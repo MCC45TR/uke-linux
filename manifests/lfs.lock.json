@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "uke-vendor-current": {
+      "source_id": "uke-vendor-current",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/uke-vendor-current-lfs.tar",
+        "sha256": "dd4951385828b896ea676a2cf5be431ab97a0fe70ec1d81c29c1ce89ab83cac8",
+        "bytes": 636968960
+      },
+      "object_ids": [
+        "8f3a510acc66692532e60293c11129b2e2c399ce870a02f292a8fbac5f8fff4f",
+        "92d0c25555a99dd795899eaa38c46e44e3f5cbfaf3c11edb36a98253e928d1c2",
+        "bbd7b5f818c78c4cdf8be1b0aaa91890e549e95ce5da53b79d66033215c029ad",
+        "e3c0a525e35b209dffd21a35f8c20e5a942d5f387f6717fe36751b63afee8ce0"
+      ],
+      "object_count": 4,
+      "offline_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:13:18Z",
+        "network_used": false
+      }
+    },
+    "lineage-uke-vendor": {
+      "source_id": "lineage-uke-vendor",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/lineage-uke-vendor-lfs.tar",
+        "sha256": "3bbff711b2b90176ff4fe631d057c066e68a352c9dfce2ee9b9cfd88f53bd533",
+        "bytes": 500807680
+      },
+      "object_ids": [
+        "8f3a510acc66692532e60293c11129b2e2c399ce870a02f292a8fbac5f8fff4f",
+        "92d0c25555a99dd795899eaa38c46e44e3f5cbfaf3c11edb36a98253e928d1c2",
+        "e3c0a525e35b209dffd21a35f8c20e5a942d5f387f6717fe36751b63afee8ce0"
+      ],
+      "object_count": 3,
+      "offline_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:13:40Z",
+        "network_used": false
+      }
+    },
+    "lineage-common-vendor": {
+      "source_id": "lineage-common-vendor",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/lineage-common-vendor-lfs.tar",
+        "sha256": "2ed5d9616b4a25f66080edebdce4e9fa0e44a090f4ca4c9591e3477d3cfc0485",
+        "bytes": 136161280
+      },
+      "object_ids": [
+        "bbd7b5f818c78c4cdf8be1b0aaa91890e549e95ce5da53b79d66033215c029ad"
+      ],
+      "object_count": 1,
+      "offline_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:13:56Z",
+        "network_used": false
+      }
+    }
+  }
+}

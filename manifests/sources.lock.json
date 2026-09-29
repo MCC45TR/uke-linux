@@ -136,8 +136,8 @@
       "acquisition": "cloned",
       "refs": {
         "refs/heads/fox_16.0": {
-          "commit": "6ff71bed1506fec1893247f0c74d7ae87c594eed",
-          "tree": "6a2b600a6475e3bae862c42ffec36c1ea18414ae"
+          "commit": "3d733672081bca3af42475a286145f4a8cdce4e7",
+          "tree": "2ac230999388bf91b96ac9c98b5f5ab7bb9d44bb"
         },
         "refs/heads/fox_14.1": {
           "commit": "7280e7204e2acdd8133c5485a15cfa05a4feb34d",
@@ -148,7 +148,7 @@
           "tree": "bdfb848003c316f4b8ea3cbb6410db5735ea6476"
         }
       },
-      "git_verified_at": "2026-09-29T03:20:11Z",
+      "git_verified_at": "2026-09-29T03:34:11Z",
       "git_integrity": "passed",
       "shallow": false,
       "history": "full reachable history of locked refs",
@@ -162,18 +162,24 @@
       "license_review": "pending-file-level-review",
       "bundle": {
         "path": "recovery-uke-ofox/referances/bundles/orangefox-recovery.bundle",
-        "sha256": "0e583d5d1d279d5667a1ab96ba86316c1622026d0113fa0122194d544f54f442",
-        "bytes": 137412629,
-        "created_at": "2026-09-28T19:44:39.567588+00:00"
+        "sha256": "8c77b8aa70154d7457352defe100ef79089c4895508449349cc56b66077880b3",
+        "created_at": "2026-09-29T03:34:12Z",
+        "bytes": 137404051
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-09-29T03:21:00Z",
+        "at": "2026-09-29T03:34:20Z",
         "network_used": false
       },
       "archive_complete": true,
       "lfs_history_changes": [],
-      "owner": "recovery-uke-ofox"
+      "owner": "recovery-uke-ofox",
+      "superseded_pins": [
+        {
+          "commit": "6ff71bed1506fec1893247f0c74d7ae87c594eed",
+          "reason": "Reviewed upstream advance within fox_16.0 on 2026-09-29; old commit is an ancestor of the new pin"
+        }
+      ]
     },
     "orangefox-manifest": {
       "url": "https://gitlab.com/OrangeFox/Manifest.git",
@@ -1248,6 +1254,889 @@
       "archive_complete": true,
       "lfs_history_changes": [],
       "owner": "senemos-uke-kernel"
+    },
+    "android-repo": {
+      "url": "https://gerrit.googlesource.com/git-repo.git",
+      "path": "recovery-uke-ofox/referances/tools/android-repo",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-29T03:36:55Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/tags/v2.67": {
+          "commit": "d27d6829a84f488b7253ea693dcc429076c33914",
+          "tree": "8ca77dd2aa718648a449107c0b264d4d7127288c"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T08:54:55Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/android-repo.bundle",
+        "sha256": "f6ec96cae45a921c7b9150287c82352fe6dd478b5ea9d7e0b7dc9359cce6e271",
+        "created_at": "2026-09-29T08:54:55Z",
+        "bytes": 14885316
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T08:54:56Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-kernel": {
+      "url": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-kernel",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T03:43:31Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "5712080a4b0c0b1a879e6d145c601c649ddaddfd",
+          "tree": "bc1bda385d926a7bcc29828f7b6649a106f743e7"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T03:57:25Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-kernel.bundle",
+        "sha256": "945d50f2f9363f0ca2fb1181f9be29539abe9543ca2b389b288c93677ecdcb9c",
+        "created_at": "2026-09-29T03:59:50Z",
+        "bytes": 2713810499
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T04:17:56Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-audio": {
+      "url": "https://github.com/MiCode/vendor_qcom_opensource_audio-kernel.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-audio",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T04:17:59Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "8eb0eccbc4027ae4a4987e4bced03a4381039714",
+          "tree": "2a2cb00ee7a2398858a10f0b619ae3d0d28b005d"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T04:17:59Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-audio.bundle",
+        "sha256": "9b810fef90f8d07d1e0aa86b0dc0e33f8f920966ff930a9d2e0ef1cbdda713c9",
+        "created_at": "2026-09-29T04:17:59Z",
+        "bytes": 1841962
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T04:17:59Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-wlan": {
+      "url": "https://github.com/MiCode/vendor_qcom_opensource_wlan.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-wlan",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T04:18:05Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "2825b01e22ac3e16345c12e6c85549188e2e765e",
+          "tree": "fded2778c452321479b337ec1820de491b115d89"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T04:18:06Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-wlan.bundle",
+        "sha256": "bdb9472969ac271c5248547cf4efcd1daa940c7c4f686a3dbb6dd42c218ee4fd",
+        "created_at": "2026-09-29T04:18:06Z",
+        "bytes": 19053970
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T04:18:08Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-camera": {
+      "url": "https://github.com/MiCode/vendor_qcom_opensource_camera-kernel.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-camera",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T04:18:11Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "699fa15a98abd40fbb94f3a6fc00f91723d29d35",
+          "tree": "11119e5b8dd007a6dcd2566f76f6dd398fa9ce61"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T04:18:11Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-camera.bundle",
+        "sha256": "59f90a8cd9caf29e90b7bda5e42238a3e0a36e99f3f1f77e3f0bbfc1e4891d3a",
+        "created_at": "2026-09-29T04:18:11Z",
+        "bytes": 1941945
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T04:18:11Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-display": {
+      "url": "https://github.com/MiCode/vendor_opensource_display-drivers.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-display",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T04:18:13Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "44275c404a677d9d9e5230fedd1af2ef02fc7b9a",
+          "tree": "4e4e3461b52db633e65e58fbc8820a8fbfe833b4"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T04:18:13Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-display.bundle",
+        "sha256": "5d428bf2258243ea742a1174d42a2ef476e2226257a3a0b4a22f388868c5471c",
+        "created_at": "2026-09-29T04:18:13Z",
+        "bytes": 1607007
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T04:18:14Z",
+        "network_used": false
+      }
+    },
+    "lineage-kernel": {
+      "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635.git",
+      "path": "senemos-uke-kernel/referances/community/lineage-kernel",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T04:23:08Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "85fc84465f719c3450ce21e52f3ca47503afdda0",
+          "tree": "e7624056926d24b27768a62b4b29ddaf264d9d97"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T04:37:07Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/lineage-kernel.bundle",
+        "sha256": "2b0944d4a7ea61c66d59c30f797093ff2a80f44d1e495c4908c0618ddc167dc6",
+        "created_at": "2026-09-29T04:39:36Z",
+        "bytes": 3779194259
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T04:57:52Z",
+        "network_used": false
+      }
+    },
+    "lineage-modules": {
+      "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635-modules.git",
+      "path": "senemos-uke-kernel/referances/community/lineage-modules",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T04:58:13Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "ed4ad0d1ad00b755af2fe61387dcc5397ad20b8f",
+          "tree": "ac69eac388d0e236b614d5cbeb6ab94728ecd063"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T05:00:00Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/lineage-modules.bundle",
+        "sha256": "6f0553205adbcafe865030f4e4da9b84fa3f1936943f0cc6698bd73ef142da88",
+        "created_at": "2026-09-29T05:00:05Z",
+        "bytes": 184318676
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T05:02:07Z",
+        "network_used": false
+      }
+    },
+    "oneplus-kernel": {
+      "url": "https://github.com/OnePlusOSS/android_kernel_oneplus_sm7675.git",
+      "path": "senemos-uke-kernel/referances/donors/oneplus-kernel",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T05:06:24Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/oneplus/sm7675_v_15.0.0_ace_3v": {
+          "commit": "1ca244746a62988d5e2ff4fe177ce0c1aa1fc09e",
+          "tree": "04dfe3a21bfad4f42803c51e8a32e026db29a8ea"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T05:21:22Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/oneplus-kernel.bundle",
+        "sha256": "03b2c15a4fca332e78efa8bb4a3e5d323c6c69079ade2222fb75b481e56a990d",
+        "created_at": "2026-09-29T05:23:38Z",
+        "bytes": 2272263782
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T05:42:02Z",
+        "network_used": false
+      }
+    },
+    "oneplus-common": {
+      "url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm7675.git",
+      "path": "senemos-uke-kernel/referances/donors/oneplus-common",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T05:46:33Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/oneplus/sm7675_v_15.0.0_ace_3v": {
+          "commit": "77298147f4072df73bc9c50ed42214ddf9e12690",
+          "tree": "1958c4d707351b7ef3a2cd9ac464f4d4058cac8d"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T06:01:54Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/oneplus-common.bundle",
+        "sha256": "24a1bb1ff8d6d50f73ec02095c1e4352d9f2341221c190655d50a1a35defb8aa",
+        "created_at": "2026-09-29T06:04:21Z",
+        "bytes": 3116559601
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T06:23:21Z",
+        "network_used": false
+      }
+    },
+    "oneplus-modules-dt": {
+      "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm7675.git",
+      "path": "senemos-uke-kernel/referances/donors/oneplus-modules-dt",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T06:23:31Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/oneplus/sm7675_v_15.0.0_ace_3v": {
+          "commit": "658537592217eb0c2026942f4bc5a8dabbbf81b0",
+          "tree": "de5fef96c2646bb3d4a1c3ee965d1ef0257d4eab"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T06:23:36Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/oneplus-modules-dt.bundle",
+        "sha256": "234b2e88081a28e743c69800ebb5cdc9727bf47bbf9b18e2af185269bb50e064",
+        "created_at": "2026-09-29T06:23:36Z",
+        "bytes": 89196335
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T06:23:42Z",
+        "network_used": false
+      }
+    },
+    "ack": {
+      "url": "https://android.googlesource.com/kernel/common",
+      "path": "senemos-uke-kernel/referances/android/ack",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T06:32:07Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/android14-6.1": {
+          "commit": "3d4bd33f0b0bedded31a9d7491d6b20d818e29c7",
+          "tree": "387e07a7c74d2684f02adfcaafd58acfd86c8ec5"
+        },
+        "refs/heads/android14-6.1-lts": {
+          "commit": "ae49a69ef2cb5e52e742649f19774e5da1f6238b",
+          "tree": "b22335c9279dd008fb8a163d9e335356f737bf9e"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T06:46:59Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/ack.bundle",
+        "sha256": "b5d350fdfa59aa6fadbdff29f4bbc38f62d6faf2e3ab24ea77d3ed11f204197c",
+        "created_at": "2026-09-29T06:49:07Z",
+        "bytes": 3369283850
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T07:07:54Z",
+        "network_used": false
+      }
+    },
+    "linux-stable": {
+      "url": "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+      "path": "senemos-uke-kernel/referances/upstream/linux-stable",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T07:13:13Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/tags/v7.2.8": {
+          "commit": "9a66fdc0d7fd55f54235524a73435af99051e46f",
+          "tree": "3904303347a6da43e2b1b2207312feede9ba3703"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T07:33:28Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/linux-stable.bundle",
+        "sha256": "9e96ed2ed481614261ea70fc2c15e342722521ebee05e72a3e71e24484d12b72",
+        "created_at": "2026-09-29T07:36:47Z",
+        "bytes": 3404807968
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T07:55:49Z",
+        "network_used": false
+      }
+    },
+    "linux-mainline": {
+      "url": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git",
+      "path": "senemos-uke-kernel/referances/upstream/linux-mainline",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T08:01:03Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/tags/v7.3-rc5": {
+          "commit": "72d3fcf802c45d00b300f25b848a93c3a2bd7c7e",
+          "tree": "b9e9f22cee46d79f64ee1d888a80ca0d04dd8df6"
+        },
+        "refs/tags/v6.12": {
+          "commit": "adc218676eef25575469234709c2d87185ca223a",
+          "tree": "ac4266ccaf1cf79e8fb22ad3e0d86deac358ffb9"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T08:21:35Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/linux-mainline.bundle",
+        "sha256": "5974ad6bace6595e5715d23fbe5ac8211ffd9501e78d9cd0b882b6f7660251c5",
+        "created_at": "2026-09-29T08:24:57Z",
+        "bytes": 3511243483
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T08:44:22Z",
+        "network_used": false
+      }
+    },
+    "linux-qcom": {
+      "url": "https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git",
+      "path": "senemos-uke-kernel/referances/upstream/linux-qcom",
+      "owner": "senemos-uke-kernel",
+      "archive_complete": true,
+      "acquired_at": "2026-09-29T17:16:14Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/for-next": {
+          "commit": "b16a8c2f9fd1f5550efdb3d561183548b3ad6047",
+          "tree": "6a834acdcba3d7ac947995f1d39e039a7acfbbae"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T17:33:38Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/linux-qcom.bundle",
+        "sha256": "f0881c50d618aefc0ae85ff7b402dfdf9100b22a0bf4a5f43df4ffe45183f9b5",
+        "created_at": "2026-09-29T17:36:13Z",
+        "bytes": 3495229191
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:56:57Z",
+        "network_used": false
+      }
+    },
+    "linux-firmware": {
+      "url": "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git",
+      "path": "uke-fedora-builder/referances/upstream/linux-firmware",
+      "owner": "uke-fedora-builder",
+      "acquired_at": "2026-09-29T08:50:48Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "d091548b0825f449581e4f58f94fb793d03cdf3e",
+          "tree": "7d68e3f5a10e4509bda3f5836b2c2abee9deea5a"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T08:51:38Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE",
+        "LICENSE-CRITERIA.md",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/linux-firmware.bundle",
+        "sha256": "3965a34f63acf85f946ddff58deaea2b26b3190ffcffc1a77de5b995ae0dfd1f",
+        "created_at": "2026-09-29T08:51:53Z",
+        "bytes": 1805969819
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T08:53:11Z",
+        "network_used": false
+      }
+    },
+    "nabu-kernel": {
+      "url": "https://github.com/MCC45TR/nabu-linux-kernel.git",
+      "path": "senemos-uke-kernel/referances/donors/nabu-kernel",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-09-29T08:54:11Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/7.2.2": {
+          "commit": "0b3226fc8f3cab5efb8a47bd17f5d7bd3ed609d1",
+          "tree": "5fe93ecb07ad5a04e5c76be4217cf01cac53b6ea"
+        },
+        "refs/heads/nabu-mainline-unstable-7.2.3": {
+          "commit": "b106359c3e3dd2bd6d1120cc03f662c0e4fa5de1",
+          "tree": "32f0f3ac8596de664f14983cf09ea03f0643f81d"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T08:54:32Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "LICENSES"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/nabu-kernel.bundle",
+        "sha256": "9b0134616da012452499326fe33cd18ac0b6e187371ee78798ebb5b681d63fbc",
+        "created_at": "2026-09-29T08:54:34Z",
+        "bytes": 292592615
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T08:54:53Z",
+        "network_used": false
+      }
+    },
+    "uke-vendor-current": {
+      "url": "https://github.com/Uke-resources/vendor_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/community/uke-vendor-current",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-29T16:15:29Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-24.0": {
+          "commit": "51ecce187b180e1df9230ff50b604af535b8e116",
+          "tree": "e54c169a7cef2b0a9109d31fb8ea2c70623f4e8a"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [
+        {
+          "ref": "refs/heads/lineage-24.0",
+          "path": ".gitattributes"
+        }
+      ],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T16:15:56Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [
+        "3eb561aae451afc24f42d1352f25a413c4fb65d7",
+        "894ed4af9dd914524ce4967796202fe6a4c77a22"
+      ],
+      "submodule_status": "not-required",
+      "lfs_status": "verified-offline",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/uke-vendor-current.bundle",
+        "sha256": "fa41310292a87df9cdbbebaf2f4bbcf8ccf735ac86481d41fa3f1976b892c2e1",
+        "created_at": "2026-09-29T16:16:04Z",
+        "bytes": 1332209931
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:14:59Z",
+        "network_used": false
+      },
+      "lfs_archive": {
+        "source_id": "uke-vendor-current",
+        "bundle": {
+          "path": "recovery-uke-ofox/referances/bundles/uke-vendor-current-lfs.tar",
+          "sha256": "dd4951385828b896ea676a2cf5be431ab97a0fe70ec1d81c29c1ce89ab83cac8",
+          "bytes": 636968960
+        },
+        "object_ids": [
+          "8f3a510acc66692532e60293c11129b2e2c399ce870a02f292a8fbac5f8fff4f",
+          "92d0c25555a99dd795899eaa38c46e44e3f5cbfaf3c11edb36a98253e928d1c2",
+          "bbd7b5f818c78c4cdf8be1b0aaa91890e549e95ce5da53b79d66033215c029ad",
+          "e3c0a525e35b209dffd21a35f8c20e5a942d5f387f6717fe36751b63afee8ce0"
+        ],
+        "object_count": 4,
+        "offline_restore": {
+          "status": "passed",
+          "at": "2026-09-29T17:13:18Z",
+          "network_used": false
+        }
+      }
+    },
+    "lineage-uke-vendor": {
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_vendor_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/community/lineage-uke-vendor",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-29T16:17:35Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "3f3cfe588cbdbfede71cd3e142314d2c1ca81900",
+          "tree": "7a4f89c0a36881fc150eb4fe4fb543225438556b"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [
+        {
+          "ref": "refs/heads/lineage-23.2",
+          "path": ".gitattributes"
+        }
+      ],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T16:17:51Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [
+        "894ed4af9dd914524ce4967796202fe6a4c77a22"
+      ],
+      "submodule_status": "not-required",
+      "lfs_status": "verified-offline",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/lineage-uke-vendor.bundle",
+        "sha256": "2358f51a05b0e66b74ddd1113effa2ae936011a5ca85d8c9b07a0f1842f85546",
+        "created_at": "2026-09-29T16:17:55Z",
+        "bytes": 791917158
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:15:21Z",
+        "network_used": false
+      },
+      "lfs_archive": {
+        "source_id": "lineage-uke-vendor",
+        "bundle": {
+          "path": "recovery-uke-ofox/referances/bundles/lineage-uke-vendor-lfs.tar",
+          "sha256": "3bbff711b2b90176ff4fe631d057c066e68a352c9dfce2ee9b9cfd88f53bd533",
+          "bytes": 500807680
+        },
+        "object_ids": [
+          "8f3a510acc66692532e60293c11129b2e2c399ce870a02f292a8fbac5f8fff4f",
+          "92d0c25555a99dd795899eaa38c46e44e3f5cbfaf3c11edb36a98253e928d1c2",
+          "e3c0a525e35b209dffd21a35f8c20e5a942d5f387f6717fe36751b63afee8ce0"
+        ],
+        "object_count": 3,
+        "offline_restore": {
+          "status": "passed",
+          "at": "2026-09-29T17:13:40Z",
+          "network_used": false
+        }
+      }
+    },
+    "lineage-common-vendor": {
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_vendor_xiaomi_sm8635-common.git",
+      "path": "recovery-uke-ofox/referances/community/lineage-common-vendor",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-29T16:18:52Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "bf664e7ef94d4530ec0d2f7f4e3945fbe3ac10b5",
+          "tree": "2fe3505ad16606e56b48cc78d9b3d2a70e0fa821"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [
+        {
+          "ref": "refs/heads/lineage-23.2",
+          "path": ".gitattributes"
+        }
+      ],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T16:19:08Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [
+        "cd684bc7310d50beac187491d87da966b7dd8749"
+      ],
+      "submodule_status": "not-required",
+      "lfs_status": "verified-offline",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/lineage-common-vendor.bundle",
+        "sha256": "36b1bbcc5103453298d0f992fe7a6a02d91b61a7170dc1c6010e47e451fc900e",
+        "created_at": "2026-09-29T16:19:12Z",
+        "bytes": 697284631
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:15:42Z",
+        "network_used": false
+      },
+      "lfs_archive": {
+        "source_id": "lineage-common-vendor",
+        "bundle": {
+          "path": "recovery-uke-ofox/referances/bundles/lineage-common-vendor-lfs.tar",
+          "sha256": "2ed5d9616b4a25f66080edebdce4e9fa0e44a090f4ca4c9591e3477d3cfc0485",
+          "bytes": 136161280
+        },
+        "object_ids": [
+          "bbd7b5f818c78c4cdf8be1b0aaa91890e549e95ce5da53b79d66033215c029ad"
+        ],
+        "object_count": 1,
+        "offline_restore": {
+          "status": "passed",
+          "at": "2026-09-29T17:13:56Z",
+          "network_used": false
+        }
+      }
+    },
+    "orangefox-classic-theme": {
+      "url": "https://gitlab.com/OrangeFox/classic-theme.git",
+      "path": "recovery-uke-ofox/referances/recovery/orangefox-classic-theme",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-29T17:03:56Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/master": {
+          "commit": "350432b6a0f65a119ac2c4511aff5c57344f7c23",
+          "tree": "8986b44aa366c6f1e1fa147016059447b48c3805"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-29T17:03:56Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/orangefox-classic-theme.bundle",
+        "sha256": "2218f9ae7d882aadd4f8f6a4c4a99b6c9bb64c0ba94ddbf2e915248b617bf354",
+        "created_at": "2026-09-29T17:03:56Z",
+        "bytes": 4660135
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T17:03:56Z",
+        "network_used": false
+      }
     }
   }
 }

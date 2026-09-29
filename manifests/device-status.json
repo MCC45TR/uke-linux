@@ -4,9 +4,14 @@
   "physical_device_available": false,
   "sources": {
     "SPEC": {
-      "title": "Xiaomi Pad 7 official specifications",
-      "url": "https://www.mi.com/in/product/xiaomi-pad-7/specs/",
+      "title": "POCO Pad X1 official specifications",
+      "url": "https://www.mi.com/my/product/poco-pad-x1/specs/",
       "scope": "Manufacturer capability statement; not a physical SKU inspection"
+    },
+    "XIAOMI-SPEC": {
+      "title": "Xiaomi Pad 7 official specifications",
+      "url": "https://www.mi.com/es/product/xiaomi-pad-7/specs/",
+      "scope": "Manufacturer capability statement for the second target commercial model; not a physical SKU inspection"
     },
     "DTS": {
       "title": "MiCode Uke board DTS",
@@ -62,12 +67,17 @@
       "title": "Uke development plan",
       "url": "PLAN.md",
       "scope": "Future implementation and acceptance goals; no physical evidence"
+    },
+    "STOCK-GLOBAL": {
+      "title": "Global stock boot and partition profile",
+      "url": "https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/STOCK-LAYOUT.md",
+      "scope": "Verified package and offline layout evidence; physical device state remains untested"
     }
   },
   "variant_rules": [
-    "Track 8/12 GB RAM, 128 GB UFS 3.1 and 256 GB UFS 4.0 separately; do not invent other SKUs.",
+    "Support covers POCO Pad X1 and Xiaomi Pad 7; keep every memory, storage, panel, touch and region variant as a separately recorded compatibility target.",
     "Keep CSOT/TM panel and Novatek firmware profiles separate.",
-    "CN OS3.0.302.0.WOZCNXM and Global OS3.0.303.0.WOZMIXM are reproducible baselines, not claims about the latest ROM.",
+    "China OS3.0.302.0.WOZCNXM and Global OS3.0.303.0.WOZMIXM fastboot packages plus Turkey OS3.0.303.0.WOZTRXM recovery OTA are separate reproducible baselines, not interchangeable images.",
     "Conflicting or generic vendor text about IR or SD eject tools does not establish physical components.",
     "Pad 7 Pro, SM8650 and SM8550 projects are subsystem donors, not equivalent boards.",
     "Not-tested in all three environments does not mean every peripheral needs a recovery or UEFI driver."
@@ -90,13 +100,14 @@
     {
       "id": "ID-01",
       "category": "Identity, SoC and platform",
-      "component": "Xiaomi Pad 7 / uke / SM7675",
+      "component": "POCO Pad X1 / Xiaomi Pad 7 / uke / SM7675",
       "capability": "Identify model, SKU, RAM, storage and firmware",
       "evidence": [
         "SPEC",
+        "XIAOMI-SPEC",
         "DTS"
       ],
-      "note": "Pad 7 Pro / muyu is a different board; no physical unit is available.",
+      "note": "Both commercial models are Uke project targets; every SKU and installed hardware variant requires its own physical record. Pad 7 Pro / muyu is a different board.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -398,9 +409,10 @@
       "capability": "Memory map, high memory and reserved regions",
       "evidence": [
         "SPEC",
+        "XIAOMI-SPEC",
         "DTS"
       ],
-      "note": "RAM SKU and boot firmware determine valid addresses.",
+      "note": "POCO Pad X1 targets 8 GB; Xiaomi Pad 7 advertises 8 GB and 12 GB variants. Boot firmware and the physical memory map determine valid addresses.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -438,13 +450,13 @@
     {
       "id": "STO-01",
       "category": "Storage and filesystems",
-      "component": "128 GB UFS 3.1",
+      "component": "512 GB UFS 4.0 target",
       "capability": "Controller, PHY and read-only access",
       "evidence": [
         "SPEC",
         "DTS"
       ],
-      "note": "Physical variant not available.",
+      "note": "The target capacity is defined by the SKU, but controller identity, geometry and health require physical inspection.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -460,13 +472,13 @@
     {
       "id": "STO-02",
       "category": "Storage and filesystems",
-      "component": "256 GB UFS 4.0",
+      "component": "Xiaomi Pad 7 128 GB UFS 3.1 / 256 GB UFS 4.0",
       "capability": "Controller, PHY and read-only access",
       "evidence": [
-        "SPEC",
+        "XIAOMI-SPEC",
         "DTS"
       ],
-      "note": "Do not assume the 128 GB timing profile applies.",
+      "note": "Keep each Xiaomi Pad 7 capacity and storage generation separate from the POCO Pad X1 512 GB profile.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2669,9 +2681,10 @@
       "capability": "Header, slot and payload relationships",
       "evidence": [
         "OFOX",
-        "DONOR"
+        "DONOR",
+        "STOCK-GLOBAL"
       ],
-      "note": "Determine the recovery partition layout from stock images.",
+      "note": "Global boot/recovery/DTBO/GPT layout measured; CN and actual device slot remain open.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2693,7 +2706,7 @@
         "OFOX",
         "PLAN"
       ],
-      "note": "No project image has been built yet.",
+      "note": "Global-profile OrangeFox built from incremental and fresh outputs; payload privacy gate fails, and pristine re-sync and physical boot on both models remain untested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",

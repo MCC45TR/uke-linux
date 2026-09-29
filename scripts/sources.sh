@@ -117,7 +117,29 @@ restore_source() {
     [[ $(git -C "$dest/repo.git" rev-parse "refs/archive/${ref#refs/}") == "$commit" ]] || fail 'Restored commit mismatch'
     [[ $(git -C "$dest/repo.git" rev-parse "refs/archive/${ref#refs/}^{tree}") == "$tree" ]] || fail 'Restored tree mismatch'
   done < <(jq -r '.refs|to_entries[]|[.key,.value.commit,.value.tree]|@tsv' "$record")
-  update_record --arg time "$(now)" '.offline_git_restore={status:"passed",at:$time,network_used:false} | .archive_complete=(((.submodules|length)+(.lfs_attributes|length)+(.lfs_history_changes // []|length))==0)'
+  local lfs_ready=false lfs_file lfs_sha lfs_oid lfs_item
+  if jq -e '.lfs_archive.offline_restore.status=="passed"' "$record" >/dev/null; then
+    lfs_file="$ROOT/$(jq -r .lfs_archive.bundle.path "$record")"
+    [[ $lfs_file == "$ROOT/$owner/referances/bundles/$id-lfs.tar" ]] || fail 'LFS bundle path mismatch'
+    lfs_sha=$(jq -r .lfs_archive.bundle.sha256 "$record")
+    [[ $(sha256sum "$lfs_file" | cut -d' ' -f1) == "$lfs_sha" ]] || fail 'LFS bundle checksum mismatch'
+    while IFS= read -r lfs_item; do
+      [[ $lfs_item =~ ^objects/[0-9a-f]{2}/[0-9a-f]{2}/[0-9a-f]{64}$ ]] || fail 'Unsafe LFS archive path'
+    done < <(tar -tf "$lfs_file")
+    mkdir -p "$dest/lfs"
+    tar -xf "$lfs_file" -C "$dest/lfs"
+    while IFS= read -r lfs_oid; do
+      [[ $lfs_oid =~ ^[0-9a-f]{64}$ ]] || fail 'Invalid LFS object ID'
+      lfs_item="$dest/lfs/objects/${lfs_oid:0:2}/${lfs_oid:2:2}/$lfs_oid"
+      [[ -f $lfs_item && $(sha256sum "$lfs_item" | cut -d' ' -f1) == "$lfs_oid" ]] || fail 'Restored LFS object mismatch'
+    done < <(jq -r '.lfs_archive.object_ids[]' "$record")
+    lfs_ready=true
+  fi
+  update_record --arg time "$(now)" --argjson lfs_ready "$lfs_ready" '
+    .offline_git_restore={status:"passed",at:$time,network_used:false} |
+    .lfs_status=(if $lfs_ready then "verified-offline" else .lfs_status end) |
+    .archive_complete=((.submodules|length)==0 and
+      (((.lfs_attributes|length)+(.lfs_history_changes // []|length))==0 or $lfs_ready))'
   rm -rf -- "$dest"
   trap - EXIT
 }

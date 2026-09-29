@@ -1,8 +1,8 @@
-# Xiaomi Pad 7: recovery, firmware and Fedora development plan
+# POCO Pad X1 and Xiaomi Pad 7: recovery, firmware and Fedora development plan
 
-Revision 3 — 29 September 2026. Target: **Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
+Revision 5 — 29 September 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
 
-This is an implementation plan and an evidence contract. Preparation is underway; no project recovery, UEFI or kernel image has been built or tested on a Pad 7. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
+This is an implementation plan and an evidence contract. A first local OrangeFox recovery image has been built for the measured Global profile, but no project image has been tested on either physical model. No UEFI or mainline kernel image has been built. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the recovery build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/FIRST-RECOVERY-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
 
 ## 1. What we are building
 
@@ -10,7 +10,7 @@ The first deliverable is a reproducible OrangeFox recovery for Uke with the mana
 
 The long-term goal is an integrated tablet: reliable boot, complete support for physically present hardware, responsive input, good battery life, bounded diagnostics and maintainable updates. “OEM quality” is an acceptance target, not a statement about today's software. Every advertised function must have a variant-specific test record.
 
-Current preparation includes architecture, source research, selected reference clones, an archive manager, feature and hardware inventories, public project repositories and the COPR test channel. Full Android sync, firmware extraction, recovery compilation, UEFI porting, kernel compilation and image publication are subsequent implementation work. No live partitioning, flashing, Android key access or remote package build is part of this preparation delivery.
+Current preparation includes architecture, source research, pinned reference clones, an archive manager, feature and hardware inventories, public project repositories and the COPR test channel. The Android 16 tree is synchronized; Global and China fastboot packages are verified and boundedly extracted, and the Turkey OTA is verified. A local recovery build completed. UEFI porting, mainline kernel compilation, clean-build reproduction, physical validation and image publication remain subsequent work. No live partitioning, flashing, Android key access or remote package build is part of this delivery.
 
 ### Fixed decisions
 
@@ -18,7 +18,7 @@ Current preparation includes architecture, source research, selected reference c
 |---|---|
 | Work order | Recovery foundations → Project Aloha → mainline integration → Fedora → full hardware acceptance |
 | Recovery reference | Official OrangeFox `fox_16.0`, source release R12.0; pin the complete manifest before building |
-| Feature minimum | All 34 groups in [FEATURE-PARITY.md](recovery-uke-ofox/docs/FEATURE-PARITY.md), including conditional Windows/second-Android tools |
+| Feature minimum | All 34 groups in [FEATURE-PARITY.md](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/FEATURE-PARITY.md), including conditional Windows/second-Android tools |
 | First recovery kernel | Firmware-matched OEM/GKI kernel and modules after stock layout analysis |
 | Mainline baseline | Linux `v7.2.8`, commit `9a66fdc0d7fd55f54235524a73435af99051e46f` |
 | Native project code | C++; upstream kernel/EDK II retain their required C and assembly |
@@ -27,7 +27,7 @@ Current preparation includes architecture, source research, selected reference c
 | Host-only exceptions | Unavoidable upstream build tools require a documented, pinned exception and must not enter target payloads |
 | Source history | Full reachable history of selected refs; no shallow/partial archive presented as complete |
 | Archive backup | Git bundles with actual offline restore checks; LFS and submodules tracked separately |
-| Firmware profiles | Separate CN and Global baselines; never mix their modules, DTs or calibration |
+| Firmware profiles | Separate China and Global fastboot baselines plus the Turkey recovery OTA; never mix modules, DTs or calibration |
 | Boot profiles | Android with Fedora dual boot, or Fedora as the single user OS; preserve firmware and recovery in both |
 | Publication | Human-written English; privacy review before every push or artifact upload |
 | COPR | `mcc45tr/uke-linux-test`, Fedora Rawhide AArch64; production channel follows physical acceptance |
@@ -83,7 +83,7 @@ A reference has one owner. Cross-component consumers use the catalog and its exa
 
 ### Recovery and source versions
 
-The pinned official OrangeFox core identifies itself as R12.0 in `orangefox.mk`, on `fox_16.0`. The wiki changelog still described R11.3 during research. Preserve that distinction; source version, published release and a successful Uke build are different facts. The official manifest includes a Mondrian/SM84xx device target that must be replaced by a researched Uke target. Cloning the manifest does not resolve or download all Android build dependencies. See [the recovery audit](recovery-uke-ofox/docs/UKE-SOURCE-AUDIT.md).
+The pinned official OrangeFox core identifies itself as R12.0 in `orangefox.mk`, on `fox_16.0`. The wiki changelog still described R11.3 during research. Preserve that distinction; source version, published release and a successful Uke build are different facts. The original manifest included a Mondrian/SM84xx device target; the resolved 399-project Uke build tree excludes that example and stages project-owned Uke configuration. See [the recovery audit](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/UKE-SOURCE-AUDIT.md).
 
 The Thanick50 Uke recovery is useful but reports broken F2FS data formatting. Its flags include a claimed 100 MiB recovery partition, header v4 and exclusion of the kernel from the recovery image. Verify these against stock images. `FIXED_DECRYPT`, spoofed future security patch levels, missing-dependency allowances, a shared Adreno735 identifier and a fixed thermal zone are not proof of correctness. Recovery settings must not occupy a calibration partition.
 
@@ -126,9 +126,9 @@ Priority meanings: **P0** establishes identity, recoverability or basic operatio
 | 006 | P0 | 001,004 | Create `uke-linux-test` for Rawhide AArch64 with no automatic unvalidated package publication. | Prepared |
 | 007 | P0 | 003 | Define source, firmware, toolchain, hardware evidence and artifact identity contracts. | Prepared |
 | 008 | P0 | 007 | Catalog canonical upstream/OEM/ACK/community references with full commit pins and ownership. | Prepared |
-| 009 | P0 | 008 | Clone selected preparation refs with full reachable history and preserve their archive refs. | 29 repositories acquired |
+| 009 | P0 | 008 | Clone selected preparation refs with full reachable history and preserve their archive refs. | 50 repositories acquired |
 | 010 | P0 | 009 | Resolve each nested submodule and LFS object at its pinned identity; record licenses and missing dependencies. | Open; three source archives have pending submodules |
-| 011 | P0 | 009 | Verify Git objects and restore self-contained bundles offline; compare commit and tree identities. | 29 Git restores passed; dependency completion is separate |
+| 011 | P0 | 009 | Verify Git objects and restore self-contained bundles offline; compare commit and tree identities. | 50 Git restores passed; dependency completion is separate |
 | 012 | P0 | 009 | Inventory all Nabu branches, UI actions and tools into a minimum feature parity matrix. | 34 feature groups recorded |
 | 013 | P0 | 008,012 | Create the variant-aware hardware ledger without promoting third-party or untested results. | 143 capabilities recorded |
 | 014 | P0 | 004,007,011,013 | Test negative evidence/archive/privacy cases and publish reviewed preparation records. | Preparation acceptance gate |
@@ -137,17 +137,17 @@ Priority meanings: **P0** establishes identity, recoverability or basic operatio
 
 | Step | Priority | Depends on | Work and completion evidence | State |
 |---|---|---|---|---|
-| 015 | P0 | 007,014 | Download CN and Global stock packages separately; verify length and compute full SHA-256. | Ready |
-| 016 | P0 | 015 | Extract stock images with bounded, traversal-safe tools; preserve raw packages and extraction provenance. | Pending |
-| 017 | P0 | 016 | Map recovery/boot/vendor_boot/init_boot, headers, slots, AVB, dynamic partitions and image limits. | Pending |
-| 018 | P0 | 016,017 | Define immutable firmware/SKU profiles and reject mixed DT, modules, keys or payload identities. | Pending |
+| 015 | P0 | 007,014 | Download China and Global fastboot baselines plus the Turkey recovery OTA separately; verify length and compute full SHA-256. | All three packages verified |
+| 016 | P0 | 015 | Extract stock images with bounded, traversal-safe tools; preserve raw packages and extraction provenance. | 38 bounded entries extracted per profile |
+| 017 | P0 | 016 | Map recovery/boot/vendor_boot/init_boot, headers, slots, AVB, dynamic partitions and image limits. | Global mapped; CN analysis pending |
+| 018 | P0 | 016,017 | Define immutable firmware/SKU profiles and reject mixed DT, modules, keys or payload identities. | Global locked; CN analysis pending |
 | 019 | P0 | 016,018 | Identify panel, touch, audio and sensor variants through DTS, modules, firmware and stock configs. | Pending |
 | 020 | P0 | 017,018 | Reproduce the donor F2FS formatting problem on synthetic images; identify incompatible flags/tool versions. | Pending U1 |
-| 021 | P0 | 008,010,017 | Resolve the complete OrangeFox Android 16 manifest, replace Mondrian selection and archive every required revision. | Pending |
+| 021 | P0 | 008,010,017 | Resolve the complete OrangeFox Android 16 manifest, replace Mondrian selection and archive every required revision. | 399 projects synced and locked; per-project offline archives pending |
 | 022 | P0 | 021 | Pin host container, compiler, packages and unavoidable upstream host-only tools; produce a dependency SBOM. | Pending |
-| 023 | P0 | 017,018,021 | Build a clean Uke device configuration with matching kernel/module ABI and auditable partition definitions. | Pending |
-| 024 | P0 | 023 | Compile OrangeFox without masking missing dependencies; save full build logs and source/config identities. | Pending U0 |
-| 025 | P0 | 024 | Unpack the result; validate headers, section sizes, module architecture, payload paths and absence of Python. | Pending U0/U2 |
+| 023 | P0 | 017,018,021 | Build a clean Uke device configuration with matching kernel/module ABI and auditable partition definitions. | Global configuration staged; module ABI review open |
+| 024 | P0 | 023 | Compile OrangeFox without masking missing dependencies; save full build logs and source/config identities. | Incremental and fresh-output builds passed; pristine re-sync open |
+| 025 | P0 | 024 | Unpack the result; validate headers, section sizes, module architecture, payload paths and absence of Python. | Header, ramdisk and Python audit passed; module dependency open |
 | 026 | P0 | 025 | Repeat the build from pinned offline inputs and explain every output difference. | Pending U2 |
 | 027 | P0 | 013,017 | Create C++ read-only device inventory with explicit model, LUN, GUID, slot and snapshot state. | Pending U1 |
 | 028 | P0 | 027 | Define a typed management API separating discovery, plan validation and execution; make failures visible to the UI. | Pending U1 |
@@ -250,7 +250,7 @@ Priority meanings: **P0** establishes identity, recoverability or basic operatio
 
 The host Bash manager provides `validate`, `sync`, `verify`, `bundle`, `restore-check`, `archive` and `report`. An unknown ID, invalid path, changed pin, unavailable commit, edited reference, shallow clone, wrong checksum or failed restore is an error. Failed work remains visibly incomplete. The tools do not execute upstream scripts. Sync does not touch component development checkouts.
 
-A complete archive requires full selected history, no missing objects, pinned nested submodules, required LFS objects, a self-contained bundle, a successful empty-directory offline restore and identical commits/trees. The present 29 Git archives include three with unresolved submodules; their dependency completeness remains false. File-level license review is still open. Bundles on the same disk provide restore material, not an independent physical backup.
+A complete archive requires full selected history, no missing objects, pinned nested submodules, required LFS objects, a self-contained bundle, a successful empty-directory offline restore and identical commits/trees. The present 50 cataloged Git archives include three with separately unarchived submodule dependencies; their dependency completeness remains false. File-level license review is still open. Bundles on the same disk provide restore material, not an independent physical backup.
 
 Start with at most two large downloads, one large extraction/build at a time, and an 80 GiB free-space reserve. Maintain a disk budget before Android sync, ROM extraction and kernel builds. Prefer selected refs over every unrelated branch. Report excluded refs explicitly rather than using shallow history to fit a budget.
 
@@ -330,4 +330,4 @@ Use at least 100 controlled suspend/resume cycles after core peripherals work, r
 
 If a gate fails, retain the last successful inputs, classify the failure, publish the reproduction command and continue independent work. Do not overwrite failed evidence with a generic success summary. No hardware support claim or production promotion occurs solely because a repository, package channel, compile or CI check exists.
 
-The immediate next implementation work is steps 015–026: stock profile acquisition and boot analysis, complete OrangeFox manifest resolution, a pinned host toolchain and the first locally validated recovery build. Aloha follows that recovery foundation; its physical boot gate still waits for a device.
+The immediate next implementation work is to remove private build metadata from the recovery payload, reproduce from a pristine pinned checkout, audit vendor-boot/module dependencies and package closure, and complete the remaining China and Turkey boot-profile analysis. Aloha follows that recovery foundation; its physical boot gate still waits for a device.

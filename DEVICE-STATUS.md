@@ -1,6 +1,6 @@
-# Device status: Xiaomi Pad 7 / uke
+# Device status: POCO Pad X1 and Xiaomi Pad 7 / uke
 
-Kernel product: **senemos-uke-kernel-mainline**. Target: OrangeFox, Project Aloha, then Fedora Rawhide AArch64.
+Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`)**. Primary physical validation hardware: **POCO Pad X1 8 GB / 512 GB**. Kernel product: **senemos-uke-kernel-mainline**. Target sequence: OrangeFox, Project Aloha, then Fedora Rawhide AArch64.
 
 This document is generated from `manifests/device-status.json`. Source evidence identifies a candidate component or capability; it does not establish that our software works on it.
 
@@ -26,9 +26,9 @@ No own-device acceptance has been performed. A missing implementation or an unte
 
 ## Variant rules
 
-- Track 8/12 GB RAM, 128 GB UFS 3.1 and 256 GB UFS 4.0 separately; do not invent other SKUs.
+- Support covers POCO Pad X1 and Xiaomi Pad 7; keep every memory, storage, panel, touch and region variant as a separately recorded compatibility target.
 - Keep CSOT/TM panel and Novatek firmware profiles separate.
-- CN OS3.0.302.0.WOZCNXM and Global OS3.0.303.0.WOZMIXM are reproducible baselines, not claims about the latest ROM.
+- China OS3.0.302.0.WOZCNXM and Global OS3.0.303.0.WOZMIXM fastboot packages plus Turkey OS3.0.303.0.WOZTRXM recovery OTA are separate reproducible baselines, not interchangeable images.
 - Conflicting or generic vendor text about IR or SD eject tools does not establish physical components.
 - Pad 7 Pro, SM8650 and SM8550 projects are subsystem donors, not equivalent boards.
 - Not-tested in all three environments does not mean every peripheral needs a recovery or UEFI driver.
@@ -37,7 +37,7 @@ No own-device acceptance has been performed. A missing implementation or an unte
 
 | ID | Component / candidate variant | Capability and acceptance target | Recovery | UEFI | Linux | Evidence / open work |
 |---|---|---|---|---|---|---|
-| ID-01 | Xiaomi Pad 7 / uke / SM7675 | Identify model, SKU, RAM, storage and firmware | not-tested | not-tested | not-tested | SPEC, DTS: Pad 7 Pro / muyu is a different board; no physical unit is available. |
+| ID-01 | POCO Pad X1 / Xiaomi Pad 7 / uke / SM7675 | Identify model, SKU, RAM, storage and firmware | not-tested | not-tested | not-tested | SPEC, XIAOMI-SPEC, DTS: Both commercial models are Uke project targets; every SKU and installed hardware variant requires its own physical record. Pad 7 Pro / muyu is a different board. |
 | SOC-01 | SM7675 / Cliffs | CPU topology and all cores online | not-tested | not-tested | not-tested | DTS, DONOR: Shared SM8635 filenames do not change the target SoC. |
 | SOC-02 | ARM64 CPU | Frequency, voltage and cpufreq | not-tested | not-tested | not-tested | DTS, PLAN: Compare stock OPP tables and power limits. |
 | SOC-03 | ARM64 CPU | Idle states and residency | not-tested | not-tested | not-tested | DTS, PLAN: Clock ignore parameters are temporary bring-up aids. |
@@ -51,7 +51,7 @@ No own-device acceptance has been performed. A missing implementation or an unte
 | SOC-11 | SMEM / SCM / QMI / GLINK | Firmware communication and service discovery | not-tested | not-tested | not-tested | DTS, DONOR: Android services do not prove native Linux support. |
 | SOC-12 | PMIC / SPMI | PMK8550, PM8550VS, PM8550VE and PM7550BA mapping | not-tested | not-tested | not-tested | DTS, DONOR: Confirm population against stock profiles and the actual board. |
 | SOC-13 | GENI QUP I2C / SPI / UART | Bus consumers, probing and recovery | not-tested | not-tested | not-tested | DTS, DONOR: Do not reuse Nabu bus numbers or pins. |
-| SOC-14 | LPDDR5X 8 / 12 GB | Memory map, high memory and reserved regions | not-tested | not-tested | not-tested | SPEC, DTS: RAM SKU and boot firmware determine valid addresses. |
+| SOC-14 | LPDDR5X 8 / 12 GB | Memory map, high memory and reserved regions | not-tested | not-tested | not-tested | SPEC, XIAOMI-SPEC, DTS: POCO Pad X1 targets 8 GB; Xiaomi Pad 7 advertises 8 GB and 12 GB variants. Boot firmware and the physical memory map determine valid addresses. |
 | SOC-15 | Watchdog / RTC / pstore | Crash retention, watchdog and timekeeping | not-tested | not-tested | not-tested | DTS, PLAN: Validate ramoops against the real memory map. |
 | SOC-16 | Hexagon / CDSP / AI Engine | DSP compute and accelerator APIs | not-tested | not-tested | not-tested | SPEC, BLOBS: Android AI marketing does not prove native Linux compute support. |
 
@@ -59,8 +59,8 @@ No own-device acceptance has been performed. A missing implementation or an unte
 
 | ID | Component / candidate variant | Capability and acceptance target | Recovery | UEFI | Linux | Evidence / open work |
 |---|---|---|---|---|---|---|
-| STO-01 | 128 GB UFS 3.1 | Controller, PHY and read-only access | not-tested | not-tested | not-tested | SPEC, DTS: Physical variant not available. |
-| STO-02 | 256 GB UFS 4.0 | Controller, PHY and read-only access | not-tested | not-tested | not-tested | SPEC, DTS: Do not assume the 128 GB timing profile applies. |
+| STO-01 | 512 GB UFS 4.0 target | Controller, PHY and read-only access | not-tested | not-tested | not-tested | SPEC, DTS: The target capacity is defined by the SKU, but controller identity, geometry and health require physical inspection. |
+| STO-02 | Xiaomi Pad 7 128 GB UFS 3.1 / 256 GB UFS 4.0 | Controller, PHY and read-only access | not-tested | not-tested | not-tested | XIAOMI-SPEC, DTS: Keep each Xiaomi Pad 7 capacity and storage generation separate from the POCO Pad X1 512 GB profile. |
 | STO-03 | UFS | Write, flush, discard and interruption recovery | not-tested | not-tested | not-tested | PLAN: Later physical tests use a designated test area. |
 | STO-04 | Qualcomm ICE | Inline encryption and wrapped-key capabilities | not-tested | not-tested | not-tested | DTS, OFOX: Kernel capability does not establish Android key access. |
 | STO-05 | ext4 | Rootfs and backup creation, reading and repair | not-tested | not-tested | not-tested | OFOX, PLAN: Synthetic disk and physical tests are separate. |
@@ -208,8 +208,8 @@ No own-device acceptance has been performed. A missing implementation or an unte
 | ID | Component / candidate variant | Capability and acceptance target | Recovery | UEFI | Linux | Evidence / open work |
 |---|---|---|---|---|---|---|
 | BOOT-01 | Stock XBL / ABL / TEE | Boot chain and recovery path | not-tested | not-tested | not-tested | DTS, PLAN: Preserve stock early firmware. |
-| BOOT-02 | Boot / init_boot / vendor_boot / dtbo | Header, slot and payload relationships | not-tested | not-tested | not-tested | OFOX, DONOR: Determine the recovery partition layout from stock images. |
-| BOOT-03 | OrangeFox Uke | Clean source build and first recovery boot | not-tested | not-tested | not-tested | OFOX, PLAN: No project image has been built yet. |
+| BOOT-02 | Boot / init_boot / vendor_boot / dtbo | Header, slot and payload relationships | not-tested | not-tested | not-tested | OFOX, DONOR, STOCK-GLOBAL: Global boot/recovery/DTBO/GPT layout measured; CN and actual device slot remain open. |
+| BOOT-03 | OrangeFox Uke | Clean source build and first recovery boot | not-tested | not-tested | not-tested | OFOX, PLAN: Global-profile OrangeFox built from incremental and fresh outputs; payload privacy gate fails, and pristine re-sync and physical boot on both models remain untested. |
 | BOOT-04 | Recovery backup / restore | Source/target validation and readback hashes | not-tested | not-tested | not-tested | NABU, PLAN: Donor features are not Uke acceptance results. |
 | BOOT-05 | GPT planner | Handle 128/256 GB and unknown layouts | not-tested | not-tested | not-tested | NABU, PLAN: Do not reuse Nabu offsets. |
 | BOOT-06 | Android with Fedora | Dual boot with separate OS data and boot paths | not-tested | not-tested | not-tested | PLAN: A/B slots do not isolate userdata. |
@@ -253,7 +253,8 @@ No own-device acceptance has been performed. A missing implementation or an unte
 
 ## Source key
 
-- **SPEC:** [Xiaomi Pad 7 official specifications](https://www.mi.com/in/product/xiaomi-pad-7/specs/) — Manufacturer capability statement; not a physical SKU inspection.
+- **SPEC:** [POCO Pad X1 official specifications](https://www.mi.com/my/product/poco-pad-x1/specs/) — Manufacturer capability statement; not a physical SKU inspection.
+- **XIAOMI-SPEC:** [Xiaomi Pad 7 official specifications](https://www.mi.com/es/product/xiaomi-pad-7/specs/) — Manufacturer capability statement for the second target commercial model; not a physical SKU inspection.
 - **DTS:** [MiCode Uke board DTS](https://github.com/MiCode/kernel_devicetree/blob/94c84aeb9e517dbde546fc732033c184094c8e57/qcom/uke-sm8635.dtsi) — Source-level identity evidence; installed variants require verification.
 - **DISPLAY:** [MiCode Uke display DTS](https://github.com/MiCode/vendor_qcom_proprietary_display-devicetree/blob/4a3e1c391130237c5e8c2b250d1c94f3e25b9b11/display/uke-sde-display.dtsi) — Source-level identity evidence; installed variants require verification.
 - **CAM:** [MiCode camera device tree](https://github.com/MiCode/vendor_qcom_proprietary_camera-devicetree) — Source-level identity evidence; installed variants require verification.
@@ -265,6 +266,7 @@ No own-device acceptance has been performed. A missing implementation or an unte
 - **NABU:** [Nabu recovery feature reference](https://github.com/ArKT-7/twrp_device_xiaomi_nabu) — Third-party source or report; no own-device validation.
 - **ALOHA:** [Project Aloha sources](https://github.com/Project-Aloha/mu_aloha_platforms) — Third-party source or report; no own-device validation.
 - **PLAN:** [Uke development plan](PLAN.md) — Future implementation and acceptance goals; no physical evidence.
+- **STOCK-GLOBAL:** [Global stock boot and partition profile](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/STOCK-LAYOUT.md) — Verified package and offline layout evidence; physical device state remains untested.
 
 ## Updating this document
 

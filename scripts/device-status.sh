@@ -25,9 +25,9 @@ tmp=$(mktemp)
 trap 'rm -f "$tmp"' EXIT
 {
 cat <<'TEXT'
-# Device status: Xiaomi Pad 7 / uke
+# Device status: POCO Pad X1 and Xiaomi Pad 7 / uke
 
-Kernel product: **senemos-uke-kernel-mainline**. Target: OrangeFox, Project Aloha, then Fedora Rawhide AArch64.
+Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`)**. Primary physical validation hardware: **POCO Pad X1 8 GB / 512 GB**. Kernel product: **senemos-uke-kernel-mainline**. Target sequence: OrangeFox, Project Aloha, then Fedora Rawhide AArch64.
 
 This document is generated from `manifests/device-status.json`. Source evidence identifies a candidate component or capability; it does not establish that our software works on it.
 

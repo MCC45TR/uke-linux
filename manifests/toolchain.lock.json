@@ -3,6 +3,22 @@
   "status": "not-provisioned",
   "recovery_container_digest": null,
   "kernel_container_digest": null,
-  "package_nevras": [],
-  "note": "Host tools were inspected; no reproducible recovery/kernel toolchain claimed."
+  "package_nevras": [
+    {
+      "nevra": "git-lfs-3.7.1-6.fc46.x86_64",
+      "sha256": "3fe2be6b2b054397835470d2ff447cc50e9014e5e54fe1f67847b08f5603cfb2",
+      "role": "host-only retrieval of Android vendor reference objects",
+      "target_payload_allowed": false
+    }
+  ],
+  "note": "Android repo may run Python on the host only. No Python scripts or runtime may be included in target artifacts. The recovery/kernel build toolchain and package NEVRAs are not yet provisioned.",
+  "host_only_exceptions": [
+    {
+      "tool": "Android repo",
+      "source_id": "android-repo",
+      "commit": "d27d6829a84f488b7253ea693dcc429076c33914",
+      "reason": "Official multi-project Android manifest resolution and synchronization",
+      "target_payload_allowed": false
+    }
+  ]
 }

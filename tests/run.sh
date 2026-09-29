@@ -82,6 +82,15 @@ rm "$tmp/payload/usr/bin/helper"
 ln -s /usr/bin/python3 "$tmp/payload/usr/bin/alias"
 reject scripts/check-target-payload.sh "$tmp/payload"
 ok 'Python target symlink rejected'
+printf 'ro.build.user=uke-builder\nro.build.host=uke-build\n' > "$tmp/payload/prop.default"
+scripts/check-target-privacy.sh "$tmp/payload" >/dev/null
+printf 'ro.build.user=private-builder\nro.build.host=uke-build\n' > "$tmp/payload/prop.default"
+reject scripts/check-target-privacy.sh "$tmp/payload"
+ok 'private target build identity rejected'
+printf 'ro.build.user=uke-builder\nro.build.host=uke-build\n' > "$tmp/payload/prop.default"
+printf '/%s/%s/private\n' home fixture > "$tmp/payload/usr/bin/path-record"
+reject scripts/check-target-privacy.sh "$tmp/payload"
+ok 'private target build path rejected'
 # Staged content is scanned even when the worktree has a sanitized replacement.
 git init -q -b main "$tmp/publication"
 git -C "$tmp/publication" config user.email fixture@users.noreply.github.com

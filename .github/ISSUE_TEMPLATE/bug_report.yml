@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a reproducible software or hardware problem
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check the device status and existing issues first. Remove serial numbers, private logs, keys, network identities and user data. Use private vulnerability reporting for security issues.
+  - type: input
+    id: component
+    attributes:
+      label: Component and build ID
+      description: OrangeFox, Aloha, kernel or Fedora; include the exact build or source revision.
+      placeholder: Component, version and commit
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Device and firmware profile
+      description: Record the POCO Pad X1 or Xiaomi Pad 7 model, RAM/storage variant and exact firmware version when relevant.
+      placeholder: Device model, RAM/storage SKU, firmware version
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the smallest safe sequence and expected result.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed result and redacted evidence
+      description: Include timestamps, relevant messages and whether a physical device was used. Do not attach raw private logs.
+    validations:
+      required: true

@@ -56,7 +56,7 @@
       "url": "https://gitlab.com/OrangeFox/bootable/Recovery.git",
       "checkout": "refs/heads/fox_16.0",
       "refs": {
-        "refs/heads/fox_16.0": "6ff71bed1506fec1893247f0c74d7ae87c594eed",
+        "refs/heads/fox_16.0": "3d733672081bca3af42475a286145f4a8cdce4e7",
         "refs/heads/fox_14.1": "7280e7204e2acdd8133c5485a15cfa05a4feb34d",
         "refs/heads/fox_12.1": "cbcc4f713dbef98d76d6d2cfd019b1ebfd9418e9"
       },
@@ -90,6 +90,20 @@
       },
       "role": "Official recovery vendor configuration and tools",
       "phase": "preparation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "orangefox-classic-theme",
+      "path": "recovery-uke-ofox/referances/recovery/orangefox-classic-theme",
+      "url": "https://gitlab.com/OrangeFox/classic-theme.git",
+      "checkout": "refs/heads/master",
+      "refs": {
+        "refs/heads/master": "350432b6a0f65a119ac2c4511aff5c57344f7c23"
+      },
+      "role": "Pinned classic theme referenced by the OrangeFox vendor submodule",
+      "phase": "implementation",
       "history": "full-selected-refs",
       "redistribution": "review-file-licenses-before-publication",
       "owner": "recovery-uke-ofox"
@@ -300,6 +314,48 @@
       },
       "role": "Current Uke Android device definitions and firmware inventory",
       "phase": "preparation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "uke-vendor-current",
+      "path": "recovery-uke-ofox/referances/community/uke-vendor-current",
+      "url": "https://github.com/Uke-resources/vendor_xiaomi_uke.git",
+      "checkout": "refs/heads/lineage-24.0",
+      "refs": {
+        "refs/heads/lineage-24.0": "51ecce187b180e1df9230ff50b604af535b8e116"
+      },
+      "role": "Uke Android vendor blobs matching the current community device branch; reference only",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "lineage-uke-vendor",
+      "path": "recovery-uke-ofox/referances/community/lineage-uke-vendor",
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_vendor_xiaomi_uke.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "3f3cfe588cbdbfede71cd3e142314d2c1ca81900"
+      },
+      "role": "Uke Android vendor files matching the Lineage 23.2 device branch; reference only",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "lineage-common-vendor",
+      "path": "recovery-uke-ofox/referances/community/lineage-common-vendor",
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_vendor_xiaomi_sm8635-common.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "bf664e7ef94d4530ec0d2f7f4e3945fbe3ac10b5"
+      },
+      "role": "Shared SM8635 Android vendor files required by the Lineage 23.2 device tree; reference only",
+      "phase": "implementation",
       "history": "full-selected-refs",
       "redistribution": "review-file-licenses-before-publication",
       "owner": "recovery-uke-ofox"
@@ -536,7 +592,7 @@
       "url": "https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git",
       "checkout": "refs/heads/for-next",
       "refs": {
-        "refs/heads/for-next": "4b05603f9496e2571dc54024bbb2a94fb45287c3"
+        "refs/heads/for-next": "b16a8c2f9fd1f5550efdb3d561183548b3ad6047"
       },
       "role": "Qualcomm upcoming changes",
       "phase": "implementation",
@@ -642,6 +698,20 @@
       "history": "full-selected-refs",
       "redistribution": "review-file-licenses-before-publication",
       "owner": "senemos-uke-kernel"
+    },
+    {
+      "id": "android-repo",
+      "path": "recovery-uke-ofox/referances/tools/android-repo",
+      "url": "https://gerrit.googlesource.com/git-repo.git",
+      "checkout": "refs/tags/v2.67",
+      "refs": {
+        "refs/tags/v2.67": "d27d6829a84f488b7253ea693dcc429076c33914"
+      },
+      "role": "Pinned host-only Android manifest client for the OrangeFox build checkout",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
     }
   ]
 }

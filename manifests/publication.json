@@ -44,7 +44,7 @@
     "chroots": [
       "fedora-rawhide-aarch64"
     ],
-    "description": "Development and hardware-test channel for Xiaomi Pad 7 (uke, SM7675). Fedora Rawhide AArch64; kernel family senemos-uke-kernel-mainline. Recovery-first preparation: no built kernel packages or validated Uke images are currently published. Source, package and physical-device acceptance are tracked separately.",
+    "description": "Development channel for Fedora Rawhide AArch64 on POCO Pad X1 and Xiaomi Pad 7 (uke, SM7675). Kernel family: senemos-uke-kernel-mainline. No validated device images are currently published; source, package and physical-device acceptance are tracked separately by model and SKU.",
     "instructions": "Project status and implementation plan: https://github.com/MCC45TR/uke-linux . This test channel is being prepared. Do not treat project creation or a successful package build as proof of hardware support. Validated installation and rollback instructions will accompany tested releases.",
     "enable_net": false,
     "builds_submitted": false,
