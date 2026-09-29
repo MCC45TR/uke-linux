@@ -1,0 +1,1253 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "arkt-nabu": {
+      "url": "https://github.com/ArKT-7/twrp_device_xiaomi_nabu.git",
+      "path": "recovery-uke-ofox/referances/recovery/arkt-nabu",
+      "acquired_at": "2026-09-28T19:44:18.018133+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/mod-windows": {
+          "commit": "b7dc2d2c2285630744934ffdd387bddd69a723de",
+          "tree": "418ed89f22fd5d17ed1228f3bc627cabefb4c08d"
+        },
+        "refs/heads/mod-linux": {
+          "commit": "91e6e861c68025e838a382f75e57dd2e321ca2f1",
+          "tree": "6951df384b15b02edf18d03f84b867e13c0af6c1"
+        },
+        "refs/heads/mod-uefi-dualpart": {
+          "commit": "dd50416e860f274806b6069e24734c95868b2ffe",
+          "tree": "d4da70a6f531d439a83f387b9e27ea241833879d"
+        },
+        "refs/heads/mod-normal": {
+          "commit": "ed558b4ae201651ec786d25d8869802660838076",
+          "tree": "c37258cea823cbf7196cfcc7bd4567aac36b5b46"
+        },
+        "refs/heads/mod-win-CN": {
+          "commit": "31e31389e1a54d72776b8ad22cefcae3f55ebf8b",
+          "tree": "64b9805378e110bdabc7e0e06e9b56fac2955d3c"
+        },
+        "refs/heads/test-rotation": {
+          "commit": "639290964d6a1cc36d98328984fdcd2e83dfbfcd",
+          "tree": "2e4deb312aac6fee95fe31d7a7ed999f5c3b41dd"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:01Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/arkt-nabu.bundle",
+        "sha256": "f13a865f7ba7a84dce763d525b47e79bd92f894b4b049133d26199c37b5cbff9",
+        "bytes": 57453359,
+        "created_at": "2026-09-28T19:44:19.493710+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:20:46Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "thanick-uke": {
+      "url": "https://github.com/Thanick50/ofox_device_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/recovery/thanick-uke",
+      "acquired_at": "2026-09-28T19:44:22.185042+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/real-fox_14.1": {
+          "commit": "ad9bf4ed034455663a71f61eb214322806f9f1fd",
+          "tree": "99661eb8dcd5a222033f068725b1334ff1c58254"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:05Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/thanick-uke.bundle",
+        "sha256": "b19cb54c013ba72c4f07f4c5cf8cb44eaf8be043da08b57b1b810bc55b2a93ff",
+        "bytes": 156930353,
+        "created_at": "2026-09-28T19:44:26.266196+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:20:52Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "orangefox-sync": {
+      "url": "https://gitlab.com/OrangeFox/sync.git",
+      "path": "recovery-uke-ofox/referances/recovery/orangefox-sync",
+      "acquired_at": "2026-09-28T19:44:32.748578+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/master": {
+          "commit": "53a303ecfb622c516082d3e61dbaa7d9f02f0120",
+          "tree": "9da746e5d0fe9d1f859e513e1969af5a435c0780"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:05Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/orangefox-sync.bundle",
+        "sha256": "95b75dc44f0f6deb13c9ad6e2bf76a071e2625925723b0e6f762d23971735c94",
+        "bytes": 96180,
+        "created_at": "2026-09-28T19:44:32.829771+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:20:52Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "orangefox-recovery": {
+      "url": "https://gitlab.com/OrangeFox/bootable/Recovery.git",
+      "path": "recovery-uke-ofox/referances/recovery/orangefox-recovery",
+      "acquired_at": "2026-09-28T19:44:33.198160+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/fox_16.0": {
+          "commit": "6ff71bed1506fec1893247f0c74d7ae87c594eed",
+          "tree": "6a2b600a6475e3bae862c42ffec36c1ea18414ae"
+        },
+        "refs/heads/fox_14.1": {
+          "commit": "7280e7204e2acdd8133c5485a15cfa05a4feb34d",
+          "tree": "8fbb303cb0a7e2663375f2f582be138a19eba32b"
+        },
+        "refs/heads/fox_12.1": {
+          "commit": "cbcc4f713dbef98d76d6d2cfd019b1ebfd9418e9",
+          "tree": "bdfb848003c316f4b8ea3cbb6410db5735ea6476"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:11Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/orangefox-recovery.bundle",
+        "sha256": "0e583d5d1d279d5667a1ab96ba86316c1622026d0113fa0122194d544f54f442",
+        "bytes": 137412629,
+        "created_at": "2026-09-28T19:44:39.567588+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:00Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "orangefox-manifest": {
+      "url": "https://gitlab.com/OrangeFox/Manifest.git",
+      "path": "recovery-uke-ofox/referances/recovery/orangefox-manifest",
+      "acquired_at": "2026-09-28T19:44:47.266127+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/fox_16.0": {
+          "commit": "6bbb43ed568c9ee2127fb64333808388e583e459",
+          "tree": "bb7dc6a8ea0eaf85c2dbc923ef56c66a8205b86c"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:11Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/orangefox-manifest.bundle",
+        "sha256": "dea2d8cc19df6a1a474157def796d85e15fc2ad580b0656d17dd7433b7dcf085",
+        "bytes": 482598,
+        "created_at": "2026-09-28T19:44:47.483112+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:01Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "orangefox-vendor": {
+      "url": "https://gitlab.com/OrangeFox/vendor/recovery.git",
+      "path": "recovery-uke-ofox/referances/recovery/orangefox-vendor",
+      "acquired_at": "2026-09-28T19:44:48.024224+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "cea00cabf2e8ce50fc9f0b5cda99b5801855847a",
+          "tree": "3ecc1916aaaad8e5e3a84d02abee2db9abc1dbe6"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:15Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [
+        {
+          "ref": "refs/heads/main",
+          "path": "Files/classic_theme",
+          "commit": "350432b6a0f65a119ac2c4511aff5c57344f7c23"
+        }
+      ],
+      "submodule_status": "pending-separate-archives",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/orangefox-vendor.bundle",
+        "sha256": "7cd511e057b59c78025e66632abd65531af8a7fdedb3f38a65b23f539b512139",
+        "bytes": 321286529,
+        "created_at": "2026-09-28T19:44:53.325352+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:08Z",
+        "network_used": false
+      },
+      "archive_complete": false,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "uke-linux": {
+      "url": "https://github.com/ztsubaki/uke-linux.git",
+      "path": "senemos-uke-kernel/referances/community/uke-linux",
+      "acquired_at": "2026-09-28T19:45:00.803396+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/master": {
+          "commit": "32cad9ccd383ff4b37d8a5e7f88a8bfdcc07307e",
+          "tree": "ec31dcac5b69203ba31e35f36ffec54e3f67d03e"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:15Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [
+        {
+          "ref": "refs/heads/master",
+          "path": "images/init_boot/busybox",
+          "commit": "fc71374dfccd46448c62947269a35f1420d7ee28"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_device_xiaomi_muyu",
+          "commit": "f08957e2e5ccef874091567db5f6020b18c81ff8"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_device_xiaomi_peridot",
+          "commit": "36d1462f9907a218e9e61206beb9f40d87a8188a"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_device_xiaomi_sm8635-common",
+          "commit": "f477733d60197b312ab2ed42f6b75dfade54ada2"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_device_xiaomi_uke",
+          "commit": "6aa70ea5d603b16187dd46cb701f4d91e8fce8f9"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_device_xiaomi_uke-kernel",
+          "commit": "9bb7c4331be7205fabf5427b5654555763304d20"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_hardware_xiaomi",
+          "commit": "e0b0fa0cf9b5a5c5f174a1c3a6e8d63cc361c1d1"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_kernel_xiaomi_sm8635",
+          "commit": "85fc84465f719c3450ce21e52f3ca47503afdda0"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_kernel_xiaomi_sm8635-devicetrees",
+          "commit": "d1143877735a1b9dd81b164100d97cfddbbbc04d"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "lineage/android_kernel_xiaomi_sm8635-modules",
+          "commit": "ed4ad0d1ad00b755af2fe61387dcc5397ad20b8f"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "linux",
+          "commit": "adc218676eef25575469234709c2d87185ca223a"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "manifest",
+          "commit": "4503ecac6e9461f1817a2cfd65399822a4a3dbc9"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/Xiaomi_Kernel_OpenSource-uke",
+          "commit": "5712080a4b0c0b1a879e6d145c601c649ddaddfd"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/camera-devicetree-uke",
+          "commit": "57d2135ee6909ffb7d288a7dc4d82c85d95fc10d"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/camera-kernel-uke",
+          "commit": "699fa15a98abd40fbb94f3a6fc00f91723d29d35"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/display-devicetree-uke",
+          "commit": "4a3e1c391130237c5e8c2b250d1c94f3e25b9b11"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/display-drivers-uke",
+          "commit": "44275c404a677d9d9e5230fedd1af2ef02fc7b9a"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/kernel_devicetree-uke",
+          "commit": "94c84aeb9e517dbde546fc732033c184094c8e57"
+        },
+        {
+          "ref": "refs/heads/master",
+          "path": "vendor/wlan-uke",
+          "commit": "2825b01e22ac3e16345c12e6c85549188e2e765e"
+        }
+      ],
+      "submodule_status": "pending-separate-archives",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/uke-linux.bundle",
+        "sha256": "2bad0dfafd4df72d20a2ba95ea1bb3b59663cd31e6ff7b843a05204c6e44f876",
+        "bytes": 491537,
+        "created_at": "2026-09-28T19:45:00.918806+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:08Z",
+        "network_used": false
+      },
+      "archive_complete": false,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "aloha-platforms": {
+      "url": "https://github.com/Project-Aloha/mu_aloha_platforms.git",
+      "path": "uke-project-aloha/referances/donors/aloha-platforms",
+      "acquired_at": "2026-09-28T19:45:17.441454+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "8d37e2bfab2f9d959ac0b3d68434e8be4866bf55",
+          "tree": "f743da03b56c69210e0b2ab464e37d30eb442c11"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:27Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [
+        {
+          "ref": "refs/heads/main",
+          "path": "Binaries",
+          "commit": "ce59dcf54753e112d7b847dd997d3ae934094e0d"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Common/MU",
+          "commit": "c6dc1247320711ac0967a7a10dddf9ddf55806b2"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Common/MU_OEM_SAMPLE",
+          "commit": "2135f522f14bc6797d17355c8ce2a4539260743f"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Features/CONFIG",
+          "commit": "d08c5af327768d2820bbd030ca5af443be33bce8"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Features/DFCI",
+          "commit": "401e480fe46d348115a6fe94a878d50069b8098c"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "MU_BASECORE",
+          "commit": "762a65dad79e2934cddbefa467b7e2c7b5ee4bc0"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Platforms/CranePkg",
+          "commit": "80e799e630ff50dba5096b431e0d9d56aca67f74"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Platforms/MbedTlsPkg/Library/MbedTlsLib/mbedtls",
+          "commit": "e185d7fd85499c8ce5ca2a54f5cf8fe7dbe3f8df"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Platforms/OpensslPkg/Library/OpensslLib/openssl",
+          "commit": "aea7aaf2abb04789f5868cbabec406ea43aa84bf"
+        },
+        {
+          "ref": "refs/heads/main",
+          "path": "Platforms/SurfaceDuoACPI",
+          "commit": "d742758fe575c08b5278d84fec1b3b313551a587"
+        }
+      ],
+      "submodule_status": "pending-separate-archives",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-project-aloha/referances/bundles/aloha-platforms.bundle",
+        "sha256": "bfea5dd8f98749e00dff397abfa4c4050a15abdf1b39edd38442a01e6259f6ba",
+        "bytes": 312434591,
+        "created_at": "2026-09-28T19:45:29.450136+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:24Z",
+        "network_used": false
+      },
+      "archive_complete": false,
+      "lfs_history_changes": [],
+      "owner": "uke-project-aloha"
+    },
+    "aloha-dualboot": {
+      "url": "https://github.com/Project-Aloha/DualBootKernelPatcher.git",
+      "path": "uke-project-aloha/referances/donors/aloha-dualboot",
+      "acquired_at": "2026-09-28T19:45:46.151512+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "36edd373e8d0ff2fd620832f0fc5108f7bcbc84f",
+          "tree": "a2ea1bbe3e0d204bf78bb9333ef6671a1d1f835c"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:27Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-project-aloha/referances/bundles/aloha-dualboot.bundle",
+        "sha256": "08938acc1af0c28639591b62e71b0473f8b3ea3f92f5e4dd83ceb5249daec05b",
+        "bytes": 39912,
+        "created_at": "2026-09-28T19:45:46.225101+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:24Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "uke-project-aloha"
+    },
+    "tb520fu-linux": {
+      "url": "https://github.com/nfe613920-cmyk/tb520fu-linux-kernel.git",
+      "path": "senemos-uke-kernel/referances/donors/tb520fu-linux",
+      "acquired_at": "2026-09-28T19:45:47.196802+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "d3e75a8fc2e7b24b36b4278e7ac56947c24d5627",
+          "tree": "11e2e1168fa477e6d1fc3ad65d16cd3bcbaa9d23"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:27Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/tb520fu-linux.bundle",
+        "sha256": "e50a3a26c4eae4d0a3c322c00f3212af21860cb924afea88652b265698528e6f",
+        "bytes": 3248,
+        "created_at": "2026-09-28T19:45:47.265907+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:25Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "tb520fu-docs": {
+      "url": "https://github.com/nfe613920-cmyk/tb520fu-mainline-docs.git",
+      "path": "senemos-uke-kernel/referances/donors/tb520fu-docs",
+      "acquired_at": "2026-09-28T19:45:48.302096+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "30db4da74217634b199e9fc5cd5f3209a160ea49",
+          "tree": "e28a298ef764d13ae5dbbba1058da1a28f4f0dc4"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:27Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/tb520fu-docs.bundle",
+        "sha256": "dd65a90c1a1cf859dc097fc2dce945a8bc67b416d4ed169e578beb992a9900b5",
+        "bytes": 11807,
+        "created_at": "2026-09-28T19:45:48.366936+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:25Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "tab-s9-linux": {
+      "url": "https://github.com/agcarbajo/postmarketos-galaxy-tab-s9-ultra.git",
+      "path": "senemos-uke-kernel/referances/donors/tab-s9-linux",
+      "acquired_at": "2026-09-28T19:45:50.007730+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/master": {
+          "commit": "b1dcca03fdc7952de60c3e9ab49e860b6bd45e8c",
+          "tree": "811274cae94ecd095aa5f5ba297d7be83b7b83f0"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:28Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/tab-s9-linux.bundle",
+        "sha256": "edd6e40707ff5483c3f543f24940ed51c317e19b0d21537622f6d4c31e57bab4",
+        "bytes": 5436111,
+        "created_at": "2026-09-28T19:45:50.370296+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:25Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "peridot-multiboot": {
+      "url": "https://github.com/dimivelev/peridot-multiboot.git",
+      "path": "senemos-uke-kernel/referances/donors/peridot-multiboot",
+      "acquired_at": "2026-09-28T19:45:51.941550+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "3a9de9fc8d9d87709da9dc2eaa28f46b753d0d9c",
+          "tree": "414b333e9d7be467b38540ca83118e36a3b23124"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:28Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/peridot-multiboot.bundle",
+        "sha256": "09394a41a5f4e2f46146e612f0beef5f706163b90f3e63bc032b10fc72264ba5",
+        "bytes": 119627,
+        "created_at": "2026-09-28T19:45:52.020656+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:26Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "postmarketos-pmaports": {
+      "url": "https://gitlab.com/postmarketOS/pmaports.git",
+      "path": "uke-fedora-builder/referances/donors/postmarketos-pmaports",
+      "acquired_at": "2026-09-28T19:45:56.424981+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/master": {
+          "commit": "817ed870e92a64963d926354fb74c75090811fcc",
+          "tree": "b1de3a30b18dee9c0ce756d6ccace95b490d342f"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:34Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/postmarketos-pmaports.bundle",
+        "sha256": "4c78a39d630686a20bca8d7d21a8e90d61b46144ce3079e11316e870d4dac403",
+        "bytes": 53585016,
+        "created_at": "2026-09-28T19:46:02.011469+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:32Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "uke-fedora-builder"
+    },
+    "xiaomi-devicetree": {
+      "url": "https://github.com/MiCode/kernel_devicetree.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-devicetree",
+      "acquired_at": "2026-09-28T19:46:10.720353+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "94c84aeb9e517dbde546fc732033c184094c8e57",
+          "tree": "627a7ba6b99f0a5aa6308eeda3e6e81c642ee8e5"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:35Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-devicetree.bundle",
+        "sha256": "acc7d126c6463a98ce6ce16aa559b5a24056666f62e60945cb3d417be89b5d8f",
+        "bytes": 3988286,
+        "created_at": "2026-09-28T19:46:11.101621+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:33Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "xiaomi-display-dt": {
+      "url": "https://github.com/MiCode/vendor_qcom_proprietary_display-devicetree.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-display-dt",
+      "acquired_at": "2026-09-28T19:46:12.803405+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "4a3e1c391130237c5e8c2b250d1c94f3e25b9b11",
+          "tree": "0a83b51efab9135d7cf8f41d2e28ad109877b549"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:35Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-display-dt.bundle",
+        "sha256": "05ce4a7ce50a8943a0df43051ec1a30225d77d51a9ed29049559cdd0250a210e",
+        "bytes": 247917,
+        "created_at": "2026-09-28T19:46:12.912898+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:33Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "xiaomi-camera-dt": {
+      "url": "https://github.com/MiCode/vendor_qcom_proprietary_camera-devicetree.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-camera-dt",
+      "acquired_at": "2026-09-28T19:46:14.270996+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "57d2135ee6909ffb7d288a7dc4d82c85d95fc10d",
+          "tree": "1dc1aa43171a0bd751e5dded1e5da6e64e01e4ec"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:35Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-camera-dt.bundle",
+        "sha256": "e8ae10d806885cd63e12eaf85548fb692e5d67c98208ca1471dc3d254ed995fe",
+        "bytes": 156053,
+        "created_at": "2026-09-28T19:46:14.354098+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:33Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "xiaomi-build": {
+      "url": "https://github.com/MiCode/kernel_build.git",
+      "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-build",
+      "acquired_at": "2026-09-28T19:46:16.169954+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/uke-v-oss": {
+          "commit": "e6b1cb8a38fa93564009bbd8116094928c67b876",
+          "tree": "ec82fe65b400a6f73827423872ca04a0b2af3fa2"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:36Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-build.bundle",
+        "sha256": "abd66b4bd4c621d10d3e927d5b1cffa4da46dd9ca399a3d399b6148c84759b04",
+        "bytes": 3082058,
+        "created_at": "2026-09-28T19:46:16.927038+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:34Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "lineage-uke-device": {
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/community/lineage-uke-device",
+      "acquired_at": "2026-09-28T19:46:18.908787+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "6aa70ea5d603b16187dd46cb701f4d91e8fce8f9",
+          "tree": "40e0daf5b3343f792e42218b63bdefd517c72e90"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:36Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/lineage-uke-device.bundle",
+        "sha256": "b8aeb5999b8a7296082d4de4a208d59df3ff830347b4b7739413082519f704ad",
+        "bytes": 33211,
+        "created_at": "2026-09-28T19:46:18.974604+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:34Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "lineage-common-device": {
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_sm8635-common.git",
+      "path": "recovery-uke-ofox/referances/community/lineage-common-device",
+      "acquired_at": "2026-09-28T19:46:20.456529+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "f477733d60197b312ab2ed42f6b75dfade54ada2",
+          "tree": "0798622cf829fabbf1850106662898529b309cbc"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:37Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/lineage-common-device.bundle",
+        "sha256": "aa5631b95100268dc8e9b7e47eaedc36049ba7d80c6b41558c2f107024d97cba",
+        "bytes": 593416,
+        "created_at": "2026-09-28T19:46:20.633372+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:35Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "uke-device-current": {
+      "url": "https://github.com/Uke-resources/device_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/community/uke-device-current",
+      "acquired_at": "2026-09-28T19:46:22.227090+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-24.0": {
+          "commit": "56daab9f882c1aded83251abbaa794c464f27905",
+          "tree": "4d01927ff111f547018c1ff43dc96d340cdc6840"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:37Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/uke-device-current.bundle",
+        "sha256": "1a33e957d3fd367fb4eebec6ffb19e29bd471bdf58a2c9e7f0c9ba67b63d1417",
+        "bytes": 723938,
+        "created_at": "2026-09-28T19:46:22.330852+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:35Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "novatek-touch": {
+      "url": "https://android.googlesource.com/kernel/google-modules/touch/novatek_touch",
+      "path": "senemos-uke-kernel/referances/donors/novatek-touch",
+      "acquired_at": "2026-09-28T19:46:23.068411+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/android-gs-tangorpro-6.1-android16": {
+          "commit": "ab0784a2903c08fb69b06c8fcb54f1a3a28c45b0",
+          "tree": "e8f2240b22975e310628c7275299bc598ef47d4b"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:37Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/novatek-touch.bundle",
+        "sha256": "2cfa1d41f18a80a1addb866b12ec27bdf682b341a21ebf6d6a43f771a1e98a30",
+        "bytes": 81943,
+        "created_at": "2026-09-28T19:46:23.155237+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:35Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "lineage-devicetrees": {
+      "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635-devicetrees.git",
+      "path": "senemos-uke-kernel/referances/community/lineage-devicetrees",
+      "acquired_at": "2026-09-28T19:46:25.791351+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "d1143877735a1b9dd81b164100d97cfddbbbc04d",
+          "tree": "aac9d3d18f389856033598db07dc58997a5d4d30"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:40Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/lineage-devicetrees.bundle",
+        "sha256": "073381fa3b884f77dc37a07ea7f1c5a63a42afb75d8fc59876494b9af752ed16",
+        "bytes": 11275423,
+        "created_at": "2026-09-28T19:46:28.552476+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:38Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "ack-manifest": {
+      "url": "https://android.googlesource.com/kernel/manifest",
+      "path": "senemos-uke-kernel/referances/android/ack-manifest",
+      "acquired_at": "2026-09-28T19:46:32.193602+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/common-android14-6.1": {
+          "commit": "044de8a1852fcf7cba788c633baf538e440f4f82",
+          "tree": "8dc8d8cceb309697937e8087b88ecc24198dce11"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:40Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/ack-manifest.bundle",
+        "sha256": "b87f732e61105f8ad15bf144352be5d7e97c683736018213fd78c491616042df",
+        "bytes": 44593,
+        "created_at": "2026-09-28T19:46:32.264180+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:38Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "mkbootimg": {
+      "url": "https://android.googlesource.com/platform/system/tools/mkbootimg",
+      "path": "recovery-uke-ofox/referances/tools/mkbootimg",
+      "acquired_at": "2026-09-28T19:46:33.291298+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "d2bb0af5ba6d3198a3e99529c97eda1be0b5a093",
+          "tree": "c45163bf1cdb731e3bdd90d69d54c8e92004d673"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:41Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/mkbootimg.bundle",
+        "sha256": "bc85db5a626df07b757bab786c965931727eb49167a77cafc7309497e98014ad",
+        "bytes": 1584128,
+        "created_at": "2026-09-28T19:46:33.478654+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:39Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "avb": {
+      "url": "https://android.googlesource.com/platform/external/avb",
+      "path": "recovery-uke-ofox/referances/tools/avb",
+      "acquired_at": "2026-09-28T19:46:34.916186+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main-kernel": {
+          "commit": "c5066a96caa7bf4150c0a8cc8cc14ab81733fdc7",
+          "tree": "fd49b19b12734f9cefa23a5ab3103092f3b496be"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:41Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/avb.bundle",
+        "sha256": "0f4f3f41e0865ab237a6a03c145536da73e966131df3d175aabcfb103bf91d9a",
+        "bytes": 8455354,
+        "created_at": "2026-09-28T19:46:35.507085+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:40Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "libufdt": {
+      "url": "https://android.googlesource.com/platform/system/libufdt",
+      "path": "recovery-uke-ofox/referances/tools/libufdt",
+      "acquired_at": "2026-09-28T19:46:37.274254+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main-kernel": {
+          "commit": "131ee2db53ad7d9d4756555567894b01107cb26e",
+          "tree": "d6f492554759383076da03374992041a45e8ceb6"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:41Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "NOTICE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/libufdt.bundle",
+        "sha256": "6aa12af1607e2e533112fe8d8c21f7ad6917d7a82ad67e66fef22de463d4cb55",
+        "bytes": 796392,
+        "created_at": "2026-09-28T19:46:37.403776+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:40Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "recovery-uke-ofox"
+    },
+    "dt-schema": {
+      "url": "https://github.com/devicetree-org/dt-schema.git",
+      "path": "senemos-uke-kernel/referances/tools/dt-schema",
+      "acquired_at": "2026-09-28T19:46:39.248707+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "5687115902ba74c1cd80bdab4772cc2cdfa75778",
+          "tree": "26d9a28856c669a1f3f8b96f180f77d47b3fc7f1"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:42Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE.txt"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/dt-schema.bundle",
+        "sha256": "935fab5e1d8b9da674c0b041037e3dac0cbf784e2f7548fd796ac4158442ed87",
+        "bytes": 950566,
+        "created_at": "2026-09-28T19:46:39.470082+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:40Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    },
+    "dtc": {
+      "url": "https://git.kernel.org/pub/scm/utils/dtc/dtc.git",
+      "path": "senemos-uke-kernel/referances/tools/dtc",
+      "acquired_at": "2026-09-28T19:46:40.701267+00:00",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/master": {
+          "commit": "7a1e017926004ecff5fce62d62d42ce9f3e00082",
+          "tree": "ee627f73460fb68328fab13aa4c9c330ebd1e9ee"
+        }
+      },
+      "git_verified_at": "2026-09-29T03:20:42Z",
+      "git_integrity": "passed",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "submodules": [],
+      "submodule_status": "not-required",
+      "lfs_attributes": [],
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/dtc.bundle",
+        "sha256": "deca945f43ac8e74f701276d9b4f9638ef9bd5294cf637aedeace8f0e9e1f666",
+        "bytes": 1572788,
+        "created_at": "2026-09-28T19:46:41.071520+00:00"
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-29T03:21:41Z",
+        "network_used": false
+      },
+      "archive_complete": true,
+      "lfs_history_changes": [],
+      "owner": "senemos-uke-kernel"
+    }
+  }
+}

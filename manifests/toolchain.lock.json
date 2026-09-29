@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "status": "not-provisioned",
+  "recovery_container_digest": null,
+  "kernel_container_digest": null,
+  "package_nevras": [],
+  "note": "Host tools were inspected; no reproducible recovery/kernel toolchain claimed."
+}

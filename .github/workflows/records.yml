@@ -1,0 +1,27 @@
+name: Preparation records
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified 2026-09-28
+        with:
+          submodules: true
+      - name: Install host validation tools
+        run: sudo apt-get update && sudo apt-get install -y jq ripgrep
+      - name: Validate evidence, archive behavior and plan dependencies
+        run: bash tests/run.sh
+      - name: Check publication content
+        run: |
+          git config user.name MCC45TR
+          git config user.email 75160848+MCC45TR@users.noreply.github.com
+          scripts/privacy-check.sh
+          for component in recovery-uke-ofox senemos-uke-kernel uke-fedora-builder uke-project-aloha; do
+            git -C "$component" config user.email 75160848+MCC45TR@users.noreply.github.com
+            scripts/privacy-check.sh "$component"
+          done
