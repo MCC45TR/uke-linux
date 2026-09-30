@@ -1,8 +1,8 @@
 # POCO Pad X1 and Xiaomi Pad 7: recovery, firmware and Fedora development plan
 
-Revision 5 — 29 September 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
+Revision 6 — 30 September 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
 
-This is an implementation plan and an evidence contract. A first local OrangeFox recovery image has been built for the measured Global profile, but no project image has been tested on either physical model. No UEFI or mainline kernel image has been built. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the recovery build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/FIRST-RECOVERY-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
+This is an implementation plan and an evidence contract. Experimental OrangeFox assets have been built for the measured Global profile; no project image has been tested on either physical model. Generic upstream Linux 7.2.8 Image, DTBs and 1,655 modules compile and stage successfully, but no Uke-bootable mainline or UEFI image exists. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the public alpha build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/PUBLIC-ALPHA-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
 
 ## 1. What we are building
 
@@ -10,7 +10,7 @@ The first deliverable is a reproducible OrangeFox recovery for Uke with the mana
 
 The long-term goal is an integrated tablet: reliable boot, complete support for physically present hardware, responsive input, good battery life, bounded diagnostics and maintainable updates. “OEM quality” is an acceptance target, not a statement about today's software. Every advertised function must have a variant-specific test record.
 
-Current preparation includes architecture, source research, pinned reference clones, an archive manager, feature and hardware inventories, public project repositories and the COPR test channel. The Android 16 tree is synchronized; Global and China fastboot packages are verified and boundedly extracted, and the Turkey OTA is verified. A local recovery build completed. UEFI porting, mainline kernel compilation, clean-build reproduction, physical validation and image publication remain subsequent work. No live partitioning, flashing, Android key access or remote package build is part of this delivery.
+Current preparation includes architecture, source research, pinned reference clones, an archive manager, feature and hardware inventories, public project repositories and the COPR test channel. The Android 16 tree is synchronized; Global and China boot layouts and four base DTBs per profile are inspected, and Turkey OTA metadata is hash-verified. A privacy-clean recovery build and native active-slot installer pass offline checks. Unsigned, explicitly untested experimental prereleases may publish these artifacts after source/privacy/package checks; supported releases still require physical boot and stock-return acceptance. UEFI/mainline porting, full build reproduction and physical validation remain open. No live partitioning, flashing, Android key access or remote package build is part of this delivery.
 
 ### Fixed decisions
 
@@ -103,8 +103,9 @@ The inspected Project Aloha platform tree has no Uke/SM7675 target. It requires 
 
 | Profile | Version | Acquisition state |
 |---|---|---|
-| CN | `OS3.0.302.0.WOZCNXM` | URL and length inspected; full download and SHA-256 pending |
-| Global | `OS3.0.303.0.WOZMIXM` | URL and length inspected; full download and SHA-256 pending |
+| CN | `OS3.0.302.0.WOZCNXM` | Download, SHA-256, bounded extraction, boot headers/layout and base DTBs inspected |
+| Global | `OS3.0.303.0.WOZMIXM` | Download, SHA-256, bounded extraction, boot headers/layout and base DTBs inspected; experimental recovery build profile |
+| Turkey OTA | `OS3.0.303.0.WOZTRXM` | Download and metadata hash verified; partition extraction/signature validation pending |
 
 Exact URLs are recorded in `recovery-uke-ofox/manifests/firmware.lock.json`. CDN ETags are not content SHA-256 values. Keep raw packages and every derived image tied to the package hash and extraction command. Do not run included flash scripts. Extract boot/init_boot/vendor_boot/recovery/dtbo/vbmeta, partition metadata, module lists/vermagic, DTB/DTBO variants, firmware names and HAL/service relationships. Record unavailable fields explicitly.
 
@@ -139,18 +140,18 @@ Priority meanings: **P0** establishes identity, recoverability or basic operatio
 |---|---|---|---|---|
 | 015 | P0 | 007,014 | Download China and Global fastboot baselines plus the Turkey recovery OTA separately; verify length and compute full SHA-256. | All three packages verified |
 | 016 | P0 | 015 | Extract stock images with bounded, traversal-safe tools; preserve raw packages and extraction provenance. | 38 bounded entries extracted per profile |
-| 017 | P0 | 016 | Map recovery/boot/vendor_boot/init_boot, headers, slots, AVB, dynamic partitions and image limits. | Global mapped; CN analysis pending |
-| 018 | P0 | 016,017 | Define immutable firmware/SKU profiles and reject mixed DT, modules, keys or payload identities. | Global locked; CN analysis pending |
-| 019 | P0 | 016,018 | Identify panel, touch, audio and sensor variants through DTS, modules, firmware and stock configs. | Pending |
+| 017 | P0 | 016 | Map recovery/boot/vendor_boot/init_boot, headers, slots, AVB, dynamic partitions and image limits. | Global and CN mapped; Turkey metadata only |
+| 018 | P0 | 016,017 | Define immutable firmware/SKU profiles and reject mixed DT, modules, keys or payload identities. | Global/CN locked separately; Global installer enforces boot-stack hashes |
+| 019 | P0 | 016,018 | Identify panel, touch, audio and sensor variants through DTS, modules, firmware and stock configs. | Four base DTBs decoded per region; installed DTBO/SKU and module ABI review open |
 | 020 | P0 | 017,018 | Reproduce the donor F2FS formatting problem on synthetic images; identify incompatible flags/tool versions. | Pending U1 |
 | 021 | P0 | 008,010,017 | Resolve the complete OrangeFox Android 16 manifest, replace Mondrian selection and archive every required revision. | 399 projects synced and locked; per-project offline archives pending |
 | 022 | P0 | 021 | Pin host container, compiler, packages and unavoidable upstream host-only tools; produce a dependency SBOM. | Pending |
 | 023 | P0 | 017,018,021 | Build a clean Uke device configuration with matching kernel/module ABI and auditable partition definitions. | Global configuration staged; module ABI review open |
-| 024 | P0 | 023 | Compile OrangeFox without masking missing dependencies; save full build logs and source/config identities. | Incremental and fresh-output builds passed; pristine re-sync open |
-| 025 | P0 | 024 | Unpack the result; validate headers, section sizes, module architecture, payload paths and absence of Python. | Header, ramdisk and Python audit passed; module dependency open |
+| 024 | P0 | 023 | Compile OrangeFox without masking missing dependencies; save full build logs and source/config identities. | Neutral-path new-output and incremental builds passed; static native installer built; pristine re-sync open |
+| 025 | P0 | 024 | Unpack the result; validate headers, section sizes, module architecture, payload paths and absence of Python. | Staged and extracted ramdisk/privacy/Python/ZIP/header checks passed; runtime module dependency open |
 | 026 | P0 | 025 | Repeat the build from pinned offline inputs and explain every output difference. | Pending U2 |
-| 027 | P0 | 013,017 | Create C++ read-only device inventory with explicit model, LUN, GUID, slot and snapshot state. | Pending U1 |
-| 028 | P0 | 027 | Define a typed management API separating discovery, plan validation and execution; make failures visible to the UI. | Pending U1 |
+| 027 | P0 | 013,017 | Create C++ read-only device inventory with explicit model, LUN, GUID, slot and snapshot state. | PARTUUID inventory and installer slot/snapshot policy fixtures pass; full live inventory pending |
+| 028 | P0 | 027 | Define a typed management API separating discovery, plan validation and execution; make failures visible to the UI. | Native mount planning and check/install policy implemented; complete UI/API pending |
 | 029 | P0 | 028 | Implement backup manifests, hashes, free-space checks and dry-run restore validation on synthetic disks. | Pending U1 |
 | 030 | P0 | 020,028,029 | Implement GPT/filesystem planning with overflow, overlap, unknown-layout and interruption tests. | Pending U1 |
 | 031 | P1 | 025,028 | Add management settings and screens: identity, diagnostics, backup, profile, image selection and explicit operation plan. | Pending U0/U1 |
@@ -158,7 +159,7 @@ Priority meanings: **P0** establishes identity, recoverability or basic operatio
 | 033 | P0 | 017,025,028 | Configure ADB, sideload, MTP and fastbootd with clear ownership and firmware-dependent data visibility. | Pending U0/H1 |
 | 034 | P1 | 028,033 | Implement selected-image mass storage, default read-only export and local/host write exclusion. | Pending U1/H1 |
 | 035 | P1 | 029,030 | Add Fedora rootfs/ESP installation and controlled chroot management with cleanup and rollback records. | Pending U1 |
-| 036 | P1 | 017,028,029 | Add OTA payload extraction, dynamic-partition inspection and snapshot-merge conflict rejection. | Pending U1 |
+| 036 | P1 | 017,028,029 | Add OTA payload extraction, dynamic-partition inspection and snapshot-merge conflict rejection. | Installer rejects non-none/unknown snapshot state; Turkey metadata hash verified; extractor pending |
 | 037 | P0 | 018,025 | Audit Android FBE/KeyMint/TEE compatibility; keep decryption unavailable until the installed firmware trust path is proven. | Pending U0/H1 |
 | 038 | P1 | 028,031 | Implement private raw logs, bounded collection and redacted export with user-visible operation results. | Pending U1 |
 | 039 | P1 | 012,034,035,036 | Reconcile every Nabu feature group; document implemented, blocked and conditional features individually. | Pending |
@@ -191,7 +192,7 @@ Priority meanings: **P0** establishes identity, recoverability or basic operatio
 |---|---|---|---|---|
 | 057 | P0 | 008,010,014 | Acquire the remaining OEM, ACK, OnePlus, Lineage, stable and Qualcomm full-history source sets. | Pending |
 | 058 | P0 | 057 | Analyze dependencies and semantic differences; distinguish Android product trees, prebuilts, firmware and source drivers. | Pending |
-| 059 | P0 | 022,057 | Lock a kernel toolchain and compile untouched Linux 7.2.8 for ARM64 before adding port changes. | Pending U0 |
+| 059 | P0 | 022,057 | Lock a kernel toolchain and compile untouched Linux 7.2.8 for ARM64 before adding port changes. | U0 passed: Image, 1,847 DTBs, 1,655 modules and local module staging; no Uke DTB |
 | 060 | P0 | 010,018,058 | Reproduce the donor's pinned Linux 6.12 tree, configuration and local artifacts; report its tests separately. | Pending U0/U2 |
 | 061 | P0 | 059,060 | Create `senemos7/uke-7.2.8-bringup` from the fixed baseline; record its commit in the component manifest. | Pending |
 | 062 | P0 | 058,060,061 | Split the donor into attributed binding, TLMM, clock, power, interconnect, SMMU and USB patch groups. | Pending |

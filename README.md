@@ -17,7 +17,9 @@ The target includes display, touch and pen, keyboard, connectivity, audio, senso
 
 ## Downloads and compatibility
 
-**No Uke Linux image or RPM has been released.** A [local OrangeFox recovery build](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/FIRST-RECOVERY-BUILD.md) exists, but it has not been boot-tested on either model and is not an installation download. The COPR test channel is reserved for reviewed development packages. Release downloads and installation instructions will appear here once builds and device tests meet their gates. A source checkout or passing CI run is not a tablet compatibility result.
+Download the **[experimental OrangeFox alpha](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases/tag/r12.0-uke.20260930-alpha1)**: separate temporary-boot IMG, dedicated recovery IMG and slot-safe installer ZIP, with source snapshots and SHA-256 hashes. Read the [firmware constraints and installation/rollback instructions](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/PRE-RELEASE.md) first. **No physical-device tests; Global OS3.0.303.0.WOZMIXM only.** These unsigned development files are not a supported recovery release.
+
+**No Uke Linux/Fedora image, UEFI image or RPM has been released.** The generic Linux 7.2.8 ARM64 baseline compiles Image, DTBs and 1,655 modules; it has no Uke DTB and is not a bootable Uke port. The COPR test channel remains reserved for reviewed development packages. A source checkout or passing CI run is not a tablet compatibility result.
 
 The project targets **POCO Pad X1** and **Xiaomi Pad 7**. POCO Pad X1 8 GB / 512 GB is the primary physical validation target; Xiaomi Pad 7 variants share the `uke` source target but require their own compatibility evidence. Each release records its tested model, memory/storage SKU, region firmware, panel and touch variant independently. Xiaomi Pad 7 Pro (`muyu`) and Xiaomi Pad 5 (`nabu`) are not compatible targets.
 
