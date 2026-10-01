@@ -1,6 +1,6 @@
 # POCO Pad X1 and Xiaomi Pad 7: recovery, firmware and Fedora development plan
 
-Revision 8 — 1 October 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
+Revision 9 — 1 October 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
 
 This is an implementation plan and an evidence contract. Experimental OrangeFox assets have been built for the measured Global profile; no project image has been tested on either physical model. Generic upstream Linux 7.2.8 Image, DTBs and 1,655 modules compile and stage successfully, but no Uke-bootable mainline or UEFI image exists. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the public alpha build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/PUBLIC-ALPHA-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
 
@@ -312,6 +312,22 @@ Host tests compare it with the exact OEM XML patches at two capacities per LUN.
 The complete manager, filesystem/data migration, multi-LUN orchestration and
 physical stock-layout restoration remain unfinished. GitHub upload is deferred
 while implementation and validation take priority.
+
+The additional Linux backup requirement is mandatory: whole Linux partition
+content, a selected home tree with numeric ownership, permissions, ACLs,
+accessible xattrs, links, sparse files and timestamps, and Btrfs subvolume
+full/incremental send streams. Source consistency, parent identity, private
+external destinations, verification and isolated restore must be explicit.
+Existing raw chunked backup is a foundation, not completion of the home-tree or
+subvolume workflows. Stock-profile Btrfs kernel support remains a separate gate.
+The tablet GUI additionally requires adjustable uniform interface density,
+full-screen anchors and matching touch rectangles, a visible percentage and
+reset, private settings on validated storage, and separate rendering/touch
+acceptance. The native 50–100 percent implementation uses a 75 percent tablet
+default and a render-thread reload that performs no settings flush or mount.
+Read-only native partition maps now expose protected reservations, bounded
+offset signature probes and healthy-GPT-only free gaps; label hints do not
+authorize OS management or Android FBE access.
 
 Priorities here follow the recovery matrix: P0 identity/recoverability, P1 core
 rescue, P2 conditional multi-OS management, P3 optional extensions. They express
