@@ -337,6 +337,18 @@ Read-only native partition maps now expose protected reservations, bounded
 offset signature probes and healthy-GPT-only free gaps; label hints do not
 authorize OS management or Android FBE access.
 
+The partition layout designer now allocates ESP, Linux and Windows only inside
+the original userdata extent. GUI and CLI share exact GB/GiB/MiB/percentage
+arithmetic, filesystem selections, proportional graphs, warnings and sealed
+review. Standard mode preserves userdata start and existing identities.
+Advanced mode permits explicit GUID/content requests; placement before userdata
+requires erase/recreate and declares Android data loss. Unselected GPT records
+and every non-userdata partition range remain unchanged. Image metadata
+execution/readback/rollback is available; supported filesystem shrink/recreate,
+formatting, multi-LUN orchestration and model-specific physical acceptance are
+still required before a complete device job. See the
+[layout checkpoint](recovery-uke-ofox/reports/URE-PARTITION-LAYOUT-BUILD.md).
+
 USB-C display and input expand the recovery UI scope: one HDMI/DP monitor,
 selectable EDID-backed resolution/refresh through 2560x1440 at nominal 75 Hz,
 visible active mode, enable/disable, aspect-preserving mirroring and USB HID
@@ -367,7 +379,7 @@ Recovery owns these phases; kernel, Aloha and Fedora dependencies are explicit.
 | URE-10 / 10 | P1/P2 | URE-01,URE-02; 027,030,042 | Add USB networking, opt-in key-authenticated SSH and separately packaged SFTP/SCP; verified host fingerprint, gadget ownership and reconnect/chunked backup tests at U1/U2/H1/H3. | PARTIAL source/host: chunked transfer/receiver and optimized host-assisted image restore/rollback with duplex transport mocks, packaged key-only Dropbear; managed service/SFTP/gadget ownership and HIL open; Wi-Fi is URE-14 |
 | URE-11 / 11 | P1 | URE-03,URE-04; 036,037 | Extend A/B, Virtual A/B, super and OTA inspection; writes reject active/unknown merges; FBE stays blocked until installed Uke KeyMint/TEE trust and credential/read-only tests. | Advanced management PLANNED; FBE BLOCKED |
 | URE-12 / 12 | P2 | URE-03,URE-04,URE-06; URE-07 for BitLocker | Add Windows detection, NTFS, WIM/ESD, ESP/BCD inspection and backup; U1 metadata/archive/target tests, isolated restore at H2; advanced BCD editing is P3. | PARTIAL source/host: installation indicators and read-only NTFS/WIM wrappers; managed restore/BCD/ESP work and Uke Windows acceptance open |
-| URE-13 / 13 | P2 | URE-03,URE-04 and accepted backup/restore; URE-05,URE-11,URE-12 for affected OSes; 034,039,043 | Implement the comprehensive partition manager, stock/default reconstruction and Android/Fedora/Windows/custom layouts from measured capacity; bounded migration/filesystem operations, multi-LUN journals, full preview/recovery UI, U1 interruption tests and exact human-reviewed H2 plans. | PARTIAL source/host: six-LUN stock reconstruction and per-image metadata execution/readback/rollback; full manager, filesystem/layout migration, multi-LUN orchestration and physical stock return remain open |
+| URE-13 / 13 | P2 | URE-03,URE-04 and accepted backup/restore; URE-05,URE-11,URE-12 for affected OSes; 034,039,043 | Implement the comprehensive partition manager, stock/default reconstruction and Android/Fedora/Windows/custom layouts from measured capacity; bounded migration/filesystem operations, multi-LUN journals, full preview/recovery UI, U1 interruption tests and exact human-reviewed H2 plans. | PARTIAL source/host: six-LUN stock reconstruction, original-userdata-only size/filesystem planner, graph/review GUI, advanced GUID/content requests, front erase/recreate policy and per-image metadata execution/readback/rollback; complete filesystem/migration job, multi-LUN orchestration and model-specific physical stock return remain open |
 | URE-14 / 14 | P2 | URE-10; kernel/firmware 079,090 | Add profile-matched WLAN, regulatory policy, network UI, secret handling and SSH over Wi-Fi; U2 config tests and H1/H3 reconnect/transfer acceptance. | PLANNED |
 | URE-15 / 15 | P0/P1 | Relevant URE phases; 038,097,098 | Complete parser fuzzing, long-operation fault/cancel tests, privacy/payload closure, independent reproduction, signing, SBOM/licenses and per-SKU acceptance. | PLANNED; existing alpha checks cover only their recorded scope |
 
