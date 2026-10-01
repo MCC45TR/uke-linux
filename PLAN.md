@@ -1,6 +1,6 @@
 # POCO Pad X1 and Xiaomi Pad 7: recovery, firmware and Fedora development plan
 
-Revision 9 — 1 October 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
+Revision 10 — 1 October 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
 
 This is an implementation plan and an evidence contract. Experimental OrangeFox assets have been built for the measured Global profile; no project image has been tested on either physical model. Generic upstream Linux 7.2.8 Image, DTBs and 1,655 modules compile and stage successfully, but no Uke-bootable mainline or UEFI image exists. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the public alpha build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/PUBLIC-ALPHA-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
 
@@ -328,6 +328,16 @@ default and a render-thread reload that performs no settings flush or mount.
 Read-only native partition maps now expose protected reservations, bounded
 offset signature probes and healthy-GPT-only free gaps; label hints do not
 authorize OS management or Android FBE access.
+
+USB-C display and input expand the recovery UI scope: one HDMI/DP monitor,
+selectable EDID-backed resolution/refresh through 2560x1440 at nominal 75 Hz,
+visible active mode, enable/disable, aspect-preserving mirroring and USB HID
+mouse/keyboard hotplug. The native DRM sink and reviewed input hooks have host
+fixtures; the Juo JH925 hub and a QHD75 monitor are the intended physical test
+setup. Compile/host evidence remains separate from tablet scanout, Type-C/PD,
+module loading and simultaneous USB input acceptance. GitHub upload stays deferred.
+The local artifact and validation scope are recorded in the
+[external display checkpoint](recovery-uke-ofox/reports/URE-EXTERNAL-DISPLAY-BUILD.md).
 
 Priorities here follow the recovery matrix: P0 identity/recoverability, P1 core
 rescue, P2 conditional multi-OS management, P3 optional extensions. They express
