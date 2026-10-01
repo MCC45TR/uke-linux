@@ -1,12 +1,21 @@
 # POCO Pad X1 and Xiaomi Pad 7: recovery, firmware and Fedora development plan
 
-Revision 6 — 30 September 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
+Revision 7 — 30 September 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
 
 This is an implementation plan and an evidence contract. Experimental OrangeFox assets have been built for the measured Global profile; no project image has been tested on either physical model. Generic upstream Linux 7.2.8 Image, DTBs and 1,655 modules compile and stage successfully, but no Uke-bootable mainline or UEFI image exists. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the public alpha build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/PUBLIC-ALPHA-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
 
 ## 1. What we are building
 
 The first deliverable is a reproducible OrangeFox recovery for Uke with the management capabilities found in the ArKT Nabu recovery. Recovery establishes the inventory, backup, diagnostics and controlled installation foundation. Project Aloha follows, providing a Uke-specific UEFI path and return to Android. The mainline kernel and Fedora system then use these foundations.
+
+The expanded recovery product is the **UKE Recovery Environment (URE)**: an
+offline Android/Linux/Windows maintenance environment built on OrangeFox, with
+project-owned C++ management code. The [comprehensive recovery roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/COMPREHENSIVE-ROADMAP.md)
+retains all topics 0–102 from the supplied 30 September roadmap. Section 6.1
+adds its sixteen implementation phases without renumbering the 100 platform
+steps. Windows, advanced layouts and optional extensions remain conditional
+future capabilities; they do not change the first Fedora target or create
+hardware support claims.
 
 The long-term goal is an integrated tablet: reliable boot, complete support for physically present hardware, responsive input, good battery life, bounded diagnostics and maintainable updates. “OEM quality” is an acceptance target, not a statement about today's software. Every advertised function must have a variant-specific test record.
 
@@ -18,7 +27,8 @@ Current preparation includes architecture, source research, pinned reference clo
 |---|---|
 | Work order | Recovery foundations → Project Aloha → mainline integration → Fedora → full hardware acceptance |
 | Recovery reference | Official OrangeFox `fox_16.0`, source release R12.0; pin the complete manifest before building |
-| Feature minimum | All 34 groups in [FEATURE-PARITY.md](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/FEATURE-PARITY.md), including conditional Windows/second-Android tools |
+| Feature minimum | All 34 groups in [FEATURE-PARITY.md](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/FEATURE-PARITY.md), including conditional Windows/second-Android tools |
+| Recovery expansion | URE-00–URE-15 and URE-C01–URE-C24 extend the donor minimum with native rescue, crypto, Btrfs, boot routing, networking and transaction contracts |
 | First recovery kernel | Firmware-matched OEM/GKI kernel and modules after stock layout analysis |
 | Mainline baseline | Linux `v7.2.8`, commit `9a66fdc0d7fd55f54235524a73435af99051e46f` |
 | Native project code | C++; upstream kernel/EDK II retain their required C and assembly |
@@ -267,6 +277,106 @@ Every storage plan includes device/LUN identity, sector size, GUIDs, old/new ran
 
 The feature parity matrix retains all donor capabilities: normal install/backup, terminal, file manager, rotations, language selection, brightness, ADB/sideload/MTP/fastbootd, log export, decryption diagnostics, partition health/planning, Linux/ESP format, chroot, stock restore, GPT backup/repair, AVB inspection, mass storage, NTFS/WIM tools, panel identification, UEFI selection, second Android, OTA extraction and reproducible builds. Conditional features remain visible as planned or unavailable until dependencies pass. Do not substitute a menu entry for a working implementation.
 
+### 6.1 URE implementation milestones
+
+The [detailed roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/COMPREHENSIVE-ROADMAP.md#91-recommended-implementation-roadmap)
+owns feature design; this table owns scheduling and acceptance dependencies.
+The existing 001–100 steps continue to track the wider platform. URE host work
+may proceed alongside them; device write and supported-release gates still
+require the exact physical recovery/return path. Existing installer and
+read-only fixture evidence is a baseline, not completion of the new phases.
+The recovery [native checkpoint](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/URE-NATIVE.md)
+now records a library/JSON API, live read-only selection, GPT image
+backup/repair/restore, OS discovery, diagnostics, regular-file transactions,
+inspected journals, storage usage/mapper policy, identity-bound storage stream
+software, host reception and native GUI pages. Live-source capture requires
+complete unit/boot/usage evidence and a retained read-only kernel claim; positive
+device acceptance, atomic snapshots and cross-boot continuation remain open.
+These are partial implementations;
+the complete milestones and physical gates below remain open.
+
+Priorities here follow the recovery matrix: P0 identity/recoverability, P1 core
+rescue, P2 conditional multi-OS management, P3 optional extensions. They express
+recovery value separately from the wider platform priorities in section 4.
+Recovery owns these phases; kernel, Aloha and Fedora dependencies are explicit.
+
+| ID / roadmap phase | Priority | Dependencies / platform steps | Deliverable and acceptance | Current state |
+|---|---|---|---|---|
+| URE-00 / 0 | P0 | 015–043 | Preserve the native active-slot installer, read-only identity checks and stock firmware; accept recovery boot and stock return on each model/profile at H0/H1. | Existing source/host/package baseline; physical gate blocked by device absence |
+| URE-01 / 1 | P0 | URE-00 safety contracts; 029 | Extract `libuke-recovery`, structured errors/results, versioned JSON and Storage Graph; retain CLI behavior and reject ambiguous identities at U0/U1. | PARTIAL source/host: shared API, graph and read-only block selector; full live identity/ownership closure and HIL open |
+| URE-02 / 2 | P0 | URE-01; 027,030 | Add R000–R100 stages, pstore preservation where available, kernel/module/display/touch/USB/UFS diagnostics and scrubbed reports; U0/U1 redaction and H1 correlation. | PARTIAL source/host: bounded diagnostic reads and scrubbed reports; R-stage producers and HIL correlation open |
+| URE-03 / 3 | P0 | URE-01; 031,032,038 | Implement serialized plans, stale-state revalidation, backup manifests, durable journals, readback and rollback; U1 partial-write/power-loss cases must distinguish safe and uncertain failure. | PARTIAL source/host: file and GPT-image plans/journals/rollback and inspected readback recovery; general live writes and electrical power-loss acceptance open |
+| URE-04 / 4 | P0 | URE-01,URE-03; 033 | Inspect/compare both GPT copies and filesystem metadata; back up GPT and slot boot chains with geometry, firmware and hashes; reject wrong-LUN/size backups at U1. | PARTIAL source/host: GPT metadata backup/verification and image repair/restore; multi-LUN/slot boot-chain orchestration and live acceptance open |
+| URE-05 / 5 | P1 | URE-01,URE-03,URE-04; 029,033 | Discover Linux distributions, package databases, kernels/initramfs/modules/DT/BLS/UKI; add metadata-aware files, atomic editor, controlled chroot, offline logs and Fedora rescue; U1/U2 before H1/H2. | PARTIAL source/host: bounded discovery, file metadata and native editor; semantic repair/chroot and HIL open |
+| URE-06 / 6 | P1 | URE-00 profile contracts,URE-04; kernel 018,058,073 | Build and probe a profile-matched recovery kernel for Btrfs, dm-crypt/crypto, NTFS and optional pstore; validate drivers on disposable images at U1/U2 before H1. | PLANNED; stock-profile Btrfs mounting remains BLOCKED |
+| URE-07 / 7 | P1/P2 | URE-03,URE-06 | Add LUKS unlock/lock/metadata/header backups, then conditional BITLK activation; no secrets in argv/logs/reports, U1 wrong-key/layering tests, H1/H2 access gates. | PLANNED; Android FBE uses a separate trust gate |
+| URE-08 / 8 | P1 | URE-03,URE-05,URE-06; URE-07 for encrypted roots | Manage Btrfs subvolumes/snapshots, file restore, scrub, filtered balance and send/receive; test rollback plans at U1 and require URE-09 plus H2 for one-shot snapshot boot. | BLOCKED by current kernel; userspace design PLANNED |
+| URE-09 / 9 | P1/P2 | URE-03,URE-05; Aloha 044–056 for EFI routes | Discover targets and validate consumed one-shot Android/Linux/Windows requests, fallback and history; U1 invalid/version/replay cases, U2 where possible, H2 actual routing. | PLANNED; Linux/Windows require a proven backend, Windows also URE-12 |
+| URE-10 / 10 | P1/P2 | URE-01,URE-02; 027,030,042 | Add USB networking, opt-in key-authenticated SSH and separately packaged SFTP/SCP; verified host fingerprint, gadget ownership and reconnect/chunked backup tests at U1/U2/H1/H3. | PARTIAL source/host: chunked file/image transfer and receiver, packaged key-only Dropbear; managed service/SFTP/gadget ownership and HIL open; Wi-Fi is URE-14 |
+| URE-11 / 11 | P1 | URE-03,URE-04; 036,037 | Extend A/B, Virtual A/B, super and OTA inspection; writes reject active/unknown merges; FBE stays blocked until installed Uke KeyMint/TEE trust and credential/read-only tests. | Advanced management PLANNED; FBE BLOCKED |
+| URE-12 / 12 | P2 | URE-03,URE-04,URE-06; URE-07 for BitLocker | Add Windows detection, NTFS, WIM/ESD, ESP/BCD inspection and backup; U1 metadata/archive/target tests, isolated restore at H2; advanced BCD editing is P3. | PARTIAL source/host: installation indicators and read-only NTFS/WIM wrappers; managed restore/BCD/ESP work and Uke Windows acceptance open |
+| URE-13 / 13 | P2 | URE-03,URE-04 and accepted backup/restore; URE-05,URE-11,URE-12 for affected OSes; 034,039,043 | Design stock, Android/Fedora/Windows combinations and Fedora-only user layouts from measured capacity; U1 geometry/interruption tests and exact human-reviewed H2 plans. | PLANNED; device writes gated by mature restore and stock-return acceptance |
+| URE-14 / 14 | P2 | URE-10; kernel/firmware 079,090 | Add profile-matched WLAN, regulatory policy, network UI, secret handling and SSH over Wi-Fi; U2 config tests and H1/H3 reconnect/transfer acceptance. | PLANNED |
+| URE-15 / 15 | P0/P1 | Relevant URE phases; 038,097,098 | Complete parser fuzzing, long-operation fault/cancel tests, privacy/payload closure, independent reproduction, signing, SBOM/licenses and per-SKU acceptance. | PLANNED; existing alpha checks cover only their recorded scope |
+
+### 6.2 Shared URE contracts
+
+`libuke-recovery` owns identity, the Storage Graph, plans, transactions,
+filesystems, crypto, OS managers, boot targets, networking and reports.
+`uke-recoveryctl`, the installer and OrangeFox adapters share that engine. The
+expanded command tree and JSON examples are proposed APIs; preserve documented
+current commands during migration. Discovery does not replay journals, unlock
+crypto, change slots/EFI variables or mount writable as a side effect.
+
+Transactions follow discover → identify → diagnose → plan → back up →
+revalidate → execute → read back → commit → record recovery path. Journal
+intent and verified boundaries durably. An uncertain partial write is
+`FAILED_UNCERTAIN`, never “nothing changed”; interrupted transactions are
+inspected before any safe resume or rollback. Check capacity, power/temperature,
+snapshot merges, active mounts/mappers, target identity and source hashes again
+immediately before execution. Long operations declare cancel-safe,
+cancel-at-boundary or not-cancellable behavior and safe cleanup before reboot.
+
+Linux rescue includes distribution/package detection, a kernel/initramfs/module/
+DT/boot-entry consistency matrix, offline logs, chroot and an atomic GUI editor
+that preserves ownership, modes, ACLs, xattrs, SELinux contexts and capabilities.
+Chroot repair tools and their dependency closure must satisfy the tablet Python
+prohibition. LUKS/BITLK secrets use bounded secret buffers and fd/API input;
+Android FBE requires its installed-firmware trust path independently. Btrfs
+snapshots do not replace external backups; expert repair is a separate gated
+plan. NTFS preliminary repair is not Windows `chkdsk`, and WIM deployment must
+validate metadata preservation and handle ESP/BCD as separate phases.
+
+Direct OS reboot means no interactive boot menu, using a proven stock/EFI/Aloha
+backend. Prefer a consumed one-shot request with exact target IDs, validated
+root/kernel/initramfs/DT/ESP or Windows loader/BCD, and a preserved default and
+Android/recovery fallback. A recovery re-entry is an observation, not proof of
+boot failure; correlate an acknowledgment or crash evidence. Shared ESP changes
+preserve every OS's files and unknown applications. Firmware and calibration
+remain protected in every layout.
+
+Public and engineering UI profiles show detected systems, locked/unlocked
+volumes, explicit change/risk summaries and actionable missing dependencies.
+USB export and local storage have exclusive ownership; remote access is visible.
+SSH starts disabled, uses explicit public-key import and a displayed host-key
+fingerprint, and keeps keys session-scoped unless persistence is chosen. USB
+networking precedes Wi-Fi; SFTP needs its own reviewed server/helper closure.
+Diagnostic stages, monotonic timelines, pstore and test annotations produce
+scrubbed reports without credentials, keys, private content or calibration.
+
+Recovery self-tests, known-good profiles, external USB/host backups, bounded
+search/diff, time/power/thermal diagnostics and session cleanup are covered by
+[URE-C01–URE-C24](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/FEATURE-PARITY.md#ure-capability-extension).
+QR sessions, a permissioned extension model, forensic tools, remote UI and
+broader distro/filesystem modules remain optional P3 work. Do not reduce boot
+health to an invented percentage.
+
+Track PLANNED, SOURCE PRESENT, BUILT, HOST TESTED, EMULATION TESTED, DEVICE
+READ-ONLY TESTED, DEVICE WRITE TESTED, SUPPORTED and BLOCKED by evidence
+dimension. A blocker may coexist with a passing build; support requires the
+feature's exact SKU/firmware/device gate. The physical hardware ledger retains
+its existing result vocabulary and evidence rules.
+
 ## 7. Boot, kernel and package contracts
 
 Dual boot means Android and Fedora have defined boot routes and independently managed OS data. A/B slots are update slots and do not isolate shared userdata. Single boot means Fedora is the only user OS; it does not mean deleting XBL/ABL/TEE or required firmware. Windows/second-Android workflows are additional conditional features, not initial OS support claims. The actual installation mechanism depends on real bootloader behavior: do not assume `fastboot boot` can temporarily replace boot, init_boot and dtbo together.
@@ -331,4 +441,10 @@ Use at least 100 controlled suspend/resume cycles after core peripherals work, r
 
 If a gate fails, retain the last successful inputs, classify the failure, publish the reproduction command and continue independent work. Do not overwrite failed evidence with a generic success summary. No hardware support claim or production promotion occurs solely because a repository, package channel, compile or CI check exists.
 
-The immediate next implementation work is to remove private build metadata from the recovery payload, reproduce from a pristine pinned checkout, audit vendor-boot/module dependencies and package closure, and complete the remaining China and Turkey boot-profile analysis. Aloha follows that recovery foundation; its physical boot gate still waits for a device.
+The public alpha report records passing staged payload privacy checks. Immediate
+work is independent reproduction from a pristine pinned checkout, vendor-boot/
+module and package-closure audits, and remaining regional boot-profile analysis.
+URE-01/02 source and host work can extend the existing safe baseline while
+physical recovery and stock-return acceptance wait for a device. Aloha platform
+work follows that recovery foundation; direct Linux/Windows boot requests need
+its proven handoff and fallback.

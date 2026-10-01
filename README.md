@@ -15,6 +15,16 @@
 
 The target includes display, touch and pen, keyboard, connectivity, audio, sensors, cameras, graphics, power management, secure boot choices and reliable updates. [The hardware matrix](DEVICE-STATUS.md) lists each capability and its actual test state. Dual boot and Fedora as the single user OS are both planned.
 
+The [UKE Recovery Environment roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/COMPREHENSIVE-ROADMAP.md)
+extends OrangeFox with planned Linux/Windows rescue, a native transaction engine,
+LUKS/BitLocker access, Btrfs management, a GUI text editor, one-shot OS boot and
+USB/SSH network rescue. Its sixteen phases are linked to the existing platform
+plan; these are development targets with separate host and physical gates.
+The [native checkpoint](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/URE-NATIVE.md)
+now includes file journals, storage usage checks, identity-bound backup streams
+and GPT image repair/restore with host fixtures; the full roadmap and live-device
+acceptance remain open.
+
 ## Downloads and compatibility
 
 Download the **[experimental OrangeFox alpha](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases/tag/r12.0-uke.20260930-alpha1)**: separate temporary-boot IMG, dedicated recovery IMG and slot-safe installer ZIP, with source snapshots and SHA-256 hashes. Read the [firmware constraints and installation/rollback instructions](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/PRE-RELEASE.md) first. **No physical-device tests; Global OS3.0.303.0.WOZMIXM only.** These unsigned development files are not a supported recovery release.
