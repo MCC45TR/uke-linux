@@ -318,8 +318,16 @@ content, a selected home tree with numeric ownership, permissions, ACLs,
 accessible xattrs, links, sparse files and timestamps, and Btrfs subvolume
 full/incremental send streams. Source consistency, parent identity, private
 external destinations, verification and isolated restore must be explicit.
-Existing raw chunked backup is a foundation, not completion of the home-tree or
-subvolume workflows. Stock-profile Btrfs kernel support remains a separate gate.
+Existing raw chunked backup remains the partition-byte foundation. The native
+directory engine now provides Linux/home tree plans, sparse data, paged metadata,
+hardlinks/symlinks, xattrs/ACLs, file-boundary capture resume, independent backup
+verification and isolated restore to a new directory. Its CLI and GUI share the
+engine; snapshot consistency, physical acceptance, in-place recovery and direct
+host tree streaming remain open. Btrfs snapshot/send/receive workflows and
+stock-profile Btrfs kernel support remain separate work. The
+[tree backup contract](recovery-uke-ofox/docs/TREE-BACKUP.md) records the boundary.
+The [tree backup checkpoint](recovery-uke-ofox/reports/URE-TREE-BACKUP-BUILD.md)
+records the local image, exact hashes and source/host/emulation evidence.
 The tablet GUI additionally requires adjustable uniform interface density,
 full-screen anchors and matching touch rectangles, a visible percentage and
 reset, private settings on validated storage, and separate rendering/touch
