@@ -1,6 +1,6 @@
 # POCO Pad X1 and Xiaomi Pad 7: recovery, firmware and Fedora development plan
 
-Revision 7 — 30 September 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
+Revision 8 — 1 October 2026. Target family: **POCO Pad X1 and Xiaomi Pad 7 (`uke`, SM7675 / Cliffs)**. Primary physical validation SKU: **POCO Pad X1 8 GB / 512 GB**. First distribution: **Fedora Rawhide AArch64**. Kernel product: **`senemos-uke-kernel-mainline`**. Initial kernel baseline: **Linux 7.2.8**.
 
 This is an implementation plan and an evidence contract. Experimental OrangeFox assets have been built for the measured Global profile; no project image has been tested on either physical model. Generic upstream Linux 7.2.8 Image, DTBs and 1,655 modules compile and stage successfully, but no Uke-bootable mainline or UEFI image exists. A physical device is not available. Current results are recorded in [the preparation report](reports/PREPARATION-REPORT.md), [the public alpha build report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/reports/PUBLIC-ALPHA-BUILD.md) and [DEVICE-STATUS.md](DEVICE-STATUS.md).
 
@@ -289,11 +289,29 @@ The recovery [native checkpoint](https://github.com/MCC45TR/orangefox_device_xia
 now records a library/JSON API, live read-only selection, GPT image
 backup/repair/restore, OS discovery, diagnostics, regular-file transactions,
 inspected journals, storage usage/mapper policy, identity-bound storage stream
-software, host reception and native GUI pages. Live-source capture requires
+software, host reception, host-assisted raw-image restore and native GUI pages.
+The host-assisted path keeps bounded verified pairs locally and avoids complete
+image scans per ordinary chunk while retaining initial/reconnect/final scans.
+Live-source capture requires
 complete unit/boot/usage evidence and a retained read-only kernel claim; positive
 device acceptance, atomic snapshots and cross-boot continuation remain open.
 These are partial implementations;
 the complete milestones and physical gates below remain open.
+
+The 1 October scope expansion also requires a comprehensive partition manager
+and restoration of the device's default partition layout. The recovery
+[partition-manager contract](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/PARTITION-MANAGER.md)
+records discovery, capacity-derived layouts, filesystem/migration operations,
+multi-LUN journals, preview/recovery UI and exact stock-return requirements.
+Stock reconstruction must use Uke's verified GPT/patch inputs and actual LUN
+capacity; open-ended userdata must not inherit a guessed SKU size. Bounded I/O,
+memory and cache use apply across the expanded scope. The native stock engine
+now reconstructs all six LUNs at selected capacity, preserves verified original
+GUIDs and provides reviewed per-image metadata execution/readback/rollback.
+Host tests compare it with the exact OEM XML patches at two capacities per LUN.
+The complete manager, filesystem/data migration, multi-LUN orchestration and
+physical stock-layout restoration remain unfinished. GitHub upload is deferred
+while implementation and validation take priority.
 
 Priorities here follow the recovery matrix: P0 identity/recoverability, P1 core
 rescue, P2 conditional multi-OS management, P3 optional extensions. They express
@@ -312,10 +330,10 @@ Recovery owns these phases; kernel, Aloha and Fedora dependencies are explicit.
 | URE-07 / 7 | P1/P2 | URE-03,URE-06 | Add LUKS unlock/lock/metadata/header backups, then conditional BITLK activation; no secrets in argv/logs/reports, U1 wrong-key/layering tests, H1/H2 access gates. | PLANNED; Android FBE uses a separate trust gate |
 | URE-08 / 8 | P1 | URE-03,URE-05,URE-06; URE-07 for encrypted roots | Manage Btrfs subvolumes/snapshots, file restore, scrub, filtered balance and send/receive; test rollback plans at U1 and require URE-09 plus H2 for one-shot snapshot boot. | BLOCKED by current kernel; userspace design PLANNED |
 | URE-09 / 9 | P1/P2 | URE-03,URE-05; Aloha 044–056 for EFI routes | Discover targets and validate consumed one-shot Android/Linux/Windows requests, fallback and history; U1 invalid/version/replay cases, U2 where possible, H2 actual routing. | PLANNED; Linux/Windows require a proven backend, Windows also URE-12 |
-| URE-10 / 10 | P1/P2 | URE-01,URE-02; 027,030,042 | Add USB networking, opt-in key-authenticated SSH and separately packaged SFTP/SCP; verified host fingerprint, gadget ownership and reconnect/chunked backup tests at U1/U2/H1/H3. | PARTIAL source/host: chunked file/image transfer and receiver, packaged key-only Dropbear; managed service/SFTP/gadget ownership and HIL open; Wi-Fi is URE-14 |
+| URE-10 / 10 | P1/P2 | URE-01,URE-02; 027,030,042 | Add USB networking, opt-in key-authenticated SSH and separately packaged SFTP/SCP; verified host fingerprint, gadget ownership and reconnect/chunked backup tests at U1/U2/H1/H3. | PARTIAL source/host: chunked transfer/receiver and optimized host-assisted image restore/rollback with duplex transport mocks, packaged key-only Dropbear; managed service/SFTP/gadget ownership and HIL open; Wi-Fi is URE-14 |
 | URE-11 / 11 | P1 | URE-03,URE-04; 036,037 | Extend A/B, Virtual A/B, super and OTA inspection; writes reject active/unknown merges; FBE stays blocked until installed Uke KeyMint/TEE trust and credential/read-only tests. | Advanced management PLANNED; FBE BLOCKED |
 | URE-12 / 12 | P2 | URE-03,URE-04,URE-06; URE-07 for BitLocker | Add Windows detection, NTFS, WIM/ESD, ESP/BCD inspection and backup; U1 metadata/archive/target tests, isolated restore at H2; advanced BCD editing is P3. | PARTIAL source/host: installation indicators and read-only NTFS/WIM wrappers; managed restore/BCD/ESP work and Uke Windows acceptance open |
-| URE-13 / 13 | P2 | URE-03,URE-04 and accepted backup/restore; URE-05,URE-11,URE-12 for affected OSes; 034,039,043 | Design stock, Android/Fedora/Windows combinations and Fedora-only user layouts from measured capacity; U1 geometry/interruption tests and exact human-reviewed H2 plans. | PLANNED; device writes gated by mature restore and stock-return acceptance |
+| URE-13 / 13 | P2 | URE-03,URE-04 and accepted backup/restore; URE-05,URE-11,URE-12 for affected OSes; 034,039,043 | Implement the comprehensive partition manager, stock/default reconstruction and Android/Fedora/Windows/custom layouts from measured capacity; bounded migration/filesystem operations, multi-LUN journals, full preview/recovery UI, U1 interruption tests and exact human-reviewed H2 plans. | PARTIAL source/host: six-LUN stock reconstruction and per-image metadata execution/readback/rollback; full manager, filesystem/layout migration, multi-LUN orchestration and physical stock return remain open |
 | URE-14 / 14 | P2 | URE-10; kernel/firmware 079,090 | Add profile-matched WLAN, regulatory policy, network UI, secret handling and SSH over Wi-Fi; U2 config tests and H1/H3 reconnect/transfer acceptance. | PLANNED |
 | URE-15 / 15 | P0/P1 | Relevant URE phases; 038,097,098 | Complete parser fuzzing, long-operation fault/cancel tests, privacy/payload closure, independent reproduction, signing, SBOM/licenses and per-SKU acceptance. | PLANNED; existing alpha checks cover only their recorded scope |
 
