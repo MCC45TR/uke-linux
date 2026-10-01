@@ -22,7 +22,7 @@ USB/SSH network rescue. Its sixteen phases are linked to the existing platform
 plan; these are development targets with separate host and physical gates.
 The [native checkpoint](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/URE-NATIVE.md)
 now includes file journals, storage usage checks, identity-bound backup streams
-and GPT image repair/restore with host fixtures; the full roadmap and live-device
+and GPT repair plus raw-image restoration with host fixtures; the full roadmap and live-device
 acceptance remain open.
 
 ## Downloads and compatibility
