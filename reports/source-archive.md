@@ -54,3 +54,6 @@ Git restoration does not prove a build or include missing submodule/LFS objects.
 | dt-schema | senemos-uke-kernel | preparation | passed | passed | complete |
 | dtc | senemos-uke-kernel | preparation | passed | passed | complete |
 | android-repo | recovery-uke-ofox | implementation | passed | passed | complete |
+| ure-cryptsetup | recovery-uke-ofox | implementation | passed | passed | complete |
+| ure-dropbear | recovery-uke-ofox | implementation | passed | passed | complete |
+| ure-wimlib | recovery-uke-ofox | implementation | passed | passed | complete |

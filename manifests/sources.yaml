@@ -712,6 +712,48 @@
       "history": "full-selected-refs",
       "redistribution": "review-file-licenses-before-publication",
       "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "ure-cryptsetup",
+      "path": "recovery-uke-ofox/referances/upstream/cryptsetup",
+      "url": "https://gitlab.com/cryptsetup/cryptsetup.git",
+      "checkout": "refs/tags/v2.8.8",
+      "refs": {
+        "refs/tags/v2.8.8": "f1dbcce190719c9e177e8fbaf3df0b908f87d920"
+      },
+      "role": "LUKS and BITLK userspace API and license review; not a packaged tool",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "ure-dropbear",
+      "path": "recovery-uke-ofox/referances/upstream/dropbear",
+      "url": "https://github.com/mkj/dropbear.git",
+      "checkout": "refs/tags/DROPBEAR_2025.89",
+      "refs": {
+        "refs/tags/DROPBEAR_2025.89": "179de98f7b9584a309ffc48e39c61da940760740"
+      },
+      "role": "Pinned SSH server source; local native candidate builds key-authentication support with forwarding and automatic start disabled",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "ure-wimlib",
+      "path": "recovery-uke-ofox/referances/upstream/wimlib",
+      "url": "https://github.com/ebiggers/wimlib.git",
+      "checkout": "refs/tags/v1.14.5",
+      "refs": {
+        "refs/tags/v1.14.5": "cd5e231c348c255ae5088873b5a66ee0eb96fa07"
+      },
+      "role": "Pinned WIM and ESD source; local native candidate builds imagex with NTFS support and no FUSE",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
     }
   ]
 }

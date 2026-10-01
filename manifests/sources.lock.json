@@ -2137,6 +2137,122 @@
         "at": "2026-09-29T17:03:56Z",
         "network_used": false
       }
+    },
+    "ure-cryptsetup": {
+      "url": "https://gitlab.com/cryptsetup/cryptsetup.git",
+      "path": "recovery-uke-ofox/referances/upstream/cryptsetup",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-30T17:34:51Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/tags/v2.8.8": {
+          "commit": "f1dbcce190719c9e177e8fbaf3df0b908f87d920",
+          "tree": "fb0f145d612c79625155c01feab1c22d50442b10"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-30T17:34:53Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/ure-cryptsetup.bundle",
+        "sha256": "f90dc5da1cdec80d673246f35a5a1debe75f89cb26fa1edfb9f7f0019a88b4f5",
+        "created_at": "2026-09-30T17:34:53Z",
+        "bytes": 56993091
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-30T17:34:56Z",
+        "network_used": false
+      }
+    },
+    "ure-dropbear": {
+      "url": "https://github.com/mkj/dropbear.git",
+      "path": "recovery-uke-ofox/referances/upstream/dropbear",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-30T17:34:58Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/tags/DROPBEAR_2025.89": {
+          "commit": "179de98f7b9584a309ffc48e39c61da940760740",
+          "tree": "fb7ddb1a2a0a00702d704e817016d46d79c91e6f"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-30T17:34:59Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/ure-dropbear.bundle",
+        "sha256": "51aa1a2454f5765cf158e148fb0fd488f9e66aa63dc65524fdd5d495c69a7325",
+        "created_at": "2026-09-30T17:34:59Z",
+        "bytes": 14168630
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-30T17:35:00Z",
+        "network_used": false
+      }
+    },
+    "ure-wimlib": {
+      "url": "https://github.com/ebiggers/wimlib.git",
+      "path": "recovery-uke-ofox/referances/upstream/wimlib",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-09-30T17:35:02Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/tags/v1.14.5": {
+          "commit": "cd5e231c348c255ae5088873b5a66ee0eb96fa07",
+          "tree": "23901c331b5caca27419158e92bb8da829391966"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-09-30T17:35:03Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "COPYING",
+        "COPYING.GPLv3",
+        "COPYING.LGPL"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/ure-wimlib.bundle",
+        "sha256": "c8b81f4de004cef7300ab2ddca1c140ed22dd6c9911a8c4467f333a5d0b93754",
+        "created_at": "2026-09-30T17:35:04Z",
+        "bytes": 7540958
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-09-30T17:35:05Z",
+        "network_used": false
+      }
     }
   }
 }
