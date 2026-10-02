@@ -25,6 +25,13 @@ now includes file journals, storage usage checks, identity-bound backup streams
 and GPT repair plus raw-image restoration with host fixtures; the full roadmap and live-device
 acceptance remain open.
 
+The local recovery checkpoint also adds staged filesystem-image jobs,
+distribution-aware isolated chroot, installed kernel/initramfs/module/DT/UKI/BLS
+auditing and native Btrfs snapshot/send/maintenance controls. Btrfs has 14
+operation checks in a separate generic ARM64 VM; the preserved stock recovery
+kernel still lacks Btrfs support. These changes are not yet published, and live
+storage writes and both tablets' physical acceptance remain open.
+
 ## Downloads and compatibility
 
 Download the **[experimental OrangeFox alpha](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases/tag/r12.0-uke.20260930-alpha1)**: separate temporary-boot IMG, dedicated recovery IMG and slot-safe installer ZIP, with source snapshots and SHA-256 hashes. Read the [firmware constraints and installation/rollback instructions](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/PRE-RELEASE.md) first. **No physical-device tests; Global OS3.0.303.0.WOZMIXM only.** These unsigned development files are not a supported recovery release.
