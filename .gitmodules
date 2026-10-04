@@ -11,3 +11,39 @@
 [submodule "uke-project-aloha"]
 	path = uke-project-aloha
 	url = https://github.com/MCC45TR/uke-project-aloha.git
+[submodule "uke-core-meta"]
+	path = uke-core-meta
+	url = https://github.com/MCC45TR/uke-core-meta.git
+[submodule "uke-sensors"]
+	path = uke-sensors
+	url = https://github.com/MCC45TR/uke-sensors.git
+[submodule "uke-boot"]
+	path = uke-boot
+	url = https://github.com/MCC45TR/uke-boot.git
+[submodule "uke-platform-runtime"]
+	path = uke-platform-runtime
+	url = https://github.com/MCC45TR/uke-platform-runtime.git
+[submodule "uke-desktop-metas"]
+	path = uke-desktop-metas
+	url = https://github.com/MCC45TR/uke-desktop-metas.git
+[submodule "uke-desktop-integration"]
+	path = uke-desktop-integration
+	url = https://github.com/MCC45TR/uke-desktop-integration.git
+[submodule "uke-camera"]
+	path = uke-camera
+	url = https://github.com/MCC45TR/uke-camera.git
+[submodule "xiaomi-uke-firmware"]
+	path = xiaomi-uke-firmware
+	url = https://github.com/MCC45TR/xiaomi-uke-firmware.git
+[submodule "plasma-uke-kcm"]
+	path = plasma-uke-kcm
+	url = https://github.com/MCC45TR/plasma-uke-kcm.git
+[submodule "uke-hardware-provenance"]
+	path = uke-hardware-provenance
+	url = https://github.com/MCC45TR/uke-hardware-provenance.git
+[submodule "uke-desktop-packaging"]
+	path = uke-desktop-packaging
+	url = https://github.com/MCC45TR/uke-desktop-packaging.git
+[submodule "uke-orangefox-packaging"]
+	path = uke-orangefox-packaging
+	url = https://github.com/MCC45TR/uke-orangefox-packaging.git

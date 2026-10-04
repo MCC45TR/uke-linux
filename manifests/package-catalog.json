@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "device": "uke",
+  "soc": "SM7675",
+  "copr_project": "mcc45tr/uke-linux-test",
+  "enabled_chroots": [
+    "fedora-rawhide-aarch64"
+  ],
+  "hardware_tested": false,
+  "components": [
+    {
+      "component": "senemos-uke-kernel",
+      "repository": "https://github.com/MCC45TR/senemos-uke-kernel-mainline",
+      "packages": [
+        "senemos-uke-linux-kernel-mainline",
+        "senemos-uke-linux-kernel-mainline-core",
+        "senemos-uke-linux-kernel-mainline-modules",
+        "senemos-uke-linux-kernel-mainline-dtbs"
+      ],
+      "nabu_reference_packages": [
+        "senemos-nabu-kernel",
+        "senemos-nabu-kernel-mainline"
+      ],
+      "status": "compiled-uke-adaptation",
+      "package_build_ready": true,
+      "copr_enabled": true,
+      "gates": [
+        "UEFI firmware handoff",
+        "Firmware-specific RAM map",
+        "Physical peripheral bring-up"
+      ]
+    },
+    {
+      "component": "uke-orangefox-packaging",
+      "repository": "https://github.com/MCC45TR/uke-orangefox-packaging",
+      "packages": [
+        "uke-orangefox-recovery"
+      ],
+      "nabu_reference_packages": [],
+      "status": "validated-alpha-image-delivery",
+      "package_build_ready": true,
+      "copr_enabled": true,
+      "gates": [
+        "Stable upstream release",
+        "Independent firmware-profile and physical acceptance"
+      ]
+    },
+    {
+      "component": "uke-core-meta",
+      "repository": "https://github.com/MCC45TR/uke-core-meta",
+      "packages": [
+        "uke-core-meta"
+      ],
+      "nabu_reference_packages": [
+        "nabu-core-meta"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Resolve only available Uke package families",
+        "Audit the complete installed closure for Python",
+        "Separate kernel package installation from boot selection"
+      ]
+    },
+    {
+      "component": "uke-sensors",
+      "repository": "https://github.com/MCC45TR/uke-sensors",
+      "packages": [
+        "uke-sensors"
+      ],
+      "nabu_reference_packages": [
+        "nabu-sensors"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Review Uke LSM6DSO, STK3BCx, SIP1328, QMC630x and SX937x sources",
+        "Prove SSC transport and per-profile sensor wiring",
+        "Calibrated measurement and IIO/desktop acceptance"
+      ]
+    },
+    {
+      "component": "uke-boot",
+      "repository": "https://github.com/MCC45TR/uke-boot",
+      "packages": [
+        "uke-boot-integration"
+      ],
+      "nabu_reference_packages": [
+        "nabu-boot"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Review Uke RAM, reserved memory, storage and firmware handoff",
+        "Build and inspect independent Uke EFI artifacts",
+        "Rehearse rollback before enabling any boot mutation"
+      ]
+    },
+    {
+      "component": "uke-platform-runtime",
+      "repository": "https://github.com/MCC45TR/uke-platform-runtime",
+      "packages": [
+        "uke-platform-runtime",
+        "hexagonrpc-uke",
+        "libssc-uke"
+      ],
+      "nabu_reference_packages": [
+        "nabu-platform-runtime"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Pin upstream C/C++ sources and their licenses",
+        "Prove Uke firmware/service topology and kernel interfaces",
+        "Do not carry Nabu service arguments or firmware names"
+      ]
+    },
+    {
+      "component": "uke-desktop-metas",
+      "repository": "https://github.com/MCC45TR/uke-desktop-metas",
+      "packages": [
+        "uke-desktop-metas",
+        "kde-plasma-uke-meta"
+      ],
+      "nabu_reference_packages": [
+        "nabu-desktop-metas",
+        "kde-plasma-nabu-meta"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Validate kernel/boot and console before desktop admission",
+        "Resolve closure on target AArch64",
+        "Preserve stock KDE behavior unless a measured Uke issue requires a change"
+      ]
+    },
+    {
+      "component": "uke-desktop-integration",
+      "repository": "https://github.com/MCC45TR/uke-desktop-integration",
+      "packages": [
+        "uke-desktop-integration"
+      ],
+      "nabu_reference_packages": [
+        "nabu-desktop-integration"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Use measured Uke input and sensor paths",
+        "Require physical suspend, charger and routing evidence",
+        "Keep generic distribution defaults until behavior is measured"
+      ]
+    },
+    {
+      "component": "uke-camera",
+      "repository": "https://github.com/MCC45TR/uke-camera",
+      "packages": [
+        "uke-camera-support",
+        "libcamera-uke"
+      ],
+      "nabu_reference_packages": [
+        "nabu-camera",
+        "libcamera",
+        "nabu-camera-support"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Identify Uke sensors and graph from exact-profile source",
+        "Keep firmware/calibration private and review licenses",
+        "Require frame capture evidence before advertising support"
+      ]
+    },
+    {
+      "component": "xiaomi-uke-firmware",
+      "repository": "https://github.com/MCC45TR/xiaomi-uke-firmware",
+      "packages": [
+        "xiaomi-uke-firmware"
+      ],
+      "nabu_reference_packages": [
+        "xiaomi-nabu-firmware"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Record exact source/license/hash for every file",
+        "Do not publish OEM blobs without file-level redistribution terms",
+        "Never publish unit calibration, persist data or security firmware"
+      ]
+    },
+    {
+      "component": "plasma-uke-kcm",
+      "repository": "https://github.com/MCC45TR/plasma-uke-kcm",
+      "packages": [
+        "plasma-uke-kcm"
+      ],
+      "nabu_reference_packages": [
+        "plasma-nabu-kcm"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Design capabilities from Uke driver evidence",
+        "Show unavailable features explicitly",
+        "Validate with Plasma and separately on the tablet"
+      ]
+    },
+    {
+      "component": "uke-hardware-provenance",
+      "repository": "https://github.com/MCC45TR/uke-hardware-provenance",
+      "packages": [
+        "uke-hardware-provenance"
+      ],
+      "nabu_reference_packages": [
+        "nabu-hardware-provenance"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Separate OEM, community, upstream and physical evidence",
+        "Exclude identifiers and calibration",
+        "Never promote a stock descriptor or package pass to support acceptance"
+      ]
+    },
+    {
+      "component": "uke-desktop-packaging",
+      "repository": "https://github.com/MCC45TR/uke-desktop-packaging",
+      "packages": [
+        "powerdevil-uke",
+        "plymouth-uke",
+        "material-decoration"
+      ],
+      "nabu_reference_packages": [
+        "powerdevil",
+        "plymouth",
+        "material-decoration"
+      ],
+      "status": "initial-source-and-packaging-scaffold",
+      "package_build_ready": false,
+      "copr_enabled": false,
+      "gates": [
+        "Use Fedora upstream packages until a measured Uke delta exists",
+        "Keep shared decoration device-neutral",
+        "Do not replace generic packages using Nabu-specific patches"
+      ]
+    }
+  ],
+  "kernel_channels": {
+    "mainline": "7.2.9 reviewed Uke profile",
+    "unstable": "planned; no generic fallback",
+    "el2_experimental": "planned; no Uke EL2 acceptance"
+  },
+  "shared_upstream_policy": "Reuse Fedora's upstream desktop packages unless Uke evidence requires a derivative.",
+  "future_distribution_targets": [
+    "fedora-45-aarch64",
+    "opensuse-tumbleweed-aarch64",
+    "debian-arm64",
+    "ubuntu-arm64",
+    "armbian-arm64",
+    "kubuntu-arm64",
+    "alpine-aarch64",
+    "postmarketos-aarch64"
+  ]
+}

@@ -12,8 +12,9 @@
 |---|---|---|
 | [OrangeFox Recovery](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) | Tablet interface, storage planning, backup, diagnostics and Linux recovery | R12.0 source development; older experimental alpha available |
 | [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Uke UEFI startup, boot profiles and return to Android | Platform integration; no Uke image release |
-| [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Mainline SM7675 adaptation, device tree and matching modules | Build and board bring-up work; physical boot pending |
-| [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Fedora Rawhide AArch64 kernel packages, root filesystem and boot artifacts | Build tooling; no published Uke package or system image |
+| [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Mainline SM7675 adaptation, device tree and matching modules | Linux 7.2.9 Image, Uke DTB and 1146 modules compiled; RPM/SRPM and first native COPR build passed; physical boot pending |
+| [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Fedora Rawhide AArch64 kernel packages, root filesystem and boot artifacts | Kernel RPM lifecycle validated; package/update hub active; no bootable Uke system image |
+| [Package and update hub](docs/PACKAGE-HUB.md) | Component repositories, COPR builds, stable-source tracking and DNF image delivery | Kernel and recovery delivery packages; eleven additional initial package-family repositories |
 
 Recovery source features include selectable interface scale, display controls, regular-image partition and stock-layout jobs, verified raw and Linux/home backups, filesystem inspection and repair, distribution-aware rescue, kernel/boot auditing, and Btrfs management. [The recovery feature overview](https://github.com/MCC45TR/orangefox_device_xiaomi_uke#feature-overview) describes the implementation and its limits. Live tablet storage admission, encrypted userdata migration, shipping-kernel Btrfs support and physical accessory acceptance remain open. A feature implemented in current source is not automatically present in the older alpha download.
 
@@ -44,7 +45,7 @@ The [hardware evidence summary](docs/research/UKE-HARDWARE-STATUS-2026-10-04.md)
 | Download | Intended use | Validation scope |
 |---|---|---|
 | [Experimental OrangeFox alpha](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases/tag/r12.0-uke.20260930-alpha1) | Separate temporary-boot IMG, recovery IMG and installer ZIP, with source snapshots and SHA-256 hashes | Unsigned prerelease for the Global OS3.0.303.0.WOZMIXM package profile; no physical boot acceptance |
-| [Fedora development channel](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Future reviewed development packages | Reserved test channel; no published Uke release |
+| [Fedora development channel](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Linux 7.2.9 kernel RPMs and DNF-managed OrangeFox image data | Rawhide AArch64 package builds and local transactions verified; recovery retains its alpha/firmware profile; no physical boot acceptance |
 
 Read the [recovery installation and rollback guidance](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/PRE-RELEASE.md) and [release policy](docs/RELEASES.md) before choosing an artifact. The stock OS2 device inventory does not establish compatibility with the OS3 alpha. Generic ARM64 build results do not establish a bootable Uke port.
 
@@ -52,13 +53,18 @@ POCO Pad X1 8 GB / 512 GB is the primary physical validation target. Xiaomi Pad 
 
 ## Development and validation
 
-Clone the workspace and its four pinned component repositories:
+Clone the workspace and its pinned component repositories:
 
 ```sh
 git clone --recurse-submodules https://github.com/MCC45TR/uke-linux.git
 ```
 
 Each component maintains its own source, patches, configuration, tests and licenses. Reference archives live below the owning component's `referances/` directory; [the source archive report](reports/source-archive.md) records acquisition and remaining dependencies.
+
+The single host build entry is `./senemeos.sh --build 7.2.9 --distro=fedora --test`.
+Use `--help` for stable/latest aliases, offline reuse and resource options. The
+[package hub](docs/PACKAGE-HUB.md) maps source repositories, automatic COPR builds,
+stable release gates and DNF updates without automatic device flashing.
 
 Build, package, host fixture, emulation, third-party and own-device results are recorded separately. A hardware result needs its build revision, firmware, model/SKU, timestamp, workload and evidence. Source changes and VM results cannot promote physical status. Public reports contain reviewed summaries; private logs and unit calibration stay out of GitHub.
 
