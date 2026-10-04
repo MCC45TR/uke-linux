@@ -29,6 +29,7 @@ separate from either commercial device's physical acceptance.
 | [Public branch consolidation](2026-10-04-RECOVERY-BRANCH-CONSOLIDATION.md) | REC-BR001–REC-BR004 | Exact R12.0 baseline, both default/ref verifications, history-preserving consolidation, current source links and corrected submodule metadata handling; release artifacts and device acceptance separate |
 | [Public recovery README](2026-10-04-RECOVERY-PUBLIC-README.md) | REC-DOC001 | Source/alpha distinction, concise feature groups, retired scope, component licenses, tracked links and GitHub Markdown rendering; no runtime or hardware acceptance |
 | [Bounded tree enumeration](2026-10-04-RECOVERY-TREE-ENUMERATION.md) | REC-TREE001–REC-TREE004 | Iterative frontier, pre-copy admission, anonymous sorted runs, measured 100,000-child RSS, deep actual restore, preserved sanitizer/oracle failures and scratch cleanup; target/combined guest/physical gates remain open |
+| [Shared host build reserve](2026-10-04-RECOVERY-HOST-RESERVE.md) | REC-HOST001–REC-HOST004 | RAM/ancestor headroom, post-lock readback, separate compile/Go limits, pinned actual Blueprint controls and real cache/RSS/PSI/OOM receipts; full clean/warm image and desktop response remain open |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
