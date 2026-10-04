@@ -23,6 +23,7 @@ separate from either commercial device's physical acceptance.
 | [Complete boot programming layouts](2026-10-04-RECOVERY-WHOLE-BOOT-LAYOUT.md) | REC-BL001–REC-BL004 | Explicit prefix/whole policy, exact DTBO gap/footer streaming, complete original-tail rollback, legacy/offline journal recovery, actual host SIGKILL and distinct source-layout/boot-acceptance results |
 | [Partition admission and capability scope](2026-10-04-RECOVERY-PARTITION-ADMISSION.md) | REC-RP001–REC-RP003 | Regular-image/runtime-tool contract, stable live blockers, refusal before request/target access, actual GUI review and explicit front-recreation/full-original rollback; native physical writer remains unaccepted |
 | [Populated filesystem acceptance](2026-10-04-RECOVERY-FILESYSTEM-ACCEPTANCE.md) | REC-FS001–REC-FS007 | Populated/fragmented/damaged ext4 and populated F2FS/NTFS/FAT oracles; recoverable space refusal, numeric volume identity, exact persisted size, preserved failed trials and matching native/instrumented/CLI receipts; target and physical acceptance separate |
+| [Aggregate rescue resources](2026-10-04-RECOVERY-RESCUE-RESOURCES.md) | REC-RSRC001–REC-RSRC006 | Compiled cgroup enforcement, GUI/ancestor admission reserve, blocked-worker attachment, OOM/proc descriptor controls, real host pressure/fork/CPU/termination, exact-owner cancellation and conservative cleanup; target, GUI, restart and tablet acceptance separate |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
