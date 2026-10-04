@@ -28,6 +28,7 @@ separate from either commercial device's physical acceptance.
 | [GUI control and lifetime](2026-10-04-RECOVERY-GUI-LIFETIME.md) | REC-LIFE001–REC-LIFE005 | Retained runtime lifecycle exclusion, exact rescue/Btrfs controls, pause/error cleanup, joined teardown, preserved failed integration trials and eighteen matching native/sanitizer tests; target, combined guest, visual and tablet gates remain open |
 | [Public branch consolidation](2026-10-04-RECOVERY-BRANCH-CONSOLIDATION.md) | REC-BR001–REC-BR004 | Exact R12.0 baseline, both default/ref verifications, history-preserving consolidation, current source links and corrected submodule metadata handling; release artifacts and device acceptance separate |
 | [Public recovery README](2026-10-04-RECOVERY-PUBLIC-README.md) | REC-DOC001 | Source/alpha distinction, concise feature groups, retired scope, component licenses, tracked links and GitHub Markdown rendering; no runtime or hardware acceptance |
+| [Bounded tree enumeration](2026-10-04-RECOVERY-TREE-ENUMERATION.md) | REC-TREE001–REC-TREE004 | Iterative frontier, pre-copy admission, anonymous sorted runs, measured 100,000-child RSS, deep actual restore, preserved sanitizer/oracle failures and scratch cleanup; target/combined guest/physical gates remain open |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
