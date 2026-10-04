@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Host-only inventory of pinned donor Git objects. Never executes donor code.
+# With no arguments, retain the original six-source Xiaomi Uke inventory.
 set -euo pipefail
 export GIT_NO_LAZY_FETCH=1
 root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
@@ -9,7 +10,14 @@ work=$(mktemp -d "$root/build/xiaomi-uke-audit.XXXXXX")
 trap 'rm -rf -- "$work"' EXIT
 ids=(xiaomi-uke-device xiaomi-uke-recovery xiaomi-uke-common-device
      xiaomi-uke-kernel-prebuilts xiaomi-uke-vendor xiaomi-uke-common-vendor)
+if (($#)); then ids=("$@"); fi
+[[ $(printf '%s\n' "${ids[@]}" | sort -u | wc -l) -eq ${#ids[@]} ]] || {
+  printf 'Duplicate source ID in audit request.\n' >&2; exit 2;
+}
 for id in "${ids[@]}"; do
+  [[ $id =~ ^[a-z0-9][a-z0-9-]*$ ]] || {
+    printf 'Invalid source ID in audit request.\n' >&2; exit 2;
+  }
   entry=$(jq -ce --arg id "$id" '.sources[] | select(.id==$id)' manifests/sources.yaml)
   owner=$(jq -r .owner <<<"$entry")
   rel=$(jq -r .path <<<"$entry")
@@ -64,4 +72,4 @@ for id in "${ids[@]}"; do
 done
 jq -s '{schema_version:1,reviewed_on:"2026-10-04",evidence_class:"source-and-local-archive",
   donor_code_executed:false,donor_payload_deployed:false,hardware_tests_performed:false,
-  tracked_bytes_include_LFS_payloads:false,repositories:.}' "$work"/xiaomi-uke-*.json
+  tracked_bytes_include_LFS_payloads:false,repositories:.}' "$work"/*.json

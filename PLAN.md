@@ -486,6 +486,38 @@ This checkpoint completes donor acquisition and static analysis only. It creates
 no new recovery payload, mainline driver, VM result, physical acceptance record
 or Uke UEFI implementation. Earlier roadmap gates retain their independent scope.
 
+### Expanded source intake: thirteen requested URLs, 4 October 2026
+
+The additional Resources, Delano, Perry, Vember, ztsubaki, btidor and Stampy
+sources are locally cloned under their owning components. Seven new catalog
+entries and six reused sources bring the catalog to 66 entries. All thirteen
+parent Git bundles passed offline restoration; twelve archives meet their
+recorded dependency gates. The direct `uke-linux` donor retains nineteen open
+gitlinks, mapped to exact commits in the
+[dependency map](docs/research/UKE-LINUX-DEPENDENCY-MAP.json).
+
+The [expanded audit](docs/research/UKE-EXPANDED-DONOR-AUDIT.md) and
+[lessons](docs/lessons/2026-10-04-UKE-EXPANDED-DONORS.md) add these prerequisites
+to the existing ordered roadmap without promoting any build or hardware gate:
+
+1. Close the v6.12 donor's exact dependency graph before reproduction; matching
+   catalog pins alone do not close parent dependencies.
+2. Resolve prebuilt header/DT layout and stock-profile provenance before using
+   any recovery/kernel binary as a development input.
+3. Review touch and pen startup/protocol paths using project-native contracts;
+   retain separate ABI, permission, error-path and HIL acceptance.
+4. Translate Android power/display/charging policy requirements only after
+   native interface semantics are known, then measure performance and energy.
+5. Develop ARM64/Fedora boot packaging independently of the generic x86-64
+   `ukefi` scripts; they supply no Uke-specific Project Aloha platform.
+6. Build clean rootfs artifacts from locked inputs. A README describing a
+   private-state desktop image supplies neither source closure nor a safe
+   distribution payload. Keep foreign signing templates outside project trust.
+
+Mirror identity, Android product claims and third-party desktop descriptions
+remain source evidence. This intake runs no donor code and changes no tablet
+Python, storage-write, firmware-preservation or publication privacy policy.
+
 Dual boot means Android and Fedora have defined boot routes and independently managed OS data. A/B slots are update slots and do not isolate shared userdata. Single boot means Fedora is the only user OS; it does not mean deleting XBL/ABL/TEE or required firmware. Windows/second-Android workflows are additional conditional features, not initial OS support claims. The actual installation mechanism depends on real bootloader behavior: do not assume `fastboot boot` can temporarily replace boot, init_boot and dtbo together.
 
 The kernel has an unchanged-baseline build, a donor-reproduction build and a forward-port build. Keep those results separate. Android 6.1 vendor modules cannot be loaded into mainline 7.2 as a portability shortcut. Kernel patch commits and exported patches must reproduce the same tree. Record `SOURCE_DATE_EPOCH`, toolchain/container digests, config SHA-256 and final kernel commit.

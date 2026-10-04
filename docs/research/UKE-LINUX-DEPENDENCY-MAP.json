@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-04",
+  "parent_id": "uke-linux",
+  "parent_commit": "32cad9ccd383ff4b37d8a5e7f88a8bfdcc07307e",
+  "parent_git_restore": "passed",
+  "dependency_closure": "pending",
+  "catalog_matches_are_not_parent_closure_proof": true,
+  "submodules": [
+    {
+      "ref": "refs/heads/master",
+      "path": "images/init_boot/busybox",
+      "commit": "fc71374dfccd46448c62947269a35f1420d7ee28",
+      "url": "https://git.busybox.net/busybox",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": []
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_device_xiaomi_muyu",
+      "commit": "f08957e2e5ccef874091567db5f6020b18c81ff8",
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_muyu.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": []
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_device_xiaomi_peridot",
+      "commit": "36d1462f9907a218e9e61206beb9f40d87a8188a",
+      "url": "https://github.com/LineageOS/android_device_xiaomi_peridot.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": []
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_device_xiaomi_sm8635-common",
+      "commit": "f477733d60197b312ab2ed42f6b75dfade54ada2",
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_sm8635-common.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "lineage-common-device",
+          "path": "recovery-uke-ofox/referances/community/lineage-common-device",
+          "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_sm8635-common.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_device_xiaomi_uke",
+      "commit": "6aa70ea5d603b16187dd46cb701f4d91e8fce8f9",
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_uke.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "lineage-uke-device",
+          "path": "recovery-uke-ofox/referances/community/lineage-uke-device",
+          "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_uke.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_device_xiaomi_uke-kernel",
+      "commit": "9bb7c4331be7205fabf5427b5654555763304d20",
+      "url": "https://github.com/vember31/android_device_xiaomi_uke-kernel.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "vember-uke-kernel-prebuilts",
+          "path": "senemos-uke-kernel/referances/donors/vember-uke-kernel-prebuilts",
+          "url": "https://github.com/vember31/android_device_xiaomi_uke-kernel.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_hardware_xiaomi",
+      "commit": "e0b0fa0cf9b5a5c5f174a1c3a6e8d63cc361c1d1",
+      "url": "https://github.com/LineageOS/android_hardware_xiaomi.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": []
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_kernel_xiaomi_sm8635",
+      "commit": "85fc84465f719c3450ce21e52f3ca47503afdda0",
+      "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "lineage-kernel",
+          "path": "senemos-uke-kernel/referances/community/lineage-kernel",
+          "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_kernel_xiaomi_sm8635-devicetrees",
+      "commit": "d1143877735a1b9dd81b164100d97cfddbbbc04d",
+      "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635-devicetrees.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "lineage-devicetrees",
+          "path": "senemos-uke-kernel/referances/community/lineage-devicetrees",
+          "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635-devicetrees.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "lineage/android_kernel_xiaomi_sm8635-modules",
+      "commit": "ed4ad0d1ad00b755af2fe61387dcc5397ad20b8f",
+      "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635-modules.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "lineage-modules",
+          "path": "senemos-uke-kernel/referances/community/lineage-modules",
+          "url": "https://github.com/LineageOS/android_kernel_xiaomi_sm8635-modules.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "linux",
+      "commit": "adc218676eef25575469234709c2d87185ca223a",
+      "url": "https://github.com/torvalds/linux.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "linux-mainline",
+          "path": "senemos-uke-kernel/referances/upstream/linux-mainline",
+          "url": "https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git",
+          "canonical_url_matches": false,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "manifest",
+      "commit": "4503ecac6e9461f1817a2cfd65399822a4a3dbc9",
+      "url": "https://git.codelinaro.org/clo/la/kernel/manifest.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": []
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/Xiaomi_Kernel_OpenSource-uke",
+      "commit": "5712080a4b0c0b1a879e6d145c601c649ddaddfd",
+      "url": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-kernel",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-kernel",
+          "url": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/camera-devicetree-uke",
+      "commit": "57d2135ee6909ffb7d288a7dc4d82c85d95fc10d",
+      "url": "https://github.com/MiCode/vendor_qcom_proprietary_camera-devicetree.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-camera-dt",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-camera-dt",
+          "url": "https://github.com/MiCode/vendor_qcom_proprietary_camera-devicetree.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/camera-kernel-uke",
+      "commit": "699fa15a98abd40fbb94f3a6fc00f91723d29d35",
+      "url": "https://github.com/MiCode/vendor_qcom_opensource_camera-kernel.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-camera",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-camera",
+          "url": "https://github.com/MiCode/vendor_qcom_opensource_camera-kernel.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/display-devicetree-uke",
+      "commit": "4a3e1c391130237c5e8c2b250d1c94f3e25b9b11",
+      "url": "https://github.com/MiCode/vendor_qcom_proprietary_display-devicetree.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-display-dt",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-display-dt",
+          "url": "https://github.com/MiCode/vendor_qcom_proprietary_display-devicetree.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/display-drivers-uke",
+      "commit": "44275c404a677d9d9e5230fedd1af2ef02fc7b9a",
+      "url": "https://github.com/MiCode/vendor_opensource_display-drivers.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-display",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-display",
+          "url": "https://github.com/MiCode/vendor_opensource_display-drivers.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/kernel_devicetree-uke",
+      "commit": "94c84aeb9e517dbde546fc732033c184094c8e57",
+      "url": "https://github.com/MiCode/kernel_devicetree.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-devicetree",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-devicetree",
+          "url": "https://github.com/MiCode/kernel_devicetree.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    },
+    {
+      "ref": "refs/heads/master",
+      "path": "vendor/wlan-uke",
+      "commit": "2825b01e22ac3e16345c12e6c85549188e2e765e",
+      "url": "https://github.com/MiCode/vendor_qcom_opensource_wlan.git",
+      "dependency_archive_status": "not-linked-or-verified-as-parent-closure",
+      "exact_pin_catalog_matches": [
+        {
+          "id": "xiaomi-wlan",
+          "path": "senemos-uke-kernel/referances/xiaomi/xiaomi-wlan",
+          "url": "https://github.com/MiCode/vendor_qcom_opensource_wlan.git",
+          "canonical_url_matches": true,
+          "archive_complete": true
+        }
+      ]
+    }
+  ]
+}
