@@ -17,6 +17,7 @@ separate from either commercial device's physical acceptance.
 | [Native recovery write gate](2026-10-04-RECOVERY-WRITE-GATE.md) | REC-G001–REC-G007 | Verified legacy mutation refusal, readonly no-replay mounts, managed recovery/script sibling writers, fastboot reader compatibility and startup locking; 27 native, 27 sanitizer and 21 focused guest results, with broader release/physical acceptance separate |
 | [Bounded recovery text](2026-10-04-RECOVERY-P1-TEXT.md) | REC-T001–REC-T004 | Exact-source Unicode and production raster/parser/cache/ownership checks, confirmed compatibility corrections, reviewed overlapping patch staging and unresolved task-shutdown observations; target and combined guest acceptance pending |
 | [Pinned recovery donors](2026-10-04-RECOVERY-DONOR-COMPARISON.md) | REC-D001–REC-D004 | USB and touch readiness gaps, init/service closure, exact mainline loader contradiction and separate firmware/geometry/DTBO provenance; read-only source comparison only |
+| [Installer durability](2026-10-04-RECOVERY-INSTALLER-DURABILITY.md) | REC-I001–REC-I005 | Removed volatile writer, exact regular-image wrapper/raw transactions, initial publication and write SIGKILL, source-independent recovery, repeated fsync failure, plan/path binding and preserved failed trials; five native and five sanitizer checks passed, target/combined guest pending |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
