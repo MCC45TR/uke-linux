@@ -31,6 +31,7 @@ separate from either commercial device's physical acceptance.
 | [Bounded tree enumeration](2026-10-04-RECOVERY-TREE-ENUMERATION.md) | REC-TREE001–REC-TREE004 | Iterative frontier, pre-copy admission, anonymous sorted runs, measured 100,000-child RSS, deep actual restore, preserved sanitizer/oracle failures and scratch cleanup; target/combined guest/physical gates remain open |
 | [Shared host build reserve](2026-10-04-RECOVERY-HOST-RESERVE.md) | REC-HOST001–REC-HOST004 | RAM/ancestor headroom, post-lock readback, separate compile/Go limits, pinned actual Blueprint controls and real cache/RSS/PSI/OOM receipts; full clean/warm image and desktop response remain open |
 | [Nested disk scratch](2026-10-04-RECOVERY-DISK-SCRATCH.md) | REC-TMP001–REC-TMP003 | Kernel-resolved namespace identity, byte/inode admission, measured 64 MiB disk/cache accounting and RAM/substitution/readonly refusal; shadowed mount-list correction and full-image gates kept separate |
+| [Build completion](2026-10-05-RECOVERY-BUILD-COMPLETION.md) | REC-COMP001–REC-COMP003 | Fresh output, complete source/pin/tool evidence, post-service acknowledgment, atomic exchange and actual compiler/interruption refusals; measured 811,108-file cache/PSI costs and corrected oracles; complete image/guest/tablet acceptance pending |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
