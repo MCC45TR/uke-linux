@@ -56,6 +56,43 @@
         "at": "2026-09-29T17:13:56Z",
         "network_used": false
       }
+    },
+    "xiaomi-uke-vendor": {
+      "source_id": "xiaomi-uke-vendor",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/xiaomi-uke-vendor-lfs.tar",
+        "sha256": "4d30d5c505acdd2e009ae498c4338897d043ca57c84976058822f08f11e9f0b3",
+        "bytes": 675276800
+      },
+      "object_ids": [
+        "8f3a510acc66692532e60293c11129b2e2c399ce870a02f292a8fbac5f8fff4f",
+        "92d0c25555a99dd795899eaa38c46e44e3f5cbfaf3c11edb36a98253e928d1c2",
+        "cb637515f31a4f4a9afa221d447f6483d4b8faf3b3f2dd896ac70a303615a852",
+        "e3c0a525e35b209dffd21a35f8c20e5a942d5f387f6717fe36751b63afee8ce0"
+      ],
+      "object_count": 4,
+      "offline_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:31:52Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-uke-common-vendor": {
+      "source_id": "xiaomi-uke-common-vendor",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/xiaomi-uke-common-vendor-lfs.tar",
+        "sha256": "facb138321cb95c38e324c5dab38a9371bde664a66e51da960d68f401b729c8b",
+        "bytes": 136161280
+      },
+      "object_ids": [
+        "bbd7b5f818c78c4cdf8be1b0aaa91890e549e95ce5da53b79d66033215c029ad"
+      ],
+      "object_count": 1,
+      "offline_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:32:17Z",
+        "network_used": false
+      }
     }
   }
 }

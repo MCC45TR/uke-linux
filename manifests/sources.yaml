@@ -754,6 +754,90 @@
       "history": "full-selected-refs",
       "redistribution": "review-file-licenses-before-publication",
       "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "xiaomi-uke-device",
+      "path": "recovery-uke-ofox/referances/donors/xiaomi-uke-device",
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_uke.git",
+      "checkout": "refs/heads/main",
+      "refs": {
+        "refs/heads/main": "d828b0ce3ef0ed19a358002ad3f81b9865754f3e"
+      },
+      "role": "Uke Android product and extraction inventory; reference only, donor Python tools must not run or ship on the tablet",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "xiaomi-uke-recovery",
+      "path": "recovery-uke-ofox/referances/donors/xiaomi-uke-recovery",
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_uke-recovery.git",
+      "checkout": "refs/heads/twrp-14.1",
+      "refs": {
+        "refs/heads/twrp-14.1": "d037467a1643d64979337ad79267c8b8f2e4ca17"
+      },
+      "role": "Uke TWRP recovery donor for fstab, boot configuration, init and prebuilt dependency review; not an OrangeFox or device acceptance result",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "xiaomi-uke-common-device",
+      "path": "senemos-uke-kernel/referances/donors/xiaomi-uke-common-device",
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_sm8635-common.git",
+      "checkout": "refs/heads/main",
+      "refs": {
+        "refs/heads/main": "d3e10662e157f273a43755a296db98063ace01f0"
+      },
+      "role": "Shared Android SM8635-family configuration and native pen/power sources; latest proprietary import is from Muyu, requiring Uke-specific comparison",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "senemos-uke-kernel"
+    },
+    {
+      "id": "xiaomi-uke-kernel-prebuilts",
+      "path": "senemos-uke-kernel/referances/donors/xiaomi-uke-kernel-prebuilts",
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_uke-kernel.git",
+      "checkout": "refs/heads/main",
+      "refs": {
+        "refs/heads/main": "446629e5d30c76848bfde9e3a67bcf6386ac24fa"
+      },
+      "role": "Uke prebuilt-only Android kernel, compiled DTB/DTBO, 788 module file instances and exported headers; no rebuildable kernel or DTS source",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "senemos-uke-kernel"
+    },
+    {
+      "id": "xiaomi-uke-vendor",
+      "path": "uke-fedora-builder/referances/donors/xiaomi-uke-vendor",
+      "url": "https://github.com/xiaomi-uke/android_vendor_xiaomi_uke.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "a1507a1f691d9de0df31c2986bdccc448bd41731"
+      },
+      "role": "Uke proprietary firmware, HAL and configuration inventory; local analysis only until file-level distribution terms are established",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "reference-only-no-blob-publication-without-file-level-license",
+      "owner": "uke-fedora-builder"
+    },
+    {
+      "id": "xiaomi-uke-common-vendor",
+      "path": "uke-fedora-builder/referances/donors/xiaomi-uke-common-vendor",
+      "url": "https://github.com/xiaomi-uke/android_vendor_xiaomi_sm8635-common.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "ed3b98c5c4d06c75413b8a58ff6a6fee4eab9f7d"
+      },
+      "role": "Shared Android SM8635-family proprietary dependencies and firmware inventory; fork ancestry is not independent hardware evidence",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "reference-only-no-blob-publication-without-file-level-license",
+      "owner": "uke-fedora-builder"
     }
   ]
 }

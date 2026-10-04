@@ -2253,6 +2253,273 @@
         "at": "2026-09-30T17:35:05Z",
         "network_used": false
       }
+    },
+    "xiaomi-uke-device": {
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/donors/xiaomi-uke-device",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-10-04T04:25:04Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "d828b0ce3ef0ed19a358002ad3f81b9865754f3e",
+          "tree": "c64935889ba74437674cbd59f0f0e05afbdf9aef"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:25:04Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/xiaomi-uke-device.bundle",
+        "sha256": "eeda5d864c2f715db8b742e4edefada652e7af7f3b42685a8c91d401be3bfa80",
+        "created_at": "2026-10-04T04:25:04Z",
+        "bytes": 33575
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:25:05Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-uke-recovery": {
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_uke-recovery.git",
+      "path": "recovery-uke-ofox/referances/donors/xiaomi-uke-recovery",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-10-04T04:25:10Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/twrp-14.1": {
+          "commit": "d037467a1643d64979337ad79267c8b8f2e4ca17",
+          "tree": "3102ff0207e5c93f64078c22167eb50e8a83c723"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:25:12Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/xiaomi-uke-recovery.bundle",
+        "sha256": "d843fd2233758cd83632b3e2488fcbadffc8ad4fa028c1253f651d7af0009110",
+        "created_at": "2026-10-04T04:25:13Z",
+        "bytes": 129699986
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:25:17Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-uke-common-device": {
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_sm8635-common.git",
+      "path": "senemos-uke-kernel/referances/donors/xiaomi-uke-common-device",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-10-04T04:25:18Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "d3e10662e157f273a43755a296db98063ace01f0",
+          "tree": "54a05717d5ca20aa75cf87e4493adb2a990553d7"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:25:18Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-uke-common-device.bundle",
+        "sha256": "b2e7462b78573c5854d0b6234bdbd7973acbd1133a7c03e0f68a0fd5db95e5ee",
+        "created_at": "2026-10-04T04:25:18Z",
+        "bytes": 584064
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:25:18Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-uke-kernel-prebuilts": {
+      "url": "https://github.com/xiaomi-uke/android_device_xiaomi_uke-kernel.git",
+      "path": "senemos-uke-kernel/referances/donors/xiaomi-uke-kernel-prebuilts",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-10-04T04:25:25Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "446629e5d30c76848bfde9e3a67bcf6386ac24fa",
+          "tree": "b14cabda429a72abca902b2a0b236ae519cf12ff"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:25:28Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/xiaomi-uke-kernel-prebuilts.bundle",
+        "sha256": "bfe693e8e2565880d8e1697187f338ce83072f03e2e221fa7e21ee299d510ffd",
+        "created_at": "2026-10-04T04:25:29Z",
+        "bytes": 150869809
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:25:34Z",
+        "network_used": false
+      }
+    },
+    "xiaomi-uke-vendor": {
+      "url": "https://github.com/xiaomi-uke/android_vendor_xiaomi_uke.git",
+      "path": "uke-fedora-builder/referances/donors/xiaomi-uke-vendor",
+      "owner": "uke-fedora-builder",
+      "acquired_at": "2026-10-04T04:27:22Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "a1507a1f691d9de0df31c2986bdccc448bd41731",
+          "tree": "55a6321dc7e2b2e6c9e07ae2dcbf29daa283672c"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [
+        {
+          "ref": "refs/heads/lineage-23.2",
+          "path": ".gitattributes"
+        }
+      ],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:27:34Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [
+        "894ed4af9dd914524ce4967796202fe6a4c77a22"
+      ],
+      "submodule_status": "not-required",
+      "lfs_status": "verified-offline",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/xiaomi-uke-vendor.bundle",
+        "sha256": "6c455ff6031cbe714011dfb69faaae8c7013c02860771a131da528a1f1f59182",
+        "created_at": "2026-10-04T04:27:38Z",
+        "bytes": 802035832
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:32:42Z",
+        "network_used": false
+      },
+      "lfs_archive": {
+        "source_id": "xiaomi-uke-vendor",
+        "bundle": {
+          "path": "uke-fedora-builder/referances/bundles/xiaomi-uke-vendor-lfs.tar",
+          "sha256": "4d30d5c505acdd2e009ae498c4338897d043ca57c84976058822f08f11e9f0b3",
+          "bytes": 675276800
+        },
+        "object_ids": [
+          "8f3a510acc66692532e60293c11129b2e2c399ce870a02f292a8fbac5f8fff4f",
+          "92d0c25555a99dd795899eaa38c46e44e3f5cbfaf3c11edb36a98253e928d1c2",
+          "cb637515f31a4f4a9afa221d447f6483d4b8faf3b3f2dd896ac70a303615a852",
+          "e3c0a525e35b209dffd21a35f8c20e5a942d5f387f6717fe36751b63afee8ce0"
+        ],
+        "object_count": 4,
+        "offline_restore": {
+          "status": "passed",
+          "at": "2026-10-04T04:31:52Z",
+          "network_used": false
+        }
+      }
+    },
+    "xiaomi-uke-common-vendor": {
+      "url": "https://github.com/xiaomi-uke/android_vendor_xiaomi_sm8635-common.git",
+      "path": "uke-fedora-builder/referances/donors/xiaomi-uke-common-vendor",
+      "owner": "uke-fedora-builder",
+      "acquired_at": "2026-10-04T04:28:27Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "ed3b98c5c4d06c75413b8a58ff6a6fee4eab9f7d",
+          "tree": "40dec77717ac3ada66faa0b662619453aa7d9f18"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [
+        {
+          "ref": "refs/heads/lineage-23.2",
+          "path": ".gitattributes"
+        }
+      ],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:28:39Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [
+        "cd684bc7310d50beac187491d87da966b7dd8749"
+      ],
+      "submodule_status": "not-required",
+      "lfs_status": "verified-offline",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/xiaomi-uke-common-vendor.bundle",
+        "sha256": "530be86ec821fbed2d68856b5adbba736c030d3462e87c84742d103939fbcbca",
+        "created_at": "2026-10-04T04:28:42Z",
+        "bytes": 709859158
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:33:03Z",
+        "network_used": false
+      },
+      "lfs_archive": {
+        "source_id": "xiaomi-uke-common-vendor",
+        "bundle": {
+          "path": "uke-fedora-builder/referances/bundles/xiaomi-uke-common-vendor-lfs.tar",
+          "sha256": "facb138321cb95c38e324c5dab38a9371bde664a66e51da960d68f401b729c8b",
+          "bytes": 136161280
+        },
+        "object_ids": [
+          "bbd7b5f818c78c4cdf8be1b0aaa91890e549e95ce5da53b79d66033215c029ad"
+        ],
+        "object_count": 1,
+        "offline_restore": {
+          "status": "passed",
+          "at": "2026-10-04T04:32:17Z",
+          "network_used": false
+        }
+      }
     }
   }
 }

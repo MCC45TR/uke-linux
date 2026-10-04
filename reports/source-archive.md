@@ -57,3 +57,9 @@ Git restoration does not prove a build or include missing submodule/LFS objects.
 | ure-cryptsetup | recovery-uke-ofox | implementation | passed | passed | complete |
 | ure-dropbear | recovery-uke-ofox | implementation | passed | passed | complete |
 | ure-wimlib | recovery-uke-ofox | implementation | passed | passed | complete |
+| xiaomi-uke-device | recovery-uke-ofox | implementation | passed | passed | complete |
+| xiaomi-uke-recovery | recovery-uke-ofox | implementation | passed | passed | complete |
+| xiaomi-uke-common-device | senemos-uke-kernel | implementation | passed | passed | complete |
+| xiaomi-uke-kernel-prebuilts | senemos-uke-kernel | implementation | passed | passed | complete |
+| xiaomi-uke-vendor | uke-fedora-builder | implementation | passed | passed | complete |
+| xiaomi-uke-common-vendor | uke-fedora-builder | implementation | passed | passed | complete |
