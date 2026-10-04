@@ -14,6 +14,7 @@ separate from either commercial device's physical acceptance.
 | [Production function tests](2026-10-03-RECOVERY-FUNCTION-TESTS.md) | REC-F001–REC-F014 | Unmodified shipping CLI in a generic guest, failed fixture/oracle corrections, raw/home metadata and interruption, module privacy, disk identity, production Btrfs, managed chroot cleanup, source-classified shutdown notices, five packaged filesystem workflows and exact package/receipt closure |
 | [Interactive desktop window](2026-10-03-RECOVERY-INTERACTIVE-VM.md) | REC-W001 | Private GTK runtime, corrected startup page and forced 3200 by 2136 framebuffer; closed at the owner's request, without complete manual acceptance |
 | [Optimization and safety audit](2026-10-04-RECOVERY-OPTIMIZATION-AUDIT.md) | REC-A001–REC-A006 | 37 classified source/performance/capability findings, reproduced decoder and draft-generator memory defects, reviewed-profile capacity boundaries and open device acceptance |
+| [Native recovery write gate](2026-10-04-RECOVERY-WRITE-GATE.md) | REC-G001–REC-G007 | Verified legacy mutation refusal, readonly no-replay mounts, managed recovery/script sibling writers, fastboot reader compatibility and startup locking; 27 native, 27 sanitizer and 21 focused guest results, with broader release/physical acceptance separate |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
