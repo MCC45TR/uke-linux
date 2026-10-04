@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-29",
-  "physical_device_available": false,
+  "updated_at": "2026-10-04",
+  "physical_device_available": true,
   "sources": {
     "SPEC": {
       "title": "POCO Pad X1 official specifications",
@@ -70,8 +70,28 @@
     },
     "STOCK-GLOBAL": {
       "title": "Global stock boot and partition profile",
-      "url": "https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/STOCK-LAYOUT.md",
+      "url": "https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/STOCK-LAYOUT.md",
       "scope": "Verified package and offline layout evidence; physical device state remains untested"
+    },
+    "POCO-FAQ": {
+      "title": "POCO Pad X1 official FAQ",
+      "url": "https://www.mi.com/global/support/faq/details/KA-628084/",
+      "scope": "OEM declarations for POCO Pad X1 DP 1.2, DP Alt Mode and charging protocols; no project hardware acceptance"
+    },
+    "STOCK-ADB": {
+      "title": "First own-device stock Android ADB inventory",
+      "url": "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts",
+      "scope": "POCO Pad X1 ukepgl running OS2.0.205.0.VOZMIXM on 2026-10-03; read-only descriptors/layout and explicit access limits, no project-environment acceptance"
+    },
+    "STOCK-DEV": {
+      "title": "Development hardware inventory, 2026-10-03",
+      "url": "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#other-hardware",
+      "scope": "15 live I2C/SPI clients and development interfaces; OS3 package pin/address definitions and source contracts remain separate from installed OS2 and project acceptance."
+    },
+    "STOCK-CAL": {
+      "title": "Calibration and bring-up evidence audit, 2026-10-03",
+      "url": "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#sensors",
+      "scope": "Installed ODM sensor connection/orientation definitions, QDCM/camera/audio inputs and thermal topology; unit calibration remains unread and physical metrology is not-tested."
     }
   },
   "variant_rules": [
@@ -89,13 +109,47 @@
     "GPU, audio and resume reports for nearby devices do not change Uke acceptance status."
   ],
   "next_evidence": [
-    "Extract stock recovery/boot headers, DTBs, partition relationships, module ABI and filesystem profiles.",
-    "When hardware arrives, record SKU, panel/touch identity, sensor population, installed firmware and recovery path.",
-    "Produce the first recovery build with header, size and dependency reports.",
-    "Reproduce the F2FS formatting problem on synthetic filesystems before any device operation.",
-    "Associate every physical result with build, firmware, variant, timestamp and raw evidence."
+    "Match the installed OS2 boot/DTBO/firmware hashes and complete physical GPT/sector geometry before project boot or live storage admission.",
+    "Identify installed panel/touch and sensor variants and establish a firmware-matched recovery/rollback route.",
+    "Finish ordered recovery P1 remediation, then generate fresh matching target/package and combined guest receipts.",
+    "Validate the Uke mainline board adaptation and packaged runtime dependencies independently of generic ARM64 compilation.",
+    "Record each physical workload with build, firmware, model/SKU, timestamp and evidence before changing an acceptance result."
   ],
-  "test_records": {},
+  "test_records": {
+    "STOCK-ADB-20261003-01": {
+      "environment": "stock-android",
+      "build_id": "OS2.0.205.0.VOZMIXM / 6.1.118-android14-11-ga3b9c44908dd-ab13320413",
+      "device_variant": "POCO Pad X1 / 25099RP08G / uke_p_global / ukepgl",
+      "firmware_profile": "global-stock-android15-os2.0.205.0-vozmixm",
+      "timestamp_utc": "2026-10-03T12:01:02Z",
+      "evidence": [
+        "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts"
+      ],
+      "summary": "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts"
+    },
+    "STOCK-ADB-20261003-02": {
+      "environment": "stock-android",
+      "build_id": "OS2.0.205.0.VOZMIXM / 6.1.118-android14-11-ga3b9c44908dd-ab13320413",
+      "device_variant": "POCO Pad X1 / 25099RP08G / uke_p_global / ukepgl",
+      "firmware_profile": "global-stock-android15-os2.0.205.0-vozmixm",
+      "timestamp_utc": "2026-10-03T12:29:10Z",
+      "evidence": [
+        "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts"
+      ],
+      "summary": "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts"
+    },
+    "STOCK-ADB-20261003-03": {
+      "environment": "stock-android",
+      "build_id": "OS2.0.205.0.VOZMIXM / 6.1.118-android14-11-ga3b9c44908dd-ab13320413",
+      "device_variant": "POCO Pad X1 / 25099RP08G / uke_p_global / ukepgl",
+      "firmware_profile": "global-stock-android15-os2.0.205.0-vozmixm",
+      "timestamp_utc": "2026-10-03T14:22:11Z",
+      "evidence": [
+        "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts"
+      ],
+      "summary": "docs/research/UKE-HARDWARE-STATUS-2026-10-04.md#stock-record-receipts"
+    }
+  },
   "capabilities": [
     {
       "id": "ID-01",
@@ -105,9 +159,10 @@
       "evidence": [
         "SPEC",
         "XIAOMI-SPEC",
-        "DTS"
+        "DTS",
+        "STOCK-ADB"
       ],
-      "note": "Both commercial models are Uke project targets; every SKU and installed hardware variant requires its own physical record. Pad 7 Pro / muyu is a different board.",
+      "note": "Both commercial models are Uke project targets; every SKU and installed hardware variant requires its own physical record. Pad 7 Pro / muyu is a different board. Stock record STOCK-ADB-20261003-01 observes POCO Pad X1 25099RP08G/ukepgl with OS2.0.205.0.VOZMIXM; other variants remain separate.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -127,9 +182,10 @@
       "capability": "CPU topology and all cores online",
       "evidence": [
         "DTS",
-        "DONOR"
+        "DONOR",
+        "STOCK-ADB"
       ],
-      "note": "Shared SM8635 filenames do not change the target SoC.",
+      "note": "Shared SM8635 filenames do not change the target SoC. Stock record observes SM7675 and CPUs 0-7 online; this does not validate project kernels.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -149,9 +205,10 @@
       "capability": "Frequency, voltage and cpufreq",
       "evidence": [
         "DTS",
-        "PLAN"
+        "PLAN",
+        "STOCK-ADB"
       ],
-      "note": "Compare stock OPP tables and power limits.",
+      "note": "Compare stock OPP tables and power limits. Stock qcom-cpufreq-hw/walt policies expose 1.9008/2.6112/2.8032 GHz maxima for the three CPU groups; sustained performance is untested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -410,9 +467,10 @@
       "evidence": [
         "SPEC",
         "XIAOMI-SPEC",
-        "DTS"
+        "DTS",
+        "STOCK-ADB"
       ],
-      "note": "POCO Pad X1 targets 8 GB; Xiaomi Pad 7 advertises 8 GB and 12 GB variants. Boot firmware and the physical memory map determine valid addresses.",
+      "note": "POCO Pad X1 targets 8 GB; Xiaomi Pad 7 advertises 8 GB and 12 GB variants. Boot firmware and the physical memory map determine valid addresses. Stock MemTotal is 7,674,232 KiB; this is OS-visible memory, not measured physical DDR density.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -454,9 +512,10 @@
       "capability": "Controller, PHY and read-only access",
       "evidence": [
         "SPEC",
-        "DTS"
+        "DTS",
+        "STOCK-ADB"
       ],
-      "note": "The target capacity is defined by the SKU, but controller identity, geometry and health require physical inspection.",
+      "note": "The target capacity is defined by the SKU, but controller identity, geometry and health require physical inspection. Stock exposes six disk names and 121 labels but denies exact UFS capacity/sector/health reads; mounted data filesystem capacity is 497,533,562,880 bytes.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -562,9 +621,10 @@
       "component": "F2FS",
       "capability": "Format, mount, checkpoint and restore",
       "evidence": [
-        "OFOX"
+        "OFOX",
+        "STOCK-ADB"
       ],
-      "note": "The recovery donor reports broken data formatting.",
+      "note": "The recovery donor reports broken data formatting. Stock /data is mounted as F2FS with inlinecrypt; no project formatting, mount or decryption was attempted.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -583,9 +643,10 @@
       "component": "EROFS / dynamic partitions",
       "capability": "Read-only Android partition inspection",
       "evidence": [
-        "OFOX"
+        "OFOX",
+        "STOCK-ADB"
       ],
-      "note": "Validate logical partition and slot selection.",
+      "note": "Validate logical partition and slot selection. Stock lpdump exposes eight allocated slot-a logical extents and reported filesystem types; super is 11,274,289,152 bytes. Physical GPT remains unread.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -691,9 +752,10 @@
       "capability": "Identify the installed panel and initialization sequence",
       "evidence": [
         "DTS",
-        "DISPLAY"
+        "DISPLAY",
+        "STOCK-ADB"
       ],
-      "note": "Keep panel firmware and power sequencing separate.",
+      "note": "Keep panel firmware and power sequencing separate. Stock panel supplier/property reads were denied; neither CSOT nor TM is selected by this record.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -735,9 +797,10 @@
       "capability": "Resolution, color order and orientation",
       "evidence": [
         "SPEC",
-        "DISPLAY"
+        "DISPLAY",
+        "STOCK-ADB"
       ],
-      "note": "A framebuffer console is not a full panel driver.",
+      "note": "A framebuffer console is not a full panel driver. Stock compositor observes 3200 x 2136; project display acceptance remains untested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -757,9 +820,10 @@
       "capability": "Refresh modes and transitions",
       "evidence": [
         "SPEC",
-        "DISPLAY"
+        "DISPLAY",
+        "STOCK-ADB"
       ],
-      "note": "These are vendor capabilities; native modes need measurement.",
+      "note": "These are vendor capabilities; native modes need measurement. Stock lists seven refresh modes and reports an active 120 Hz mode; controlled transitions are untested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -866,9 +930,10 @@
       "capability": "Chip ID and GMU/SQE/ZAP firmware matching",
       "evidence": [
         "BLOBS",
-        "DONOR"
+        "DONOR",
+        "STOCK-ADB"
       ],
-      "note": "Do not select firmware for other GPUs from shared vendor trees.",
+      "note": "Do not select firmware for other GPUs from shared vendor trees. Stock KGSL/GLES identify Adreno 732; installed firmware hashes and project rendering remain unverified.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -970,12 +1035,13 @@
       "id": "DIS-10",
       "category": "Display and graphics",
       "component": "USB-C video output",
-      "capability": "Determine whether DP alt-mode exists",
+      "capability": "Validate DP Alt Mode and external display",
       "evidence": [
         "DTS",
-        "PLAN"
+        "PLAN",
+        "POCO-FAQ"
       ],
-      "note": "USB 3.2 capability alone does not establish DisplayPort support.",
+      "note": "POCO Pad X1 FAQ declares DP 1.2 and DP Alt Mode. JH925 HDMI/MST testing is planned; each environment and Xiaomi Pad 7 variant still require physical evidence.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -995,9 +1061,10 @@
       "capability": "Finger input, IRQ, reset and firmware loading",
       "evidence": [
         "DTS",
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Keep CSOT and TM firmware variants separate.",
+      "note": "Keep CSOT and TM firmware variants separate. Stock loaded nt36532_touch and registered NVT input paths; no controlled touch experiment was performed.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1061,9 +1128,10 @@
       "capability": "Pen position and hover",
       "evidence": [
         "DTS",
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "The pen accessory is not available for testing.",
+      "note": "The pen accessory is not available for testing. Stock registers NVTCapacitivePen; this does not establish an attached or tested pen specimen.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1300,9 +1368,10 @@
       "capability": "Host connection and installation transfer",
       "evidence": [
         "OFOX",
-        "PLAN"
+        "PLAN",
+        "STOCK-ADB"
       ],
-      "note": "Require checksum and disconnect tests.",
+      "note": "Require checksum and disconnect tests. Stock ADB read-only acquisition succeeded; recovery ADB/sideload remains untested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1431,9 +1500,10 @@
       "capability": "Orientation, role switching and power negotiation",
       "evidence": [
         "DTS",
-        "PLAN"
+        "PLAN",
+        "STOCK-ADB"
       ],
-      "note": "Test combinations of ports, cables and chargers.",
+      "note": "Test combinations of ports, cables and chargers. Stock snapshot is a configured USB sink; battery-service maximums are 5 V/0.5 A for this connection, not negotiated RC1001/PD proof.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1921,12 +1991,13 @@
     {
       "id": "SNS-01",
       "category": "Sensors and candidate variants",
-      "component": "LSM6DSO or QMI8658",
+      "component": "LSM6DSO observed HAL / QMI8658 alternate configuration",
       "capability": "Accelerometer raw XYZ, units and scale",
       "evidence": [
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Do not assume both candidate IMUs are installed.",
+      "note": "Do not assume both candidate IMUs are installed. This specimen's stock HAL advertises lsm6dso accelerometer/uncalibrated forms; register identity and project data path remain unverified.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1942,12 +2013,13 @@
     {
       "id": "SNS-02",
       "category": "Sensors and candidate variants",
-      "component": "LSM6DSO or QMI8658",
+      "component": "LSM6DSO observed HAL / QMI8658 alternate configuration",
       "capability": "Gyroscope XYZ, bias and sampling",
       "evidence": [
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Require IC identity and mounting matrix.",
+      "note": "Require IC identity and mounting matrix. This specimen's stock HAL advertises lsm6dso gyro/uncalibrated forms; cached events do not prove a current stream or accuracy.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1963,12 +2035,13 @@
     {
       "id": "SNS-03",
       "category": "Sensors and candidate variants",
-      "component": "QMC6308 candidate",
+      "component": "QMC630x reported family / QMC6308 unconfirmed",
       "capability": "Magnetometer and compass",
       "evidence": [
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Validate axes and hard/soft iron calibration.",
+      "note": "Validate axes and hard/soft iron calibration. Stock HAL family text is qmc630x; exact QMC6308 suffix remains unconfirmed.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -1987,9 +2060,10 @@
       "component": "SIP1328 candidate",
       "capability": "Determine ALS/CCT role and channels",
       "evidence": [
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Filenames alone cannot establish sensor function.",
+      "note": "Filenames alone cannot establish sensor function. Stock HAL advertises sip1328 back ALS, flicker and back-lux stream; optical channel/accuracy tests remain open.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2008,9 +2082,10 @@
       "component": "STK3BCX candidate family",
       "capability": "Distinguish ALS, proximity and flicker capabilities",
       "evidence": [
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Exact submodel and channel population are unknown.",
+      "note": "Exact submodel and channel population are unknown. Stock HAL advertises stk_stk3bcx front ALS, proximity, CCT and factory streams; exact chip suffix remains unknown.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2029,9 +2104,10 @@
       "component": "SX937X candidate family",
       "capability": "SAR/grip raw capacitive channels",
       "evidence": [
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Do not label it display proximity or invent electrode positions.",
+      "note": "Do not label it display proximity or invent electrode positions. Stock HAL advertises semtech_sx937x_0 and sar_detector; electrode mapping and physical SAR acceptance remain open.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2073,9 +2149,10 @@
       "capability": "Lux, dynamic range and automatic brightness",
       "evidence": [
         "SPEC",
-        "PLAN"
+        "PLAN",
+        "STOCK-ADB"
       ],
-      "note": "Raw sensor behavior and desktop policy are separate.",
+      "note": "Raw sensor behavior and desktop policy are separate. Front non-wakeup ALS last-event time advanced across stock snapshots; lux metrology and project brightness acceptance remain open.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2095,9 +2172,10 @@
       "capability": "Raw color channels, CCT and adaptation",
       "evidence": [
         "SPEC",
-        "PLAN"
+        "PLAN",
+        "STOCK-ADB"
       ],
-      "note": "Saturated values are not valid calibration evidence.",
+      "note": "Saturated values are not valid calibration evidence. Stock front CCT descriptors and retained events are present; raw channel mapping and calibrated response are untested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2117,9 +2195,10 @@
       "capability": "Sampling, 50/60 Hz detection and validity",
       "evidence": [
         "SPEC",
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Confirm hardware and driver transport.",
+      "note": "Confirm hardware and driver transport. Stock SIP1328 flicker descriptors are present; 50/60 Hz validity was not tested.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2139,9 +2218,10 @@
       "capability": "Physical sensor or algorithm and near/far events",
       "evidence": [
         "SPEC",
-        "BLOBS"
+        "BLOBS",
+        "STOCK-ADB"
       ],
-      "note": "Do not automatically equate proximity with SAR.",
+      "note": "Do not automatically equate proximity with SAR. Stock STK3BCx proximity descriptors/retained events are present; controlled near/far stimulus was not performed.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2182,9 +2262,10 @@
       "capability": "Batching, timestamps, wake and resume streams",
       "evidence": [
         "BLOBS",
-        "DONOR"
+        "DONOR",
+        "STOCK-ADB"
       ],
-      "note": "Test re-registration after firmware reset.",
+      "note": "Test re-registration after firmware reset. Stock has QSH config and ADSP/CDSP/WPSS names; exact sensor-DSP ownership/state/firmware is unverified. Visible IIO symlinks are PMIC ADCs.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2204,9 +2285,10 @@
       "capability": "Channel identity, millidegrees and consistent readings",
       "evidence": [
         "DTS",
-        "OFOX"
+        "OFOX",
+        "STOCK-ADB"
       ],
-      "note": "Do not reuse the fixed thermal_zone48 index.",
+      "note": "Do not reuse the fixed thermal_zone48 index. Stock thermal HAL reports CPU/GPU/NSP/battery/SoC channels and non-temperature vbat; cached and current readings must remain distinct.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2313,9 +2395,10 @@
       "capability": "Negotiation and safe power limits",
       "evidence": [
         "SPEC",
-        "PLAN"
+        "PLAN",
+        "POCO-FAQ"
       ],
-      "note": "Adapter rating is not continuous battery input power.",
+      "note": "POCO Pad X1 FAQ excludes PPS and declares PD 2.0/3.0. Direct/docked RC1001 negotiation is untested; adapter rating is not continuous battery input power.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -2706,7 +2789,7 @@
         "OFOX",
         "PLAN"
       ],
-      "note": "Global-profile OrangeFox built from incremental and fresh outputs; payload privacy gate fails, and pristine re-sync and physical boot on both models remain untested.",
+      "note": "The experimental Global OS3 alpha has separate host/package/privacy records; it has not completed physical boot acceptance. Current P1 source changes require fresh matching target/package and combined guest receipts. The installed OS2 specimen is a separate firmware profile.",
       "implementation": "planned",
       "results": {
         "recovery": "not-tested",
@@ -3192,5 +3275,6 @@
         "linux": []
       }
     }
-  ]
+  ],
+  "stock_inventory_record": "STOCK-ADB-20261003-03"
 }

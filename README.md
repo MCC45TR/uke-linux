@@ -1,57 +1,69 @@
-# Uke Linux for POCO Pad X1 and Xiaomi Pad 7
+# Uke Linux
 
-**Fedora Rawhide and mainline Linux for POCO Pad X1 and Xiaomi Pad 7.** Uke Linux is building a maintainable, recovery-first platform for the Snapdragon 7+ Gen 3 tablet family identified by Xiaomi sources as `uke`. The implementation covers device recovery, a Uke-specific UEFI path, mainline Linux and Fedora AArch64.
+**Recovery, UEFI and Fedora Linux development for POCO Pad X1 and Xiaomi Pad 7.** This workspace brings together OrangeFox recovery, Project Aloha boot integration, the Senemos mainline kernel and the Fedora AArch64 builder for the Snapdragon 7+ Gen 3 / SM7675 tablet family (`uke`).
 
-[Development plan](PLAN.md) · [Hardware status](DEVICE-STATUS.md) · [Downloads](docs/RELEASES.md) · [Test channel](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) · [Build checks](https://github.com/MCC45TR/uke-linux/actions/workflows/records.yml)
+[Hardware status](#hardware-and-sensors) · [Downloads](#downloads-and-compatibility) · [Development plan](PLAN.md) · [Engineering records](docs/lessons/PLATFORM-INDEX.md) · [Build checks](https://github.com/MCC45TR/uke-linux/actions/workflows/records.yml)
 
-## The platform
+**Development status:** an experimental OrangeFox alpha is available. UEFI, mainline Linux and Fedora remain under development, with no published bootable Uke system image. Project recovery, UEFI and Linux acceptance on either tablet is still pending. Current source changes and downloadable artifacts have separate validation records.
 
-| Project | Purpose |
-|---|---|
-| [OrangeFox Recovery for Uke](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) | Recovery, diagnostics, backup and installation management |
-| [Project Aloha for Uke](https://github.com/MCC45TR/uke-project-aloha) | UEFI boot, Android return and selectable Fedora boot profiles |
-| [Senemos Uke kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Mainline SM7675 support, beginning with Linux 7.2.8 |
-| [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Rawhide AArch64 kernel RPMs, root filesystem and boot artifacts |
+## Platform components
 
-The target includes display, touch and pen, keyboard, connectivity, audio, sensors, cameras, graphics, power management, secure boot choices and reliable updates. [The hardware matrix](DEVICE-STATUS.md) lists each capability and its actual test state. Dual boot and Fedora as the single user OS are both planned.
+| Component | Scope | Current checkpoint |
+|---|---|---|
+| [OrangeFox Recovery](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) | Tablet interface, storage planning, backup, diagnostics and Linux recovery | R12.0 source development; older experimental alpha available |
+| [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Uke UEFI startup, boot profiles and return to Android | Platform integration; no Uke image release |
+| [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Mainline SM7675 adaptation, device tree and matching modules | Build and board bring-up work; physical boot pending |
+| [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Fedora Rawhide AArch64 kernel packages, root filesystem and boot artifacts | Build tooling; no published Uke package or system image |
 
-The [UKE Recovery Environment roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/COMPREHENSIVE-ROADMAP.md)
-extends OrangeFox with planned Linux/Windows rescue, a native transaction engine,
-LUKS/BitLocker access, Btrfs management, a GUI text editor, one-shot OS boot and
-USB/SSH network rescue. Its sixteen phases are linked to the existing platform
-plan; these are development targets with separate host and physical gates.
-The [native checkpoint](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/URE-NATIVE.md)
-now includes file journals, storage usage checks, identity-bound backup streams
-and GPT repair plus raw-image restoration with host fixtures; the full roadmap and live-device
-acceptance remain open.
+Recovery source features include selectable interface scale, display controls, regular-image partition and stock-layout jobs, verified raw and Linux/home backups, filesystem inspection and repair, distribution-aware rescue, kernel/boot auditing, and Btrfs management. [The recovery feature overview](https://github.com/MCC45TR/orangefox_device_xiaomi_uke#feature-overview) describes the implementation and its limits. Live tablet storage admission, encrypted userdata migration, shipping-kernel Btrfs support and physical accessory acceptance remain open. A feature implemented in current source is not automatically present in the older alpha download.
 
-The local recovery checkpoint also adds staged filesystem-image jobs,
-distribution-aware isolated chroot, installed kernel/initramfs/module/DT/UKI/BLS
-auditing and native Btrfs snapshot/send/maintenance controls. Btrfs has 14
-operation checks in a separate generic ARM64 VM; the preserved stock recovery
-kernel still lacks Btrfs support. These changes are not yet published, and live
-storage writes and both tablets' physical acceptance remain open.
+## Hardware and sensors
+
+**Latest physical evidence: 3 October 2026**, POCO Pad X1 8 GB / 512 GB running stock Android 15, Global `OS2.0.205.0.VOZMIXM`. A read-only collection established descriptors and exposed driver bindings. Controlled sensor measurements and project-environment tests have not yet been performed.
+
+The status vocabulary is **Fully working**, **Partial**, **Not working** and **Not tested**. Fully working requires the recorded acceptance workload; Not working requires an observed failure. Stock inventory observations are shown separately below. An advancing event timestamp is a partial observation, not calibrated sensor or automatic-brightness acceptance.
+
+| Function | Reported sensor / interface | Stock Android evidence | OrangeFox | Fedora Linux |
+|---|---|---|---|---|
+| Accelerometer | STMicro LSM6DSO | Descriptor and cached events; function not tested | Not tested | Not tested |
+| Gyroscope | STMicro LSM6DSO | Descriptor and cached events; function not tested | Not tested | Not tested |
+| Compass / magnetometer | QST QMC630x | Descriptor; exact suffix and function not tested | Not tested | Not tested |
+| Front ambient light | Sensortek STK3BCx | Partial observation: last-event timestamp advanced | Not tested | Not tested |
+| Proximity / front color temperature | Sensortek STK3BCx | Descriptors and cached events; function not tested | Not tested | Not tested |
+| Rear ambient light / flicker | SIP1328 | Descriptors; light response and 50/60 Hz detection not tested | Not tested | Not tested |
+| SAR / grip sensing | Semtech SX937x | Descriptor; electrodes and response not tested | Not tested | Not tested |
+| Magnetic cover / tablet position | Hall interfaces; chip unknown | Input/source interfaces; cover response not tested | Not tested | Not tested |
+| Rotation, gravity and steps | Xiaomi / QTI fusion interfaces | Software descriptors; behavior not tested | Not tested | Not tested |
+
+The collection exposes **61 sensor interfaces**, including software and wake/non-wake variants; this is not a count of physical chips. QMI8658 is an alternate configuration candidate, and QMC6308 is an unconfirmed suffix. Neither is presented as an additional installed sensor.
+
+The [hardware evidence summary](docs/research/UKE-HARDWARE-STATUS-2026-10-04.md) also covers the 3200 × 2136 display, Novatek touch, dual KTZ8866 backlight controllers, FS16xx speaker amplifiers, Nanosic keyboard interface, storage, cameras, USB and power. The [complete capability matrix](DEVICE-STATUS.md) tracks 143 capabilities independently for Recovery, UEFI and Linux. It currently records no project hardware success or measured failure. PenguinOS/CLO observations remain a separate evidence track.
 
 ## Downloads and compatibility
 
-Download the **[experimental OrangeFox alpha](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases/tag/r12.0-uke.20260930-alpha1)**: separate temporary-boot IMG, dedicated recovery IMG and slot-safe installer ZIP, with source snapshots and SHA-256 hashes. Read the [firmware constraints and installation/rollback instructions](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/main/docs/PRE-RELEASE.md) first. **No physical-device tests; Global OS3.0.303.0.WOZMIXM only.** These unsigned development files are not a supported recovery release.
+| Download | Intended use | Validation scope |
+|---|---|---|
+| [Experimental OrangeFox alpha](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases/tag/r12.0-uke.20260930-alpha1) | Separate temporary-boot IMG, recovery IMG and installer ZIP, with source snapshots and SHA-256 hashes | Unsigned prerelease for the Global OS3.0.303.0.WOZMIXM package profile; no physical boot acceptance |
+| [Fedora development channel](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Future reviewed development packages | Reserved test channel; no published Uke release |
 
-**No Uke Linux/Fedora image, UEFI image or RPM has been released.** The generic Linux 7.2.8 ARM64 baseline compiles Image, DTBs and 1,655 modules; it has no Uke DTB and is not a bootable Uke port. The COPR test channel remains reserved for reviewed development packages. A source checkout or passing CI run is not a tablet compatibility result.
+Read the [recovery installation and rollback guidance](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/PRE-RELEASE.md) and [release policy](docs/RELEASES.md) before choosing an artifact. The stock OS2 device inventory does not establish compatibility with the OS3 alpha. Generic ARM64 build results do not establish a bootable Uke port.
 
-The project targets **POCO Pad X1** and **Xiaomi Pad 7**. POCO Pad X1 8 GB / 512 GB is the primary physical validation target; Xiaomi Pad 7 variants share the `uke` source target but require their own compatibility evidence. Each release records its tested model, memory/storage SKU, region firmware, panel and touch variant independently. Xiaomi Pad 7 Pro (`muyu`) and Xiaomi Pad 5 (`nabu`) are not compatible targets.
+POCO Pad X1 8 GB / 512 GB is the primary physical validation target. Xiaomi Pad 7 memory/storage, regional firmware, panel and touch variants require their own records. Pad 7 Pro (`muyu`) and Pad 5 (`nabu`) are different boards. Global, China and Turkey firmware references stay separate; stock early firmware and a documented recovery route must be preserved.
 
-Global and China fastboot baselines are preserved for platform analysis. The Turkey recovery OTA is tracked as a separate regional reference. Firmware profiles are never mixed, and no package is treated as flashable merely because it can be downloaded or unpacked.
+## Development and validation
 
-## Source and development
-
-Clone this workspace with its four component repositories:
+Clone the workspace and its four pinned component repositories:
 
 ```sh
 git clone --recurse-submodules https://github.com/MCC45TR/uke-linux.git
 ```
 
-Each component keeps source, patches, configuration, documentation and tests in its own repository. Pinned upstream references and offline archives live locally in its `referances/` directory. [The source report](reports/source-archive.md) shows what has been acquired and which dependencies are still open.
+Each component maintains its own source, patches, configuration, tests and licenses. Reference archives live below the owning component's `referances/` directory; [the source archive report](reports/source-archive.md) records acquisition and remaining dependencies.
 
-New native device tools use C++; host automation prefers Bash. Python is excluded from tablet payloads. Linux and EDK II retain their upstream-required languages. See [contributing rules](AGENTS.md), [test requirements](docs/testing/TEST-CONTRACT.md), [security reporting](SECURITY.md) and [diagnostics](docs/security/SECURITY-AND-OBSERVABILITY.md).
+Build, package, host fixture, emulation, third-party and own-device results are recorded separately. A hardware result needs its build revision, firmware, model/SKU, timestamp, workload and evidence. Source changes and VM results cannot promote physical status. Public reports contain reviewed summaries; private logs and unit calibration stay out of GitHub.
 
-Uke Linux is an independent community project. OrangeFox, Xiaomi, Fedora, Qualcomm and Project Aloha retain their own trademarks and licenses. Original project documentation is MIT-licensed; imported upstream sources retain their own licenses.
+Native device tools use C++. Host automation prefers Bash, and tablet payloads exclude Python. Linux and EDK II retain their upstream implementation languages. See [project guidance](AGENTS.md), [test requirements](docs/testing/TEST-CONTRACT.md), [security reporting](SECURITY.md) and [diagnostics](docs/security/SECURITY-AND-OBSERVABILITY.md).
+
+## Project and licensing
+
+Uke Linux is an independent community project. Original workspace documentation is [MIT-licensed](LICENSE); imported sources and component repositories retain their own licenses. Xiaomi, POCO, OrangeFox, Fedora, Qualcomm and Project Aloha retain their respective trademarks. Component links and source references do not imply vendor endorsement.

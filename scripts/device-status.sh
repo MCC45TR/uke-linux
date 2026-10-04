@@ -35,7 +35,7 @@ TEXT
 jq -r '"Ledger updated: **\(.updated_at)**. Physical device available: **\(.physical_device_available)**. Tracked capabilities: **\(.capabilities|length)**."' "$input"
 cat <<'TEXT'
 
-No own-device acceptance has been performed. A missing implementation or an untested feature is not a measured hardware failure. Third-party results are recorded separately.
+No recovery, UEFI or Linux own-device acceptance has been performed. A missing implementation or an untested feature is not a measured hardware failure. Third-party results are recorded separately.
 
 ## Reading the results
 
@@ -44,6 +44,12 @@ No own-device acceptance has been performed. A missing implementation or an unte
 - **not-working**: a real test observed failure.
 - **not-tested**: no success or failure claim.
 - **not-applicable**: the function is outside that environment's scope, with a recorded reason.
+
+TEXT
+if jq -e '.stock_inventory_record != null' "$input" >/dev/null; then
+  jq -r '.stock_inventory_record as $id | .test_records[$id] as $r | "\nStock Android has a separate [read-only inventory](\($r.summary)) recorded as **\($id)** on **\($r.timestamp_utc)**. It establishes observed stock metadata and device availability; it does not promote the recovery, UEFI or Linux results below."' "$input"
+fi
+cat <<'TEXT'
 
 ## Coverage
 
