@@ -1,6 +1,7 @@
 [submodule "recovery-uke-ofox"]
 	path = recovery-uke-ofox
 	url = https://github.com/MCC45TR/orangefox_device_xiaomi_uke.git
+	branch = R12.0
 [submodule "senemos-uke-kernel"]
 	path = senemos-uke-kernel
 	url = https://github.com/MCC45TR/senemos-uke-kernel-mainline.git

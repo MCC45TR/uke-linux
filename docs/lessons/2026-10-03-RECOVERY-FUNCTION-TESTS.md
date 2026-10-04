@@ -442,7 +442,7 @@ Raw console logs and test media remain private.
   `c1a604aecbec113d7856f12c9eb2f1aac1c3334b504968d6f196ce9b93b05b51`;
   recovery image SHA-256
   `77f7cbf86aaa97a62fb0bfbb3781eb11dffbf9430709ac4fc3e00e92fc0b6c38`.
-  The reviewed [function report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/reports/URE-FUNCTION-VM-REVIEW.md)
+  The reviewed [function report](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/reports/URE-FUNCTION-VM-REVIEW.md)
   records all receipt and repeat-package identities.
 - **Practical consequence:** Preserve prior candidates and refuse stale source
   identities. Commit source and evidence changes separately, then seal against

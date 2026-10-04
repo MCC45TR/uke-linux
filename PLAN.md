@@ -10,7 +10,7 @@ The first deliverable is a reproducible OrangeFox recovery for Uke with the mana
 
 The expanded recovery product is the **UKE Recovery Environment (URE)**: an
 offline Android/Linux/Windows maintenance environment built on OrangeFox, with
-project-owned C++ management code. The [comprehensive recovery roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/COMPREHENSIVE-ROADMAP.md)
+project-owned C++ management code. The [comprehensive recovery roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/COMPREHENSIVE-ROADMAP.md)
 retains all topics 0–102 from the supplied 30 September roadmap. Section 6.1
 adds its sixteen implementation phases without renumbering the 100 platform
 steps. Windows, advanced layouts and optional extensions remain conditional
@@ -27,7 +27,7 @@ Current preparation includes architecture, source research, pinned reference clo
 |---|---|
 | Work order | Recovery foundations → Project Aloha → mainline integration → Fedora → full hardware acceptance |
 | Recovery reference | Official OrangeFox `fox_16.0`, source release R12.0; pin the complete manifest before building |
-| Feature minimum | All 34 groups in [FEATURE-PARITY.md](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/FEATURE-PARITY.md), including conditional Windows/second-Android tools |
+| Feature minimum | All 34 groups in [FEATURE-PARITY.md](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/FEATURE-PARITY.md), including conditional Windows/second-Android tools |
 | Recovery expansion | URE-00–URE-15 and URE-C01–URE-C24 extend the donor minimum with native rescue, crypto, Btrfs, boot routing, networking and transaction contracts |
 | First recovery kernel | Firmware-matched OEM/GKI kernel and modules after stock layout analysis |
 | Mainline baseline | Linux `v7.2.8`, commit `9a66fdc0d7fd55f54235524a73435af99051e46f` |
@@ -279,13 +279,13 @@ The feature parity matrix retains all donor capabilities: normal install/backup,
 
 ### 6.1 URE implementation milestones
 
-The [detailed roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/COMPREHENSIVE-ROADMAP.md#91-recommended-implementation-roadmap)
+The [detailed roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/COMPREHENSIVE-ROADMAP.md#91-recommended-implementation-roadmap)
 owns feature design; this table owns scheduling and acceptance dependencies.
 The existing 001–100 steps continue to track the wider platform. URE host work
 may proceed alongside them; device write and supported-release gates still
 require the exact physical recovery/return path. Existing installer and
 read-only fixture evidence is a baseline, not completion of the new phases.
-The recovery [native checkpoint](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/URE-NATIVE.md)
+The recovery [native checkpoint](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/URE-NATIVE.md)
 now records a library/JSON API, live read-only selection, GPT image
 backup/repair/restore, OS discovery, diagnostics, regular-file transactions,
 inspected journals, storage usage/mapper policy, identity-bound storage stream
@@ -300,7 +300,7 @@ the complete milestones and physical gates below remain open.
 
 The 1 October scope expansion also requires a comprehensive partition manager
 and restoration of the device's default partition layout. The recovery
-[partition-manager contract](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/PARTITION-MANAGER.md)
+[partition-manager contract](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/PARTITION-MANAGER.md)
 records discovery, capacity-derived layouts, filesystem/migration operations,
 multi-LUN journals, preview/recovery UI and exact stock-return requirements.
 Stock reconstruction must use Uke's verified GPT/patch inputs and actual LUN
@@ -445,7 +445,7 @@ scrubbed reports without credentials, keys, private content or calibration.
 
 Recovery self-tests, known-good profiles, external USB/host backups, bounded
 search/diff, time/power/thermal diagnostics and session cleanup are covered by
-[URE-C01–URE-C24](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/FEATURE-PARITY.md#ure-capability-extension).
+[URE-C01–URE-C24](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/FEATURE-PARITY.md#ure-capability-extension).
 QR sessions, a permissioned extension model, forensic tools, remote UI and
 broader distro/filesystem modules remain optional P3 work. Do not reduce boot
 health to an invented percentage.

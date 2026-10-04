@@ -21,8 +21,8 @@ Future U0/U1/U2 jobs cover kernel/config/DT validation, image round trips, RPM s
 
 ## URE acceptance cases
 
-The recovery [roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/COMPREHENSIVE-ROADMAP.md#88-ci-test-classes)
-and [capability contracts](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/codex/ure-rescue-framework/docs/FEATURE-PARITY.md#ure-capability-extension)
+The recovery [roadmap](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/COMPREHENSIVE-ROADMAP.md#88-ci-test-classes)
+and [capability contracts](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/blob/R12.0/docs/FEATURE-PARITY.md#ure-capability-extension)
 extend these classes. They are future cases, not new passing test records.
 
 | Scope | Required cases before device acceptance |
