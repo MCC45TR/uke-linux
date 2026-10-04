@@ -18,6 +18,7 @@ separate from either commercial device's physical acceptance.
 | [Bounded recovery text](2026-10-04-RECOVERY-P1-TEXT.md) | REC-T001–REC-T004 | Exact-source Unicode and production raster/parser/cache/ownership checks, confirmed compatibility corrections, reviewed overlapping patch staging and unresolved task-shutdown observations; target and combined guest acceptance pending |
 | [Pinned recovery donors](2026-10-04-RECOVERY-DONOR-COMPARISON.md) | REC-D001–REC-D004 | USB and touch readiness gaps, init/service closure, exact mainline loader contradiction and separate firmware/geometry/DTBO provenance; read-only source comparison only |
 | [Installer durability](2026-10-04-RECOVERY-INSTALLER-DURABILITY.md) | REC-I001–REC-I005 | Removed volatile writer, exact regular-image wrapper/raw transactions, initial publication and write SIGKILL, source-independent recovery, repeated fsync failure, plan/path binding and preserved failed trials; five native and five sanitizer checks passed, target/combined guest pending |
+| [Common operation ownership](2026-10-04-RECOVERY-OPERATION-OWNERSHIP.md) | REC-O001–REC-O009 | Process-independent admission, durable exact retirement, compound plan binding, staged-tree recovery, rescue/lifecycle cleanup, captured Btrfs controls and reviewed source stacks; 36 native and 36 sanitizer regressions plus affected CLI corrections, Android backend and physical durability unaccepted |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
