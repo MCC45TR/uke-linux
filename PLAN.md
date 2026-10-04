@@ -458,6 +458,34 @@ its existing result vocabulary and evidence rules.
 
 ## 7. Boot, kernel and package contracts
 
+### Source intake checkpoint: Xiaomi Uke organization, 4 October 2026
+
+Six additional donor repositories are pinned, cloned under their component-owned
+`referances/donors/` directories and verified through Git integrity and offline
+bundle restoration. The two vendor archives additionally include five verified
+historical LFS objects. The [source audit](docs/research/XIAOMI-UKE-DONOR-AUDIT.md),
+[inventory](docs/research/XIAOMI-UKE-INVENTORY.json) and
+[engineering lessons](docs/lessons/DONOR-INDEX.md) define their reuse boundaries.
+
+Continue source implementation work in this order:
+
+1. Compare donor storage/header declarations with independent firmware-profile
+   evidence; conflicting super sizes must not reach write plans.
+2. Compare the potentially modified community DTBO to its exact stock origin
+   before selecting any board/panel transition profile.
+3. Map the recovery touch module, THP HAL and uinput readiness chain to project
+   source; review ABI, missing-file closure and observable failure behavior.
+4. Review native pen/power protocol sources for C++ implementation with bounded
+   discovery and explicit error/cleanup paths; omit destructive input-node glue.
+5. Match panel/sensor/audio/camera alternatives to Uke OEM and installed-profile
+   evidence, retaining Muyu import provenance and private-calibration boundaries.
+6. Select firmware only after native driver requirements and file-level licenses
+   are established; then rerun relevant source/build/package/VM gates.
+
+This checkpoint completes donor acquisition and static analysis only. It creates
+no new recovery payload, mainline driver, VM result, physical acceptance record
+or Uke UEFI implementation. Earlier roadmap gates retain their independent scope.
+
 Dual boot means Android and Fedora have defined boot routes and independently managed OS data. A/B slots are update slots and do not isolate shared userdata. Single boot means Fedora is the only user OS; it does not mean deleting XBL/ABL/TEE or required firmware. Windows/second-Android workflows are additional conditional features, not initial OS support claims. The actual installation mechanism depends on real bootloader behavior: do not assume `fastboot boot` can temporarily replace boot, init_boot and dtbo together.
 
 The kernel has an unchanged-baseline build, a donor-reproduction build and a forward-port build. Keep those results separate. Android 6.1 vendor modules cannot be loaded into mainline 7.2 as a portability shortcut. Kernel patch commits and exported patches must reproduce the same tree. Record `SOURCE_DATE_EPOCH`, toolchain/container digests, config SHA-256 and final kernel commit.
