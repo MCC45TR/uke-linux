@@ -838,6 +838,107 @@
       "history": "full-selected-refs",
       "redistribution": "reference-only-no-blob-publication-without-file-level-license",
       "owner": "uke-fedora-builder"
+    },
+    {
+      "id": "resources-uke-kernel-prebuilts",
+      "path": "senemos-uke-kernel/referances/donors/resources-uke-kernel-prebuilts",
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_uke-kernel.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "446629e5d30c76848bfde9e3a67bcf6386ac24fa"
+      },
+      "role": "Original community Uke Android kernel prebuilts; same selected commit as xiaomi-uke mirror, not independent hardware evidence",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "senemos-uke-kernel"
+    },
+    {
+      "id": "delano-uke-device",
+      "path": "recovery-uke-ofox/referances/donors/delano-uke-device",
+      "url": "https://github.com/delano-git/android_device_xiaomi_uke.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "78812b13d6a04596ed6157668c5d160ee4ca29db",
+        "refs/heads/main": "fef1dbfb013afdca915e93126a73335a46a15c76",
+        "refs/heads/test-16": "0988518a766a9edddd3b18811a2f8e736f0b5edb"
+      },
+      "role": "Uke Android product revisions and experimental branch comparison; extraction scripts remain evidence only",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "perry-uke-device",
+      "path": "recovery-uke-ofox/referances/donors/perry-uke-device",
+      "url": "https://github.com/PerryOnUke/android_device_xiaomi_uke.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "5c9266c11812c7f64484c2cb76350338c2d3355b"
+      },
+      "role": "Alternate Uke Android product and dependency revisions for source comparison; not a native Linux implementation",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "delano-uke-recovery",
+      "path": "recovery-uke-ofox/referances/donors/delano-uke-recovery",
+      "url": "https://github.com/delano-git/android_device_xiaomi_uke-recovery.git",
+      "checkout": "refs/heads/twrp-14.1",
+      "refs": {
+        "refs/heads/twrp-14.1": "d037467a1643d64979337ad79267c8b8f2e4ca17"
+      },
+      "role": "Uke recovery mirror at the same commit as xiaomi-uke; retained for exact provenance comparison",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "recovery-uke-ofox"
+    },
+    {
+      "id": "vember-uke-kernel-prebuilts",
+      "path": "senemos-uke-kernel/referances/donors/vember-uke-kernel-prebuilts",
+      "url": "https://github.com/vember31/android_device_xiaomi_uke-kernel.git",
+      "checkout": "refs/heads/lineage-23.2",
+      "refs": {
+        "refs/heads/lineage-23.2": "9bb7c4331be7205fabf5427b5654555763304d20",
+        "refs/heads/lunaris-16.2": "d448f7961cbf979b0eedf801ba61a5836583b131"
+      },
+      "role": "Uke Android kernel/DT/module prebuilt revisions; inspect ABI and source completeness separately from the direct Linux donor",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "senemos-uke-kernel"
+    },
+    {
+      "id": "btidor-ukefi",
+      "path": "uke-project-aloha/referances/donors/btidor-ukefi",
+      "url": "https://github.com/btidor/ukefi.git",
+      "checkout": "refs/heads/main",
+      "refs": {
+        "refs/heads/main": "6a7daff10b4d48aba4d213cc11e1bd434effec77"
+      },
+      "role": "Generic x86-64 Unified Kernel EFI packaging with Debian hooks; no ARM64/SM7675 platform port, read-only design reference",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "uke-project-aloha"
+    },
+    {
+      "id": "stampy-linux-uke",
+      "path": "uke-fedora-builder/referances/donors/stampy-linux-uke",
+      "url": "https://github.com/StampyCat889/Linux-UKE.git",
+      "checkout": "refs/heads/main",
+      "refs": {
+        "refs/heads/main": "3eb6ec4437eea0f53b6d23b74bd612e66806a1c8"
+      },
+      "role": "README-only Uke Debian/GNOME experiment; no reproducible source/build payloads, third-party claims and privacy boundaries remain separate",
+      "phase": "implementation",
+      "history": "full-selected-refs",
+      "redistribution": "review-file-licenses-before-publication",
+      "owner": "uke-fedora-builder"
     }
   ]
 }

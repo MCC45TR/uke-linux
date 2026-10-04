@@ -270,7 +270,7 @@
           "tree": "ec31dcac5b69203ba31e35f36ffec54e3f67d03e"
         }
       },
-      "git_verified_at": "2026-09-29T03:20:15Z",
+      "git_verified_at": "2026-10-04T04:47:05Z",
       "git_integrity": "passed",
       "shallow": false,
       "history": "full reachable history of locked refs",
@@ -384,7 +384,7 @@
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-09-29T03:21:08Z",
+        "at": "2026-10-04T04:47:31Z",
         "network_used": false
       },
       "archive_complete": false,
@@ -862,7 +862,7 @@
           "tree": "40e0daf5b3343f792e42218b63bdefd517c72e90"
         }
       },
-      "git_verified_at": "2026-09-29T03:20:36Z",
+      "git_verified_at": "2026-10-04T04:47:05Z",
       "git_integrity": "passed",
       "shallow": false,
       "history": "full reachable history of locked refs",
@@ -880,7 +880,7 @@
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-09-29T03:21:34Z",
+        "at": "2026-10-04T04:47:32Z",
         "network_used": false
       },
       "archive_complete": true,
@@ -898,7 +898,7 @@
           "tree": "0798622cf829fabbf1850106662898529b309cbc"
         }
       },
-      "git_verified_at": "2026-09-29T03:20:37Z",
+      "git_verified_at": "2026-10-04T04:47:05Z",
       "git_integrity": "passed",
       "shallow": false,
       "history": "full reachable history of locked refs",
@@ -916,7 +916,7 @@
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-09-29T03:21:35Z",
+        "at": "2026-10-04T04:47:32Z",
         "network_used": false
       },
       "archive_complete": true,
@@ -2001,7 +2001,7 @@
       ],
       "archive_complete": true,
       "git_integrity": "passed",
-      "git_verified_at": "2026-09-29T16:17:51Z",
+      "git_verified_at": "2026-10-04T04:47:17Z",
       "shallow": false,
       "history": "full reachable history of locked refs",
       "lfs_history_changes": [
@@ -2019,7 +2019,7 @@
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-09-29T17:15:21Z",
+        "at": "2026-10-04T04:47:55Z",
         "network_used": false
       },
       "lfs_archive": {
@@ -2063,7 +2063,7 @@
       ],
       "archive_complete": true,
       "git_integrity": "passed",
-      "git_verified_at": "2026-09-29T16:19:08Z",
+      "git_verified_at": "2026-10-04T04:47:27Z",
       "shallow": false,
       "history": "full reachable history of locked refs",
       "lfs_history_changes": [
@@ -2081,7 +2081,7 @@
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-09-29T17:15:42Z",
+        "at": "2026-10-04T04:48:15Z",
         "network_used": false
       },
       "lfs_archive": {
@@ -2306,7 +2306,7 @@
       "lfs_attributes": [],
       "archive_complete": true,
       "git_integrity": "passed",
-      "git_verified_at": "2026-10-04T04:25:12Z",
+      "git_verified_at": "2026-10-04T04:47:30Z",
       "shallow": false,
       "history": "full reachable history of locked refs",
       "lfs_history_changes": [],
@@ -2322,7 +2322,7 @@
       },
       "offline_git_restore": {
         "status": "passed",
-        "at": "2026-10-04T04:25:17Z",
+        "at": "2026-10-04T04:48:19Z",
         "network_used": false
       }
     },
@@ -2519,6 +2519,272 @@
           "at": "2026-10-04T04:32:17Z",
           "network_used": false
         }
+      }
+    },
+    "resources-uke-kernel-prebuilts": {
+      "url": "https://github.com/Xiaomi-Pad-7-Pro-Resources/android_device_xiaomi_uke-kernel.git",
+      "path": "senemos-uke-kernel/referances/donors/resources-uke-kernel-prebuilts",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-10-04T04:44:37Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "446629e5d30c76848bfde9e3a67bcf6386ac24fa",
+          "tree": "b14cabda429a72abca902b2a0b236ae519cf12ff"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:44:41Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/resources-uke-kernel-prebuilts.bundle",
+        "sha256": "6838807001d7c0511e5dd5291783e37baa603a822232d5f4110c1706c0d7590f",
+        "created_at": "2026-10-04T04:44:41Z",
+        "bytes": 101161433
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:44:46Z",
+        "network_used": false
+      }
+    },
+    "delano-uke-device": {
+      "url": "https://github.com/delano-git/android_device_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/donors/delano-uke-device",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-10-04T04:44:48Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "78812b13d6a04596ed6157668c5d160ee4ca29db",
+          "tree": "32a3820cf1d6de8cdf28bcceebe1af5b8cd00488"
+        },
+        "refs/heads/main": {
+          "commit": "fef1dbfb013afdca915e93126a73335a46a15c76",
+          "tree": "a43647b515debc67374a56effcc4c797ab55d44d"
+        },
+        "refs/heads/test-16": {
+          "commit": "0988518a766a9edddd3b18811a2f8e736f0b5edb",
+          "tree": "43019672aa67ad0d2cc4884022b07c8c0d3739f9"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:44:48Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/delano-uke-device.bundle",
+        "sha256": "f87d54bd348cb4a64999410ae5724488cc34dea007364fd8368cd36fff53dff4",
+        "created_at": "2026-10-04T04:44:48Z",
+        "bytes": 40453
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:44:49Z",
+        "network_used": false
+      }
+    },
+    "perry-uke-device": {
+      "url": "https://github.com/PerryOnUke/android_device_xiaomi_uke.git",
+      "path": "recovery-uke-ofox/referances/donors/perry-uke-device",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-10-04T04:44:50Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "5c9266c11812c7f64484c2cb76350338c2d3355b",
+          "tree": "59daa4a186e5f8f15446b0a32819705290a6d6dc"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:44:50Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/perry-uke-device.bundle",
+        "sha256": "bab961e70cae5734646ca57172920907231757cfcdaabf3582fe10229c168a68",
+        "created_at": "2026-10-04T04:44:50Z",
+        "bytes": 48271
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:44:50Z",
+        "network_used": false
+      }
+    },
+    "delano-uke-recovery": {
+      "url": "https://github.com/delano-git/android_device_xiaomi_uke-recovery.git",
+      "path": "recovery-uke-ofox/referances/donors/delano-uke-recovery",
+      "owner": "recovery-uke-ofox",
+      "acquired_at": "2026-10-04T04:44:55Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/twrp-14.1": {
+          "commit": "d037467a1643d64979337ad79267c8b8f2e4ca17",
+          "tree": "3102ff0207e5c93f64078c22167eb50e8a83c723"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:44:57Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "recovery-uke-ofox/referances/bundles/delano-uke-recovery.bundle",
+        "sha256": "d843fd2233758cd83632b3e2488fcbadffc8ad4fa028c1253f651d7af0009110",
+        "created_at": "2026-10-04T04:44:58Z",
+        "bytes": 129699986
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:45:02Z",
+        "network_used": false
+      }
+    },
+    "vember-uke-kernel-prebuilts": {
+      "url": "https://github.com/vember31/android_device_xiaomi_uke-kernel.git",
+      "path": "senemos-uke-kernel/referances/donors/vember-uke-kernel-prebuilts",
+      "owner": "senemos-uke-kernel",
+      "acquired_at": "2026-10-04T04:45:11Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/lineage-23.2": {
+          "commit": "9bb7c4331be7205fabf5427b5654555763304d20",
+          "tree": "b4f70456c7555c8576fc1bdd17f9b60ae925b80f"
+        },
+        "refs/heads/lunaris-16.2": {
+          "commit": "d448f7961cbf979b0eedf801ba61a5836583b131",
+          "tree": "298825ef0377e05cd8939eab17eaba193d71e88c"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:45:16Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "senemos-uke-kernel/referances/bundles/vember-uke-kernel-prebuilts.bundle",
+        "sha256": "f44e83633cd58e55b622484dfba6dd18c8a179dc813cca76ef225d7fd15108d7",
+        "created_at": "2026-10-04T04:45:21Z",
+        "bytes": 82336659
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:45:24Z",
+        "network_used": false
+      }
+    },
+    "btidor-ukefi": {
+      "url": "https://github.com/btidor/ukefi.git",
+      "path": "uke-project-aloha/referances/donors/btidor-ukefi",
+      "owner": "uke-project-aloha",
+      "acquired_at": "2026-10-04T04:45:25Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "6a7daff10b4d48aba4d213cc11e1bd434effec77",
+          "tree": "a701e8d706b133fd2e20f5f1eae26fd08256f8a9"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:45:26Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [
+        "LICENSE"
+      ],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-project-aloha/referances/bundles/btidor-ukefi.bundle",
+        "sha256": "95a1f27a04b53603113ceff4861d5475d47002bffca5982d211fb6b0986b930c",
+        "created_at": "2026-10-04T04:45:26Z",
+        "bytes": 81935
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:45:26Z",
+        "network_used": false
+      }
+    },
+    "stampy-linux-uke": {
+      "url": "https://github.com/StampyCat889/Linux-UKE.git",
+      "path": "uke-fedora-builder/referances/donors/stampy-linux-uke",
+      "owner": "uke-fedora-builder",
+      "acquired_at": "2026-10-04T04:45:27Z",
+      "acquisition": "cloned",
+      "refs": {
+        "refs/heads/main": {
+          "commit": "3eb6ec4437eea0f53b6d23b74bd612e66806a1c8",
+          "tree": "fd41df9755a6a1c3a83bf0a1c7486e6cbef2d528"
+        }
+      },
+      "submodules": [],
+      "lfs_attributes": [],
+      "archive_complete": true,
+      "git_integrity": "passed",
+      "git_verified_at": "2026-10-04T04:45:27Z",
+      "shallow": false,
+      "history": "full reachable history of locked refs",
+      "lfs_history_changes": [],
+      "submodule_status": "not-required",
+      "lfs_status": "no-lfs-attributes-detected",
+      "license_paths": [],
+      "license_review": "pending-file-level-review",
+      "bundle": {
+        "path": "uke-fedora-builder/referances/bundles/stampy-linux-uke.bundle",
+        "sha256": "1a42a9a95c5252bbae49dc28d0c1b7b41843b4908102b07cdf5cd44057e2f2eb",
+        "created_at": "2026-10-04T04:45:27Z",
+        "bytes": 2519
+      },
+      "offline_git_restore": {
+        "status": "passed",
+        "at": "2026-10-04T04:45:27Z",
+        "network_used": false
       }
     }
   }

@@ -63,3 +63,10 @@ Git restoration does not prove a build or include missing submodule/LFS objects.
 | xiaomi-uke-kernel-prebuilts | senemos-uke-kernel | implementation | passed | passed | complete |
 | xiaomi-uke-vendor | uke-fedora-builder | implementation | passed | passed | complete |
 | xiaomi-uke-common-vendor | uke-fedora-builder | implementation | passed | passed | complete |
+| resources-uke-kernel-prebuilts | senemos-uke-kernel | implementation | passed | passed | complete |
+| delano-uke-device | recovery-uke-ofox | implementation | passed | passed | complete |
+| perry-uke-device | recovery-uke-ofox | implementation | passed | passed | complete |
+| delano-uke-recovery | recovery-uke-ofox | implementation | passed | passed | complete |
+| vember-uke-kernel-prebuilts | senemos-uke-kernel | implementation | passed | passed | complete |
+| btidor-ukefi | uke-project-aloha | implementation | passed | passed | complete |
+| stampy-linux-uke | uke-fedora-builder | implementation | passed | passed | complete |
