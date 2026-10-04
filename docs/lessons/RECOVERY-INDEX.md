@@ -15,6 +15,7 @@ separate from either commercial device's physical acceptance.
 | [Interactive desktop window](2026-10-03-RECOVERY-INTERACTIVE-VM.md) | REC-W001 | Private GTK runtime, corrected startup page and forced 3200 by 2136 framebuffer; closed at the owner's request, without complete manual acceptance |
 | [Optimization and safety audit](2026-10-04-RECOVERY-OPTIMIZATION-AUDIT.md) | REC-A001–REC-A006 | 37 classified source/performance/capability findings, reproduced decoder and draft-generator memory defects, reviewed-profile capacity boundaries and open device acceptance |
 | [Native recovery write gate](2026-10-04-RECOVERY-WRITE-GATE.md) | REC-G001–REC-G007 | Verified legacy mutation refusal, readonly no-replay mounts, managed recovery/script sibling writers, fastboot reader compatibility and startup locking; 27 native, 27 sanitizer and 21 focused guest results, with broader release/physical acceptance separate |
+| [Bounded recovery text](2026-10-04-RECOVERY-P1-TEXT.md) | REC-T001–REC-T004 | Exact-source Unicode and production raster/parser/cache/ownership checks, confirmed compatibility corrections, reviewed overlapping patch staging and unresolved task-shutdown observations; target and combined guest acceptance pending |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
