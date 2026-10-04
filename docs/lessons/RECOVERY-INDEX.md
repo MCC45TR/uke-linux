@@ -21,6 +21,7 @@ separate from either commercial device's physical acceptance.
 | [Common operation ownership](2026-10-04-RECOVERY-OPERATION-OWNERSHIP.md) | REC-O001–REC-O009 | Process-independent admission, durable exact retirement, compound plan binding, staged-tree recovery, rescue/lifecycle cleanup, captured Btrfs controls and reviewed source stacks; 36 native and 36 sanitizer regressions plus affected CLI corrections, Android backend and physical durability unaccepted |
 | [Exact device profiles](2026-10-04-RECOVERY-DEVICE-PROFILES.md) | REC-U001–REC-U004 | Installed OS2/source OS3 distinction, complete six-LUN/whole-boot declaration contracts, unit-bound original GUID backups, early profile refusal and frozen native/sanitizer/CLI controls; no live unit accepted |
 | [Complete boot programming layouts](2026-10-04-RECOVERY-WHOLE-BOOT-LAYOUT.md) | REC-BL001–REC-BL004 | Explicit prefix/whole policy, exact DTBO gap/footer streaming, complete original-tail rollback, legacy/offline journal recovery, actual host SIGKILL and distinct source-layout/boot-acceptance results |
+| [Partition admission and capability scope](2026-10-04-RECOVERY-PARTITION-ADMISSION.md) | REC-RP001–REC-RP003 | Regular-image/runtime-tool contract, stable live blockers, refusal before request/target access, actual GUI review and explicit front-recreation/full-original rollback; native physical writer remains unaccepted |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
