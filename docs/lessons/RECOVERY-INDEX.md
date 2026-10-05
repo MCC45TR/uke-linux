@@ -34,6 +34,7 @@ separate from either commercial device's physical acceptance.
 | [Build completion](2026-10-05-RECOVERY-BUILD-COMPLETION.md) | REC-COMP001–REC-COMP003 | Fresh output, complete source/pin/tool evidence, post-service acknowledgment, atomic exchange and actual compiler/interruption refusals; measured 811,108-file cache/PSI costs and corrected oracles; complete image/guest/tablet acceptance pending |
 | [Explicit release policy](2026-10-05-RECOVERY-RELEASE-POLICY.md) | REC-REL001–REC-REL003 | Class/capability requirements, three renamed-candidate refusals, complete named test catalogs, bound repeat metadata and six immutable-output paths; complete image/package/guest acceptance pending |
 | [Localization input closure](2026-10-05-RECOVERY-LOCALIZATION-INPUTS.md) | REC-LOC001–REC-LOC003 | All 32 language/draft/font/license inputs, pinned dependency closure, GUI source/shipping/reviewed-overlay identities and failed/corrected default-path controls; fresh rendering/build/guest and physical acceptance pending |
+| [Multilingual text](2026-10-05-RECOVERY-MULTILINGUAL-TEXT.md) | REC-MT001–REC-MT004 | Exact licensed script/CJK fonts, bounded shaping/bidi, actual all-language and 616 orientation/scale draws, reproduced allocation/variable-font failures and corrected halt/umask controls; complete image/GUI/VM and physical acceptance pending |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
