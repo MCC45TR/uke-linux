@@ -24,4 +24,15 @@ jobs:
           test ! -e PLAN.md
           test ! -e packages
           test "$(git config -f .gitmodules --get submodule.uke-linux-hardware-support.path)" = uke-linux-hardware-support
-          bash -n senemeos.sh
+          test ! -e senemeos.sh
+          test -x senemos-uke-kernel/senemos.sh
+          bash -n senemos-uke-kernel/senemos.sh
+          test -x ukelinux.sh
+          bash -n ukelinux.sh
+      - name: Validate Core image entry contracts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jq ripgrep shellcheck
+          ./ukelinux.sh --self-test
+          ./ukelinux.sh --build core --distro=fedora --offline --dry-run
+          shellcheck ukelinux.sh uke-fedora-builder/src/image/*.sh uke-fedora-builder/src/audit/*.sh uke-fedora-builder/tests/*.sh
