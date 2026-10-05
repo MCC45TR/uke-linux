@@ -82,6 +82,17 @@ rm "$tmp/payload/usr/bin/helper"
 ln -s /usr/bin/python3 "$tmp/payload/usr/bin/alias"
 reject scripts/check-target-payload.sh "$tmp/payload"
 ok 'Python target symlink rejected'
+rm "$tmp/payload/usr/bin/alias"
+printf '\177ELFbroken' > "$tmp/payload/usr/bin/broken-elf"
+reject scripts/check-target-payload.sh "$tmp/payload"
+ok 'unreadable ELF target rejected'
+rm "$tmp/payload/usr/bin/broken-elf"
+mkdir -p "$tmp/audit-bin"
+for tool in realpath find readlink head grep od tr; do
+  ln -s "$(command -v "$tool")" "$tmp/audit-bin/$tool"
+done
+reject env PATH="$tmp/audit-bin" /usr/bin/bash scripts/check-target-payload.sh "$tmp/payload"
+ok 'missing host ELF audit tool rejected'
 printf 'ro.build.user=uke-builder\nro.build.host=uke-build\n' > "$tmp/payload/prop.default"
 scripts/check-target-privacy.sh "$tmp/payload" >/dev/null
 printf 'ro.build.user=private-builder\nro.build.host=uke-build\n' > "$tmp/payload/prop.default"

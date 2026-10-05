@@ -50,7 +50,7 @@
 - **Finding:** GitHub push delivery returned HTTP 200 and created job [11074362](https://copr.fedorainfracloud.org/coprs/build/11074362). Source generation completed, but collection failed with permission denied on `rpmbuild/gnupg`, whose deliberate mode 0700 excluded the unprivileged collector. `.copr/Makefile` now keeps intermediate verification/payload state under the source workspace and exports only mode-0644 SRPM files to COPR's result directory. The same correction applies to recovery delivery.
 - **Evidence:** Public job 11074362 source log and both project-owned `.copr/Makefile` files; HTTP-200 webhook receipts and package `auto_rebuild=true` settings. Replacement kernel source job 11074370 collected its SRPM and reached native compilation; recovery SCM job 11074373 succeeded end to end.
 - **Practical consequence:** Never weaken the GPG home's permissions to make it a build result. COPR source-generation and binary-build acceptance remain separate.
-- **Remaining uncertainty:** Replacement kernel native compilation remains in progress at this observation; a webhook receipt alone is insufficient.
+- **Remaining uncertainty:** Kernel SCM build 11074370 and queued `1.1` build 11074417 subsequently succeeded. The later fresh-install builtin timestamp correction is tracked by UKE-K729-L014; a webhook receipt alone is insufficient.
 - **Next validation:** Inspect the replacement SCM jobs and retain their exact source RPM and package identities.
 
 ## UKE-PKG-L005 — stable tracking rejects disguised alphas
@@ -78,3 +78,94 @@
 - **Practical consequence:** A same-version packaging fix needs an increasing release so DNF can deliver it. Keep tool capability differences and regenerated metadata explicit rather than claiming binary reproducibility.
 - **Remaining uncertainty:** Neither signatures, config, module ABI nor QEMU userspace transactions run the Uke kernel or establish physical hardware support.
 - **Next validation:** Verify corrected SCM artifacts and DNF repository transactions, then separately qualify firmware handoff and tablet boot.
+
+## UKE-PKG-L007 — screenshot priorities require real Uke source families
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Current Nabu COPR source inventory, GitHub and Uke Rawhide source factories.
+- **Evidence class:** Reference inspection, original source/package implementation and local extracted RPM tests.
+- **Status:** Four additional real source families registered with automatic rebuilds; native and full target acceptance pending.
+- **Question or previous assumption:** Renaming every Nabu binary or enabling a scaffold's webhook produced a qualified Uke counterpart.
+- **Finding:** The user's screenshot prioritizes core metas, desktop metas, Material Decoration, Plymouth and firmware. The current reference project is `mcc45tr/nabu-linux`. Its core and desktop specs contain Nabu firmware, boot, panel, calibration and service assumptions. Independent Uke core/stock-Plasma selection RPMs now use explicit candidate profiles. Plymouth is an original optional renderer-size-aware theme with no boot activation. Material uses the published `26-09-18` upstream release, commit `7bf62f142c17902f4afe04d0be408b5dfef27982`, archive SHA-256 `06450723b575cf848576fe0f65960d2e7a876c41241fe0a289f244eab96ef328`, retaining GPL/LGPL and the attributed small KPlugin metadata correction. Local core/desktop/theme RPM payloads passed architecture, no-scriptlet, Python and privacy checks. Existing Fedora PowerDevil/Plymouth engines remain shared dependencies.
+- **Evidence:** Component Make/spec/profile/lock files, current COPR inventory, local source/package audit and the firmware repository's `ADMISSION-2026-10-05.json`.
+- **Practical consequence:** Source roles transfer; hardware assertions do not. Firmware cannot enter COPR without a file-level Uke source/hash/license/kernel-request allowlist. No empty firmware package or Nabu blob substitute is published.
+- **Remaining uncertainty:** Package solving, native decoration compilation, theme rendering and all Uke hardware gates are separate. The firmware admission record describes missing project evidence, not proof that redistributable firmware cannot exist.
+- **Next validation:** Complete native builds and signed target install/upgrade/remove and closure audits; qualify exact firmware files independently.
+
+## UKE-PKG-L008 — one root source factory and one push hook per shared repository
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Two desktop source families sharing one GitHub repository.
+- **Evidence class:** Failed source jobs, corrected remote SRPM collection and webhook observations.
+- **Status:** Corrected source factories collected both SRPMs; binary jobs queued.
+- **Question or previous assumption:** COPR's source factory follows its configured package subdirectory, and each source family needs its own GitHub push hook.
+- **Finding:** Jobs 11075047/11075048 and repeated 11075049/11075050 failed before SRPM collection: COPR selected repository-root `.copr/Makefile` while working inside each package subdirectory. One root dispatcher now validates the package directory and invokes ordinary source generation; replacement 11075055/11075056 collected both complete SRPMs. Two hooks on the same repository created duplicate matching source builds, including 11075057/11075058. One redundant push hook was removed; the remaining hook serves both source families. Healthy native jobs were not cancelled.
+- **Evidence:** Public source command/logs, root source dispatcher, safe hook IDs/configuration and replacement source RPM URLs.
+- **Practical consequence:** COPR source-generation paths and actual result collection are tested separately. Repositories sharing multiple source families need a single project push event; per-package custom hooks remain available for stable tracking.
+- **Remaining uncertainty:** Removing the duplicate hook is not inferred to cancel existing jobs. Native compilation and target acceptance must be collected independently.
+- **Next validation:** Verify the corrected jobs and a subsequent single push event, and retain failed trials as historical evidence.
+
+## UKE-PKG-L009 — native stable decoration needs current Qt imports
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Published Material Decoration stable source and native Rawhide AArch64 COPR.
+- **Evidence class:** Failed native CMake trials, corrected source patch and real signed binary audit.
+- **Status:** Corrected native job 11075084 succeeded; plugin payload/ELF checks passed.
+- **Finding:** Jobs 11075055/11075057 failed because the current KF6 exported an
+  I18n QML dependency without a declared Qt QmlIntegration target. A separate
+  attributed CMake patch and official Qt declarative BuildRequires correct the
+  imports. The first local diff hunk count was rejected; a corrected zero-fuzz
+  patch passed preparation, followed by a whitespace-context correction before
+  publication. The resulting `20260918.151422-2.uke.fc46` RPM has real AArch64
+  decoration and KCM plugins. Signed package and extracted Python/privacy audits
+  passed. A first audit assumed a generic KCM directory and stopped on its
+  missing glob; the corrected audit uses the RPM's actual
+  `org.kde.kdecoration3.kcm/materialdecoration_kcm.so` and passes.
+- **Practical consequence:** Stable source, preparation, binary import resolution,
+  actual installed paths and complete runtime closure are distinct gates.
+- **Remaining uncertainty:** The complete selected graphical runtime and plugin
+  rendering remain separate; no tablet display or boot success is inferred.
+- **Next validation:** Complete the corrected Python-free dependency transaction.
+
+## UKE-PKG-L010 — complete Plasma closure requires six native source variants
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Isolated AArch64 full desktop transaction, 600 official RPM file lists, host C++ fixtures and native COPR.
+- **Evidence class:** Failed dependency acceptance, extracted metadata, native source implementation and explicit corrections.
+- **Status:** Initial complete desktop transaction rejected; native variant validation in progress.
+- **Finding:** The original complete Plasma transaction installed six Python
+  packages through at-spi2-core, GStreamer, libaccounts-glib, libwacom and
+  plasma-workspace-libs. A full RPM file-list audit also found Dolphin's two
+  Python migrations without a declared interpreter dependency. Six exact
+  official Koji source RPMs are now pinned by NEVRA/hash. Optional GI overrides,
+  host documentation/debugger utilities and Python Wacom helpers are excluded;
+  required Plasma/Dolphin configuration migrations have attributed atomic C++
+  replacements. Host fixtures passed transformations, permissions, idempotence
+  and malformed/symlink rejection. These are real source recompilations, not
+  binary RPM conversions. Unavoidable upstream Meson/GI/Python build tools have
+  purpose, official host pins and exclusion documented before native use.
+- **Correction evidence:** Job 11075173 failed because the pinning adapter replaced
+  `BuildRequires: meson gcc` as a whole and removed GCC. The adapter now retains
+  every original requirement and adds exact host pins separately. An initial
+  diagnosis incorrectly blamed the inherited spec; the component lesson records
+  its explicit correction. Job 11075171 compiled C successfully but the whole
+  BUILDROOT audit found optional Python GDB helpers in the SDK; release `1.uke2`
+  removes those helpers as well. Healthy KDE jobs are retained while corrected
+  failed source families are queued.
+- **Practical consequence:** Core release 2 conflicts with the Python ABI and
+  interpreter packages; Plasma release 2 requires all six native capabilities.
+  This fails safely on changed dependency graphs. An audit must also inspect
+  undeclared scripts, every generated subpackage and ELF dependencies. The host
+  payload scanner now requires readelf and rejects unreadable ELF rather than
+  treating a missing inspection tool as a clean target.
+- **Automation:** COPR source records enable rebuilds. One shared GitHub push hook
+  serves the source repository; an explicit Actions workflow requests all six
+  native builds for shared adapter/manifest changes. The custom hook base lives
+  only in an encrypted secret. Native Fedora pins require reviewed updates;
+  Material/kernel/recovery stable tracking remains separately scoped.
+- **Remaining uncertainty:** Full corrected signed runtime installation, upgrade,
+  removal and graphical/hardware qualification remain required. No rejected
+  transaction is relabeled as accepted and no firmware blob is inferred from a
+  device-tree filename.
+- **Next validation:** Complete native binary builds, then audit the entire
+  resolved target before installing it in a clean userspace test environment.

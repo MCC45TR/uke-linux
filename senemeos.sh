@@ -208,14 +208,14 @@ resolve_version() {
         (.sha256 | test("^[a-f0-9]{64}$"))))' "$PROFILE" >/dev/null || die 'Invalid or incomplete source profile'
 }
 verify_source() {
-    local archive=$1 signature=$2 profile=$3 key=$4 home=$5 expected fingerprint
+    local archive=$1 signature=$2 profile=$3 key=$4 gpg_home=$5 expected fingerprint
     expected=$(jq -er '.source_sha256' "$profile")
     [[ $(sha256sum "$archive" | cut -d ' ' -f1) == "$expected" ]] || die 'Source SHA-256 mismatch'
-    mkdir -p "$home"; chmod 700 "$home"
-    gpg --homedir "$home" --batch --import "$key" >/dev/null 2>&1
+    mkdir -p "$gpg_home"; chmod 700 "$gpg_home"
+    gpg --homedir "$gpg_home" --batch --import "$key" >/dev/null 2>&1
     fingerprint=$(jq -er '.signer' "$profile")
-    xz -cd "$archive" | gpg --homedir "$home" --batch --status-fd=1 --verify "$signature" - > "$home/verification.txt" 2> "$home/verification.log" || die 'Invalid kernel release signature'
-    grep -F "[GNUPG:] VALIDSIG $fingerprint " "$home/verification.txt" >/dev/null || die 'Unexpected kernel release signer'
+    xz -cd "$archive" | gpg --homedir "$gpg_home" --batch --status-fd=1 --verify "$signature" - > "$gpg_home/verification.txt" 2> "$gpg_home/verification.log" || die 'Invalid kernel release signature'
+    grep -F "[GNUPG:] VALIDSIG $fingerprint " "$gpg_home/verification.txt" >/dev/null || die 'Unexpected kernel release signer'
 }
 fetch_source() {
     local archive=$KERNEL/referances/releases/linux-$VERSION.tar.xz signature=$KERNEL/referances/releases/linux-$VERSION.tar.sign
@@ -507,6 +507,10 @@ internal_lifecycle() {
     cd "$location"
     rpm -q kmod
     dnf -y --disablerepo='*' --setopt=install_weak_deps=False install ./rpmbuild/RPMS/aarch64/*.rpm
+    # Fresh-install scriptlet ordering also regenerates the core's builtin
+    # binary indexes; check this state separately from the later upgrade.
+    rpm -V senemos-uke-linux-kernel-mainline-core senemos-uke-linux-kernel-mainline-modules \
+        senemos-uke-linux-kernel-mainline-dtbs
     rpm -qa | grep '^senemos-uke-linux-kernel-mainline' | sort
     dnf -y --disablerepo='*' --setopt=install_weak_deps=False upgrade ./upgrade/*.rpm
     rpm -q --qf '%{RELEASE}\n' senemos-uke-linux-kernel-mainline | grep -E '^2\.'

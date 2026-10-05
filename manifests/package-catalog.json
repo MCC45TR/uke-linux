@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "device": "uke",
   "soc": "SM7675",
   "copr_project": "mcc45tr/uke-linux-test",
@@ -55,9 +55,9 @@
       "nabu_reference_packages": [
         "nabu-core-meta"
       ],
-      "status": "initial-source-and-packaging-scaffold",
-      "package_build_ready": false,
-      "copr_enabled": false,
+      "status": "signed-console-selection-lifecycle-passed",
+      "package_build_ready": true,
+      "copr_enabled": true,
       "gates": [
         "Resolve only available Uke package families",
         "Audit the complete installed closure for Python",
@@ -131,9 +131,9 @@
         "nabu-desktop-metas",
         "kde-plasma-nabu-meta"
       ],
-      "status": "initial-source-and-packaging-scaffold",
-      "package_build_ready": false,
-      "copr_enabled": false,
+      "status": "native-RPM-built-Python-free-Plasma-closure-pending",
+      "package_build_ready": true,
+      "copr_enabled": true,
       "gates": [
         "Validate kernel/boot and console before desktop admission",
         "Resolve closure on target AArch64",
@@ -188,7 +188,7 @@
       "nabu_reference_packages": [
         "xiaomi-nabu-firmware"
       ],
-      "status": "initial-source-and-packaging-scaffold",
+      "status": "blocked-file-level-source-license-and-Uke-request-admission",
       "package_build_ready": false,
       "copr_enabled": false,
       "gates": [
@@ -237,22 +237,31 @@
       "component": "uke-desktop-packaging",
       "repository": "https://github.com/MCC45TR/uke-desktop-packaging",
       "packages": [
-        "powerdevil-uke",
         "plymouth-uke",
-        "material-decoration"
+        "material-decoration",
+        "at-spi2-core",
+        "gstreamer1",
+        "libaccounts-glib",
+        "libwacom",
+        "plasma-workspace",
+        "dolphin"
       ],
       "nabu_reference_packages": [
         "powerdevil",
         "plymouth",
         "material-decoration"
       ],
-      "status": "initial-source-and-packaging-scaffold",
-      "package_build_ready": false,
-      "copr_enabled": false,
+      "status": "native-decoration-and-theme-built-native-dependency-variants-in-validation",
+      "package_build_ready": true,
+      "copr_enabled": true,
       "gates": [
         "Use Fedora upstream packages until a measured Uke delta exists",
         "Keep shared decoration device-neutral",
         "Do not replace generic packages using Nabu-specific patches"
+      ],
+      "shared_fedora_dependencies": [
+        "powerdevil",
+        "plymouth"
       ]
     }
   ],
@@ -261,7 +270,7 @@
     "unstable": "planned; no generic fallback",
     "el2_experimental": "planned; no Uke EL2 acceptance"
   },
-  "shared_upstream_policy": "Reuse Fedora's upstream desktop packages unless Uke evidence requires a derivative.",
+  "shared_upstream_policy": "Reuse Fedora upstream packages; reviewed native runtime source variants exclude optional Python tools/bindings and provide required C++ migrations. Do not copy Nabu hardware patches.",
   "future_distribution_targets": [
     "fedora-45-aarch64",
     "opensuse-tumbleweed-aarch64",
