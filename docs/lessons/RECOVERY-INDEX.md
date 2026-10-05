@@ -35,6 +35,7 @@ separate from either commercial device's physical acceptance.
 | [Explicit release policy](2026-10-05-RECOVERY-RELEASE-POLICY.md) | REC-REL001–REC-REL003 | Class/capability requirements, three renamed-candidate refusals, complete named test catalogs, bound repeat metadata and six immutable-output paths; complete image/package/guest acceptance pending |
 | [Localization input closure](2026-10-05-RECOVERY-LOCALIZATION-INPUTS.md) | REC-LOC001–REC-LOC003 | All 32 language/draft/font/license inputs, pinned dependency closure, GUI source/shipping/reviewed-overlay identities and failed/corrected default-path controls; fresh rendering/build/guest and physical acceptance pending |
 | [Multilingual text](2026-10-05-RECOVERY-MULTILINGUAL-TEXT.md) | REC-MT001–REC-MT004 | Exact licensed script/CJK fonts, bounded shaping/bidi, actual all-language and 616 orientation/scale draws, reproduced allocation/variable-font failures and corrected halt/umask controls; complete image/GUI/VM and physical acceptance pending |
+| [Localization key generation](2026-10-05-RECOVERY-LOCALIZATION-KEYS.md) | REC-KEY001–REC-KEY003 | Retained JSON owner, strict schema/alias/byte closure, atomic malformed-input preservation, actual 3,189-entry header/lookup compilation and original ASan negative; parser/comment and alias-producer corrections; translation and complete target/GUI/VM acceptance pending |
 
 Every record includes its environment, finding, practical consequence,
 uncertainty and next validation. Raw personal logs remain private; no record in
