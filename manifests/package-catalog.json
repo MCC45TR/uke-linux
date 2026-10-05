@@ -55,7 +55,7 @@
       "nabu_reference_packages": [
         "nabu-core-meta"
       ],
-      "status": "signed-console-selection-lifecycle-passed",
+      "status": "bounded-console-package-lifecycle-passed-full-root-correction-pending",
       "package_build_ready": true,
       "copr_enabled": true,
       "gates": [
@@ -124,20 +124,22 @@
       "component": "uke-desktop-metas",
       "repository": "https://github.com/MCC45TR/uke-desktop-metas",
       "packages": [
-        "uke-desktop-metas",
-        "kde-plasma-uke-meta"
+        "uke-desktop-metas"
       ],
       "nabu_reference_packages": [
         "nabu-desktop-metas",
         "kde-plasma-nabu-meta"
       ],
-      "status": "native-RPM-built-Python-free-Plasma-closure-pending",
+      "status": "data-only-policy-metadata-graphical-admission-blocked",
       "package_build_ready": true,
       "copr_enabled": true,
       "gates": [
-        "Validate kernel/boot and console before desktop admission",
-        "Resolve closure on target AArch64",
-        "Preserve stock KDE behavior unless a measured Uke issue requires a change"
+        "Use original distribution KDE applications only",
+        "Do not admit original Python-containing graphical packages under the current target policy",
+        "Validate complete console root independently"
+      ],
+      "withdrawn_packages": [
+        "kde-plasma-uke-meta"
       ]
     },
     {
@@ -243,8 +245,7 @@
         "gstreamer1",
         "libaccounts-glib",
         "libwacom",
-        "plasma-workspace",
-        "dolphin"
+        "libstdc++"
       ],
       "nabu_reference_packages": [
         "powerdevil",
@@ -257,11 +258,16 @@
       "gates": [
         "Use Fedora upstream packages until a measured Uke delta exists",
         "Keep shared decoration device-neutral",
-        "Do not replace generic packages using Nabu-specific patches"
+        "Do not replace generic packages using Nabu-specific patches",
+        "Reject KDE application derivative source targets before download"
       ],
       "shared_fedora_dependencies": [
         "powerdevil",
         "plymouth"
+      ],
+      "withdrawn_packages": [
+        "plasma-workspace",
+        "dolphin"
       ]
     }
   ],
@@ -270,7 +276,7 @@
     "unstable": "planned; no generic fallback",
     "el2_experimental": "planned; no Uke EL2 acceptance"
   },
-  "shared_upstream_policy": "Reuse Fedora upstream packages; reviewed native runtime source variants exclude optional Python tools/bindings and provide required C++ migrations. Do not copy Nabu hardware patches.",
+  "shared_upstream_policy": "Reuse original Fedora KDE applications. Reviewed non-KDE native library sources exclude optional Python tools; never copy Nabu hardware assumptions.",
   "future_distribution_targets": [
     "fedora-45-aarch64",
     "opensuse-tumbleweed-aarch64",
@@ -280,5 +286,6 @@
     "kubuntu-arm64",
     "alpine-aarch64",
     "postmarketos-aarch64"
-  ]
+  ],
+  "kde_application_policy": "Never clone, fork or rebuild KDE desktop applications; original distribution applications only"
 }

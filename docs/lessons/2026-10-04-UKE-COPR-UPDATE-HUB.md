@@ -169,3 +169,139 @@
   device-tree filename.
 - **Next validation:** Complete native binary builds, then audit the entire
   resolved target before installing it in a clean userspace test environment.
+- **Further scope evidence:** The signed Plasma runtime binaries from 11075200
+  passed Python/privacy checks. Its optional `-doc` HTML subpackage triggered
+  the conservative path scan on public upstream Klipper tutorial examples, not
+  a leaked build/owner identity; it is excluded from the admitted tablet runtime.
+  Dolphin's embedded optional manuals were similarly classified, excluded from
+  its lean `1.uke2` runtime and retained in complete source. Native job 11075201
+  passed the corrected signed payload gate. Offline transaction preparation
+  first failed on an incorrect assumed Fedora key path, then correctly stopped
+  because the reused 600-RPM download cache lacked the external OpenH264
+  provider. Neither failed source plan installed the desktop. The key is
+  obtained from official Fedora source and matched to the already present
+  Rawhide fingerprint; missing official dependency inputs must be completed
+  before replay, with no skip-broken or dependency-policy bypass.
+
+## UKE-PKG-L011 — validate deferred inputs and nonempty records before replay
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Frozen official/COPR RPM cache and isolated Rawhide AArch64 userspace.
+- **Evidence class:** Failed preparation trials, complete source-deferred transaction and host extracted payload audit.
+- **Status:** Exact 603-RPM transaction stored and audited before installation.
+- **Finding:** `dnf install --store` resolves and copies the exact signed inputs
+  without installing the desktop. The recovered official cache needed one
+  missing OpenH264 provider. After completing that official input, all 603
+  signatures, dependency names/Requires and complete extracted payload passed
+  the no-Python gate. The optional Plasma HTML documentation subpackage is not
+  in the selected tablet runtime. The corrected native runtime packages retain
+  ordinary UI translations and upstream sources/licensing.
+- **Record correction:** An initial attempt embedded raw JSON braces in RPM's
+  query-format grammar. RPM printed a format diagnostic while returning zero,
+  producing empty JSON input; an empty lock is invalid evidence. The corrected
+  generator reads explicit TSV fields, JSON-escapes them with jq, requires
+  nonempty fields and exactly 603 records, and checks every SHA-256. The invalid
+  draft was never published. Query exit status alone is insufficient when a tool
+  can emit an empty successful result.
+- **Practical consequence:** The public runtime lock records actual NEVRAs,
+  licenses and hashes; the local transaction/root exports remain ignored test
+  artifacts. A native source build, selected closure and installed root require
+  their own gates. No skip-broken, ignore-installed or dependency bypass is used.
+- **Remaining uncertainty:** Actual replay, meta upgrade, installed-root audit and
+  removal remain separate required results. QEMU userspace fixtures do not
+  establish a Plasma session, plugin rendering, Uke boot or physical support.
+- **Next validation:** Replay the stored transaction with network disabled,
+  inspect the installed root, execute native migration fixtures and complete
+  actual signed meta-package upgrade/removal.
+- **Completed bounded checks:** Offline replay, all six native capabilities,
+  admitted RPM verification and real AArch64 C++ migration fixtures passed.
+  Actual signed meta release-1 to release-2 upgrade and complete admitted
+  package removal passed. These results are independent of complete-root
+  acceptance, which was rejected by the next lesson.
+
+## UKE-PKG-L012 — inherited base files are part of target acceptance
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Pinned Rawhide AArch64 base plus the complete 603-input desktop transaction.
+- **Evidence class:** Failed full installed-root audit, RPM file ownership and native source correction.
+- **Status:** Complete installed root rejected; seventh native runtime source build in progress.
+- **Finding:** The selected 603 inputs contained no recognized Python payload.
+  The installed-root scan nevertheless found 15 Python/PYC GDB helper files in
+  the preinstalled `libstdc++-16.2.1-2.fc46.1`. The library declares no Python
+  interpreter dependency; installed package-name checks therefore passed while
+  the full file gate correctly failed. No complete desktop acceptance is claimed.
+- **Correction:** `libstdcxx-uke-runtime` compiles the shared GNU C++ library from
+  the exact official `gcc-16.2.1-2.fc46.1.src.rpm`, SHA-256
+  `b8f6cc1f055a057233a3b807bf5e9cc2a43836c025ba664b1231c79d86271175`.
+  Its standalone native build excludes debugger scripts from the installed
+  selection and requires all 6,100 original versioned symbols plus a native
+  C++ concurrency/exception/filesystem/ranges/calendar fixture. The complete
+  source RPM is retained for provenance. Local SRPM generation, patch
+  preparation and GitHub validation passed; real native job 11076609 is tracked
+  separately. Host GCC/Python build-policy pins are documented before use.
+- **Practical consequence:** Core candidate release 3 requires the native GNU
+  C++ capability. The former seven-capability graphical candidate was
+  superseded by the owner policy in L013; desktop release 3 is metadata only.
+  Replacement must remove old RPM-owned helper files through an ordinary signed
+  package upgrade, with no manual target file deletion or solver bypass.
+- **Superseding scope:** Earlier kernel/recovery/core package payload and
+  package-name checks retain their bounded results. They do not certify the
+  entire inherited Fedora base as Python-free. Only a subsequent full root
+  inspection can supersede this rejection.
+- **Remaining uncertainty:** New native build, signatures, ABI, full corrected
+  root and lifecycle remain required. QEMU userspace is separate from a KDE
+  session, graphics, Uke boot and physical operation.
+- **Next validation:** Accept the native library, publish the matching meta
+  revisions, resolve a new signed transaction and repeat complete root and
+  upgrade/removal tests.
+- **Further native rejection:** Job 11076609 failed at final linking under
+  generic RPM LTO flags. Clearing only `_lto_cflags` allowed 11076668 to link,
+  but the unchanged ABI gate correctly rejected missing thread symbols. Its
+  standalone configure probe lacked GCC's generated POSIX threading header.
+  Preparation now creates that header and requires the thread macro before
+  compiling. Job 11076770 tracks the corrected native trial; the 6,100-symbol
+  baseline is not weakened.
+- **Header and recursion correction:** Job 11076770 restored thread exports
+  but rejected two standard-module exports after missing C fenv declarations
+  made upstream compile empty module fallbacks. A host GCC 16.2.1 experiment
+  reproduced 81 diagnostic lines with the default installed C++ header search,
+  zero with `-nostdinc++`, and both real module initialization exports. Trial
+  11076948 still failed because upstream clears `MAKEOVERRIDES` and drops the
+  top-level CXX override. Forward isolation through its explicit CXXFLAGS path;
+  retain all 6,100 symbols and require new native and complete-root evidence.
+
+## UKE-PKG-L013 — original KDE applications take precedence over variant work
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Owner instruction, source contracts, GitHub workflow and COPR publication.
+- **Evidence class:** Explicit policy correction and actual automation withdrawal.
+- **Status:** KDE source records and seven completed derivative builds removed.
+- **Finding:** The owner explicitly forbids cloning KDE desktop applications.
+  The project therefore withdraws Plasma/Dolphin application variants, uses
+  original distribution applications and rejects their derivative source
+  targets before archive retrieval. Automatic source records were first
+  disabled and then removed; active jobs 11076607, 11076665 and 11076667 were
+  canceled because this new requirement supersedes their earlier build scope.
+- **Practical consequence:** Five non-KDE runtime source families remain in the
+  shared workflow. Existing variant outputs/logs/source are archived per build
+  before active repository withdrawal. A draft archive that reused the same
+  output directory could overwrite equal-NEVRA results from different jobs;
+  corrected archives use one directory per exact build ID.
+- **Withdrawal evidence:** Builds 11075174, 11075190, 11075200, 11075175,
+  11075191, 11075201 and 11076608 were deleted only after per-ID RPM/SRPM and
+  available-log archives were complete. A first source-count guard wrongly
+  expected one SRPM; actual builds provide factory and native SRPMs, so it was
+  corrected before any deletion. The oldest available builder log was fetched
+  separately. Fresh COPR metadata contains no Plasma/Dolphin derivative binary
+  names. Remote inventory has 11 records, all automatic, with neither KDE
+  source name present. Both local source targets fail before build preparation.
+- **Target scope:** Original Fedora KDE packages currently contain Python
+  components incompatible with the separate target requirement. Complete KDE
+  admission remains blocked; desktop release 3 supplies policy metadata and
+  obsoletes the former derivative-dependent selection. No file deletion or
+  dependency bypass is used to manufacture acceptance.
+- **Remaining uncertainty:** Native console/GNU C++ acceptance is independent
+  and continues. Neither earlier bounded desktop tests nor this policy change
+  establishes a graphical session, Uke boot or physical support.
+- **Next validation:** Verify disabled remote source settings, absent active
+  derivative outputs, source rejection and compatible console lifecycle tests.

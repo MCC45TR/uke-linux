@@ -9,6 +9,6 @@ These records distinguish source, build, package, host fixture, emulation, third
 | [Hardware evidence summary](../research/UKE-HARDWARE-STATUS-2026-10-04.md) | Condensed 3 October stock Android receipts; installed OS2, candidate identity and measurement limits |
 | [Recovery engineering index](RECOVERY-INDEX.md) | Ordered recovery implementation, failed/corrected trials and validation records |
 | [Kernel and RPM build](2026-10-04-UKE-7.2.9-RPM-BUILD.md) | UKE-K729-L001–UKE-K729-L015; signed 7.2.9 Uke compilation, failed/corrected packaging trials, host-family bootstrap and fresh-install/upgrade lifecycle |
-| [COPR, recovery delivery and source tracking](2026-10-04-UKE-COPR-UPDATE-HUB.md) | UKE-PKG-L001–UKE-PKG-L010; initial repositories, actual COPR jobs, DNF image delivery, ramdisk audit corrections and stable admission |
+| [COPR, recovery delivery and source tracking](2026-10-04-UKE-COPR-UPDATE-HUB.md) | UKE-PKG-L001–UKE-PKG-L013; actual COPR jobs, DNF image delivery, base-runtime audit corrections, original KDE policy and stable admission |
 
 The [test contract](../testing/TEST-CONTRACT.md) governs physical acceptance. The [generated matrix](../../DEVICE-STATUS.md) remains the complete project capability ledger. A source or VM result does not promote a physical result.
