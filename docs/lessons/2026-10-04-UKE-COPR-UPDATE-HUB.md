@@ -305,3 +305,49 @@
   establishes a graphical session, Uke boot or physical support.
 - **Next validation:** Verify disabled remote source settings, absent active
   derivative outputs, source rejection and compatible console lifecycle tests.
+
+## UKE-PKG-L014 — accept the separate signed console root
+
+- **Date:** 2026-10-05 (UTC).
+- **Environment scope:** Native Rawhide AArch64 COPR and pinned AArch64 userspace
+  under QEMU; GNU readelf/nm inspection in the separate host compiler container.
+- **Evidence class:** Native compilation, signed payloads, complete inherited
+  root, actual metadata upgrade and removal; no graphical or physical execution.
+- **Status:** Console package/root gates passed. Original KDE admission blocked.
+- **Finding:** Native GNU C++ trial 11076968 retained all 6,100 original versioned
+  exports and passed its real native smoke test, then rejected an absolute
+  Source3 pathname mixed with relative RPM license entries. Copying the exact
+  Boost license into prepared source corrected packaging in build 11077014.
+  Core/desktop policy metadata release 3 succeeded in 11077017/11077018.
+- **Exact package evidence:** The 52-input console transaction has SHA-256
+  `1a0e7140a45ef021bb7f99f49be23a069475687676a2b5d8aeae69f264691e22`.
+  All signatures, dependency names and complete extracted Python/ELF payloads
+  passed. Both fresh and actual signed release-2 to release-3 upgraded roots
+  passed complete installed `usr/`/`etc/` scans and the unchanged GNU C++ ABI.
+  Ordinary library upgrade removed all inherited optional Python helpers.
+  The actual available official Python provider was rejected by core conflicts.
+  Removing admitted metadata/kernel/recovery/theme records and payload passed
+  in a separate immutable accepted snapshot; mandatory base libstdc++ stayed
+  installed and verified. Exact binary/native-source/factory-source identities
+  and local export hashes are in the public console report and 52-input lock.
+- **Failed solver trial:** Rawhide refused the Fedora-to-COPR vendor transition.
+  Initial installation explicitly uses `--allow-vendor-change` for the reviewed,
+  signed native library. Dependency and interpreter conflicts remain enforced;
+  no broken-dependency or RPM-owned-file deletion shortcut is used.
+- **Excluded fixture mistake:** After successful upgrade, export and host audit,
+  the test launcher accidentally restarted its old-baseline fixture on the same
+  already-upgraded container. That restart downgraded only metadata and correctly
+  stopped at the expected original-library helper assertion. It is excluded from
+  acceptance. The successful pre-restart exported root was unchanged; removal
+  used the immutable accepted fresh snapshot. A fixture restart is not evidence
+  of another successful upgrade or a native package defect.
+- **Superseding consequence:** The console result resolves L012's inherited GNU
+  C++ gate for this exact selection. The historical 603-input desktop root stays
+  rejected; L013's owner policy continues to prohibit KDE application derivatives.
+  Eleven remaining COPR source families are automatic. Earlier KDE selection
+  builds 11075045/11075167 were also withdrawn after archive and successful
+  data-only replacement; active metadata contains no derivative selection.
+- **Remaining uncertainty:** No Uke kernel boot, graphical session, image
+  composition, firmware redistribution, rollback or peripheral acceptance ran.
+- **Next validation:** Independently admitted Uke boot/firmware/storage profiles,
+  physical validation and native rules/tests for later distribution formats.
