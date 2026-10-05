@@ -421,8 +421,8 @@ internal_audit() {
     cmp "$output/System.map" "$work/extracted/usr/lib/modules/$krel/System.map" || die 'Packaged System.map differs from the compiled map'
     cmp "$work/output/sm7675-xiaomi-uke.dtb" "$work/extracted/usr/lib/modules/$krel/dtb/qcom/sm7675-xiaomi-uke.dtb" || die 'Packaged Uke DTB differs from the compiled DTB'
     cmp "$work/source-profile.json" "$work/extracted/usr/share/senemos/uke/$krel/source-lock.json" || die 'Packaged source/config identity differs from the compiled profile'
-    bash /work/scripts/check-target-payload.sh "$work/extracted"
-    bash /work/scripts/check-target-privacy.sh "$work/extracted"
+    bash /work/uke-fedora-builder/src/audit/check-target-payload.sh "$work/extracted"
+    bash /work/uke-fedora-builder/src/audit/check-target-privacy.sh "$work/extracted"
     local count=0
     : > "$work/module-abi.txt"
     while IFS= read -r -d '' module; do

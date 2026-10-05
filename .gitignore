@@ -20,3 +20,35 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Engineering records live in the private uke-linux-docs checkout. Local
+# compatibility links and working notes never enter this landing repository.
+/uke-linux-docs/
+/docs
+/manifests
+/reports
+/scripts
+/tests
+/PLAN.md
+/DEVICE-STATUS.md
+/SOURCE-MAP.md
+/AGENTS.md
+/AGENTS.local.md
+/CLAUDE.md
+/GEMINI.md
+/MEMORY.md
+/TODO.md
+/.codex/
+/.agents/
+/.claude/
+/.cursor/
+/.aider*
+
+# Local compilation, release downloads and editor state.
+*.img.zst
+*.qcow2
+*.iso
+*.log
+*.swp
+.vscode/
+.idea/

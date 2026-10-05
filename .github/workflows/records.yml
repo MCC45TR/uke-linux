@@ -1,4 +1,4 @@
-name: Preparation records
+name: Validate workspace links
 on:
   push:
   pull_request:
@@ -6,27 +6,22 @@ on:
 permissions:
   contents: read
 jobs:
-  validate:
-    runs-on: ubuntu-latest
+  workspace:
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified 2026-09-28
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           submodules: true
-      - name: Install host validation tools
-        run: sudo apt-get update && sudo apt-get install -y cmake g++ jq libxml2-dev ripgrep
-      - name: Validate evidence, archive behavior and plan dependencies
-        run: bash tests/run.sh
-      - name: Build and test the read-only recovery inventory tool
+      - name: Verify component checkouts and the public landing layout
         run: |
-          cmake -S recovery-uke-ofox/src/inventory -B recovery-uke-ofox/build/inventory
-          cmake --build recovery-uke-ofox/build/inventory --parallel 2
-          recovery-uke-ofox/tests/check-inventory.sh
-      - name: Check publication content
-        run: |
-          git config user.name MCC45TR
-          git config user.email 75160848+MCC45TR@users.noreply.github.com
-          scripts/privacy-check.sh
-          for component in recovery-uke-ofox senemos-uke-kernel uke-fedora-builder uke-project-aloha; do
-            git -C "$component" config user.email 75160848+MCC45TR@users.noreply.github.com
-            scripts/privacy-check.sh "$component"
+          set -euo pipefail
+          for component in recovery-uke-ofox senemos-uke-kernel uke-project-aloha uke-fedora-builder uke-linux-hardware-support uke-linux-images; do
+            test -f "$component/README.md"
+            git -C "$component" rev-parse --verify HEAD >/dev/null
           done
+          test ! -e docs
+          test ! -e AGENTS.md
+          test ! -e PLAN.md
+          test ! -e packages
+          test "$(git config -f .gitmodules --get submodule.uke-linux-hardware-support.path)" = uke-linux-hardware-support
+          bash -n senemeos.sh
