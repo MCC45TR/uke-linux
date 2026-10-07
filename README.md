@@ -48,6 +48,10 @@ All twelve components are ordinary directories inside that shared repository.
 The kernel repository owns `senemos.sh` and its pinned build rules; it also works
 from a standalone clone. Use `./senemos-uke-kernel/senemos.sh --help`.
 Use `./ukelinux.sh --build core --distro=fedora --test` for the local Core filesystem candidate. See the [image guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/IMAGES.md) for the ESP32 debug profile and device release gates.
+Use `./ukelinux.sh --build boot --distro=fedora --help` for the additional
+stock ABL `fedora_boot.img` development route. It uses a built-in Fedora debug
+initramfs before Aloha is complete; stock DT handoff and own-device first TTY
+remain unverified. Build recipes perform no flashing or slot activation.
 
 This independent community project is not an official Fedora, Xiaomi, POCO or
 Qualcomm product. Original files are MIT licensed; components retain their own licenses.
