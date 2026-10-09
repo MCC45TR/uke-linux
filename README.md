@@ -58,6 +58,8 @@ adaptation and a local tablet-screen TTY1 candidate. The
 [October 9 pair](https://github.com/MCC45TR/uke-fedora-builder/blob/test/stock-abl-core-pair/reports/FEDORA-BOOT-PAIR-2026-10-09.json)
 passed image and generic VM root/TTY checks. Physical tablet boot remains
 untested; the `linux` partition must be prepared independently (at least 3 GiB).
+Run `./ukelinux.sh --check-device --pair DELIVERY_DIRECTORY` for read-only
+file, bootloader and target-capacity checks before the owner's manual trial.
 
 This independent community project is not an official Fedora, Xiaomi, POCO or
 Qualcomm product. Original files are MIT licensed; components retain their own licenses.
