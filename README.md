@@ -52,6 +52,12 @@ Use `./ukelinux.sh --build boot --distro=fedora --help` for the additional
 stock ABL `fedora_boot.img` development route. It uses a built-in Fedora debug
 initramfs before Aloha is complete; stock DT handoff and own-device first TTY
 remain unverified. Build recipes perform no flashing or slot activation.
+Use `./ukelinux.sh --build boot-pair --distro=fedora --help` for the root-capable
+stock-ABL Core route: paired `boot_b` and GPT `linux` images, runtime Uke DT
+adaptation and a local tablet-screen TTY1 candidate. The
+[October 9 pair](https://github.com/MCC45TR/uke-fedora-builder/blob/test/stock-abl-core-pair/reports/FEDORA-BOOT-PAIR-2026-10-09.json)
+passed image and generic VM root/TTY checks. Physical tablet boot remains
+untested; the `linux` partition must be prepared independently (at least 3 GiB).
 
 This independent community project is not an official Fedora, Xiaomi, POCO or
 Qualcomm product. Original files are MIT licensed; components retain their own licenses.
