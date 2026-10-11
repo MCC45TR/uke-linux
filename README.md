@@ -48,7 +48,7 @@ the private reports.
 | Feature | Status | What you can expect today |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
-| Backlight | 🟡 **Partial** | The screen stays lit, but Linux cannot adjust brightness or control blanking yet. |
+| Backlight | 🟡 **Partial** | The screen stays lit and Linux reads the primary controller. Brightness adjustment and blanking are still unavailable. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
 | GPU — Adreno 732 | 🔴 **Broken** | No usable DRM/render device or hardware acceleration. Showing the GPU name in Fastfetch does not enable graphics. |
 | Touchscreen | 🔴 **Broken** | No usable touch input device in Fedora. |
@@ -151,7 +151,9 @@ sensor descriptors are not a count of physical chips or proof of Linux support.
 
 Use original distribution KDE applications; do not clone, fork or rebuild them
 as Uke variants. The current target is a Fedora Rawhide AArch64 Core console.
-The graphical image still needs dependency work to keep Python off the tablet.
+The graphical image is blocked by Fedora's original `plasma-workspace-libs`
+6.8.0 package, which requires Python and includes a Python migration script.
+It is not admitted under the no-tablet-Python policy.
 Nabu boot binaries, storage geometry and firmware are not reused for Uke.
 
 ## Downloads
