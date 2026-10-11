@@ -3,8 +3,9 @@
 Linux development for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
 **Fedora now boots to a visible terminal on the tablet.** USB serial access and
-SSH over a USB cable work. Wi-Fi, Bluetooth, touch, accelerated graphics and audio
-do not work yet. This is an early development build, with a usable console for
+SSH over a USB cable work. Wi-Fi also connects automatically and provides SSH,
+DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
+accelerated graphics and audio do not work yet. This is an early development build, with a usable console for
 bringing up the remaining hardware.
 
 This repository is the project landing page and workspace. Component repositories
@@ -15,9 +16,10 @@ are linked below; detailed engineering records are private.
 **Last reviewed: 2026-10-11 — Fedora Rawhide AArch64, Linux `7.2.9-senemos-uke`.**
 These results come from the owner's POCO Pad X1, 8 GB / 512 GB, using the stock
 Android bootloader. Linux displays the requested name **Xiaomi Pad 7**. Other
-models and firmware versions need their own tests. The current boot candidate is
-`pair-0242a33799d12541`; earlier successful USB transfers are identified in the
-linked reports.
+models and firmware versions need their own tests. The initial physical boot
+candidate was `pair-0242a33799d12541`; subsequent matched RAM profiles added Wi-Fi
+without replacing the root or stock slot A. Detailed artifact identities are in
+the private reports.
 
 | Status | What it means |
 |---|---|
@@ -31,13 +33,13 @@ linked reports.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Two RAM boots reached the real Fedora filesystem and USB SSH. Repeated cold boots and automatic slot-B startup still need testing. |
+| Fedora boot | 🟡 **Partial** | Repeated matched RAM starts reached the real Fedora filesystem and automatic USB/Wi-Fi SSH. Cold boots and automatic slot-B startup still need testing. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online and run native Linux commands. Heavy workloads have not been tested. |
-| CPU frequency control | 🟡 **Partial** | Three frequency policies are exposed, up to about 2.80 GHz. Voltage changes and throttling need validation. |
+| CPU frequency control | 🟡 **Partial** | The hardware driver exposes three active schedutil policies: 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz. Frequency adjustment, voltage behavior and throttling need validation. |
 | RAM | 🟡 **Partial** | Linux uses about 7.21 GiB of the installed 8 GB. Memory stress and suspend retention are untested. |
 | UFS storage | 🟢 **Working** | Fedora reads and writes its real internal-storage root filesystem. Long transfers, power-loss recovery and resume are untested. |
 | Linux partition / EXT4 | 🟢 **Working** | The existing 64 GiB partition is fully usable. Root is selected by GPT partition name `linux`, not by UUID. |
-| `reboot bootloader` | 🟢 **Working** | One command returned the tablet to bootloader fastboot, confirmed on the tablet and computer. Repeat testing remains open. |
+| `reboot bootloader` | 🟡 **Partial** | Repeated commands returned to fastboot, but one shutdown took about 106 seconds with a serial-shell timeout. Restart reliability remains open. |
 | Normal reboot, recovery command and poweroff | ⚪ **Not tested** | These routes have not been qualified on the current candidate. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The current Fedora session uses the stock Android bootloader. The Uke UEFI port is still in development. |
 
@@ -59,13 +61,14 @@ linked reports.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Wi-Fi — WCN6750 | 🔴 **Broken** | No Wi-Fi interface appears. Firmware, wireless processor startup and board resources still need integration. |
+| Wi-Fi — WCN6750 | 🟢 **Working** | Automatic association, Wi-Fi SSH, DNS and a byte-identical 16 MiB transfer passed in the matched RAM profile. A 15-minute functional check passed; cold-boot and suspend reliability remain open. |
+| Signed network updates | 🟢 **Working** | Fedora and COPR packages were installed through DNF over Wi-Fi with signature checks. Kernel updates remain pinned to manually reviewed matched tuples. |
 | Bluetooth | 🔴 **Broken** | No Bluetooth controller appears; scanning and pairing are unavailable. |
 | USB overall | 🟡 **Partial** | Device mode works with a computer. Host power, accessories and role switching are not ready. |
 | USB CDC ACM / serial shell | 🟢 **Working** | The computer can exchange native shell commands and logs with the tablet. |
 | USB ECM / SSH | 🟢 **Working** | SSH over the USB cable works. A previous matched profile also passed a byte-identical 16 MiB round trip and software gadget reconnect. |
 | USB host / accessory power (VBUS) | 🔴 **Broken** | The owner's ESP32-S3 received no power from the tablet. Host accessories are not usable through this path yet. |
-| USB-C switch / role control | 🔴 **Broken** | The switch driver fails while acquiring its reset GPIO. Automatic host/device switching is not qualified. |
+| USB-C switch / role control | 🟡 **Partial** | The reset GPIO supplier and switch driver now bind; USB device mode works. Automatic role switching and host power remain unqualified. |
 | Physical USB unplug / replug | ⚪ **Not tested** | Software reconnect passed; a physical cable-disconnect test is still needed. |
 | USB SuperSpeed | ⚪ **Not tested** | No validated USB 3 accessory transfer. |
 | DisplayPort / USB-C video output | ⚪ **Not tested** | No external-monitor or adapter test has passed. |
@@ -110,16 +113,17 @@ exposes no usable motion, light or SAR sensor interface.
 | Charging / USB Power Delivery | ⚪ **Not tested** | Charging behavior and negotiated power are not validated; battery readings are missing. |
 | Thermal protection / throttling | ⚪ **Not tested** | Readable temperatures do not establish working throttling or shutdown protection. |
 | Suspend / resume | ⚪ **Not tested** | No physical sleep/wake test. |
-| RTC / persistent clock | 🟡 **Partial** | The RTC driver binds, but startup time is wrong. System time was corrected from the computer; persistence and NTP are untested. |
+| RTC / persistent clock | 🟡 **Partial** | Native network time synchronization works over Wi-Fi. The RTC still supplies an incorrect startup time; persistent clock behavior remains unqualified. |
 | Watchdog | 🟡 **Partial** | The Gunyah watchdog driver binds. Recovery behavior has not been tested. |
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
-| DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and related bus paths are usable. GPU and wireless resources still need work. |
+| DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
 | DSPs — ADSP / CDSP / QSH | 🔴 **Broken** | No usable remote-processor interface for audio, sensor or DSP services. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
-The next priority is **Wi-Fi**, followed by native graphics and an original
-Fedora KDE image. Battery telemetry is a prerequisite for stress, charging and
+The next priorities are native graphics, DSP services, backlight, touch and
+sensors, followed by an original Fedora KDE image. Wi-Fi restart reliability
+remains under review. Battery telemetry is a prerequisite for stress, charging and
 power-management experiments. KDE applications will come from Fedora's packages.
 
 The tables describe the recorded development profiles, not a finished tablet
@@ -137,7 +141,7 @@ sensor descriptors are not a count of physical chips or proof of Linux support.
 | Repository | Purpose | Current stage |
 |---|---|---|
 | [OrangeFox Recovery](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) | Recovery and storage management | Experimental alpha; full physical acceptance pending |
-| [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Linux kernel, Uke device trees and matching modules | Linux 7.2.9; physical TTY, USB SSH and one fastboot return recorded |
+| [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Linux kernel, Uke device trees and matching modules | Linux 7.2.9; physical TTY, USB/Wi-Fi SSH and signed online COPR delivery recorded |
 | [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Uke UEFI and boot integration | UEFI port in development |
 | [Hardware support](https://github.com/MCC45TR/uke-linux-hardware-support) | Platform integration and device packages | Signed boot/CDC 0.1.0-5 installed through DNF on the tablet |
 | [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Fedora AArch64 image recipes and checks | Matched boot pair passes build, payload and five VM scenarios |
