@@ -48,9 +48,10 @@ the private reports.
 | Feature | Status | What you can expect today |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
-| Backlight | 🟡 **Partial** | Linux reads both controllers at the same inherited brightness. Paired brightness adjustment and blanking still need physical tests. |
+| Backlight | 🟡 **Partial** | The paired driver binds both controllers. Three normal brightness levels pass matching readback and restore the inherited level. Visible response and blanking still need confirmation. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
-| GPU — Adreno 732 | 🔴 **Broken** | No usable DRM/render device or hardware acceleration. Showing the GPU name in Fastfetch does not enable graphics. |
+| Firmware DRM | 🟡 **Partial** | Signed 1.17 exposes a connected 3200×2136 simpledrm output and an active framebuffer console on the tablet. KDE/Wayland scanout still needs testing. |
+| GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
 | Touchscreen | 🔴 **Broken** | No usable touch input device in Fedora. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
 | Power / volume buttons | 🟡 **Partial** | Input drivers register; physical key events and navigation have not been verified. |
