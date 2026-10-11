@@ -5,8 +5,8 @@ Linux development for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 /
 **Fedora now boots to a visible terminal on the tablet.** USB serial access and
 SSH over a USB cable work. Wi-Fi also connects automatically and provides SSH,
 DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
-accelerated graphics and audio do not work yet. This is an early development build, with a usable console for
-bringing up the remaining hardware.
+accelerated graphics and audio do not work yet. This is an early development
+build, with a usable console for bringing up the remaining hardware.
 
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
@@ -119,6 +119,7 @@ exposes no usable motion, light or SAR sensor interface.
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
 | DSPs — ADSP / CDSP / QSH | 🔴 **Broken** | No usable remote-processor interface for audio, sensor or DSP services. |
+| FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
 The next priorities are native graphics, DSP services, backlight, touch and
