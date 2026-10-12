@@ -17,8 +17,9 @@ sustainable charging is not accepted. SLIMbus and automatic DSP recovery remain
 contained. Stock Android A and the complete kernel/module rollback are preserved.
 
 Manual backlight off/on works, but automatic screen blanking leaves illumination
-behind. The 1.26 charger and 1.27 DRM/backlight fixes are being built in COPR;
-their build results do not establish device behavior. Normal boot B fell back
+behind. The 1.27 charger/backlight package set and matched boot candidate pass
+build and payload checks; they still need a device trial. Release 1.28 adds
+standard suspend diagnostics and is building in COPR. Normal boot B fell back
 to Android despite a matching image readback. The working route is still a
 matched RAM start, not unattended slot-B boot.
 
@@ -34,7 +35,7 @@ a different filesystem.
 
 ## Hardware support
 
-**Last reviewed: 2026-10-12 — Fedora Rawhide AArch64, Linux `7.2.9-senemos-uke`.**
+**Last reviewed: 2026-10-13 — Fedora Rawhide AArch64, Linux `7.2.9-senemos-uke`.**
 These results come from the owner's POCO Pad X1, 8 GB / 512 GB, using the stock
 Android bootloader. Linux displays the requested name **Xiaomi Pad 7**. Other
 models and firmware versions need their own tests. The initial physical boot
@@ -141,8 +142,12 @@ exposes no usable motion, light or SAR sensor interface.
 | USB Power Delivery / fast charging | ⚪ **Not tested** | Protocol negotiation, thermal protection and higher-power charging remain unqualified. |
 | Plasma battery indicator | 🟡 **Partial** | UPower detects the battery and the original Fedora PowerDevil service runs. Complete fields and the visible tray behavior still need confirmation. |
 | Thermal protection / throttling | ⚪ **Not tested** | Readable temperatures do not establish working throttling or shutdown protection. |
-| Suspend / s2idle | ⏸️ **Disabled** | System sleep targets remain masked. A brief black screen is not a successful sleep transition; s2idle and safe resume still need testing. |
-| Power-key / USB wake | ⚪ **Not tested** | Power-key input and its wake flag are present. Physical wake from sleep and USB wake are not accepted. |
+| Display-only soft sleep | 🔴 **Broken** | Automatic screen-off can leave the backlight lit. Manual backlight off/on works; the 1.27 kernel blanking fix needs a device test. Screen-off alone does not suspend the system. |
+| Suspend-to-idle / s2idle | ⏸️ **Disabled** | Sleep targets remain masked. The reported one-second black interval has no confirmed suspend entry. Release 1.28 adds diagnostics; real sleep and stable resume remain unqualified. |
+| Deep suspend | ⚪ **Not tested** | The kernel advertises deep sleep, but CPU, memory and device resume have not been qualified. |
+| Power-key IRQ wake | ⚪ **Not tested** | Power-key input and its wake flag are present. Waking a real resident sleep cycle still needs a physical test. |
+| USB cable wake | 🔴 **Broken** | The current peripheral-only USB DT does not include the OEM wake IRQs. Cable wake needs the complete controller/PHY/Type-C path. |
+| USB keyboard / mouse wake | 🔴 **Broken** | Host accessories do not work yet. HID remote wake will be tested after host power and role switching work. |
 | RTC / persistent clock | 🟡 **Partial** | Native network time synchronization works over Wi-Fi. The RTC still supplies an incorrect startup time; persistent clock behavior remains unqualified. |
 | Watchdog | 🟡 **Partial** | The Gunyah watchdog driver binds. Recovery behavior has not been tested. |
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
