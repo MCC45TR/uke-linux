@@ -164,6 +164,7 @@ Nabu boot binaries, storage geometry and firmware are not reused for Uke.
 - [Experimental recovery releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases)
 - [Development RPM channel](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/)
 - [Fedora image releases](https://github.com/MCC45TR/uke-linux-images/releases)
+- [Fedora Core prebuild test, signed kernel 1.17](https://github.com/MCC45TR/uke-linux-images/releases/tag/prebuild-fedora-core-20261012-copr1.17) — firmware DRM console; two existing-root RAM starts and complete boot_b readback. The clean released root has host/VM qualification only.
 
 Consult the producing repository for exact compatibility and validation limits.
 Package installation does not flash Android partitions or change boot selection.
