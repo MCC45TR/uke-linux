@@ -68,7 +68,7 @@ the private reports.
 | Feature | Status | What you can expect today |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
-| Backlight | 🟡 **Partial** | The paired driver binds both controllers. Three normal brightness levels pass matching readback and restore the inherited level. Visible response and blanking still need confirmation. |
+| Backlight | 🟡 **Partial** | Three normal levels pass paired readback and restoration. A bounded camera comparison confirms a relative visible increase. Calibrated brightness, full range, blanking and desktop integration remain untested. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
 | Firmware DRM | 🟡 **Partial** | Connected 3200×2136 simpledrm output, visible console and software Wayland scanout work. Native panel control and accelerated rendering remain unavailable. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Camera-confirmed wallpaper, panel and clock using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
