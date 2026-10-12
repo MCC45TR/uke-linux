@@ -21,6 +21,12 @@ remain under investigation; a short trial without the SLIMbus driver avoids
 that recurrence. ADSP stays manual and offline. Stock slot A, verified
 1.17 boot_b and a consistent offline Core rollback are retained.
 
+Signed 1.21 also passes online DNF, all installed module hashes and fresh early
+boot/VM checks. Its RAM trial awaits USB/fastboot recovery after the requested
+reboot; no 1.21 physical startup is claimed. Signed CPUCP 1.22 passes source,
+payload, callback/shutdown and all 1,144 native module byte checks. Its fresh
+early tuple and physical SCMI qualification remain pending.
+
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
 
