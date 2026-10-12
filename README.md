@@ -2,30 +2,25 @@
 
 Linux development for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
-**Fedora now displays the original KDE desktop on the tablet using software rendering.** SSH over a USB cable
-works. Wi-Fi also connects automatically and provides SSH,
+**Fedora displays the original KDE desktop on the tablet using software rendering.** Wi-Fi
+connects automatically and provides SSH,
 DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
 accelerated graphics and audio do not work yet. This is an early development
 build, with a usable console and software desktop for bringing up the remaining hardware.
+USB networking remains available as a manual development feature and is now off by default.
 
-**Current installation, 12 October:** Recovery rejected the first KDE write's
-root hash and journal. A scoped native recovery rewrite now passes complete
-64 GiB readback and filesystem checks. The matching 1.17 RAM boot reaches this
-KDE root with USB/Wi-Fi SSH, DNS and synchronized time. Original Fedora PAM/time
-packages correct the missing login runtime. A signed Mesa correction removes
-the observed SVE crash: the original Fedora KDE desktop is now observed,
-and manual Wayland rotation/restoration works. Rendering uses llvmpipe.
-A later matched 1.20 RAM start returns KDE and both SSH paths. GPR now binds
-and registers three services. An ADSP NoC crash and SLIMbus DMA/restart errors
-remain under investigation; a short trial without the SLIMbus driver avoids
-that recurrence. ADSP stays manual and offline. Stock slot A, verified
-1.17 boot_b and a consistent offline Core rollback are retained.
+**Current device state, 12 October:** A matched signed 1.25 RAM start reaches
+the existing 64 GiB EXT4 Fedora root, software-rendered KDE and Wi-Fi SSH.
+Manual ADSP startup now exposes battery percentage, voltage and temperature.
+The battery still loses charge on computer USB despite reporting Charging;
+sustainable charging is not accepted. SLIMbus and automatic DSP recovery remain
+contained. Stock Android A and the complete kernel/module rollback are preserved.
 
-Signed 1.21 also passes online DNF, all installed module hashes and fresh early
-boot/VM checks. A matched 1.21 RAM start on 12 October reaches the real Fedora
-root, the original KDE desktop, USB SSH and automatic Wi-Fi. Signed CPUCP 1.22 passes source,
-payload, callback/shutdown and all 1,144 native module byte checks. Its fresh
-early tuple and physical SCMI qualification remain pending.
+Manual backlight off/on works, but automatic screen blanking leaves illumination
+behind. The 1.26 charger and 1.27 DRM/backlight fixes are being built in COPR;
+their build results do not establish device behavior. Normal boot B fell back
+to Android despite a matching image readback. The working route is still a
+matched RAM start, not unattended slot-B boot.
 
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
@@ -74,16 +69,17 @@ the private reports.
 | Feature | Status | What you can expect today |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
-| Backlight | 🟡 **Partial** | Three normal levels pass paired readback and restoration. A relative visible brightness increase is observed. Calibrated brightness, full range, blanking and desktop integration remain untested. |
+| Backlight brightness | 🟡 **Partial** | Both LED banks respond to manual brightness and power-off/on; about 5% is usable. Full-range calibration and automatic control remain unqualified. |
+| Screen-off backlight / DPMS | 🔴 **Broken** | A dark screen can leave the backlight lit. A kernel/DT fix is in the 1.27 candidate; automatic off/on still needs a matched-device test. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
 | Firmware DRM | 🟡 **Partial** | Connected 3200×2136 simpledrm output, visible console and software Wayland scanout work. Native panel control and accelerated rendering remain unavailable. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Wallpaper, panel and clock are observed using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
 | Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations are observed. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
-| Touchscreen | 🔴 **Broken** | No usable touch input device in Fedora. |
+| Touchscreen | 🔴 **Broken** | No usable touch input device. The live SPI compatible differs from the Linux driver match; the controller and exact Novatek firmware/map are being qualified. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
 | Power / volume buttons | 🟡 **Partial** | Input drivers register; physical key events and navigation have not been verified. |
-| USB keyboard / mouse | ⚪ **Not tested** | Tablet host mode is not ready; no successful physical input test. |
+| USB keyboard / mouse | 🔴 **Broken** | The owner's mouse dongle is not detected. HID/xHCI drivers exist, but the current fixed-device USB route cannot provide host operation. |
 | Pogo keyboard / touchpad | ⚪ **Not tested** | Attachment, key events and touchpad input still need testing. |
 
 ### Networking and USB
@@ -96,7 +92,7 @@ the private reports.
 | NFC | ⚪ **Not tested** | No NFC controller is exposed. OEM pin states alone do not establish a fitted NFC chip; controller provenance and tag exchange remain unqualified. |
 | USB overall | 🟡 **Partial** | Device mode works with a computer. Host power, accessories and role switching are not ready. |
 | USB CDC ACM / serial shell | 🟡 **Partial** | The composite ACM endpoint and native shell service register. Bidirectional serial commands remain unqualified; the terminal stop correction passed two bounded physical trials. |
-| USB ECM / SSH | 🟢 **Working** | SSH over the USB cable works. A previous matched profile also passed a byte-identical 16 MiB round trip and software gadget reconnect. |
+| USB ECM / SSH | 🟢 **Working — manual** | Earlier matched trials pass SSH and a byte-identical 16 MiB transfer. Automatic activation is now disabled; development uses Wi-Fi SSH. |
 | USB host / accessory power (VBUS) | 🔴 **Broken** | The owner's ESP32-S3 received no power from the tablet. Host accessories are not usable through this path yet. |
 | USB-C switch / role control | 🟡 **Partial** | The reset GPIO supplier and switch driver now bind; USB device mode works. Automatic role switching and host power remain unqualified. |
 | Physical USB unplug / replug | ⚪ **Not tested** | Software reconnect passed; a physical cable-disconnect test is still needed. |
@@ -139,31 +135,35 @@ exposes no usable motion, light or SAR sensor interface.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Battery percentage / voltage / current / temperature | 🔴 **Broken** | Linux exposes no battery telemetry. Charge state and battery temperature cannot be monitored. |
-| Charging / USB Power Delivery | ⚪ **Not tested** | Charging behavior and negotiated power are not validated; battery readings are missing. |
+| Battery percentage / voltage / temperature | 🟡 **Partial** | Real readings appear after manual ADSP startup. Early automatic startup, full/design charge units and stable presentation still need validation. |
+| Battery current / power / charging indication | 🟡 **Partial** | Current is readable, but OEM power units are unqualified. The Charging label does not reflect the declining capacity trend reliably. |
+| Charging from computer USB | 🔴 **Broken** | Capacity declines while connected. A bounded USB2 current-budget fix is in the candidate; positive net charging has not been demonstrated. |
+| USB Power Delivery / fast charging | ⚪ **Not tested** | Protocol negotiation, thermal protection and higher-power charging remain unqualified. |
+| Plasma battery indicator | 🟡 **Partial** | UPower detects the battery and the original Fedora PowerDevil service runs. Complete fields and the visible tray behavior still need confirmation. |
 | Thermal protection / throttling | ⚪ **Not tested** | Readable temperatures do not establish working throttling or shutdown protection. |
-| Suspend / resume | ⚪ **Not tested** | No physical sleep/wake test. |
+| Suspend / s2idle | ⏸️ **Disabled** | System sleep targets remain masked. A brief black screen is not a successful sleep transition; s2idle and safe resume still need testing. |
+| Power-key / USB wake | ⚪ **Not tested** | Power-key input and its wake flag are present. Physical wake from sleep and USB wake are not accepted. |
 | RTC / persistent clock | 🟡 **Partial** | Native network time synchronization works over Wi-Fi. The RTC still supplies an incorrect startup time; persistent clock behavior remains unqualified. |
 | Watchdog | 🟡 **Partial** | The Gunyah watchdog driver binds. Recovery behavior has not been tested. |
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Matched 1.20 starts ADSP manually and binds GPR with three services. A NoC crash and SLIMbus errors keep ADSP offline; a short trial without SLIMbus avoids recurrence. CDSP/QSH, audio and sensor services remain unavailable. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | ADSP remains running in the bounded 1.25 trial with SLIMbus disabled and exposes charger telemetry. Automatic boot/recovery, audio, CDSP/QSH and sensors remain unqualified. |
 | FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
-Work follows three queues: **A — connectivity** (Wi-Fi, Bluetooth, NFC and USB),
-**B — GPU/video acceleration and general log errors**, and **C — DSP/FastRPC,
-touch, all sensors and remaining hardware**. The OEM LPASS interconnect change has passed
-signed-package, matched RAM and initial ADSP startup checks; its dependent
-services still need admission. Wi-Fi restart
-reliability remains under review. Battery telemetry is a prerequisite for stress,
-charging and power-management experiments. KDE applications use Fedora's packages.
+Work follows four groups: **A — ADSP, battery, Bluetooth and backlight**;
+**B — touch, graphics and automatic brightness/rotation**;
+**C — complete USB-C, compass and firewall**;
+**D — CPU/thermal tables, DT resources, refresh rates and safe sleep/wake**.
+Charging and repeat-boot safety come before stress testing. KDE applications
+use Fedora's original packages. EL2/KVM remains a separate experimental branch;
+the recorded physical firmware handoff is EL1.
 
 The tables describe the recorded development profiles, not a finished tablet
 release. Stock slot A and a consistent backup of the earlier root are preserved;
-the new `boot_b` image was written and verified, but unattended slot-B startup
-is still untested. The private KDE root has complete physical hash/fsck
+the new `boot_b` image was written and verified, but its normal start fell back
+to Android. The private KDE root has complete physical hash/fsck
 verification and an observed software desktop.
 Build, RPM and virtual-machine checks are tracked separately from physical results.
 
@@ -192,8 +192,8 @@ has separate host validation and release boundaries. The owner permits Python on
 for its original signed Fedora dependencies; project startup, service and test
 helpers remain native or shell. The Core image and early initramfs retain their
 no-Python audits. Software Wayland scanout and Adreno acceleration have separate
-acceptance gates. Sleep targets and Plasma PowerDevil remain masked until
-battery telemetry and repeated-start safety gates pass.
+acceptance gates. Original Fedora PowerDevil is running; system sleep targets
+remain masked until safe suspend/resume is qualified.
 Nabu boot binaries, storage geometry and firmware are not reused for Uke.
 
 ## Downloads
