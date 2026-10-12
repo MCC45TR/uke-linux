@@ -2,8 +2,8 @@
 
 Linux development for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
-**Fedora now boots to a visible terminal on the tablet.** USB serial access and
-SSH over a USB cable work. Wi-Fi also connects automatically and provides SSH,
+**Fedora now boots to a visible terminal on the tablet.** SSH over a USB cable
+works. Wi-Fi also connects automatically and provides SSH,
 DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
 accelerated graphics and audio do not work yet. This is an early development
 build, with a usable console for bringing up the remaining hardware.
@@ -72,7 +72,7 @@ the private reports.
 | Signed network updates | 🟢 **Working** | Fedora and COPR packages were installed through DNF over Wi-Fi with signature checks. Kernel updates remain pinned to manually reviewed matched tuples. |
 | Bluetooth | 🔴 **Broken** | No Bluetooth controller appears; scanning and pairing are unavailable. |
 | USB overall | 🟡 **Partial** | Device mode works with a computer. Host power, accessories and role switching are not ready. |
-| USB CDC ACM / serial shell | 🟢 **Working** | The computer can exchange native shell commands and logs with the tablet. |
+| USB CDC ACM / serial shell | 🟡 **Partial** | The composite ACM endpoint and native shell service register. Bidirectional serial commands remain unqualified; the terminal stop correction passed two bounded physical trials. |
 | USB ECM / SSH | 🟢 **Working** | SSH over the USB cable works. A previous matched profile also passed a byte-identical 16 MiB round trip and software gadget reconnect. |
 | USB host / accessory power (VBUS) | 🔴 **Broken** | The owner's ESP32-S3 received no power from the tablet. Host accessories are not usable through this path yet. |
 | USB-C switch / role control | 🟡 **Partial** | The reset GPIO supplier and switch driver now bind; USB device mode works. Automatic role switching and host power remain unqualified. |
