@@ -8,12 +8,18 @@ DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
 accelerated graphics and audio do not work yet. This is an early development
 build, with a usable console for bringing up the remaining hardware.
 
+**Current installation, 12 October:** The owner KDE filesystem write completed,
+but USB did not return from the subsequent recovery request. Full physical root
+readback and a real Wayland session are pending. The working results below refer
+to the earlier matched Core RAM profiles. Stock slot A and a consistent offline
+Core rollback are retained.
+
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
 
 ## Hardware support
 
-**Last reviewed: 2026-10-11 — Fedora Rawhide AArch64, Linux `7.2.9-senemos-uke`.**
+**Last reviewed: 2026-10-12 — Fedora Rawhide AArch64, Linux `7.2.9-senemos-uke`.**
 These results come from the owner's POCO Pad X1, 8 GB / 512 GB, using the stock
 Android bootloader. Linux displays the requested name **Xiaomi Pad 7**. Other
 models and firmware versions need their own tests. The initial physical boot
@@ -91,7 +97,7 @@ exposes no usable motion, light or SAR sensor interface.
 | Front proximity sensor — STK3BCx family | 🔴 **Broken** | No usable proximity events. |
 | SAR / body proximity — SX937x family | 🔴 **Broken** | No usable capacitive proximity readings. |
 | Automatic rotation / sensor fusion | 🔴 **Broken** | Motion data and fused orientation are unavailable. |
-| Automatic brightness | 🔴 **Broken** | Both ambient-light input and Linux brightness control are missing. |
+| Automatic brightness | 🔴 **Broken** | Ambient-light samples are unavailable. Paired Linux backlight control exists, but visible response and desktop integration still need validation. |
 | Hall / cover detection | ⚪ **Not tested** | No controlled cover-open/close event test. |
 | Temperature sensors | 🟡 **Partial** | 36 thermal channels are readable. Their accuracy and protective actions have not been validated. |
 
@@ -123,14 +129,17 @@ exposes no usable motion, light or SAR sensor interface.
 | FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
-The next priorities are native graphics, DSP services, backlight, touch and
-sensors, followed by an original Fedora KDE image. Wi-Fi restart reliability
-remains under review. Battery telemetry is a prerequisite for stress, charging and
-power-management experiments. KDE applications will come from Fedora's packages.
+The immediate priority is recovery transport and complete KDE root readback,
+then actual Wayland testing, native graphics, DSP services, backlight, touch and
+sensors. The exact OEM LPASS interconnect source is merged; signed-package,
+matched-boot and physical DSP admission remain separate gates. Wi-Fi restart
+reliability remains under review. Battery telemetry is a prerequisite for stress,
+charging and power-management experiments. KDE applications use Fedora's packages.
 
 The tables describe the recorded development profiles, not a finished tablet
-release. Stock slot A and the existing root were preserved; the new `boot_b`
-image was written and verified, but unattended slot-B startup is still untested.
+release. Stock slot A and a consistent backup of the earlier root are preserved;
+the new `boot_b` image was written and verified, but unattended slot-B startup
+is still untested. The subsequent KDE root write is applied but unverified.
 Build, RPM and virtual-machine checks are tracked separately from physical results.
 
 The private [hardware report](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/FEDORA-HARDWARE-AUDIT-2026-10-11.md)
@@ -145,18 +154,21 @@ sensor descriptors are not a count of physical chips or proof of Linux support.
 | [OrangeFox Recovery](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) | Recovery and storage management | Experimental alpha; full physical acceptance pending |
 | [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Linux kernel, Uke device trees and matching modules | Linux 7.2.9; physical TTY, USB/Wi-Fi SSH and signed online COPR delivery recorded |
 | [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Uke UEFI and boot integration | UEFI port in development |
-| [Hardware support](https://github.com/MCC45TR/uke-linux-hardware-support) | Platform integration and device packages | Signed boot/CDC 0.1.0-5 installed through DNF on the tablet |
+| [Hardware support](https://github.com/MCC45TR/uke-linux-hardware-support) | Platform integration and device packages | Signed boot/CDC 0.1.0-7 is audited and installed on the public KDE copy; physical deployment is pending |
 | [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Fedora AArch64 image recipes and checks | Matched boot pair passes build, payload and five VM scenarios |
 | [Linux images](https://github.com/MCC45TR/uke-linux-images) | Fedora image releases and checksums | Core console reached; wider hardware and repeat-boot testing remain open |
 | [Engineering documentation](https://github.com/MCC45TR/uke-linux-docs) | Research, plans and validation records | Private; access required |
 
 Use original distribution KDE applications; do not clone, fork or rebuild them
-as Uke variants. The current target is a Fedora Rawhide AArch64 Core console.
-The original Fedora KDE image is in preparation. The owner permits Python only
+as Uke variants. Fedora Rawhide AArch64 Core is the qualified console baseline.
+Separate original Fedora KDE images pass host filesystem/readback checks;
+the private owner write awaits physical verification and the clean public image
+awaits its upstream namespace publication review. The owner permits Python only
 for its original signed Fedora dependencies; project startup, service and test
 helpers remain native or shell. The Core image and early initramfs retain their
 no-Python audits. Software Wayland scanout and Adreno acceleration have separate
-acceptance gates.
+acceptance gates. Sleep targets and Plasma PowerDevil remain masked until
+battery telemetry and repeated-start safety gates pass.
 Nabu boot binaries, storage geometry and firmware are not reused for Uke.
 
 ## Downloads
