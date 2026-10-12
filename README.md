@@ -2,24 +2,32 @@
 
 Linux development for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
-**Fedora now boots to a visible terminal on the tablet.** SSH over a USB cable
+**Fedora now displays the original KDE desktop on the tablet using software rendering.** SSH over a USB cable
 works. Wi-Fi also connects automatically and provides SSH,
 DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
 accelerated graphics and audio do not work yet. This is an early development
-build, with a usable console for bringing up the remaining hardware.
+build, with a usable console and software desktop for bringing up the remaining hardware.
 
 **Current installation, 12 October:** Recovery rejected the first KDE write's
 root hash and journal. A scoped native recovery rewrite now passes complete
 64 GiB readback and filesystem checks. The matching 1.17 RAM boot reaches this
 KDE root with USB/Wi-Fi SSH, DNS and synchronized time. Original Fedora PAM/time
-packages correct the missing login runtime. KWin starts Wayland software
-rendering, then crashes at an unavailable SVE instruction; a focused Mesa
-correction has passed native COPR and is being tested. Camera images confirm
-the illuminated console, with no accepted KDE desktop yet. Stock slot A and a
-consistent offline Core rollback are retained.
+packages correct the missing login runtime. A signed Mesa correction removes
+the observed SVE crash: camera images now show the original Fedora KDE desktop,
+and manual Wayland rotation/restoration works. Rendering uses llvmpipe.
+A later matched 1.18 RAM start returns KDE and both SSH paths; ADSP starts
+manually but is stopped after a GPR binding error. Stock slot A, verified
+1.17 boot_b and a consistent offline Core rollback are retained.
 
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
+
+[Core](https://github.com/MCC45TR/uke-linux-images/releases/tag/prebuild-fedora-core-20261012-copr1.17)
+and [original Fedora KDE](https://github.com/MCC45TR/uke-linux-images/releases/tag/prebuild-fedora-kde-20261012-copr1.17)
+prebuild tests are published with checksums and installation/rollback limits.
+The clean public root images have separate host qualification and have not
+been flashed or booted on this tablet; the owner root observations above are
+a different filesystem.
 
 ## Hardware support
 
@@ -60,7 +68,9 @@ the private reports.
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
 | Backlight | 🟡 **Partial** | The paired driver binds both controllers. Three normal brightness levels pass matching readback and restore the inherited level. Visible response and blanking still need confirmation. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
-| Firmware DRM | 🟡 **Partial** | Signed 1.17 exposes a connected 3200×2136 simpledrm output and visible framebuffer console. KWin starts software Wayland but hits a Mesa/LLVM instruction fault; a stable visible desktop remains unqualified. |
+| Firmware DRM | 🟡 **Partial** | Connected 3200×2136 simpledrm output, visible console and software Wayland scanout work. Native panel control and accelerated rendering remain unavailable. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | Camera-confirmed wallpaper, panel and clock using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
+| Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations were verified by camera. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
 | Touchscreen | 🔴 **Broken** | No usable touch input device in Fedora. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
@@ -129,21 +139,22 @@ exposes no usable motion, light or SAR sensor interface.
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
-| DSPs — ADSP / CDSP / QSH | 🔴 **Broken** | No usable remote-processor interface for audio, sensor or DSP services. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Matched 1.18 registers ADSP and one verified private-firmware manual start reaches running with GLINK/QRTR channels. ADSP is stopped after repeated GPR binding errors. CDSP/QSH, audio and sensor services remain unavailable. |
 | FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
-The immediate priority is recovery transport and complete KDE root readback,
-then actual Wayland testing, native graphics, DSP services, backlight, touch and
-sensors. The exact OEM LPASS interconnect source is merged; signed-package,
-matched-boot and physical DSP admission remain separate gates. Wi-Fi restart
+The next priorities are exact GPR/PDM/FastRPC bindings, native graphics,
+touch and motion/light sensors. The OEM LPASS interconnect change has passed
+signed-package, matched RAM and initial ADSP startup checks; its dependent
+services still need admission. Wi-Fi restart
 reliability remains under review. Battery telemetry is a prerequisite for stress,
 charging and power-management experiments. KDE applications use Fedora's packages.
 
 The tables describe the recorded development profiles, not a finished tablet
 release. Stock slot A and a consistent backup of the earlier root are preserved;
 the new `boot_b` image was written and verified, but unattended slot-B startup
-is still untested. The subsequent KDE root write is applied but unverified.
+is still untested. The private KDE root has complete physical hash/fsck
+verification and a camera-visible software desktop.
 Build, RPM and virtual-machine checks are tracked separately from physical results.
 
 The private [hardware report](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/FEDORA-HARDWARE-AUDIT-2026-10-11.md)
@@ -158,16 +169,16 @@ sensor descriptors are not a count of physical chips or proof of Linux support.
 | [OrangeFox Recovery](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) | Recovery and storage management | Experimental alpha; full physical acceptance pending |
 | [Senemos kernel](https://github.com/MCC45TR/senemos-uke-kernel-mainline) | Linux kernel, Uke device trees and matching modules | Linux 7.2.9; physical TTY, USB/Wi-Fi SSH and signed online COPR delivery recorded |
 | [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Uke UEFI and boot integration | UEFI port in development |
-| [Hardware support](https://github.com/MCC45TR/uke-linux-hardware-support) | Platform integration and device packages | Signed boot/CDC 0.1.0-7 is audited and installed on the public KDE copy; physical deployment is pending |
+| [Hardware support](https://github.com/MCC45TR/uke-linux-hardware-support) | Platform integration and device packages | Signed boot/CDC 7 and Mesa host-feature correction pass actual DNF and bounded device checks |
 | [Fedora builder](https://github.com/MCC45TR/uke-fedora-builder) | Fedora AArch64 image recipes and checks | Matched boot pair passes build, payload and five VM scenarios |
-| [Linux images](https://github.com/MCC45TR/uke-linux-images) | Fedora image releases and checksums | Core console reached; wider hardware and repeat-boot testing remain open |
+| [Linux images](https://github.com/MCC45TR/uke-linux-images) | Fedora image releases and checksums | Core and original KDE prebuild tests published; clean roots remain physically untested |
 | [Engineering documentation](https://github.com/MCC45TR/uke-linux-docs) | Research, plans and validation records | Private; access required |
 
 Use original distribution KDE applications; do not clone, fork or rebuild them
 as Uke variants. Fedora Rawhide AArch64 Core is the qualified console baseline.
 Separate original Fedora KDE images pass host filesystem/readback checks;
-the private owner write awaits physical verification and the clean public image
-awaits its upstream namespace publication review. The owner permits Python only
+the private owner root reaches software KDE, while the clean public image
+has separate host validation and release boundaries. The owner permits Python only
 for its original signed Fedora dependencies; project startup, service and test
 helpers remain native or shell. The Core image and early initramfs retain their
 no-Python audits. Software Wayland scanout and Adreno acceleration have separate
