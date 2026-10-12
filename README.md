@@ -8,11 +8,15 @@ DNS, time synchronization and signed Fedora/COPR updates. Bluetooth, touch,
 accelerated graphics and audio do not work yet. This is an early development
 build, with a usable console for bringing up the remaining hardware.
 
-**Current installation, 12 October:** The owner KDE filesystem write completed,
-but USB did not return from the subsequent recovery request. Full physical root
-readback and a real Wayland session are pending. The working results below refer
-to the earlier matched Core RAM profiles. Stock slot A and a consistent offline
-Core rollback are retained.
+**Current installation, 12 October:** Recovery rejected the first KDE write's
+root hash and journal. A scoped native recovery rewrite now passes complete
+64 GiB readback and filesystem checks. The matching 1.17 RAM boot reaches this
+KDE root with USB/Wi-Fi SSH, DNS and synchronized time. Original Fedora PAM/time
+packages correct the missing login runtime. KWin starts Wayland software
+rendering, then crashes at an unavailable SVE instruction; a focused Mesa
+correction has passed native COPR and is being tested. Camera images confirm
+the illuminated console, with no accepted KDE desktop yet. Stock slot A and a
+consistent offline Core rollback are retained.
 
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
@@ -56,7 +60,7 @@ the private reports.
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
 | Backlight | 🟡 **Partial** | The paired driver binds both controllers. Three normal brightness levels pass matching readback and restore the inherited level. Visible response and blanking still need confirmation. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
-| Firmware DRM | 🟡 **Partial** | Signed 1.17 exposes a connected 3200×2136 simpledrm output and an active framebuffer console on the tablet. KDE/Wayland scanout still needs testing. |
+| Firmware DRM | 🟡 **Partial** | Signed 1.17 exposes a connected 3200×2136 simpledrm output and visible framebuffer console. KWin starts software Wayland but hits a Mesa/LLVM instruction fault; a stable visible desktop remains unqualified. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
 | Touchscreen | 🔴 **Broken** | No usable touch input device in Fedora. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
