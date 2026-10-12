@@ -15,8 +15,10 @@ KDE root with USB/Wi-Fi SSH, DNS and synchronized time. Original Fedora PAM/time
 packages correct the missing login runtime. A signed Mesa correction removes
 the observed SVE crash: camera images now show the original Fedora KDE desktop,
 and manual Wayland rotation/restoration works. Rendering uses llvmpipe.
-A later matched 1.18 RAM start returns KDE and both SSH paths; ADSP starts
-manually but is stopped after a GPR binding error. Stock slot A, verified
+A later matched 1.20 RAM start returns KDE and both SSH paths. GPR now binds
+and registers three services. An ADSP NoC crash and SLIMbus DMA/restart errors
+remain under investigation; a short trial without the SLIMbus driver avoids
+that recurrence. ADSP stays manual and offline. Stock slot A, verified
 1.17 boot_b and a consistent offline Core rollback are retained.
 
 This repository is the project landing page and workspace. Component repositories
@@ -85,6 +87,7 @@ the private reports.
 | Wi-Fi — WCN6750 | 🟢 **Working** | Automatic association, Wi-Fi SSH, DNS and a byte-identical 16 MiB transfer passed in the matched RAM profile. A 15-minute functional check passed; cold-boot and suspend reliability remain open. |
 | Signed network updates | 🟢 **Working** | Fedora and COPR packages were installed through DNF over Wi-Fi with signature checks. Kernel updates remain pinned to manually reviewed matched tuples. |
 | Bluetooth | 🔴 **Broken** | No Bluetooth controller appears; scanning and pairing are unavailable. |
+| NFC | ⚪ **Not tested** | No NFC controller is exposed. OEM pin states alone do not establish a fitted NFC chip; controller provenance and tag exchange remain unqualified. |
 | USB overall | 🟡 **Partial** | Device mode works with a computer. Host power, accessories and role switching are not ready. |
 | USB CDC ACM / serial shell | 🟡 **Partial** | The composite ACM endpoint and native shell service register. Bidirectional serial commands remain unqualified; the terminal stop correction passed two bounded physical trials. |
 | USB ECM / SSH | 🟢 **Working** | SSH over the USB cable works. A previous matched profile also passed a byte-identical 16 MiB round trip and software gadget reconnect. |
@@ -139,12 +142,13 @@ exposes no usable motion, light or SAR sensor interface.
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Matched 1.18 registers ADSP and one verified private-firmware manual start reaches running with GLINK/QRTR channels. ADSP is stopped after repeated GPR binding errors. CDSP/QSH, audio and sensor services remain unavailable. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Matched 1.20 starts ADSP manually and binds GPR with three services. A NoC crash and SLIMbus errors keep ADSP offline; a short trial without SLIMbus avoids recurrence. CDSP/QSH, audio and sensor services remain unavailable. |
 | FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
-The next priorities are exact GPR/PDM/FastRPC bindings, native graphics,
-touch and motion/light sensors. The OEM LPASS interconnect change has passed
+Work follows three queues: **A — connectivity** (Wi-Fi, Bluetooth, NFC and USB),
+**B — GPU/video acceleration and general log errors**, and **C — DSP/FastRPC,
+touch, all sensors and remaining hardware**. The OEM LPASS interconnect change has passed
 signed-package, matched RAM and initial ADSP startup checks; its dependent
 services still need admission. Wi-Fi restart
 reliability remains under review. Battery telemetry is a prerequisite for stress,
