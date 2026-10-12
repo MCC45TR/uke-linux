@@ -13,7 +13,7 @@ root hash and journal. A scoped native recovery rewrite now passes complete
 64 GiB readback and filesystem checks. The matching 1.17 RAM boot reaches this
 KDE root with USB/Wi-Fi SSH, DNS and synchronized time. Original Fedora PAM/time
 packages correct the missing login runtime. A signed Mesa correction removes
-the observed SVE crash: camera images now show the original Fedora KDE desktop,
+the observed SVE crash: the original Fedora KDE desktop is now observed,
 and manual Wayland rotation/restoration works. Rendering uses llvmpipe.
 A later matched 1.20 RAM start returns KDE and both SSH paths. GPR now binds
 and registers three services. An ADSP NoC crash and SLIMbus DMA/restart errors
@@ -22,8 +22,8 @@ that recurrence. ADSP stays manual and offline. Stock slot A, verified
 1.17 boot_b and a consistent offline Core rollback are retained.
 
 Signed 1.21 also passes online DNF, all installed module hashes and fresh early
-boot/VM checks. Its RAM trial awaits USB/fastboot recovery after the requested
-reboot; no 1.21 physical startup is claimed. Signed CPUCP 1.22 passes source,
+boot/VM checks. A matched 1.21 RAM start on 12 October reaches the real Fedora
+root, the original KDE desktop, USB SSH and automatic Wi-Fi. Signed CPUCP 1.22 passes source,
 payload, callback/shutdown and all 1,144 native module byte checks. Its fresh
 early tuple and physical SCMI qualification remain pending.
 
@@ -74,11 +74,11 @@ the private reports.
 | Feature | Status | What you can expect today |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
-| Backlight | 🟡 **Partial** | Three normal levels pass paired readback and restoration. A bounded camera comparison confirms a relative visible increase. Calibrated brightness, full range, blanking and desktop integration remain untested. |
+| Backlight | 🟡 **Partial** | Three normal levels pass paired readback and restoration. A relative visible brightness increase is observed. Calibrated brightness, full range, blanking and desktop integration remain untested. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
 | Firmware DRM | 🟡 **Partial** | Connected 3200×2136 simpledrm output, visible console and software Wayland scanout work. Native panel control and accelerated rendering remain unavailable. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | Camera-confirmed wallpaper, panel and clock using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
-| Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations were verified by camera. Sensor-driven rotation is unavailable. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | Wallpaper, panel and clock are observed using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
+| Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations are observed. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
 | Touchscreen | 🔴 **Broken** | No usable touch input device in Fedora. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
@@ -164,7 +164,7 @@ The tables describe the recorded development profiles, not a finished tablet
 release. Stock slot A and a consistent backup of the earlier root are preserved;
 the new `boot_b` image was written and verified, but unattended slot-B startup
 is still untested. The private KDE root has complete physical hash/fsck
-verification and a camera-visible software desktop.
+verification and an observed software desktop.
 Build, RPM and virtual-machine checks are tracked separately from physical results.
 
 The private [hardware report](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/FEDORA-HARDWARE-AUDIT-2026-10-11.md)
