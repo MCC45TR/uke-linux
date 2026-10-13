@@ -30,10 +30,10 @@ This repository contains the project overview and workspace. Sources are in the
 
 ## Hardware support
 
-Recorded on a POCO Pad X1, 8 GB / 512 GB, running Fedora Rawhide AArch64 and
-Linux `7.2.9-senemos-uke` through the stock Android bootloader. Linux reports the
-requested model name **Xiaomi Pad 7**. Other variants have not been tested.
-The table includes earlier development tests; experimental results are marked.
+**Test environment, 13 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora
+Rawhide AArch64; Linux `7.2.9-senemos-uke`; stock Android bootloader. The Linux
+model label is configured as Xiaomi Pad 7. Other variants remain untested.
+The table includes earlier development tests and marks experimental results.
 
 | Status | Meaning |
 |---|---|
@@ -206,3 +206,5 @@ and [boot-pair instructions](https://github.com/MCC45TR/uke-linux-docs/blob/main
 
 This is an independent community project. It is not an official Fedora, Xiaomi,
 POCO or Qualcomm product. Original files use MIT; components retain their own licenses.
+
+Documentation follows the [report style](CONTRIBUTING.md).
