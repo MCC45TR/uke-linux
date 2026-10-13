@@ -5,7 +5,8 @@ Linux for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 ## Status — 13 October 2026
 
 Fedora boots to a local console and the original KDE desktop. Wi-Fi, SSH and
-signed DNF updates work. Graphics use software rendering. Touch, Bluetooth,
+signed DNF updates work. Experimental Freedreno graphics now work in KDE,
+Xwayland/OpenGL and a Turnip Vulkan test at 255 MHz. Touch, Bluetooth,
 audio and USB host mode do not work yet.
 
 Battery readings and manual backlight control are available. Experimental
@@ -16,6 +17,13 @@ The latest tablet tests use kernel package revision **1.27** in a RAM boot.
 Revision **1.30** has passed signed RPM and module checks; it has not been tested
 on the tablet. Normal slot-B startup is still unreliable. Android slot A and a
 Linux rollback are retained.
+
+The GPU result uses a RAM candidate and manually loaded matching modules.
+Automatic early GPU loading failed and is not ready for unattended boot.
+Full GPU frequencies, thermal limits, suspend and sustained workloads still
+need testing. The [GPU branch](https://github.com/MCC45TR/senemos-uke-kernel-mainline/pull/29)
+remains experimental. Linux 7.2.10 migration is in progress; current tablet
+results remain from 7.2.9.
 
 This repository contains the project overview and workspace. Sources are in the
 [component repositories](#project-repositories); detailed test records are private.
@@ -57,10 +65,12 @@ The table includes earlier development tests; experimental results are marked.
 | Backlight brightness | 🟡 **Partial** | Manual brightness and off/on control work on both LED banks. Full-range calibration and automatic control still need testing. |
 | Screen-off backlight / DPMS | 🟡 **Partial** | One desktop screen-off/on cycle fully disabled the backlight and restored its brightness. Repeated cycles and resume remain untested. |
 | Native panel control / refresh switching | 🔴 **Broken** | Linux still relies on the bootloader's fixed display setup. |
-| Firmware DRM | 🟡 **Partial** | simpledrm provides console and software desktop output. Native panel control and GPU acceleration are unavailable. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | The desktop, panel and clock were observed. Rendering uses llvmpipe; touch and long-term stability remain unresolved. |
+| Firmware DRM | 🟡 **Partial** | simpledrm provides the fixed display output while Adreno renders the experimental desktop. Native panel control and refresh switching are incomplete. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | KWin reports Freedreno OpenGL ES 3.2 in the GPU RAM trial. Touch, automatic GPU startup and long-term stability remain unresolved. |
 | Manual display rotation | 🟢 **Working** | KScreen rotated the desktop by 90° and restored landscape. Automatic rotation does not work. |
-| GPU — Adreno 732 | 🔴 **Broken** | No hardware rendering device or acceleration is available. |
+| GPU — Adreno 732 | 🟡 **Partial — experimental** | Native shader/pixel-readback tests pass at 255 MHz. KDE and Xwayland use Freedreno; a 120-frame Turnip Wayland cube passes. Higher frequencies, thermal protection, automatic startup and suspend are incomplete. Mesa currently mislabels this exact chip FD735. |
+| Xwayland / OpenGL | 🟡 **Partial — experimental** | A fresh session reports Freedreno and hardware acceleration, with OpenGL 4.6 available. Late GPU loading requires a clean graphical session; broad application testing remains open. |
+| Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
 | Touchscreen — Novatek NT36532 | 🔴 **Broken** | Normal CSOT firmware starts and returns valid metadata and fresh packets. No working finger input; packet decoding and IRQ/input integration are incomplete. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟡 **Partial** | Drivers register. Physical key events and navigation still need testing. |
