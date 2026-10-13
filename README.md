@@ -11,23 +11,35 @@ USB networking remains available as a manual development feature and is now off 
 
 **Latest device trial, 13 October:** A matched signed 1.27 RAM start reaches
 the existing 64 GiB EXT4 Fedora root, software-rendered KDE and Wi-Fi SSH.
-ADSP starts automatically, but its charger services still need a manual restart.
-Battery percentage, voltage, temperature, full/design charge and the desktop
-battery icon are then observed. A bounded 500 mA computer-USB budget is accepted;
-sustained charging with the screen on remains unqualified.
+The revised initramfs preloads QRTR and the domain mapper; fresh RAM trials
+now bring up ADSP charger services automatically. Battery percentage, voltage,
+temperature, full/design charge and the desktop battery icon are observed.
+A manual bounded 500 mA computer-USB budget is accepted; automatic budgeting and
+sustained charging with the screen on remain unqualified.
 
 One automatic display off/on cycle now turns the backlight fully off and restores
 the requested brightness. Sleep and touch still do not work. A live battery-driver
 reload exposed a USB lifetime fault and left shutdown stuck; that session is
-rejected for further USB testing. The next fresh-boot and kernel corrections
-remain separate validation gates. SLIMbus and automatic DSP recovery stay contained.
-Stock Android A and the complete kernel/module rollback are preserved. Normal
-slot-B startup remains unreliable; the tested route is a matched RAM start.
+rejected for further USB testing. The owner restored fastboot and a fresh matched
+RAM session is now collecting passive battery/temperature data with the display
+off. Corrected USB driver lifecycle still needs a separate test. SLIMbus and
+automatic DSP recovery stay contained.
+The validated DT candidate is written to boot B with full readback equality.
+Android A stays selected; the current session is a matched RAM start. A cold
+start from selected slot B still needs testing.
+
+Touch DT supplier and chip-select fixes now identify the physical NT36532
+controller. Firmware-info validation still fails, so finger and stylus input
+remain unavailable. Bounded SSC queries return six service endpoints and no
+physical motion/light/compass/SAR samples. The owner's effective sensor registry
+is retained privately for the next firmware/loader qualification. The existing
+Linux filesystem passes a modern offline consistency check after orphan repair.
 
 The reviewed 1.29 charger-readiness, gauge-ABI and USB-lifetime corrections pass
 source, host-contract and ARM64 object checks. Native
 [COPR build 11114370](https://copr.fedorainfracloud.org/coprs/build/11114370)
-is in progress; the revised boot and corrected drivers remain physically untried.
+succeeds, and all signed RPMs pass payload checks. The 1.29 drivers are not yet
+installed or physically tested; the active unattended session retains 1.27.
 
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
@@ -65,8 +77,8 @@ the private reports.
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online and run native Linux commands. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | The hardware driver exposes three active schedutil policies: 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz. Frequency adjustment, voltage behavior and throttling need validation. |
 | RAM | 🟡 **Partial** | Linux uses about 7.21 GiB of the installed 8 GB. Memory stress and suspend retention are untested. |
-| UFS storage | 🟢 **Working** | Fedora reads and writes its real internal-storage root filesystem. Long transfers, power-loss recovery and resume are untested. |
-| Linux partition / EXT4 | 🟢 **Working** | The existing 64 GiB partition is fully usable. Root is selected by GPT partition name `linux`, not by UUID. |
+| UFS storage | 🟢 **Working** | Fedora reads and writes its real internal-storage root. Long transfers, power-loss recovery and resume are untested; filesystem health is a separate gate. |
+| Linux partition / EXT4 | 🟡 **Partial** | The existing 64 GiB partition mounts by GPT name `linux`, not UUID. Offline e2fsck repairs orphan metadata; its forced read-only postcheck and fresh-boot zero error counter pass. Power-loss resilience and full file integrity remain unqualified. |
 | `reboot bootloader` | 🟡 **Partial** | Repeated commands returned to fastboot, but one shutdown took about 106 seconds with a serial-shell timeout. Restart reliability remains open. |
 | Normal reboot, recovery command and poweroff | ⚪ **Not tested** | These routes have not been qualified on the current candidate. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The current Fedora session uses the stock Android bootloader. The Uke UEFI port is still in development. |
@@ -83,7 +95,7 @@ the private reports.
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Wallpaper, panel and clock are observed using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
 | Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations are observed. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
-| Touchscreen | 🔴 **Broken** | The adapted SPI controller now binds and creates spi0, but its inherited child has no usable driver. Exact Novatek firmware, mapping and physical finger events remain unqualified. |
+| Touchscreen — Novatek NT36532 | 🔴 **Broken** | DT supplier and GPIO19 chip-select fixes allow a real chip-identity read. Resident firmware-info validation fails; there is still no usable finger input. Normal firmware loading, IRQ behavior and coordinates remain unqualified. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
 | Power / volume buttons | 🟡 **Partial** | Input drivers register; physical key events and navigation have not been verified. |
 | USB keyboard / mouse | 🔴 **Broken** | The owner's mouse dongle is not detected. HID/xHCI drivers exist, but the current fixed-device USB route cannot provide host operation. |
@@ -111,10 +123,12 @@ the private reports.
 
 Sensor names below come from the earlier stock Android inventory and OEM
 configuration. Exact populated variants still need confirmation. Fedora currently
-exposes no usable motion, light or SAR sensor interface.
+exposes no usable motion, light or SAR sensor interface. The running ADSP now
+supports bounded SSC metadata queries. These do not establish sensor samples.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
+| Sensor DSP / SSC discovery | 🟡 **Partial** | Native SUID/attribute queries work and identify six service endpoints. Motion/light/compass/SAR lookups return no SUIDs in their first events; there are no IIO sensor streams. |
 | Accelerometer — LSM6DSO family | 🔴 **Broken** | No acceleration samples in Fedora. |
 | Gyroscope — LSM6DSO family | 🔴 **Broken** | No angular-rate samples in Fedora. |
 | Magnetometer / compass — QMC630x family | 🔴 **Broken** | No magnetic-field samples or working compass. |
@@ -124,8 +138,8 @@ exposes no usable motion, light or SAR sensor interface.
 | SAR / body proximity — SX937x family | 🔴 **Broken** | No usable capacitive proximity readings. |
 | Automatic rotation / sensor fusion | 🔴 **Broken** | Motion data and fused orientation are unavailable. |
 | Automatic brightness | 🔴 **Broken** | Ambient-light samples are unavailable. Paired Linux backlight control exists, but visible response and desktop integration still need validation. |
-| Hall / cover detection | ⚪ **Not tested** | No controlled cover-open/close event test. |
-| Temperature sensors | 🟡 **Partial** | 36 thermal channels are readable. Their accuracy and protective actions have not been validated. |
+| Hall / cover detection | ⚪ **Not tested** | SSC reports an available oem_hall service, but no Linux cover-state interface or controlled open/close event is verified. |
+| Temperature sensors | 🟡 **Partial** | The current snapshot has 37 thermal zones and 38 readable hwmon temperature channels, including battery and Wi-Fi. These overlap and are not chip counts; accuracy and protective actions remain unqualified. |
 
 ### Audio and media
 
@@ -142,7 +156,7 @@ exposes no usable motion, light or SAR sensor interface.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Battery percentage / voltage / temperature | 🟡 **Partial** | Real percentage, voltage, temperature and full/design charge are readable after an ADSP restart. Automatic charger-service readiness and long-term readings remain unqualified. |
+| Battery percentage / voltage / temperature | 🟡 **Partial** | The revised initramfs exposes real readings automatically in one fresh RAM start. Repeated cold starts and long-term readings remain unqualified. |
 | Battery current / power / charging indication | 🟡 **Partial** | Current is readable. Exact-Uke current direction and remaining-charge units need the prepared ABI correction; the Charging label alone does not prove net battery gain. |
 | Charging from computer USB | 🟡 **Partial** | A manual 500 mA SDP budget reads back correctly, with about 453 mA USB input. Screen-off samples support charging direction; screen-on load can still exceed supply. Automatic budgeting and sustained capacity gain remain unqualified. |
 | USB Power Delivery / fast charging | ⚪ **Not tested** | Protocol negotiation, thermal protection and higher-power charging remain unqualified. |
@@ -159,7 +173,7 @@ exposes no usable motion, light or SAR sensor interface.
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | ADSP starts automatically in 1.27, but charger QRTR/PDR services appear only after a controlled restart. SLIMbus and automatic recovery remain disabled. Reliable startup, audio, CDSP/QSH and sensors remain unqualified. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | One revised 1.27 RAM start brings up ADSP charger services and SSC discovery automatically. SLIMbus and automatic recovery remain disabled. Repeated startup, audio, CDSP/QSH and actual sensor streams remain unqualified. |
 | FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
