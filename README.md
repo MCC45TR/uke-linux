@@ -29,18 +29,19 @@ Android A stays selected; the current session is a matched RAM start. A cold
 start from selected slot B still needs testing.
 
 Touch DT supplier and chip-select fixes now identify the physical NT36532
-controller. Firmware-info validation still fails, so finger and stylus input
-remain unavailable. Experimental RAM boots now return acceleration, gyro and
+controller. The normal CSOT firmware now starts after complete RAM-bank readback
+and returns valid high-resolution metadata. Finger and stylus input remain
+unavailable while the packet/IRQ path is completed. Experimental RAM boots return acceleration, gyro and
 rear-light data through native SSC tools. Motion samples reach high reported
 accuracy after settling; front light, compass, SAR and desktop sensor integration
 remain unavailable. OEM calibration stays private on a read-only persist mount;
 the sensor framework writes only to a temporary RAM copy. The existing
 Linux filesystem passes a modern offline consistency check after orphan repair.
 
-The reviewed 1.29 charger-readiness, gauge-ABI and USB-lifetime corrections pass
+The reviewed 1.30 brightness transition, charger-readiness, gauge-ABI and USB-lifetime corrections pass
 source, host-contract and ARM64 object checks. Native
-[COPR build 11114370](https://copr.fedorainfracloud.org/coprs/build/11114370)
-succeeds, and all signed RPMs pass payload checks. The 1.29 drivers are not yet
+[COPR build 11115690](https://copr.fedorainfracloud.org/coprs/build/11115690)
+succeeds, and all signed RPMs pass payload, module and dependency checks. The 1.30 drivers are not yet
 installed or physically tested; the active unattended session retains 1.27.
 
 This repository is the project landing page and workspace. Component repositories
@@ -97,7 +98,7 @@ the private reports.
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Wallpaper, panel and clock are observed using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
 | Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations are observed. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
-| Touchscreen — Novatek NT36532 | 🔴 **Broken** | Identity reads confirm a cascade controller and the OEM supplier strap selects CSOT firmware. Resident firmware-info validation still fails. The Uke cascade memory map and normal input protocol need completion; there is no usable finger input. |
+| Touchscreen — Novatek NT36532 | 🔴 **Broken** | The selected normal CSOT firmware starts and all four programmed RAM banks match the image. Valid 60×40 metadata and raw 32000×21360 bounds are observed. Finger input still needs packet decoding and kernel IRQ/input integration. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
 | Power / volume buttons | 🟡 **Partial** | Input drivers register; physical key events and navigation have not been verified. |
 | USB keyboard / mouse | 🔴 **Broken** | The owner's mouse dongle is not detected. HID/xHCI drivers exist, but the current fixed-device USB route cannot provide host operation. |
@@ -216,10 +217,12 @@ Use original distribution KDE applications; do not clone, fork or rebuild them
 as Uke variants. Fedora Rawhide AArch64 Core is the qualified console baseline.
 Separate original Fedora KDE images pass host filesystem/readback checks;
 the private owner root reaches software KDE, while the clean public image
-has separate host validation and release boundaries. The owner permits Python only
-for its original signed Fedora dependencies; project startup, service and test
-helpers remain native or shell. The Core image and early initramfs retain their
-no-Python audits. Software Wayland scanout and Adreno acceleration have separate
+has separate host validation and release boundaries. Project tablet startup,
+service and test helpers remain native or shell. The Core image and early
+initramfs retain their no-Python audits. The existing private KDE bring-up root
+contains original Fedora dependencies that conflict with the Python-free target
+policy; compliant KDE release remains gated. KDE applications are not cloned or
+rebuilt to alter those requirements. Software Wayland scanout and Adreno acceleration have separate
 acceptance gates. Original Fedora PowerDevil is running; system sleep targets
 remain masked until safe suspend/resume is qualified.
 Nabu boot binaries, storage geometry and firmware are not reused for Uke.
