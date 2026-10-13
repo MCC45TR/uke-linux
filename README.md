@@ -9,19 +9,25 @@ accelerated graphics and audio do not work yet. This is an early development
 build, with a usable console and software desktop for bringing up the remaining hardware.
 USB networking remains available as a manual development feature and is now off by default.
 
-**Current device state, 12 October:** A matched signed 1.25 RAM start reaches
+**Latest device trial, 13 October:** A matched signed 1.27 RAM start reaches
 the existing 64 GiB EXT4 Fedora root, software-rendered KDE and Wi-Fi SSH.
-Manual ADSP startup now exposes battery percentage, voltage and temperature.
-The battery still loses charge on computer USB despite reporting Charging;
-sustainable charging is not accepted. SLIMbus and automatic DSP recovery remain
-contained. Stock Android A and the complete kernel/module rollback are preserved.
+ADSP starts automatically, but its charger services still need a manual restart.
+Battery percentage, voltage, temperature, full/design charge and the desktop
+battery icon are then observed. A bounded 500 mA computer-USB budget is accepted;
+sustained charging with the screen on remains unqualified.
 
-Manual backlight off/on works, but automatic screen blanking leaves illumination
-behind. The 1.27 charger/backlight package set and matched boot candidate pass
-build and payload checks; they still need a device trial. Release 1.28 adds
-standard suspend diagnostics and is building in COPR. Normal boot B fell back
-to Android despite a matching image readback. The working route is still a
-matched RAM start, not unattended slot-B boot.
+One automatic display off/on cycle now turns the backlight fully off and restores
+the requested brightness. Sleep and touch still do not work. A live battery-driver
+reload exposed a USB lifetime fault and left shutdown stuck; that session is
+rejected for further USB testing. The next fresh-boot and kernel corrections
+remain separate validation gates. SLIMbus and automatic DSP recovery stay contained.
+Stock Android A and the complete kernel/module rollback are preserved. Normal
+slot-B startup remains unreliable; the tested route is a matched RAM start.
+
+The reviewed 1.29 charger-readiness, gauge-ABI and USB-lifetime corrections pass
+source, host-contract and ARM64 object checks. Native
+[COPR build 11114370](https://copr.fedorainfracloud.org/coprs/build/11114370)
+is in progress; the revised boot and corrected drivers remain physically untried.
 
 This repository is the project landing page and workspace. Component repositories
 are linked below; detailed engineering records are private.
@@ -71,13 +77,13 @@ the private reports.
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A real command prompt is visible at 3200×2136 using the framebuffer left by the bootloader. |
 | Backlight brightness | 🟡 **Partial** | Both LED banks respond to manual brightness and power-off/on; about 5% is usable. Full-range calibration and automatic control remain unqualified. |
-| Screen-off backlight / DPMS | 🔴 **Broken** | A dark screen can leave the backlight lit. A kernel/DT fix is in the 1.27 candidate; automatic off/on still needs a matched-device test. |
+| Screen-off backlight / DPMS | 🟡 **Partial** | One 1.27 Wayland DPMS cycle turns illumination fully off and restores the previous brightness. Repeated cycles and suspend/resume still need testing. |
 | Native panel control / refresh switching | 🔴 **Broken** | The native Linux display path is not usable. The current image relies on the bootloader's fixed display setup. |
 | Firmware DRM | 🟡 **Partial** | Connected 3200×2136 simpledrm output, visible console and software Wayland scanout work. Native panel control and accelerated rendering remain unavailable. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Wallpaper, panel and clock are observed using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
 | Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations are observed. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
-| Touchscreen | 🔴 **Broken** | No usable touch input device. The live SPI compatible differs from the Linux driver match; the controller and exact Novatek firmware/map are being qualified. |
+| Touchscreen | 🔴 **Broken** | The adapted SPI controller now binds and creates spi0, but its inherited child has no usable driver. Exact Novatek firmware, mapping and physical finger events remain unqualified. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
 | Power / volume buttons | 🟡 **Partial** | Input drivers register; physical key events and navigation have not been verified. |
 | USB keyboard / mouse | 🔴 **Broken** | The owner's mouse dongle is not detected. HID/xHCI drivers exist, but the current fixed-device USB route cannot provide host operation. |
@@ -96,7 +102,7 @@ the private reports.
 | USB ECM / SSH | 🟢 **Working — manual** | Earlier matched trials pass SSH and a byte-identical 16 MiB transfer. Automatic activation is now disabled; development uses Wi-Fi SSH. |
 | USB host / accessory power (VBUS) | 🔴 **Broken** | The owner's ESP32-S3 received no power from the tablet. Host accessories are not usable through this path yet. |
 | USB-C switch / role control | 🟡 **Partial** | The reset GPIO supplier and switch driver now bind; USB device mode works. Automatic role switching and host power remain unqualified. |
-| Physical USB unplug / replug | ⚪ **Not tested** | Software reconnect passed; a physical cable-disconnect test is still needed. |
+| USB reconnect / driver lifecycle | 🟡 **Partial** | Earlier software reconnect works, but removing the live battery provider exposes a stale USB callback fault. The affected session is rejected; corrected driver teardown and physical cable replug need fresh tests. |
 | USB SuperSpeed | ⚪ **Not tested** | No validated USB 3 accessory transfer. |
 | DisplayPort / USB-C video output | ⚪ **Not tested** | No external-monitor or adapter test has passed. |
 | USB Ethernet adapters / hubs | ⚪ **Not tested** | Accessory networking and hub operation still need physical tests. |
@@ -136,14 +142,14 @@ exposes no usable motion, light or SAR sensor interface.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Battery percentage / voltage / temperature | 🟡 **Partial** | Real readings appear after manual ADSP startup. Early automatic startup, full/design charge units and stable presentation still need validation. |
-| Battery current / power / charging indication | 🟡 **Partial** | Current is readable, but OEM power units are unqualified. The Charging label does not reflect the declining capacity trend reliably. |
-| Charging from computer USB | 🔴 **Broken** | Capacity declines while connected. A bounded USB2 current-budget fix is in the candidate; positive net charging has not been demonstrated. |
+| Battery percentage / voltage / temperature | 🟡 **Partial** | Real percentage, voltage, temperature and full/design charge are readable after an ADSP restart. Automatic charger-service readiness and long-term readings remain unqualified. |
+| Battery current / power / charging indication | 🟡 **Partial** | Current is readable. Exact-Uke current direction and remaining-charge units need the prepared ABI correction; the Charging label alone does not prove net battery gain. |
+| Charging from computer USB | 🟡 **Partial** | A manual 500 mA SDP budget reads back correctly, with about 453 mA USB input. Screen-off samples support charging direction; screen-on load can still exceed supply. Automatic budgeting and sustained capacity gain remain unqualified. |
 | USB Power Delivery / fast charging | ⚪ **Not tested** | Protocol negotiation, thermal protection and higher-power charging remain unqualified. |
-| Plasma battery indicator | 🟡 **Partial** | UPower detects the battery and the original Fedora PowerDevil service runs. Complete fields and the visible tray behavior still need confirmation. |
+| Plasma battery indicator | 🟡 **Partial** | UPower supplies real battery fields and the tray icon is observed. It still depends on charger-service startup and correct current/counter interpretation. |
 | Thermal protection / throttling | ⚪ **Not tested** | Readable temperatures do not establish working throttling or shutdown protection. |
-| Display-only soft sleep | 🔴 **Broken** | Automatic screen-off can leave the backlight lit. Manual backlight off/on works; the 1.27 kernel blanking fix needs a device test. Screen-off alone does not suspend the system. |
-| Suspend-to-idle / s2idle | ⏸️ **Disabled** | Sleep targets remain masked. The reported one-second black interval has no confirmed suspend entry. Release 1.28 adds diagnostics; real sleep and stable resume remain unqualified. |
+| Display-only soft sleep | 🟡 **Partial** | One automatic DPMS off/on cycle fully disables and restores illumination. Repeated cycles remain unqualified; screen-off alone does not suspend the system. |
+| Suspend-to-idle / s2idle | ⏸️ **Disabled** | Sleep targets remain masked. The reported one-second black interval has no confirmed suspend entry. Signed 1.28 diagnostic packages pass payload checks; real sleep and stable resume remain unqualified. |
 | Deep suspend | ⚪ **Not tested** | The kernel advertises deep sleep, but CPU, memory and device resume have not been qualified. |
 | Power-key IRQ wake | ⚪ **Not tested** | Power-key input and its wake flag are present. Waking a real resident sleep cycle still needs a physical test. |
 | USB cable wake | 🔴 **Broken** | The current peripheral-only USB DT does not include the OEM wake IRQs. Cable wake needs the complete controller/PHY/Type-C path. |
@@ -153,7 +159,7 @@ exposes no usable motion, light or SAR sensor interface.
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | ADSP remains running in the bounded 1.25 trial with SLIMbus disabled and exposes charger telemetry. Automatic boot/recovery, audio, CDSP/QSH and sensors remain unqualified. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | ADSP starts automatically in 1.27, but charger QRTR/PDR services appear only after a controlled restart. SLIMbus and automatic recovery remain disabled. Reliable startup, audio, CDSP/QSH and sensors remain unqualified. |
 | FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
