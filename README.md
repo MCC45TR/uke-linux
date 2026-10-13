@@ -30,9 +30,11 @@ start from selected slot B still needs testing.
 
 Touch DT supplier and chip-select fixes now identify the physical NT36532
 controller. Firmware-info validation still fails, so finger and stylus input
-remain unavailable. Bounded SSC queries return six service endpoints and no
-physical motion/light/compass/SAR samples. The owner's effective sensor registry
-is retained privately for the next firmware/loader qualification. The existing
+remain unavailable. Experimental RAM boots now return acceleration, gyro and
+rear-light data through native SSC tools. Motion samples reach high reported
+accuracy after settling; front light, compass, SAR and desktop sensor integration
+remain unavailable. OEM calibration stays private on a read-only persist mount;
+the sensor framework writes only to a temporary RAM copy. The existing
 Linux filesystem passes a modern offline consistency check after orphan repair.
 
 The reviewed 1.29 charger-readiness, gauge-ABI and USB-lifetime corrections pass
@@ -95,7 +97,7 @@ the private reports.
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Wallpaper, panel and clock are observed using original Fedora Plasma/KWin 6.8.0. The signed Mesa fix avoids the observed SVE crash. Rendering is llvmpipe; touch and long-term session reliability remain open. |
 | Manual display rotation | 🟢 **Working** | Original KScreen rotated the Wayland desktop/lock screen by 90° and restored landscape; both orientations are observed. Sensor-driven rotation is unavailable. |
 | GPU — Adreno 732 | 🔴 **Broken** | No hardware render device or acceleration. Firmware DRM supplies software scanout; showing the GPU name in Fastfetch does not enable acceleration. |
-| Touchscreen — Novatek NT36532 | 🔴 **Broken** | DT supplier and GPIO19 chip-select fixes allow a real chip-identity read. Resident firmware-info validation fails; there is still no usable finger input. Normal firmware loading, IRQ behavior and coordinates remain unqualified. |
+| Touchscreen — Novatek NT36532 | 🔴 **Broken** | Identity reads confirm a cascade controller and the OEM supplier strap selects CSOT firmware. Resident firmware-info validation still fails. The Uke cascade memory map and normal input protocol need completion; there is no usable finger input. |
 | Stylus / pen | 🔴 **Broken** | No usable pen input, pressure or tilt interface in Fedora. |
 | Power / volume buttons | 🟡 **Partial** | Input drivers register; physical key events and navigation have not been verified. |
 | USB keyboard / mouse | 🔴 **Broken** | The owner's mouse dongle is not detected. HID/xHCI drivers exist, but the current fixed-device USB route cannot provide host operation. |
@@ -122,22 +124,23 @@ the private reports.
 ### Sensors
 
 Sensor names below come from the earlier stock Android inventory and OEM
-configuration. Exact populated variants still need confirmation. Fedora currently
-exposes no usable motion, light or SAR sensor interface. The running ADSP now
-supports bounded SSC metadata queries. These do not establish sensor samples.
+configuration, with LSM6DSO and SIP1328 now identified by the running sensor DSP.
+Experimental RAM boots provide bounded native readout. These tools are not yet
+installed as a permanent desktop sensor service; automatic brightness and
+rotation remain unavailable.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Sensor DSP / SSC discovery | 🟡 **Partial** | Native SUID/attribute queries work and identify six service endpoints. Motion/light/compass/SAR lookups return no SUIDs in their first events; there are no IIO sensor streams. |
-| Accelerometer — LSM6DSO family | 🔴 **Broken** | No acceleration samples in Fedora. |
-| Gyroscope — LSM6DSO family | 🔴 **Broken** | No angular-rate samples in Fedora. |
+| Sensor DSP / SSC discovery | 🟡 **Partial** | Native discovery finds 15 endpoints and motion/rear-light data are readable in RAM trials. Persistent startup, complete firmware lifecycle and IIO/D-Bus integration are not ready. |
+| Accelerometer — LSM6DSO | 🟡 **Partial** | Real XYZ samples reach high reported accuracy after settling, with a plausible stationary gravity magnitude. Controlled movement, mounting orientation and desktop rotation still need validation. |
+| Gyroscope — LSM6DSO | 🟡 **Partial** | Real XYZ samples reach high reported accuracy and settle close to zero while stationary. Controlled rotation, drift and desktop integration still need validation. |
 | Magnetometer / compass — QMC630x family | 🔴 **Broken** | No magnetic-field samples or working compass. |
 | Front light sensor — STK3BCx family | 🔴 **Broken** | No usable front ambient-light readings. |
-| Rear light sensor — SIP1328 | 🔴 **Broken** | No usable rear light or flicker readings. |
+| Rear light sensor — SIP1328 | 🟡 **Partial** | On-change and streaming endpoints return raw channel data. Channel units, illumination response and desktop lux readings are not yet verified. Flicker remains unqualified. |
 | Front proximity sensor — STK3BCx family | 🔴 **Broken** | No usable proximity events. |
 | SAR / body proximity — SX937x family | 🔴 **Broken** | No usable capacitive proximity readings. |
-| Automatic rotation / sensor fusion | 🔴 **Broken** | Motion data and fused orientation are unavailable. |
-| Automatic brightness | 🔴 **Broken** | Ambient-light samples are unavailable. Manual paired backlight control is Partial; qualified light-driven adjustment is unavailable. |
+| Automatic rotation / sensor fusion | 🔴 **Broken** | Native motion data now exist, but no validated fused orientation or desktop rotation service is available. |
+| Automatic brightness | 🔴 **Broken** | Front light readings and a validated desktop lux interface are unavailable. Manual paired backlight control is Partial. |
 | Hall / cover detection | ⚪ **Not tested** | SSC reports an available oem_hall service, but no Linux cover-state interface or controlled open/close event is verified. |
 | Temperature sensors | 🟡 **Partial** | The current snapshot has 37 thermal zones and 38 readable hwmon temperature channels, including battery and Wi-Fi. These overlap and are not chip counts; accuracy and protective actions remain unqualified. |
 
@@ -173,8 +176,8 @@ supports bounded SSC metadata queries. These do not establish sensor samples.
 | PMIC / regulators | 🟡 **Partial** | Enough resources work for storage and USB. Other PMIC probes still report errors. |
 | DMA / IOMMU resources | 🟡 **Partial** | Reviewed storage, USB and WLAN paths are usable. GPU and other bus clients still need integration and physical tests. |
 | Interconnect / platform power control | 🟡 **Partial** | Basic root and USB operations work, but provider errors remain; performance and power behavior are unverified. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | One revised 1.27 RAM start brings up ADSP charger services and SSC discovery automatically. SLIMbus and automatic recovery remain disabled. Repeated startup, audio, CDSP/QSH and actual sensor streams remain unqualified. |
-| FastRPC | 🔴 **Broken** | No usable native DSP compute interface. Firmware authentication, transport and memory permissions still need separate validation. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Matched RAM boots bring up ADSP charger services; temporary native file delivery enables motion/rear-light readout. SLIMbus and automatic recovery remain disabled. Audio, CDSP/QSH and complete lifecycle remain unqualified. |
+| FastRPC | 🟡 **Partial** | The reviewed ADSP root and sensor context banks bind and serve the temporary sensor registry. General DSP compute, other banks and a permanent service lifecycle are not qualified. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The exact failure still needs investigation. |
 
 Work follows four groups: **A — ADSP, battery, Bluetooth and backlight**;
