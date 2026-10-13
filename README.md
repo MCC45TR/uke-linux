@@ -73,7 +73,7 @@ the private reports.
 
 | Feature | Status | What you can expect today |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Repeated matched RAM starts reached the real Fedora filesystem and automatic USB/Wi-Fi SSH. Cold boots and automatic slot-B startup still need testing. |
+| Fedora boot | 🟡 **Partial** | Repeated matched RAM starts reach the real Fedora filesystem and Wi-Fi SSH. Cold boots and automatic slot-B startup still need testing. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online and run native Linux commands. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | The hardware driver exposes three active schedutil policies: 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz. Frequency adjustment, voltage behavior and throttling need validation. |
 | RAM | 🟡 **Partial** | Linux uses about 7.21 GiB of the installed 8 GB. Memory stress and suspend retention are untested. |
@@ -137,7 +137,7 @@ supports bounded SSC metadata queries. These do not establish sensor samples.
 | Front proximity sensor — STK3BCx family | 🔴 **Broken** | No usable proximity events. |
 | SAR / body proximity — SX937x family | 🔴 **Broken** | No usable capacitive proximity readings. |
 | Automatic rotation / sensor fusion | 🔴 **Broken** | Motion data and fused orientation are unavailable. |
-| Automatic brightness | 🔴 **Broken** | Ambient-light samples are unavailable. Paired Linux backlight control exists, but visible response and desktop integration still need validation. |
+| Automatic brightness | 🔴 **Broken** | Ambient-light samples are unavailable. Manual paired backlight control is Partial; qualified light-driven adjustment is unavailable. |
 | Hall / cover detection | ⚪ **Not tested** | SSC reports an available oem_hall service, but no Linux cover-state interface or controlled open/close event is verified. |
 | Temperature sensors | 🟡 **Partial** | The current snapshot has 37 thermal zones and 38 readable hwmon temperature channels, including battery and Wi-Fi. These overlap and are not chip counts; accuracy and protective actions remain unqualified. |
 
