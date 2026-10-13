@@ -94,8 +94,8 @@ kept on read-only `persist`; experimental registry writes use a RAM copy.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Sensor DSP / SSC discovery | 🟡 **Partial** | Fifteen endpoints are found in experimental tests. Automatic startup and a standard Linux sensor interface are incomplete. |
-| Accelerometer — LSM6DSO | 🟡 **Partial** | XYZ samples are available with plausible stationary gravity. Axis alignment, movement tests and desktop integration are incomplete. |
+| Sensor DSP / SSC discovery | 🟡 **Partial** | Experimental tests find fifteen endpoints and return orientation through SensorProxy. Permanent startup and restart support are incomplete. |
+| Accelerometer — LSM6DSO | 🟡 **Partial** | XYZ samples and stationary SensorProxy orientation are available in bounded tests. Axis alignment, movement tests and automatic desktop rotation are incomplete. |
 | Gyroscope — LSM6DSO | 🟡 **Partial** | XYZ samples settle near zero at rest. Rotation, drift and desktop integration still need testing. |
 | Magnetometer / compass — QMC630x family | 🔴 **Broken** | No magnetic-field readings or working compass. |
 | Front light sensor — STK3BCx family | 🔴 **Broken** | No usable front ambient-light readings. |
