@@ -12,9 +12,12 @@ Xwayland/OpenGL and a Turnip Vulkan test at 255 MHz. Finger input and ten
 simultaneous touch contacts worked in the 14 October tablet test. Bluetooth,
 audio and USB host mode do not work yet.
 
-Battery readings and manual backlight control are available. Experimental
-sensor tests return acceleration, gyroscope and rear-light readings, but
-automatic screen rotation and brightness are not ready.
+Manual backlight control and power/volume buttons also worked in the 14 October
+test. The current backlight adjustment is linear and difficult to use
+comfortably; a logarithmic curve is planned. Battery readings are available.
+Experimental sensor tests return acceleration, gyroscope and rear-light
+readings, but automatic screen rotation and automatic brightness control are
+not ready.
 
 The boot and graphics trials below use kernel package revision **1.27** in a RAM
 boot.
@@ -66,7 +69,7 @@ The table includes earlier development tests and marks experimental results.
 | Feature | Status | Test result / remaining work |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A local console is visible at 3200×2136 using the bootloader framebuffer. |
-| Backlight brightness | 🟡 **Partial** | Manual brightness and off/on control work on both LED banks. Full-range calibration and automatic control still need testing. |
+| Backlight brightness | 🟡 **Partial** | Manual level control and off/on work on both LED banks. The current adjustment is linear and difficult to use comfortably; a logarithmic curve is planned. Full-range calibration and automatic control remain untested. |
 | Screen-off backlight / DPMS | 🟡 **Partial** | One desktop screen-off/on cycle fully disabled the backlight and restored its brightness. Repeated cycles and resume remain untested. |
 | Native panel control / refresh switching | 🔴 **Broken** | Linux still relies on the bootloader's fixed display setup. |
 | Firmware DRM | 🟡 **Partial** | simpledrm provides the fixed display output while Adreno renders the experimental desktop. Native panel control and refresh switching are incomplete. |
@@ -77,7 +80,7 @@ The table includes earlier development tests and marks experimental results.
 | Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
 | Touchscreen — Novatek NT36532 | 🟢 **Working** | Finger input and ten simultaneous contacts worked in the 14 October tablet test. Stylus, edge coverage, coordinate transforms and suspend/resume remain untested. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
-| Power / volume buttons | 🟡 **Partial** | Drivers register. Physical key events and navigation still need testing. |
+| Power / volume buttons | 🟢 **Working** | Power and volume input worked in the 14 October Fedora test. Recovery navigation and power-menu behavior remain untested. |
 | USB keyboard / mouse | 🔴 **Broken** | The USB mouse dongle was not detected. USB host mode does not work. |
 | Pogo keyboard / touchpad | ⚪ **Not tested** | Attachment and input events have not been tested. |
 
