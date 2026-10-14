@@ -1,3 +1,5 @@
+![Fedora KDE desktop and Fastfetch on Uke, 14 October 2026](assets/screenshots/uke-fedora-kde-2026-10-14.png)
+
 # Uke Linux
 
 Linux for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
