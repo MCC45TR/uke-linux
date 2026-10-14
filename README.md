@@ -4,18 +4,20 @@
 
 Linux for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
-## Status — 13 October 2026
+## Status — 14 October 2026
 
 Fedora boots to a local console and the original KDE desktop. Wi-Fi, SSH and
 signed DNF updates work. Experimental Freedreno graphics now work in KDE,
-Xwayland/OpenGL and a Turnip Vulkan test at 255 MHz. Touch, Bluetooth,
+Xwayland/OpenGL and a Turnip Vulkan test at 255 MHz. Finger input and ten
+simultaneous touch contacts worked in the 14 October tablet test. Bluetooth,
 audio and USB host mode do not work yet.
 
 Battery readings and manual backlight control are available. Experimental
 sensor tests return acceleration, gyroscope and rear-light readings, but
 automatic screen rotation and brightness are not ready.
 
-The latest tablet tests use kernel package revision **1.27** in a RAM boot.
+The boot and graphics trials below use kernel package revision **1.27** in a RAM
+boot.
 Revision **1.30** has passed signed RPM and module checks; it has not been tested
 on the tablet. Normal slot-B startup is still unreliable. Android slot A and a
 Linux rollback are retained.
@@ -32,7 +34,7 @@ This repository contains the project overview and workspace. Sources are in the
 
 ## Hardware support
 
-**Test environment, 13 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora
+**Baseline test environment, 13 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora
 Rawhide AArch64; Linux `7.2.9-senemos-uke`; stock Android bootloader. The Linux
 model label is configured as Xiaomi Pad 7. Other variants remain untested.
 The table includes earlier development tests and marks experimental results.
@@ -68,12 +70,12 @@ The table includes earlier development tests and marks experimental results.
 | Screen-off backlight / DPMS | 🟡 **Partial** | One desktop screen-off/on cycle fully disabled the backlight and restored its brightness. Repeated cycles and resume remain untested. |
 | Native panel control / refresh switching | 🔴 **Broken** | Linux still relies on the bootloader's fixed display setup. |
 | Firmware DRM | 🟡 **Partial** | simpledrm provides the fixed display output while Adreno renders the experimental desktop. Native panel control and refresh switching are incomplete. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | KWin reports Freedreno OpenGL ES 3.2 in the GPU RAM trial. Touch, automatic GPU startup and long-term stability remain unresolved. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | KWin reports Freedreno OpenGL ES 3.2 in the GPU RAM trial. Automatic GPU startup and long-term stability remain unresolved. |
 | Manual display rotation | 🟢 **Working** | KScreen rotated the desktop by 90° and restored landscape. Automatic rotation does not work. |
 | GPU — Adreno 732 | 🟡 **Partial — experimental** | Native shader/pixel-readback tests pass at 255 MHz. KDE and Xwayland use Freedreno; a 120-frame Turnip Wayland cube passes. Higher frequencies, thermal protection, automatic startup and suspend are incomplete. Mesa currently mislabels this exact chip FD735. |
 | Xwayland / OpenGL | 🟡 **Partial — experimental** | A fresh session reports Freedreno and hardware acceleration, with OpenGL 4.6 available. Late GPU loading requires a clean graphical session; broad application testing remains open. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
-| Touchscreen — Novatek NT36532 | 🔴 **Broken** | Normal CSOT firmware starts and returns valid metadata and fresh packets. No working finger input; packet decoding and IRQ/input integration are incomplete. |
+| Touchscreen — Novatek NT36532 | 🟢 **Working** | Finger input and ten simultaneous contacts worked in the 14 October tablet test. Stylus, edge coverage, coordinate transforms and suspend/resume remain untested. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟡 **Partial** | Drivers register. Physical key events and navigation still need testing. |
 | USB keyboard / mouse | 🔴 **Broken** | The USB mouse dongle was not detected. USB host mode does not work. |
