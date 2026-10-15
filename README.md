@@ -4,6 +4,31 @@
 
 Linux for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
+## Fedora Rawhide Alpha 1
+
+**Experimental alpha — not suitable for daily use.** Boot reliability, display
+artifacts, power management and several hardware functions remain unresolved.
+
+[Release files and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1):
+
+| File | Purpose |
+|---|---|
+| `fedora-rawhide-uke-system-alpha-1.img` | Fedora Rawhide root filesystem |
+| `fedora-linux-uke-senemos-729-boot-lp.img` | Boot image targeting `PARTLABEL=linux` |
+| `fedora-linux-uke-senemos-729-kernel-up.img` | Experimental boot image targeting `PARTLABEL=userdata`; not tested on the tablet |
+
+The software baseline is normal Linux 7.2.9 revision 1.39. Both public boot
+variants and the exported root filesystem are rebuilt and have not been booted
+on the tablet. The hardware results below refer to the separate development
+installation. Installation instructions will follow.
+See the [short bug-report guide](CONTRIBUTING.md) before opening an issue.
+
+OEM firmware and device calibration files are not distributed. The public image
+does not include their provisioning workflow, so hardware that requires those
+files cannot be assumed to work. The status table describes the separately
+provisioned development system. Using `userdata` for Fedora replaces Android
+user data; this variant is not an Android data-preserving dual-boot route.
+
 ## Status — 15 October 2026
 
 Linux 7.2.9 revision 1.39 boots from slot B to a local console and the original
@@ -186,18 +211,18 @@ establish working thermal protection, charging or boot reliability.
 ## Downloads and development
 
 - [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/)
+- [Fedora Rawhide Alpha 1](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1)
 - [Fedora image releases](https://github.com/MCC45TR/uke-linux-images/releases)
 - [Experimental recovery releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases)
 
-The published Core and KDE images are prebuild tests. Their exact root filesystems
+The earlier Core and KDE images are prebuild tests. Their exact root filesystems
 have host/VM checks but have not been booted on this tablet. Tablet results above
 come from a separate development installation. DNF does not flash Android
 partitions or select a boot slot.
 
-KDE applications come from Fedora; no Uke clones or rebuilds are used. The current
-development KDE installation includes Python dependencies and does not meet the
-project's Python-free target policy. A compliant KDE release remains blocked.
-Core, early initramfs and new project device tools are checked separately.
+KDE applications come from Fedora; no Uke clones or rebuilds are used. Unmodified
+Fedora desktop packages may retain their original Python dependencies. This
+exception does not cover project tools, recovery or initramfs payloads.
 
 ```sh
 git clone --recurse-submodules https://github.com/MCC45TR/uke-linux.git
