@@ -33,6 +33,11 @@ black with DSI errors. It is kept outside the normal build. Native refresh-rate
 switching and adaptive sync do not work yet. Linux 7.2.10 remains a separate
 candidate; the working tablet baseline is 7.2.9.
 
+On 15 October, [COPR build 11125451](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/build/11125451/)
+produced signed 7.2.9-1.39 Rawhide AArch64 RPMs and a signed SRPM. Downloaded
+packages passed signature, architecture and payload checks. This COPR build
+has not yet been installed and tested on the tablet.
+
 This repository contains the project overview and workspace. Sources are in the
 [component repositories](#project-repositories); detailed test records are private.
 
