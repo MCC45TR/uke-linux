@@ -4,40 +4,41 @@
 
 Linux for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
 
-## Status — 14 October 2026
+## Status — 15 October 2026
 
-Fedora boots to a local console and the original KDE desktop. Wi-Fi, SSH and
+Linux 7.2.9 revision 1.39 boots from slot B to a local console and the original
+Fedora KDE desktop. Wi-Fi, SSH and
 signed DNF updates work. Experimental Freedreno graphics now work in KDE,
 Xwayland/OpenGL and a Turnip Vulkan test at 255 MHz. Finger input and ten
 simultaneous touch contacts worked in the 14 October tablet test. Bluetooth,
 audio and USB host mode do not work yet.
 
 Manual backlight control and power/volume buttons also worked in the 14 October
-test. The current backlight adjustment is linear and difficult to use
-comfortably; a logarithmic curve is planned. Battery readings are available.
+test. The paired backlight now uses the OEM mapping, retains a visible minimum
+while on, and reaches zero when blanked. Smooth full-range adjustment still
+needs testing. Battery readings are available.
 Experimental sensor tests return acceleration, gyroscope and rear-light
 readings, but automatic screen rotation and automatic brightness control are
 not ready.
 
-The boot and graphics trials below use kernel package revision **1.27** in a RAM
-boot.
-Revision **1.30** has passed signed RPM and module checks; it has not been tested
-on the tablet. Normal slot-B startup is still unreliable. Android slot A and a
-Linux rollback are retained.
+Revision **1.39** starts Adreno rendering and touch input automatically from the
+installed Fedora root. Touch registered on the first attempt at about seven
+seconds in the measured boot. Earlier RAM trials remain separate evidence.
+Repeated cold boots, full GPU workloads, thermal limits and suspend still need
+testing. Android slot A and the working Linux rollback are retained.
 
-The GPU result uses a RAM candidate and manually loaded matching modules.
-Automatic early GPU loading failed and is not ready for unattended boot.
-Full GPU frequencies, thermal limits, suspend and sustained workloads still
-need testing. The [GPU branch](https://github.com/MCC45TR/senemos-uke-kernel-mainline/pull/29)
-remains experimental. Linux 7.2.10 migration is in progress; current tablet
-results remain from 7.2.9.
+Display scanout still uses simpledrm and the bootloader framebuffer. The native
+DPU/DSI trial now registers a DRM connector and framebuffer, but the panel stays
+black with DSI errors. It is kept outside the normal build. Native refresh-rate
+switching and adaptive sync do not work yet. Linux 7.2.10 remains a separate
+candidate; the working tablet baseline is 7.2.9.
 
 This repository contains the project overview and workspace. Sources are in the
 [component repositories](#project-repositories); detailed test records are private.
 
 ## Hardware support
 
-**Baseline test environment, 13 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora
+**Baseline test environment, 15 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora
 Rawhide AArch64; Linux `7.2.9-senemos-uke`; stock Android bootloader. The Linux
 model label is configured as Xiaomi Pad 7. Other variants remain untested.
 The table includes earlier development tests and marks experimental results.
@@ -54,9 +55,9 @@ The table includes earlier development tests and marks experimental results.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Repeated RAM boots reach Fedora and Wi-Fi SSH. Cold boot and normal slot-B startup still need testing. |
+| Fedora boot | 🟡 **Partial** | Installed revision 1.39 starts from slot B and reaches KDE and Wi-Fi SSH. Repeated cold boots and failure recovery remain under test. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
-| CPU frequency control | 🟡 **Partial** | Three frequency policies are active: 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz. Voltage and throttling behavior still need testing. |
+| CPU frequency control | 🟡 **Partial** | Three schedutil policies expose 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz; frequencies change during operation. Voltage and throttling behavior still need testing. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Memory stress and sleep retention have not been tested. |
 | UFS storage | 🟢 **Working** | The internal Fedora root supports reads and writes. Long transfers, power loss and resume have not been tested. |
 | Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. Filesystem checks pass after orphan repair; power-loss recovery and complete file integrity still need testing. |
@@ -69,16 +70,16 @@ The table includes earlier development tests and marks experimental results.
 | Feature | Status | Test result / remaining work |
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A local console is visible at 3200×2136 using the bootloader framebuffer. |
-| Backlight brightness | 🟡 **Partial** | Manual level control and off/on work on both LED banks. The current adjustment is linear and difficult to use comfortably; a logarithmic curve is planned. Full-range calibration and automatic control remain untested. |
+| Backlight brightness | 🟡 **Partial** | Both banks use the OEM mapping. An unblanked zero request retains a visible minimum; blanking reaches zero and restoration works. Smooth full-range adjustment, optical calibration and automatic control remain untested. |
 | Screen-off backlight / DPMS | 🟡 **Partial** | One desktop screen-off/on cycle fully disabled the backlight and restored its brightness. Repeated cycles and resume remain untested. |
-| Native panel control / refresh switching | 🔴 **Broken** | Linux still relies on the bootloader's fixed display setup. |
+| Native panel control / refresh switching | 🔴 **Broken** | The isolated 60 Hz DPU/DSI candidate registers a connector and framebuffer, but the panel remains black with repeated DSI errors. Normal boots retain firmware scanout; other rates and adaptive sync are unavailable. |
 | Firmware DRM | 🟡 **Partial** | simpledrm provides the fixed display output while Adreno renders the experimental desktop. Native panel control and refresh switching are incomplete. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | KWin reports Freedreno OpenGL ES 3.2 in the GPU RAM trial. Automatic GPU startup and long-term stability remain unresolved. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | Installed revision 1.39 starts KWin with Adreno 732 rendering. The original Fedora application selection is available, including Discover, KWrite, Chromium and Dolphin administration support. Display artifacts and long-term stability remain unresolved. |
 | Manual display rotation | 🟢 **Working** | KScreen rotated the desktop by 90° and restored landscape. Automatic rotation does not work. |
-| GPU — Adreno 732 | 🟡 **Partial — experimental** | Native shader/pixel-readback tests pass at 255 MHz. KDE and Xwayland use Freedreno; a 120-frame Turnip Wayland cube passes. Higher frequencies, thermal protection, automatic startup and suspend are incomplete. Mesa currently mislabels this exact chip FD735. |
+| GPU — Adreno 732 | 🟡 **Partial — experimental** | Automatic hardware rendering reports FD732. Earlier shader/pixel-readback and bounded Vulkan tests passed at 255 MHz. The driver exposes 255–950 MHz; sustained load, thermal behavior and suspend are unqualified. |
 | Xwayland / OpenGL | 🟡 **Partial — experimental** | A fresh session reports Freedreno and hardware acceleration, with OpenGL 4.6 available. Late GPU loading requires a clean graphical session; broad application testing remains open. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
-| Touchscreen — Novatek NT36532 | 🟢 **Working** | Finger input and ten simultaneous contacts worked in the 14 October tablet test. Stylus, edge coverage, coordinate transforms and suspend/resume remain untested. |
+| Touchscreen — Novatek NT36532 | 🟢 **Working** | Finger input and ten simultaneous contacts worked in the 14 October tablet test. Normal revision 1.39 registers input automatically on its first attempt. Native panel reset/DPMS coordination, stylus and suspend/resume remain incomplete. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟢 **Working** | Power and volume input worked in the 14 October Fedora test. Recovery navigation and power-menu behavior remain untested. |
 | USB keyboard / mouse | 🔴 **Broken** | The USB mouse dongle was not detected. USB host mode does not work. |
@@ -88,12 +89,12 @@ The table includes earlier development tests and marks experimental results.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Wi-Fi — WCN6750 | 🟢 **Working** | Automatic connection, SSH, DNS and a verified 16 MiB transfer work. Cold boot and resume still need testing. |
+| Wi-Fi — WCN6750 | 🟢 **Working** | Automatic connection, SSH, DNS and a verified 16 MiB transfer work. The protected factory-data reader supplies the device's own WLAN address across restarts. Broader cold-boot and resume testing remains open. |
 | Signed network updates | 🟢 **Working** | Fedora and COPR packages install over Wi-Fi with signature checks. Kernel and boot-image updates require matching files. |
 | Bluetooth | 🔴 **Broken** | No controller is available for scanning or pairing. |
 | NFC | ⚪ **Not tested** | No controller is exposed. A fitted NFC chip has not been confirmed. |
 | USB overall | 🟡 **Partial** | Device mode works with a computer. Host power and role switching do not work yet. |
-| USB CDC ACM / serial shell | 🟡 **Partial** | The serial interface registers. Reliable two-way commands still need testing. |
+| USB CDC ACM / serial shell | 🟡 **Partial** | Bidirectional development commands work through normal boot and switch-root. Physical reconnect, suspend and role-change reliability remain unqualified. |
 | USB ECM / SSH | 🟢 **Working — manual** | SSH and a verified 16 MiB transfer worked in earlier tests. USB networking is now off by default; development uses Wi-Fi. |
 | USB host / accessory power (VBUS) | 🔴 **Broken** | The USB port did not supply power to the ESP32-S3. Host accessories are not usable yet. |
 | USB-C switch / role control | 🟡 **Partial** | The switch driver starts and device mode works. Automatic role changes and host power still need work. |
@@ -139,11 +140,12 @@ kept on read-only `persist`; experimental registry writes use a RAM copy.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Battery percentage / voltage / temperature | 🟡 **Partial** | Real readings start automatically in a fresh RAM boot. Repeated cold boots and long-term readings still need testing. |
-| Battery current / power / charging indication | 🟡 **Partial** | Current is readable. Current direction and charge-counter units need the prepared driver correction. A Charging label alone does not prove battery gain. |
-| Charging from computer USB | 🟡 **Partial** | A manual 500 mA limit is accepted. Screen-off samples indicate charging, but screen-on load may exceed supply. Automatic limits and sustained capacity gain still need testing. |
+| Battery percentage / voltage / temperature | 🟡 **Partial** | Readings start automatically on normal slot-B boots. Long-term accuracy and all battery states still need testing. |
+| Battery current / power / charging indication | 🟡 **Partial** | Signed current and charge-counter readings reach the standard power-supply/UPower interfaces. External power can be present while the battery discharges; a Charging flag alone does not prove energy gain. |
+| Charging from computer USB | 🟡 **Partial** | Revision 1.39 automatically admits the enumerated 500 mA budget; measured input is about 450 mA. Active-system load can exceed this supply, and a three-minute native diagnostic trial lost battery charge. Sustained net charging remains unqualified. |
 | USB Power Delivery / fast charging | ⚪ **Not tested** | Higher-power charging and protocol/protection behavior have not been tested. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
+| Desktop power profiles | 🔴 **Broken** | The original power-profiles-daemon has a placeholder backend. KDE correctly hides the ineffective choices; a real CPU/GPU policy backend is still needed. |
 | Thermal protection / throttling | ⚪ **Not tested** | Throttling and protective shutdown have not been verified. |
 | Display-only soft sleep | 🟡 **Partial** | One screen-off/on cycle turned off and restored the backlight. This does not suspend the system. |
 | Suspend-to-idle / s2idle | ⏸️ **Disabled** | Sleep remains disabled. The brief black-screen interval did not confirm suspend entry. |
