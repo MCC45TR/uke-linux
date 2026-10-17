@@ -1,8 +1,8 @@
-![Fedora KDE and Fastfetch on Uke at 144 Hz, 17 October 2026](assets/screenshots/uke-fedora-kde-2026-10-17.png)
-
 # Uke Linux
 
 Linux for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Snapdragon 7+ Gen 3 / SM7675).
+
+![Fedora KDE and Fastfetch on Uke at 144 Hz, 17 October 2026](assets/screenshots/Fedora_Rawhide_PAD7_UKE_Fastfetch_Konsole.png)
 
 ## Fedora Rawhide Alpha 1
 
