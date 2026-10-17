@@ -29,34 +29,32 @@ files cannot be assumed to work. The status table describes the separately
 provisioned development system. Using `userdata` for Fedora replaces Android
 user data; this variant is not an Android data-preserving dual-boot route.
 
-## Status — 15 October 2026
+## Status — 17 October 2026
 
-Linux 7.2.9 revision 1.39 boots from slot B to a local console and the original
-Fedora KDE desktop. Wi-Fi, SSH and
-signed DNF updates work. Experimental Freedreno graphics now work in KDE,
-Xwayland/OpenGL and a Turnip Vulkan test at 255 MHz. Finger input and ten
-simultaneous touch contacts worked in the 14 October tablet test. Bluetooth,
-audio and USB host mode do not work yet.
+The development installation now reaches the original Fedora KDE desktop
+through the **native DPU/DSI display driver at 3200×2136, 120 Hz**. Linux
+`7.2.9-senemos.1.4050` starts from the installed slot B image and uses
+`msm-kmsdrmfb`, rather than the bootloader framebuffer. This is the first
+visible native-display result; repeated starts and display lifecycle tests
+remain open. The released Alpha 1 images still use revision 1.39 and do not
+include this development result.
 
-Manual backlight control and power/volume buttons also worked in the 14 October
-test. The paired backlight now uses the OEM mapping, retains a visible minimum
-while on, and reaches zero when blanked. Smooth full-range adjustment still
-needs testing. Battery readings are available.
-Experimental sensor tests return acceleration, gyroscope and rear-light
-readings, but automatic screen rotation and automatic brightness control are
-not ready.
+Manual OEM-mapped brightness adjustment is smooth. Power and volume buttons,
+single-finger input and multitouch work; touchscreen suspend/resume remains
+untested. Support for the seven OEM refresh rates — 30, 48, 50, 60, 90, 120 and
+144 Hz — is being prepared. Only the fixed 120 Hz native mode has a physical
+result so far; adaptive sync is not available.
 
-Revision **1.39** starts Adreno rendering and touch input automatically from the
-installed Fedora root. Touch registered on the first attempt at about seven
-seconds in the measured boot. Earlier RAM trials remain separate evidence.
-Repeated cold boots, full GPU workloads, thermal limits and suspend still need
-testing. Android slot A and the working Linux rollback are retained.
+Wi-Fi, SSH, signed DNF updates and battery readings are available. Earlier
+Freedreno tests exercised KDE, Xwayland/OpenGL and Turnip Vulkan at 255 MHz;
+full GPU workloads and thermal limits remain unqualified. Experimental sensor
+tests return acceleration, gyroscope and rear-light readings, but automatic
+rotation and automatic brightness are not ready. Bluetooth and audio remain
+unavailable. USB data-role and source/sink power-role management need work, and closing the magnetic
+cover does not turn off the display. Android slot A and the Linux rollback are
+preserved.
 
-Display scanout still uses simpledrm and the bootloader framebuffer. The native
-DPU/DSI trial now registers a DRM connector and framebuffer, but the panel stays
-black with DSI errors. It is kept outside the normal build. Native refresh-rate
-switching and adaptive sync do not work yet. Linux 7.2.10 remains a separate
-candidate; the working tablet baseline is 7.2.9.
+Linux 7.2.10 remains a separate candidate; development continues on 7.2.9.
 
 On 15 October, [COPR build 11125451](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/build/11125451/)
 produced signed 7.2.9-1.39 Rawhide AArch64 RPMs and a signed SRPM. Downloaded
@@ -68,10 +66,11 @@ This repository contains the project overview and workspace. Sources are in the
 
 ## Hardware support
 
-**Baseline test environment, 15 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora
-Rawhide AArch64; Linux `7.2.9-senemos-uke`; stock Android bootloader. The Linux
-model label is configured as Xiaomi Pad 7. Other variants remain untested.
-The table includes earlier development tests and marks experimental results.
+**Reviewed 17 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64;
+stock Android bootloader. Native display was observed on Linux
+`7.2.9-senemos.1.4050`; earlier subsystem tests are identified below. The Linux
+model label is Xiaomi Pad 7. Other variants remain untested. These are
+development-system results, not acceptance of the downloadable Alpha 1 images.
 
 | Status | Meaning |
 |---|---|
@@ -85,7 +84,7 @@ The table includes earlier development tests and marks experimental results.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Installed revision 1.39 starts from slot B and reaches KDE and Wi-Fi SSH. Repeated cold boots and failure recovery remain under test. |
+| Fedora boot | 🟡 **Partial** | The installed `.4050` slot B image reached the native-display KDE desktop on 17 October. Repeated cold boots and failure recovery remain under test. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three schedutil policies expose 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz; frequencies change during operation. Voltage and throttling behavior still need testing. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Memory stress and sleep retention have not been tested. |
@@ -99,19 +98,21 @@ The table includes earlier development tests and marks experimental results.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Tablet screen / local TTY | 🟢 **Working** | A local console is visible at 3200×2136 using the bootloader framebuffer. |
-| Backlight brightness | 🟡 **Partial** | Both banks use the OEM mapping. An unblanked zero request retains a visible minimum; blanking reaches zero and restoration works. Smooth full-range adjustment, optical calibration and automatic control remain untested. |
+| Tablet screen / local TTY | 🟢 **Working** | A local console and KDE desktop are visible at 3200×2136. The 17 October native-display boot uses MSM DRM scanout. |
+| Manual backlight brightness | 🟢 **Working** | Smooth adjustment was confirmed on 17 October. Both banks use the exact OEM normal-mode mapping through the standard non-linear backlight interface. Active zero requests retain a visible minimum. Optical calibration and automatic control are separate. |
 | Screen-off backlight / DPMS | 🟡 **Partial** | One desktop screen-off/on cycle fully disabled the backlight and restored its brightness. Repeated cycles and resume remain untested. |
-| Native panel control / refresh switching | 🔴 **Broken** | The isolated 60 Hz DPU/DSI candidate registers a connector and framebuffer, but the panel remains black with repeated DSI errors. Normal boots retain firmware scanout; other rates and adaptive sync are unavailable. |
-| Firmware DRM | 🟡 **Partial** | simpledrm provides the fixed display output while Adreno renders the experimental desktop. Native panel control and refresh switching are incomplete. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | Installed revision 1.39 starts KWin with Adreno 732 rendering. The original Fedora application selection is available, including Discover, KWrite, Chromium and Dolphin administration support. Display artifacts and long-term stability remain unresolved. |
+| Native DPU / DSI / DSC display | 🟢 **Working — fixed 120 Hz** | The `.4050` persistent boot produced a recognizable KDE desktop on 17 October, with active DSI-1 and `msm-kmsdrmfb`. Repeated starts, blanking and suspend remain unqualified. |
+| Refresh-rate switching | 🟡 **Partial** | Native 120 Hz is visible. OEM 30/48/50/60/90/144 Hz modes are being integrated and have not passed physical switching tests. |
+| Adaptive sync / dynamic refresh | 🔴 **Broken** | No qualified VRR implementation. Discrete OEM modes do not establish adaptive-sync support. |
+| Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the `.4050` native-display candidate. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | KDE is visible through native scanout on `.4050`. Earlier revision 1.39 starts KWin with Adreno 732 rendering. Original Fedora applications include Discover, KWrite, Chromium and Dolphin administration support. Sustained graphics and session stability remain under test. |
 | Manual display rotation | 🟢 **Working** | KScreen rotated the desktop by 90° and restored landscape. Automatic rotation does not work. |
 | GPU — Adreno 732 | 🟡 **Partial — experimental** | Automatic hardware rendering reports FD732. Earlier shader/pixel-readback and bounded Vulkan tests passed at 255 MHz. The driver exposes 255–950 MHz; sustained load, thermal behavior and suspend are unqualified. |
 | Xwayland / OpenGL | 🟡 **Partial — experimental** | A fresh session reports Freedreno and hardware acceleration, with OpenGL 4.6 available. Late GPU loading requires a clean graphical session; broad application testing remains open. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
-| Touchscreen — Novatek NT36532 | 🟢 **Working** | Finger input and ten simultaneous contacts worked in the 14 October tablet test. Normal revision 1.39 registers input automatically on its first attempt. Native panel reset/DPMS coordination, stylus and suspend/resume remain incomplete. |
+| Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch were reconfirmed on 17 October; ten simultaneous contacts worked in the 14 October test. Input starts automatically. Touchscreen suspend/resume remains to be validated. Stylus support is listed separately. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
-| Power / volume buttons | 🟢 **Working** | Power and volume input worked in the 14 October Fedora test. Recovery navigation and power-menu behavior remain untested. |
+| Power / volume buttons | 🟢 **Working** | All power and volume buttons work during normal Fedora use, confirmed on 14 and 17 October. Wake from actual suspend is listed separately. |
 | USB keyboard / mouse | 🔴 **Broken** | The USB mouse dongle was not detected. USB host mode does not work. |
 | Pogo keyboard / touchpad | ⚪ **Not tested** | Attachment and input events have not been tested. |
 
@@ -123,11 +124,11 @@ The table includes earlier development tests and marks experimental results.
 | Signed network updates | 🟢 **Working** | Fedora and COPR packages install over Wi-Fi with signature checks. Kernel and boot-image updates require matching files. |
 | Bluetooth | 🔴 **Broken** | No controller is available for scanning or pairing. |
 | NFC | ⚪ **Not tested** | No controller is exposed. A fitted NFC chip has not been confirmed. |
-| USB overall | 🟡 **Partial** | Device mode works with a computer. Host power and role switching do not work yet. |
+| USB overall | 🟡 **Partial** | Device mode works with a computer. Automatic host/device data roles and source/sink power roles are incomplete; accessories are not reliable. |
 | USB CDC ACM / serial shell | 🟡 **Partial** | Bidirectional development commands work through normal boot and switch-root. Physical reconnect, suspend and role-change reliability remain unqualified. |
 | USB ECM / SSH | 🟢 **Working — manual** | SSH and a verified 16 MiB transfer worked in earlier tests. USB networking is now off by default; development uses Wi-Fi. |
 | USB host / accessory power (VBUS) | 🔴 **Broken** | The USB port did not supply power to the ESP32-S3. Host accessories are not usable yet. |
-| USB-C switch / role control | 🟡 **Partial** | The switch driver starts and device mode works. Automatic role changes and host power still need work. |
+| USB-C switch / role control | 🟡 **Partial** | The switch driver starts and device mode works. Data-role and source/sink power-role selection are not yet correct across connections; role changes and accessory power need work. |
 | USB reconnect / driver lifecycle | 🟡 **Partial** | Software reconnect worked. A live battery-driver reload caused a USB fault; the correction and physical cable reconnect still need testing. |
 | USB SuperSpeed | ⚪ **Not tested** | No USB 3 accessory transfer has been verified. |
 | DisplayPort / USB-C video output | ⚪ **Not tested** | No successful external-display test. |
@@ -152,7 +153,7 @@ kept on read-only `persist`; experimental registry writes use a RAM copy.
 | SAR / body proximity — SX937x family | 🔴 **Broken** | No usable capacitive proximity readings. |
 | Automatic rotation / sensor fusion | 🔴 **Broken** | Motion samples exist, but automatic desktop rotation does not work. |
 | Automatic brightness | 🔴 **Broken** | No working front-light or desktop lux interface. Manual backlight control is available. |
-| Hall / cover detection | ⚪ **Not tested** | The DSP lists a hall service. Cover events and Linux integration have not been tested. |
+| Magnetic cover / lid detection | 🔴 **Broken** | Closing the stock magnetic cover did not blank the display in the 17 October test. The DSP lists a hall service, but physical sensor events and Linux lid integration remain unverified. |
 | Temperature sensors | 🟡 **Partial** | Thirty-seven thermal zones and 38 hwmon channels are readable, including battery and Wi-Fi. Channels overlap; accuracy and protective actions remain untested. |
 
 ### Audio and media
