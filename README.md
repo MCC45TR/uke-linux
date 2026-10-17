@@ -1,4 +1,4 @@
-![Fedora KDE desktop and Fastfetch on Uke, 14 October 2026](assets/screenshots/uke-fedora-kde-2026-10-14.png)
+![Fedora KDE and Fastfetch on Uke at 144 Hz, 17 October 2026](assets/screenshots/uke-fedora-kde-2026-10-17.png)
 
 # Uke Linux
 
@@ -32,18 +32,19 @@ user data; this variant is not an Android data-preserving dual-boot route.
 ## Status — 17 October 2026
 
 The development installation now reaches the original Fedora KDE desktop
-through the **native DPU/DSI display driver at 3200×2136, 120 Hz**. Linux
-`7.2.9-senemos.1.4050` starts from the installed slot B image and uses
+through the **native DPU/DSI display driver at 3200×2136**. Linux
+`7.2.9-senemos.1.4054` starts from the installed slot B image and uses
 `msm-kmsdrmfb`, rather than the bootloader framebuffer. This is the first
-visible native-display result; repeated starts and display lifecycle tests
+tested seven-rate native-display build; repeated starts and display lifecycle tests
 remain open. The released Alpha 1 images still use revision 1.39 and do not
 include this development result.
 
 Manual OEM-mapped brightness adjustment is smooth. Power and volume buttons,
 single-finger input and multitouch work; touchscreen suspend/resume remains
-untested. Support for the seven OEM refresh rates — 30, 48, 50, 60, 90, 120 and
-144 Hz — is being prepared. Only the fixed 120 Hz native mode has a physical
-result so far; adaptive sync is not available.
+untested. All seven OEM refresh rates — 30, 48, 50, 60, 90, 120 and
+144 Hz — work in KDE. Nine measured transitions retained the panel reset count,
+touch process and input device. Direct testing found no visible blanking or
+interruption of single-finger and multitouch input. Adaptive sync is not available.
 
 Wi-Fi, SSH, signed DNF updates and battery readings are available. Earlier
 Freedreno tests exercised KDE, Xwayland/OpenGL and Turnip Vulkan at 255 MHz;
@@ -56,10 +57,11 @@ preserved.
 
 Linux 7.2.10 remains a separate candidate; development continues on 7.2.9.
 
-On 15 October, [COPR build 11125451](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/build/11125451/)
-produced signed 7.2.9-1.39 Rawhide AArch64 RPMs and a signed SRPM. Downloaded
-packages passed signature, architecture and payload checks. This COPR build
-has not yet been installed and tested on the tablet.
+On 17 October, [COPR build 11163806](https://copr.fedorainfracloud.org/coprs/build/11163806)
+built the consolidated mainline display source as 7.2.9-1.4054.3 for Rawhide
+AArch64. The separate native package has been retired. COPR supplies a raw Image,
+modules and DTBs; its reproducible boot-container integration is still pending.
+The tested tablet uses the separately matched `.4054` development boot bundle.
 
 This repository contains the project overview and workspace. Sources are in the
 [component repositories](#project-repositories); detailed test records are private.
@@ -68,7 +70,7 @@ This repository contains the project overview and workspace. Sources are in the
 
 **Reviewed 17 October 2026:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64;
 stock Android bootloader. Native display was observed on Linux
-`7.2.9-senemos.1.4050`; earlier subsystem tests are identified below. The Linux
+`7.2.9-senemos.1.4054`; earlier subsystem tests are identified below. The Linux
 model label is Xiaomi Pad 7. Other variants remain untested. These are
 development-system results, not acceptance of the downloadable Alpha 1 images.
 
@@ -84,7 +86,7 @@ development-system results, not acceptance of the downloadable Alpha 1 images.
 
 | Feature | Status | Test result / remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | The installed `.4050` slot B image reached the native-display KDE desktop on 17 October. Repeated cold boots and failure recovery remain under test. |
+| Fedora boot | 🟡 **Partial** | The installed `.4054` slot B image reached the native-display KDE desktop on 17 October. Repeated cold boots and failure recovery remain under test. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three schedutil policies expose 0.365–1.901, 0.480–2.611 and 0.480–2.803 GHz; frequencies change during operation. Voltage and throttling behavior still need testing. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Memory stress and sleep retention have not been tested. |
@@ -101,16 +103,16 @@ development-system results, not acceptance of the downloadable Alpha 1 images.
 | Tablet screen / local TTY | 🟢 **Working** | A local console and KDE desktop are visible at 3200×2136. The 17 October native-display boot uses MSM DRM scanout. |
 | Manual backlight brightness | 🟢 **Working** | Smooth adjustment was confirmed on 17 October. Both banks use the exact OEM normal-mode mapping through the standard non-linear backlight interface. Active zero requests retain a visible minimum. Optical calibration and automatic control are separate. |
 | Screen-off backlight / DPMS | 🟡 **Partial** | One desktop screen-off/on cycle fully disabled the backlight and restored its brightness. Repeated cycles and resume remain untested. |
-| Native DPU / DSI / DSC display | 🟢 **Working — fixed 120 Hz** | The `.4050` persistent boot produced a recognizable KDE desktop on 17 October, with active DSI-1 and `msm-kmsdrmfb`. Repeated starts, blanking and suspend remain unqualified. |
-| Refresh-rate switching | 🟡 **Partial** | Native 120 Hz is visible. OEM 30/48/50/60/90/144 Hz modes are being integrated and have not passed physical switching tests. |
+| Native DPU / DSI / DSC display | 🟢 **Working** | The `.4054` persistent boot displays KDE through DSI-1 and `msm-kmsdrmfb` at all seven OEM rates. Repeated starts, blanking and suspend remain unqualified. |
+| Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
 | Adaptive sync / dynamic refresh | 🔴 **Broken** | No qualified VRR implementation. Discrete OEM modes do not establish adaptive-sync support. |
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the `.4050` native-display candidate. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | KDE is visible through native scanout on `.4050`. Earlier revision 1.39 starts KWin with Adreno 732 rendering. Original Fedora applications include Discover, KWrite, Chromium and Dolphin administration support. Sustained graphics and session stability remain under test. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | KDE is visible through native scanout on `.4054`. Earlier revision 1.39 starts KWin with Adreno 732 rendering. Original Fedora applications include Discover, KWrite, Chromium and Dolphin administration support. Sustained graphics and session stability remain under test. |
 | Manual display rotation | 🟢 **Working** | KScreen rotated the desktop by 90° and restored landscape. Automatic rotation does not work. |
 | GPU — Adreno 732 | 🟡 **Partial — experimental** | Automatic hardware rendering reports FD732. Earlier shader/pixel-readback and bounded Vulkan tests passed at 255 MHz. The driver exposes 255–950 MHz; sustained load, thermal behavior and suspend are unqualified. |
 | Xwayland / OpenGL | 🟡 **Partial — experimental** | A fresh session reports Freedreno and hardware acceleration, with OpenGL 4.6 available. Late GPU loading requires a clean graphical session; broad application testing remains open. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
-| Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch were reconfirmed on 17 October; ten simultaneous contacts worked in the 14 October test. Input starts automatically. Touchscreen suspend/resume remains to be validated. Stylus support is listed separately. |
+| Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch remain usable across all seven refresh rates, confirmed on 17 October. Ten simultaneous contacts worked in the 14 October test. Input starts automatically; suspend/resume remains to be validated. Stylus support is listed separately. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟢 **Working** | All power and volume buttons work during normal Fedora use, confirmed on 14 and 17 October. Wake from actual suspend is listed separately. |
 | USB keyboard / mouse | 🔴 **Broken** | The USB mouse dongle was not detected. USB host mode does not work. |
