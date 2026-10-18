@@ -18,7 +18,7 @@
 </tr>
 </table>
 
-[Downloads](#downloads) · [Hardware support](#hardware-support) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
+[Downloads](#downloads) · [Hardware support](#hardware-support) · [18 October changes](CHANGELOG.md) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
 
 > [!WARNING]
 > **Not suitable for daily use.** Boot reliability, shutdown, power management
@@ -27,7 +27,7 @@
 ## Project status
 
 **18 October 2026:** the development installation runs Fedora Rawhide KDE on a
-**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.10-28`** and the stock Android
+**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.10-29`** and the stock Android
 bootloader. Native display output reaches **3200×2136 at 144 Hz**. Xiaomi Pad 7
 and other memory/storage variants remain untested.
 
@@ -35,6 +35,11 @@ The hardware results below apply to this separately provisioned development
 system. **The public Alpha 1 images use an older kernel and have not been booted
 on the tablet as complete exported artifacts.** OEM firmware and device
 calibration files are not distributed.
+
+The [18 October development record](CHANGELOG.md) covers the matched kernel,
+VRR preference, native management tools, dock mouse, LDAC and battery readback.
+Charge-stop and bypass controls are not physically qualified; HDMI tests remain
+paused until the requested protection/power-path gate is satisfied.
 
 ## Downloads
 
@@ -50,7 +55,7 @@ Android user data; it is not a data-preserving dual-boot route.**
 
 **Validation scope:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64; stock
 Android bootloader. The persistent development boot is
-`7.2.10-28`, reviewed on 18 October 2026. Earlier subsystem tests
+`7.2.10-29`, reviewed on 18 October 2026. Earlier subsystem tests
 are identified where relevant. These are development-system observations, not acceptance of
 the downloadable Alpha 1 images.
 
@@ -71,14 +76,14 @@ Each row records the function's current status, observations, and remaining work
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Signed COPR 11168191 installs the matched 7.2.10-28 boot B/module bundle through DNF, preserving Android A. A normal reboot reaches original KDE; the user confirms display and touch. Cold-boot endurance and failure recovery remain open. |
+| Fedora boot | 🟡 **Partial** | Signed COPR 11168479 installs the matched 7.2.10-29 boot B/module bundle through DNF, preserving Android A and the previous 28 tuple. A normal reboot reaches original KDE; the user confirms display and touch. Cold-boot endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Memory stress and sleep retention have not been tested. |
 | UFS storage | 🟢 **Working** | The internal Fedora root supports reads and writes. Long transfers, power loss and resume have not been tested. |
 | Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. Filesystem checks pass after orphan repair; power-loss recovery and complete file integrity still need testing. |
 | `reboot bootloader` | 🟡 **Partial** | Reaches fastboot. USB re-enumeration has required physical reconnects. Shutdown reliability remains affected by the KDE clipboard hang. |
-| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal KDE reboot reaches the signed persistent 7.2.10-8 bundle. Poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
+| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal reboot reaches signed persistent 7.2.10-29. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The Uke UEFI port is in development. Current Fedora tests use the Android bootloader. |
 
 ### Display, graphics and input
@@ -90,7 +95,7 @@ Each row records the function's current status, observations, and remaining work
 | Screen-off backlight / DPMS | 🟡 **Partial** | Five bounded screen-off/on cycles on 7.2.10-20 retain touch and restore VRR without interface underruns. These display-only cycles do not establish system suspend or long-term reliability. |
 | Native DPU / DSI / DSC display | 🟢 **Working** | The persistent development bundle displays KDE through DSI-1 and msm-kmsdrmfb. The earlier seven-rate transition tests remain bounded; long-run and suspend tests remain open. |
 | Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
-| Adaptive sync / dynamic refresh | 🟢 **Working — development profile** | The user accepts the tested VRR/touch profile. Bounded tests show variable host-interface timing with 30–144 fps delivery, irregular intervals and floor repeats. On 28, restoring KDE Always yields about 30 Hz idle DPU with 144 Hz selected. Optical panel cadence, complete receiver range and endurance remain unqualified. |
+| Adaptive sync / dynamic refresh | 🟢 **Working — development profile** | The user accepts the tested VRR/touch profile. Bounded tests show variable host-interface timing with 30–144 fps delivery, irregular intervals and floor repeats. On 29, KDE Always survives normal reboot without restoration; an eight-second DRM/DPU capture measures about 30 Hz idle with the 144 Hz upper mode selected. Optical panel cadence, complete receiver range and endurance remain unqualified. |
 | Display color depth | 🟡 **Partial** | The active desktop uses a 10-bit framebuffer and the exact OEM 10-bpc RGB/DSC link. Xiaomi advertises 12-bit color; native panel depth versus FRC is not independently established. Selectable 8/12/16-bpc link modes are not implemented. |
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the native-display development track. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Original Fedora applications run on native scanout. A full-shutdown dump identifies a Wayland clipboard deadlock in KGuiAddons 6.31.0; an original distribution fix and repeat tests are required. |
@@ -101,6 +106,7 @@ Each row records the function's current status, observations, and remaining work
 | Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch remain usable across all seven refresh rates, confirmed on 17 October. Ten simultaneous contacts worked in the 14 October test. Input starts automatically; suspend/resume remains to be validated. Stylus support is listed separately. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟢 **Working** | All power and volume buttons work during normal Fedora use, confirmed on 14 and 17 October. Wake from actual suspend is listed separately. |
+| Power-button screen toggle | 🟡 **Partial — configured** | Original PowerDevil is configured for display-only on/off. Physical power-button toggle validation remains pending; this is separate from s2idle. |
 | USB keyboard / mouse | 🟡 **Partial — mouse tested** | With the powered Juo dock on kernel 27, the receiver enumerates, evdev records mouse movement and the user confirms pointer operation. Keyboard, reconnect and suspend coverage remain open. |
 | Pogo keyboard / touchpad | ⚪ **Not tested** | No pogo keyboard is available. The OEM Nanosic transport and MiAuth authentication still need a native Linux implementation. The Android [keyboard fix](https://github.com/JohnnyFFM/xiaomi-keyboard-fix/tree/f838a54bd70f84087cd35b54d5d62c7bba489d15) is a protocol reference. No keyboard light control is exposed without hardware. |
 
@@ -120,6 +126,7 @@ Each row records the function's current status, observations, and remaining work
 | USB reconnect / driver lifecycle | 🟡 **Partial** | Software reconnect worked. A live battery-driver reload caused a USB fault; the correction and physical cable reconnect still need testing. |
 | USB SuperSpeed | 🟡 **Partial — enumeration** | Juo hubs and RTL8153 enumerate at 5 Gbit/s in bounded trials. USB 3 storage transfers and throughput remain untested. |
 | DisplayPort / USB-C video output | 🟡 **Partial** | The connector and notification path exist; 28 fixes a traced type-2 notification rejection. No successful tablet HDMI output yet. The Juo dock requires PD power on the tested laptop; an unpowered trial is inconclusive. |
+| External-monitor DDC/CI brightness | 🟡 **Partial — desktop initialization** | Original Fedora ddcutil is installed. Adaptive-display 9 retains successful original PowerDevil/libddcutil initialization after reboot, excluding internal GENI buses. Actual HDMI output and monitor brightness control remain untested. |
 | USB Ethernet adapters / hubs | 🟡 **Partial** | Juo USB 2/3 hubs, HID and RTL8153 enumerate. On 28, ethtool reports rtl8153b-2 v2 04/27/23 after the compressed-firmware fix. Ethernet carrier is zero; no cable or traffic acceptance. |
 
 ### Sensors and desktop integration
@@ -138,6 +145,7 @@ event mapping or physical calibration result.
 | Magnetometer / compass — QMC630x family | 🟡 **Partial** | SensorProxy returns finite headings that change through physical motion. Absolute heading accuracy is not established; the phone comparison does not pass. Factory calibration remains read-only. |
 | Front light sensor — STK3BCx family | 🟢 **Working — ambient light** | Front lux responds to illumination and participates in dual-sensor KDE brightness. Vendor raw channels are retained without invented units; spectral accuracy remains unqualified. |
 | Rear light sensor — SIP1328 | 🟢 **Working — ambient light** | Rear-only illumination changes KDE backlight while the front stays dark. Lux response is measured; raw spectral channels and flicker require separate qualification. |
+| Ambient color temperature | ⚪ **Not qualified** | A native development diagnostic exists, but the optional front-color endpoint has no valid startup sample. Kelvin conversion and spectral calibration remain unqualified. |
 | Front proximity sensor — STK3BCx family | 🟢 **Working — near/far** | Physical open, covered and released trials report far → near → far through standard SensorProxy. Automatic desktop actions and longer lifecycle tests remain unqualified. |
 | SAR / body proximity — SX937x family | ⏸️ **Disabled** | Three authorized SAR lookups return no endpoint; no sample vector or physical response is established. It remains disabled. |
 | Automatic rotation / sensor fusion | 🟢 **Working — four poses** | Original KDE rotates correctly in all four poses with matching touch coordinates. Normal persistent boot restores the feature. |
@@ -165,8 +173,9 @@ event mapping or physical calibration result.
 | Battery current / power / charging indication | 🟡 **Partial** | Signed current, derived voltage×current power and charge-counter readings reach standard power-supply/hwmon interfaces. External power can be present while the battery discharges; a Charging flag alone does not prove energy gain. |
 | Charging from computer USB | 🟡 **Partial** | Revision 1.39 automatically admits the enumerated 500 mA budget; measured input is about 450 mA. Active-system load can exceed this supply, and a three-minute native diagnostic trial lost battery charge. Sustained net charging remains unqualified. |
 | USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | The Ricomm-powered Juo dock supplies charging while the tablet uses host data role. Bounded battery readings are available; exact negotiated contracts, all charging protocols and protection behavior remain unqualified. |
-| Charge limits / battery bypass | ⚪ **Not tested — physical control** | The native backend rejects the unqualified profile. Host boundary/refusal tests pass; no 80% hold, battery bypass or autonomous termination result is claimed. Full SOC with Charging alone establishes neither cutoff nor a fault. |
-| Native device management | 🟡 **Partial** | Signed COPR 11168298 installs C++ uke-control 9 and separate development diagnostics. Half-RAM swap survives normal reboot; status reports charging metadata without a control write. Existing swap-partition preference and charging actuation remain untested. |
+| Charge limits / charge stop | 🟡 **Partial — firmware readback** | On 29, the deliberate root query reads restart 70%, stop 80% and feature disabled with USB input off. General controls remain unqualified. No SET, physical 80% hold, termination or reboot-persistent cap is accepted. Full SOC with Charging alone establishes neither cutoff nor a fault. |
+| Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass control or battery-isolation result. A charge threshold is not a bypass. Powered HDMI tests remain paused for the requested protection/power-path work. |
+| Native device management | 🟡 **Partial** | Signed COPR 11168494 installs C++ uke-control 10 and separate development diagnostics; COPR 11168495 supplies charging helper 4. Half-RAM swap survives normal reboot. Metadata status and explicit threshold GETs work; they grant no control permission. Existing swap-partition preference and charging actuation remain untested. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
 | Desktop power profiles | 🟡 **Partial** | Three real CPU/GPU profiles are exposed through PPD. Governor and GPU-cap changes pass bounded physical checks. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
 | Thermal protection / throttling | 🟡 **Partial** | Software-emulated thermal events lower three CPU policy limits and the GPU limit; PPD respects thermal QoS. All emulation values are cleared afterward. Actual heat, sustained throttling, protective shutdown and full OEM BCL/skin policy remain unqualified. |
