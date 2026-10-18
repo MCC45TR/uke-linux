@@ -1,158 +1,45 @@
-<div align="center">
+<table>
+<tr>
+<td width="65%" valign="top">
+<h1>Uke Linux</h1>
+<p><strong>Fedora Rawhide for Xiaomi Pad 7 and POCO Pad X1</strong></p>
+<p>A community Linux port for the Snapdragon 7+ Gen 3 (SM7675), with the original Fedora KDE Plasma desktop.</p>
+<p><strong>Experimental alpha</strong> · AArch64 · <code>uke</code></p>
+</td>
+<td width="35%" valign="top" align="center">
+<br>
+<img src="assets/images/uke-fedora-mockup.png" width="240" alt="Xiaomi Pad 7 mockup with Fedora KDE Plasma">
+</td>
+</tr>
+</table>
 
-# Uke Linux
-
-**Fedora Rawhide for Xiaomi Pad 7 and POCO Pad X1**
-
-A community Linux port for the `uke` platform, with native display support,
-device integration, and a shared kernel and image-building workspace.
-
-[![Stage: experimental alpha](https://img.shields.io/badge/stage-experimental%20alpha-d97706?style=flat-square)](#project-status)
-![Architecture: AArch64](https://img.shields.io/badge/architecture-AArch64-475569?style=flat-square)
-![Desktop: KDE Plasma](https://img.shields.io/badge/desktop-KDE%20Plasma-1d99f3?style=flat-square)
-
-**Snapdragon 7+ Gen 3 · SM7675 · `uke`**
-
-[Project status](#project-status) · [Downloads](#downloads) · [Hardware support](#hardware-support) · [Roadmap](#development-roadmap)
-
-[Repositories](#project-repositories) · [Build and validate](#building-and-validation) · [Contribute](#contributing-and-reporting-issues)
-
-</div>
+[Downloads](#downloads) · [Hardware support](#hardware-support) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
 
 > [!WARNING]
-> **Experimental alpha — not suitable for daily use.** Boot reliability,
-> display artifacts, power management, and several hardware functions remain
-> unresolved. The downloadable release and the tested development installation
-> have different validation histories; see [release and validation tracks](#release-and-validation-tracks).
-
-![Fedora KDE and Fastfetch on Uke at 144 Hz, 17 October 2026](assets/screenshots/Fedora_Rawhide_PAD7_UKE_Fastfetch_Konsole.png)
-
-*Fedora KDE at 3200×2136 and 144 Hz on the development installation,
-17 October 2026. This screenshot does not describe the downloadable Alpha 1 images.*
+> **Not suitable for daily use.** Boot reliability, shutdown, power management
+> and several hardware functions remain incomplete. System suspend is disabled.
 
 ## Project status
 
-**Last reviewed: 18 October 2026.** The tested device is a **POCO Pad X1,
-8 GB RAM / 512 GB storage**, running Fedora Rawhide AArch64 through the stock
-Android bootloader. Linux reports the model as Xiaomi Pad 7. Other device and
-memory/storage variants remain untested.
+**18 October 2026:** the development installation runs Fedora Rawhide KDE on a
+**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.10-8`** and the stock Android
+bootloader. Native display output reaches **3200×2136 at 144 Hz**. Xiaomi Pad 7
+and other memory/storage variants remain untested.
 
-Uke Linux brings together the Senemos kernel, hardware support packages, Fedora
-image recipes, recovery, and experimental UEFI work. This repository is the
-project overview and shared workspace; implementation lives in the
-[component repositories](#project-repositories).
-
-### Current development result
-
-The installed slot B image running **`7.2.10-8`** reaches the
-original Fedora KDE desktop through the **native DPU/DSI display driver at
-3200×2136**. Android slot A and the verified `.4054` Linux rollback remain
-preserved. This development installation is separate from the public Alpha 1.
-Original Fedora Plasma Login Manager 6.8.0 now starts the Wayland session;
-SDDM is disabled and retained for rollback.
-
-- **Display and input:** all seven OEM modes are available: 30, 48, 50, 60, 90,
-  120 and 144 Hz. Nine earlier transitions retained panel and touch state.
-  Four-pose automatic rotation and touch alignment pass direct user checks.
-- **Sensors:** front and rear ambient-light readings jointly drive KDE automatic
-  brightness through an OEM-derived curve. Dark, front-only and rear-only
-  trials change actual backlight values. Rotation and brightness work after a
-  normal persistent boot. Factory calibration stays on read-only persist.
-- **Connectivity:** Bluetooth starts automatically; a paired Bluetooth 5.2 mouse
-  provides movement, clicks and wheel input. Wi-Fi discovers the reported
-  network and connects on 5 GHz. No 6 GHz peer or hotspot result is established.
-- **Power:** three real CPU/GPU profiles operate through Power Profiles daemon.
-  CPU requests reach the firmware maxima, and the GPU retains nine 255–950 MHz
-  states. Software-emulated thermal events lower all three CPU policy limits
-  and the GPU limit; power profiles respect those caps. Sustained performance,
-  energy use and protection under actual heat remain unqualified.
-- **Telemetry:** all 27 OEM PMIC ADC channels are exposed through IIO and hwmon.
-  Original KDE System Monitor's backend returns live values for all 27 channels
-  and battery voltage, signed current and derived power with standard units.
-  The complete installation has 69 readable hwmon temperature inputs and 51
-  thermal zones; several interfaces represent the same physical measurement.
-  Battery power is derived from signed current and voltage. The OEM charger
-  temperature channel reads 31.29–31.41 °C with USB power. Without USB power,
-  its near-zero ADC input produces the OEM-clamped 0 °C; this is not a measured
-  ambient temperature. Independent conversion checks match the live results.
-- **Cover sensors:** front close/open and rear fold/unfold generate standard
-  kernel switch events. logind tracks the lid; KDE retains tablet mode without
-  a keyboard. Automatic cover-triggered display blanking remains unqualified.
-
-Systemd reports 8.663 seconds for the measured system startup with Plasma Login
-Manager; desktop readiness is a separate observation. Two preceding normal KDE
-reboot cycles reach the reboot target about three seconds after logind's request.
-The first release-5 boot followed a forced power cycle. Full shutdown remains unreliable:
-an actual plasmashell dump identifies a KDE Wayland clipboard deadlock.
-Automatic brightness needs longer feedback/endurance tests. Absolute compass
-accuracy, cover display policy, complete PMIC/thermal policy,
-audio and USB host roles remain incomplete. Two SPI/GPI timeouts leave long-idle
-touchscreen reliability open. A bounded AVR experiment is included, disabled by default;
-physical VRR activation tests are assigned to a separate continuation. System suspend
-remains disabled. The [hardware tables](#hardware-support) state each test limit.
-
-### Release and validation tracks
-
-| Track | Baseline | What has been established |
-|---|---|---|
-| **Public Alpha 1** | Linux 7.2.9, revision **1.39** | The exact exported boot variants and root filesystem have **not been booted on the tablet**. They do not include the current native display and sensor work. |
-| **Tested development installation** | **`7.2.10-8`** | Signed COPR packages install through DNF and update persistent slot B with verified backup/readback. Normal KDE reboot restores 27 ADC channels, two Hall input nodes, rotation and brightness APIs. Physical lid/fold transitions pass. Original Fedora Plasma Login Manager starts the session. |
-| **COPR kernel producer** | **`7.2.10-8`** delivered | [Build 11165188](https://copr.fedorainfracloud.org/coprs/build/11165188) passes signatures, matched Image/module/container checks and bounded tablet sensor tests. The included AVR experiment remains disabled and unqualified. |
-| **COPR platform packages** | Original KDE with native hardware integration | Sensor startup, dual-light brightness, Bluetooth mouse and CPU/GPU profiles have bounded tablet results. A successful RPM build alone does not establish hardware support. |
-
-The consolidated kernel source uses integer releases: `7.2.10-1`, `-2`, `-3`;
-a separately pinned 7.2.11 starts at `7.2.11-1`. The native updater retains a
-verified previous image. The public Alpha 1 release remains unchanged.
-
-> [!IMPORTANT]
-> **Hardware status applies to the separately provisioned development system.**
-> OEM firmware and device calibration files are not distributed. The public
-> image does not include their provisioning workflow, so hardware that depends
-> on those files cannot be assumed to work in a downloaded image.
+The hardware results below apply to this separately provisioned development
+system. **The public Alpha 1 images use an older kernel and have not been booted
+on the tablet as complete exported artifacts.** OEM firmware and device
+calibration files are not distributed.
 
 ## Downloads
 
-### Fedora Rawhide Alpha 1
+- **[Fedora Rawhide Alpha 1 — images and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1)** — Linux 7.2.9, revision 1.39; predates the current native display and sensor work.
+- [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) — kernel and platform packages, with validation recorded per build.
+- [Linux image releases](https://github.com/MCC45TR/uke-linux-images/releases) · [Experimental OrangeFox releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases).
 
-**[Open the Alpha 1 release and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1)**
-
-| Artifact | Purpose | Root target |
-|---|---|---|
-| `fedora-rawhide-uke-system-alpha-1.img` | Fedora Rawhide root filesystem | Use only with the corresponding boot image and intended partition layout. |
-| `fedora-linux-uke-senemos-729-boot-lp.img` | Boot image for a dedicated Linux partition | `PARTLABEL=linux` |
-| `fedora-linux-uke-senemos-729-kernel-up.img` | Experimental boot image for the Android user-data partition; not tested on the tablet | `PARTLABEL=userdata` |
-
-Both public boot variants and the exported root filesystem are untested as
-complete tablet boot artifacts. Their baseline is revision 1.39. Earlier Core
-and KDE images are also prebuild tests: their exact root filesystems have
-host/VM checks but have not been booted on this tablet.
-
-### Installation status
-
-Public installation instructions will follow. The
-[build examples](#building-and-validation) cover artifact generation and
-inspection; installation requires a separately prepared, appropriate partition
-layout and matched boot files.
-
-> [!CAUTION]
-> **Using `userdata` for Fedora replaces Android user data.** The `userdata`
-> variant is not an Android data-preserving dual-boot route. The preservation
-> of Android slot A on the development tablet does not establish a public
-> installation workflow for other devices.
-
-Verify the downloaded files against the release checksums and record the exact
-filenames before reporting a result. Kernel, modules, DTBs, and boot artifacts
-must match. DNF installs packages. On an explicitly configured development system, the
-native kernel updater also writes and verifies the matching slot B boot image;
-this does not create partitions or select a different slot.
-
-### Other distribution channels
-
-| Channel | Contents |
-|---|---|
-| [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Development kernel and platform packages. Read the validation scope above before selecting a build. |
-| [Linux image releases](https://github.com/MCC45TR/uke-linux-images/releases) | Image release assets and checksums. |
-| [Experimental recovery releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases) | OrangeFox recovery artifacts. |
+Public installation instructions are pending. Read the release requirements and
+verify checksums before using an artifact. **The `userdata` variant replaces
+Android user data; it is not a data-preserving dual-boot route.**
 
 ## Hardware support
 
@@ -162,8 +49,10 @@ Android bootloader. The persistent development boot is
 are identified where relevant. These are development-system observations, not acceptance of
 the downloadable Alpha 1 images.
 
-**Expand a category to view its hardware table.** Each row records the
-function's current status, observations, and remaining work.
+<details>
+<summary><strong>View all hardware support tables</strong></summary>
+
+Each row records the function's current status, observations, and remaining work.
 
 - 🟢 **Working:** the listed function was used successfully on the tested tablet;
   the stated limits still apply.
@@ -173,11 +62,7 @@ function's current status, observations, and remaining work.
 - ⚪ **Not tested:** no functional test result is available.
 - ⏸️ **Disabled:** kept off while a known fault is investigated.
 
-<!-- Keep these hardware tables collapsed by default. Preserve the scope and
-limitations of individual test results when updating a status. -->
-
-<details>
-<summary><strong>Boot, CPU and storage</strong> — 9 items</summary>
+### Boot, CPU and storage
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
@@ -191,10 +76,7 @@ limitations of individual test results when updating a status. -->
 | Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal KDE reboot reaches the signed persistent 7.2.10-8 bundle. Poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The Uke UEFI port is in development. Current Fedora tests use the Android bootloader. |
 
-</details>
-
-<details>
-<summary><strong>Display, graphics and input</strong> — 17 items</summary>
+### Display, graphics and input
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
@@ -216,10 +98,7 @@ limitations of individual test results when updating a status. -->
 | USB keyboard / mouse | 🔴 **Broken** | The USB mouse dongle was not detected. USB host mode does not work. |
 | Pogo keyboard / touchpad | ⚪ **Not tested** | No pogo keyboard is available. The OEM Nanosic transport and MiAuth authentication still need a native Linux implementation. The Android [keyboard fix](https://github.com/JohnnyFFM/xiaomi-keyboard-fix/tree/f838a54bd70f84087cd35b54d5d62c7bba489d15) is a protocol reference. No keyboard light control is exposed without hardware. |
 
-</details>
-
-<details>
-<summary><strong>Networking and USB</strong> — 13 items</summary>
+### Networking and USB
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
@@ -237,10 +116,7 @@ limitations of individual test results when updating a status. -->
 | DisplayPort / USB-C video output | ⚪ **Not tested** | No successful external-display test. |
 | USB Ethernet adapters / hubs | ⚪ **Not tested** | No functional adapter or hub test. |
 
-</details>
-
-<details>
-<summary><strong>Sensors and desktop integration</strong> — 12 items</summary>
+### Sensors and desktop integration
 
 The persistent development boot starts SSC and SensorProxy through native readiness
 dependencies. Original KDE consumes their standard D-Bus interfaces. Factory
@@ -263,10 +139,7 @@ event mapping or physical calibration result.
 | Magnetic cover / lid detection | 🟡 **Partial — input events** | On 7.2.10-8, the Hall module and both input nodes appear automatically. Front close/open and rear fold/unfold generate standard switch events; logind tracks the lid. Cover-triggered display blanking and closed-cover boot remain unqualified. |
 | Temperature sensors | 🟡 **Partial** | On 7.2.10-8, 69 hwmon temperature inputs and 51 thermal zones are readable. All 27 PMIC channels expose 17 temperatures, eight voltages and two currents through standard interfaces and KDE. Counts overlap. Internal CHG_TEMP reads 31.29–31.41 °C with USB power; its inactive near-zero input is OEM-clamped to 0 °C without USB power. Conversion checks pass; absolute calibration and complete thermal policy remain unqualified. |
 
-</details>
-
-<details>
-<summary><strong>Audio, cameras and media</strong> — 6 items</summary>
+### Audio, cameras and media
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
@@ -277,10 +150,7 @@ event mapping or physical calibration result.
 | Rear camera | ⚪ **Not tested** | No verified capture pipeline or frame. |
 | Hardware video decoding / encoding | ⚪ **Not tested** | No verified hardware codec workload. |
 
-</details>
-
-<details>
-<summary><strong>Power, thermal management and platform services</strong> — 21 items</summary>
+### Power, thermal management and platform services
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
@@ -306,182 +176,38 @@ event mapping or physical calibration result.
 | FastRPC | 🟡 **Partial** | Two admitted ADSP contexts serve the sensor registry after persistent boot. General DSP compute and recovery remain unqualified. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload is blocked after earlier resets. The cause still needs investigation. |
 
-</details>
-
 The current boot handoff is **EL1**. EL2/KVM work remains on a separate
 experimental branch, and Project Aloha/UEFI is not the boot path used for the
 reported Fedora tests.
 
-## Development roadmap
+</details>
 
-The workstreams below organize the outstanding work in this status report.
-They describe validation goals, with no delivery dates assigned. Functionality
-should be promoted in the hardware tables only when a corresponding device
-result is available.
+## Documentation
 
-| Workstream | Next validation goals |
+| Topic | Guide |
 |---|---|
-| **Boot and release reproducibility** | Integrate the tested COPR boot bundle into public image production; validate the exact exported artifacts on the tablet; repeat cold boots, failure recovery, and rollback checks. |
-| **Display and touch lifecycle** | Repeat native-display starts, screen-off/on cycles, refresh-rate changes, and touch lifecycle tests. Qualify suspend/resume separately. Investigate adaptive sync as a separate capability from the seven fixed OEM modes. |
-| **CPU/GPU performance and thermal control** | Qualify CPU frequency behavior, GPU workloads, and sustained operation under measured thermal limits. Extend the tested CPU/GPU power-profile backend and verify sustained limits, throttling and protective actions. Exposed frequency ranges remain unqualified until tested. |
-| **Battery, charging, and sleep** | Validate current and charge-counter interpretation, sustained net charging, source-dependent power behavior, USB PD, sleep entry, resume, and wake sources. Keep display-only blanking separate from system suspend. |
-| **USB-C and accessories** | Correct host/device data roles and source/sink power roles; validate VBUS, physical reconnects, driver lifecycle, and host peripherals before broader hub, SuperSpeed, and video-output testing. |
-| **Sensors and desktop integration** | Extend SSC restart and calibration coverage; qualify remaining endpoint units and temperature mappings, sustained dual-light brightness and automatic cover-display policy. |
-| **Audio, Bluetooth, and media** | Bring up usable playback/recording routes and extend Bluetooth lifecycle coverage beyond the tested mouse. Establish camera capture and hardware codec tests before claiming media support. |
-| **EL2/KVM and alternate boot paths** | Continue the separate EL2/KVM experiments and Project Aloha UEFI port. Establish their own boot, device, and recovery results before treating them as supported boot routes. |
+| Build Fedora images | [Image recipes and validation](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/IMAGES.md) |
+| Build the kernel | [Kernel build automation](https://github.com/MCC45TR/senemos-uke-kernel-mainline/blob/main/docs/AUTOMATION.md) |
+| Boot requirements and rollback | [Stock-bootloader boot pair](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/FEDORA-BOOT-PAIR.md) — private, access required |
+| Development plan | [Milestones and remaining work](https://github.com/MCC45TR/uke-linux-docs/blob/main/PLAN.md) — private, access required |
+| Engineering records | [Documentation index](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/README.md) — private, access required |
+| Desktop screenshots | [Fedora KDE gallery](assets/screenshots) |
+| Contributing and bug reports | [Reporting guide](CONTRIBUTING.md) · [Open an issue](https://github.com/MCC45TR/uke-linux/issues/new?template=bug_report.yml) |
+| Security reports | [Security policy](SECURITY.md) |
 
 ## Project repositories
 
-| Component | Repository / workspace path | Responsibility |
-|---|---|---|
-| **Project workspace** | [uke-linux](https://github.com/MCC45TR/uke-linux) · repository root | Project overview, submodule workspace, and the `ukelinux.sh` entry point. |
-| **Senemos kernel** | [senemos-uke-kernel-mainline](https://github.com/MCC45TR/senemos-uke-kernel-mainline) · `senemos-uke-kernel/` | Kernel development, device trees, and Fedora kernel RPMs. |
-| **Hardware support** | [uke-linux-hardware-support](https://github.com/MCC45TR/uke-linux-hardware-support) · `uke-linux-hardware-support/` | Device integration, platform packages, and services. |
-| **Fedora builder** | [uke-fedora-builder](https://github.com/MCC45TR/uke-fedora-builder) · `uke-fedora-builder/` | Image recipes, build implementation, and validation tools. |
-| **Linux images** | [uke-linux-images](https://github.com/MCC45TR/uke-linux-images) · `uke-linux-images/` | Image distribution, release assets, and checksums. |
-| **OrangeFox Recovery** | [orangefox_device_xiaomi_uke](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) · `recovery-uke-ofox/` | Recovery and storage-management work. |
-| **Project Aloha** | [uke-project-aloha](https://github.com/MCC45TR/uke-project-aloha) · `uke-project-aloha/` | Experimental UEFI platform and boot integration. |
-| **Engineering records — private** | [uke-linux-docs](https://github.com/MCC45TR/uke-linux-docs) · access required | Detailed reports, lessons, test records, and risk documentation. |
-
-### Documentation
-
-- [Bug-report guide and documentation style](CONTRIBUTING.md) — required context
-  for useful reports and precise hardware claims.
-- [Core image guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/IMAGES.md)
-  — image recipes and validation boundaries; includes the separate Core/UEFI
-  image workflow.
-- [Stock-bootloader boot-pair instructions](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/FEDORA-BOOT-PAIR.md)
-  — requirements and rollback details; **private, access required**.
-- [Security policy](SECURITY.md) — private vulnerability reporting.
-
-## Building and validation
-
-### 1. Check out the workspace
-
-```sh
-git clone --recurse-submodules https://github.com/MCC45TR/uke-linux.git
-cd uke-linux
-```
-
-The component repositories are included as submodules. Use the build
-documentation for the checked-out revision when selecting host prerequisites
-and output profiles.
-
-### 2. Build kernel and Core image candidates
-
-```sh
-./senemos-uke-kernel/senemos.sh --build 7.2.10 --distro=fedora --test
-./ukelinux.sh --build core --distro=fedora --test
-```
-
-`senemos.sh` builds the kernel; `ukelinux.sh` builds images. These examples
-cover kernel and Core candidates. The separately provisioned KDE development
-installation has its own validation history, as described above.
-
-### 3. Inspect the stock-bootloader boot-pair profile
-
-```sh
-./ukelinux.sh --build boot-pair --distro=fedora --help
-```
-
-This command displays the profile's help. The documented stock-bootloader pair
-contains:
-
-| Output | Intended use |
+| Component | Repository |
 |---|---|
-| `fedora_boot.img` | Android-format Linux boot image for `boot_b`. |
-| `system.img` | Root filesystem for a separately prepared GPT partition named `linux`, selected with `PARTLABEL=linux`. |
+| Kernel and device trees | [senemos-uke-kernel-mainline](https://github.com/MCC45TR/senemos-uke-kernel-mainline) |
+| Hardware integration and packages | [uke-linux-hardware-support](https://github.com/MCC45TR/uke-linux-hardware-support) |
+| Fedora image builder | [uke-fedora-builder](https://github.com/MCC45TR/uke-fedora-builder) |
+| Image distribution | [uke-linux-images](https://github.com/MCC45TR/uke-linux-images) |
+| OrangeFox Recovery | [orangefox_device_xiaomi_uke](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) |
+| Experimental UEFI | [uke-project-aloha](https://github.com/MCC45TR/uke-project-aloha) |
 
-The documented minimum for that partition is 3 GiB, and the selected image must
-fit. The development tablet's 64 GiB Linux root is a separate tested layout.
-The root selection uses a partition label, not a fixed UUID. The older
-`--build boot` profile contains only a debug initramfs.
+## License
 
-The build commands generate local artifacts. They do not create tablet
-partitions or flash the device.
-
-### 4. Check a generated delivery pair
-
-Replace `DELIVERY_DIRECTORY` with the directory containing the generated pair:
-
-```sh
-./ukelinux.sh --check-device --pair DELIVERY_DIRECTORY
-```
-
-This performs read-only file and device checks before a trial. Consult the
-profile's requirements and rollback documentation before proceeding. A build,
-package, VM, or file-validation result does not establish a successful tablet
-boot; report those results separately.
-
-### Package and update scope
-
-Keep the kernel, modules, DTBs, and boot container matched. The consolidated COPR
-source now builds a matched boot container. Its guarded post-transaction updater
-writes slot B only when automatic updates are explicitly enabled locally; it
-verifies readback and retains the previous image. Package builds and physical
-boot acceptance are recorded separately. The selected slot is not changed.
-
-KDE applications come from Fedora; the project uses no Uke clones or rebuilds
-of those applications. Unmodified Fedora desktop packages may retain their
-original Python dependencies. This exception does not cover project tools,
-recovery, or initramfs payloads.
-
-## Contributing and reporting issues
-
-Reproducible device reports, focused driver or integration changes, and clearer
-documentation help move the port forward. Check the
-[hardware status](#hardware-support), [existing issues](https://github.com/MCC45TR/uke-linux/issues),
-and [reporting guide](CONTRIBUTING.md) before opening a report. A listed limitation
-can still benefit from new evidence.
-
-**[Open a hardware or boot bug report](https://github.com/MCC45TR/uke-linux/issues/new?template=bug_report.yml)**
-
-For one problem at a time, include:
-
-1. **Device and software:** commercial device model, RAM/storage variant,
-   stock firmware version if known, distribution, and exact kernel version.
-2. **Artifact identity:** release tag, boot and system filenames, SHA-256 values,
-   and whether files or installed packages changed after installation.
-3. **Boot and storage context:** selected slot and intended root label (`linux`
-   or `userdata`). Write “unknown” when unsure; no partition changes are needed
-   to report a bug.
-4. **Reproduction and observations:** the smallest safe steps, expected and
-   actual behavior, frequency, and whether the failure affects boot, a running
-   session, a mode change, or resume.
-5. **Relevant conditions and evidence:** failure time and clock synchronization,
-   power source, accessories, display mode, whether touch or SSH remained
-   available, and a short relevant log excerpt or photo.
-
-Useful version information from a running Fedora session:
-
-```sh
-uname -r
-cat /etc/os-release
-```
-
-The [reporting guide](CONTRIBUTING.md#useful-evidence-from-a-running-fedora-session)
-describes short journal and kernel-warning captures. Review attachments and
-remove credentials, personal identifiers, network details, and calibration
-data before posting. Do not repeat a crash or unsafe charging test just to
-collect evidence. Report vulnerabilities through the
-[private security-reporting process](SECURITY.md).
-
-For source changes, use the component repository that owns the implementation.
-Describe the observed problem, the change, the tested device and revision, the
-result, and remaining limits. Keep source review, build, package, VM, and tablet
-results separate, following the [documentation style](CONTRIBUTING.md#documentation-style).
-
-## Licensing and project identity
-
-Original files in this repository use the **[MIT License](LICENSE)**.
-Components retain their own licenses; consult the corresponding repositories
-and source files for their terms and attribution. OEM firmware and device
-calibration files are not part of the distributed project artifacts.
-
-Uke Linux is an independent community project built with Linux, Fedora, KDE,
-Mesa, and the work of the wider device-porting community. It is not an official
-Fedora, Xiaomi, POCO, or Qualcomm product.
-
----
-
-[Back to top](#uke-linux)
+Original files use the [MIT License](LICENSE). Components retain their own
+licenses and attribution. Uke Linux is an independent community project,
+unaffiliated with Fedora, Xiaomi, POCO or Qualcomm.
