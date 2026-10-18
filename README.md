@@ -27,7 +27,7 @@
 ## Project status
 
 **18 October 2026:** the development installation runs Fedora Rawhide KDE on a
-**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.10-8`** and the stock Android
+**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.10-20`** and the stock Android
 bootloader. Native display output reaches **3200×2136 at 144 Hz**. Xiaomi Pad 7
 and other memory/storage variants remain untested.
 
@@ -50,7 +50,7 @@ Android user data; it is not a data-preserving dual-boot route.**
 
 **Validation scope:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64; stock
 Android bootloader. The persistent development boot is
-`7.2.10-8`, reviewed on 18 October 2026. Earlier subsystem tests
+`7.2.10-20`, reviewed on 18 October 2026. Earlier subsystem tests
 are identified where relevant. These are development-system observations, not acceptance of
 the downloadable Alpha 1 images.
 
@@ -71,7 +71,7 @@ Each row records the function's current status, observations, and remaining work
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | The signed COPR 7.2.10-8 slot B bundle reaches native-display KDE. Automatic sensor startup returns after normal persistent boot. Cold-boot endurance and failure recovery remain open. |
+| Fedora boot | 🟡 **Partial** | The signed COPR 7.2.10-20 slot B bundle reaches native-display KDE. Two normal reboots retain the desktop display configuration. Cold-boot endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Memory stress and sleep retention have not been tested. |
@@ -87,10 +87,11 @@ Each row records the function's current status, observations, and remaining work
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A local console and KDE desktop are visible at 3200×2136. The 17 October native-display boot uses MSM DRM scanout. |
 | Manual backlight brightness | 🟢 **Working** | Smooth adjustment was confirmed on 17 October. Both banks use the exact OEM normal-mode mapping through the standard non-linear backlight interface. Active zero requests retain a visible minimum. Optical calibration and automatic control are separate. |
-| Screen-off backlight / DPMS | 🟡 **Partial** | Three bounded screen-off/on cycles retain the touch input device. Touch readiness improves from about 1.5 s to 0.65–0.71 s; the user reports normal use. Full suspend remains unqualified. |
+| Screen-off backlight / DPMS | 🟡 **Partial** | Five bounded screen-off/on cycles on 7.2.10-20 retain touch and restore VRR without interface underruns. These display-only cycles do not establish system suspend or long-term reliability. |
 | Native DPU / DSI / DSC display | 🟢 **Working** | The persistent development bundle displays KDE through DSI-1 and msm-kmsdrmfb. The earlier seven-rate transition tests remain bounded; long-run and suspend tests remain open. |
 | Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
-| Adaptive sync / dynamic refresh | 🔴 **Broken** | No qualified VRR implementation. Discrete OEM modes do not establish adaptive-sync support. |
+| Adaptive sync / dynamic refresh | 🟡 **Partial — experimental** | Original KDE exposes Adaptive sync. The explicit development opt-in survives two normal reboots. Bounded tests show variable host-interface timing with 30–144 fps delivery, including irregular intervals and floor repeats. Physical panel cadence and the complete receiver range remain unqualified. |
+| Display color depth | 🟡 **Partial** | The active desktop uses a 10-bit framebuffer and the exact OEM 10-bpc RGB/DSC link. Xiaomi advertises 12-bit color; native panel depth versus FRC is not independently established. Selectable 8/12/16-bpc link modes are not implemented. |
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the native-display development track. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Original Fedora applications run on native scanout. A full-shutdown dump identifies a Wayland clipboard deadlock in KGuiAddons 6.31.0; an original distribution fix and repeat tests are required. |
 | Manual display rotation | 🟢 **Working** | KScreen manual rotation works. Automatic four-pose rotation and matching touch coordinates also pass direct user checks. |
@@ -109,7 +110,7 @@ Each row records the function's current status, observations, and remaining work
 |---|---|---|
 | Wi-Fi — WCN6750 | 🟢 **Working** | Automatic connection, SSH, DNS and a verified 16 MiB transfer work. The protected factory-data reader supplies the device's own WLAN address across restarts. Broader cold-boot and resume testing remains open. |
 | Signed network updates | 🟢 **Working** | Fedora and COPR packages install over Wi-Fi with signature checks. Kernel and boot-image updates require matching files. |
-| Bluetooth | 🟢 **Working — mouse** | The controller starts automatically. A Bluetooth 5.2 mouse pairs, reconnects and supplies movement, clicks and wheel input. Audio and broader device/lifecycle coverage remain untested. |
+| Bluetooth | 🟢 **Working — mouse and audio** | The controller starts automatically. A Bluetooth 5.2 mouse pairs and reconnects with movement, clicks and wheel input. A soundcore Space Q45 also plays stereo audio over LDAC. Broader device and lifecycle coverage remains untested. |
 | NFC | ⚪ **Not tested** | No controller is exposed. A fitted NFC chip has not been confirmed. |
 | USB overall | 🟡 **Partial** | Device mode works with a computer. Automatic host/device data roles and source/sink power roles are incomplete; accessories are not reliable. |
 | USB CDC ACM / serial shell | 🟡 **Partial** | Bidirectional development commands work through normal boot and switch-root. Physical reconnect, suspend and role-change reliability remain unqualified. |
@@ -150,7 +151,8 @@ event mapping or physical calibration result.
 |---|---|---|
 | Internal speakers | 🔴 **Broken** | No usable ALSA playback route. |
 | Microphones | 🔴 **Broken** | No usable ALSA recording route. |
-| USB / Bluetooth audio | ⚪ **Not tested** | No playback or recording acceptance. Bluetooth mouse support does not establish an audio route. |
+| Bluetooth audio / LDAC | 🟢 **Working — stereo playback** | On 18 October, soundcore Space Q45 playback is reported clear and PipeWire confirms a running A2DP sink with the LDAC codec. Microphone/HFP, latency, reconnection and suspend behavior remain untested. |
+| USB audio | ⚪ **Not tested** | No USB playback or recording acceptance. |
 | Front camera | ⚪ **Not tested** | No verified capture pipeline or frame. |
 | Rear camera | ⚪ **Not tested** | No verified capture pipeline or frame. |
 | Hardware video decoding / encoding | ⚪ **Not tested** | No verified hardware codec workload. |
