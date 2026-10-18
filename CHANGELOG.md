@@ -16,14 +16,19 @@ been accepted as complete exported images on this tablet.
   An eight-second DRM/DPU capture measures about 30 Hz idle while the configured
   upper mode remains 144 Hz. The user accepts the development VRR/touch profile;
   optical cadence and complete receiver/endurance qualification remain separate.
-- **Native management:** signed COPR 11168494 installs uke-control 10 and its
-  separate development diagnostics. Signed COPR 11168495 installs charging
-  helper 4. RPM/source checks and native self-checks pass. The 3690 MiB half-RAM
+- **Native management:** signed COPR 11168593 installs uke-control 11 and its
+  separate development diagnostics. Signed COPR 11168630 installs runtime and
+  charging helper 6. RPM/source checks and native self-checks pass. The 3690 MiB half-RAM
   swap survives reboot. Existing swap-partition preference remains untested.
 - **Charging diagnostics:** metadata status remains read-only. With input off,
   the explicit root query reads firmware restart 70%, stop 80%, feature disabled.
   Old-kernel and ordinary-user requests fail explicitly without a fallback.
   No control permission, SET, electrical cutoff or bypass follows from a read.
+- **Minimal charging interface:** signed COPR 11168630 installs the separate
+  native offline screen. Its normal-boot guard refuses drawing over KDE; the
+  desktop and touch service remain uninterrupted. The interface includes a large
+  battery, percentage, firmware time-to-full, signed battery-side power and
+  temperature. Missing time data remains unknown. Actual charger boot is untested.
 - **USB dock:** the powered Juo dock on kernel 27 enumerates its hubs, receiver
   and RTL8153; mouse movement passes evdev and physical confirmation. Kernel 28
   enables compressed firmware loading; ethtool reports rtl8153b-2 v2 04/27/23.
@@ -43,6 +48,14 @@ been accepted as complete exported images on this tablet.
   thermal, color-temperature or complete sensor-accuracy work.
 
 ### Remaining work
+
+The next kernel targets signed Linux 7.2.11, the current kernel.org stable source
+on 18 October. All 77 base patches, native source preparation, guarded battery
+fixtures and full AArch64 battmgr/early-boot translation units pass. Full
+[COPR 11168638](https://copr.fedorainfracloud.org/coprs/build/11168638/) is in
+progress; it is not installed. Its explicit charger-boot handoff and restricted
+existing 70/80 cap enable still require matched-kernel device tests. Source and
+package results do not qualify physical offline charging or battery bypass.
 
 Qualify charge-stop behavior, reboot-persistent protection and any actual
 bypass/system-power path before resuming powered HDMI tests. HDMI output,
