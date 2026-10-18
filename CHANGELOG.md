@@ -9,6 +9,12 @@ been accepted as complete exported images on this tablet.
 
 ### Installed and observed
 
+- **Kernel 7.2.11-4:** signed COPR 11169288 passes the complete kernel build,
+  battery/audio fixtures and package audit. DNF installs the matching tuple;
+  Android A and earlier tested images/modules are preserved. Normal reboot
+  returns to SSH with original KDE processes and active touch/sensor services.
+  s2idle remains the startup selection. Physical display/touch confirmation
+  after this reboot is pending.
 - **Kernel 7.2.11-2:** signed COPR 11168745 installs through DNF. Boot B is
   written and read back, Android A is unchanged and earlier tested image/modules
   are retained. A normal reboot reaches KDE; physical display and touch pass.
@@ -25,7 +31,9 @@ been accepted as complete exported images on this tablet.
   existing firmware 70/80 band. Readback survives normal reboots through
   7.2.11-2, without service replay. A later powered observation reaches reported
   80% with positive battery current; physical charge stop remains unqualified.
-  A separate fixed target-application request is prepared for 7.2.11-3.
+  On 7.2.11-4, one separate input-off target request receives an opaque 16-byte
+  reply and verified unchanged settings. Actuator effect remains unknown;
+  no automatic retry, charge worker or bypass is enabled.
 - **Minimal charging interface:** signed runtime cohort 7 retains the separate
   native offline screen. Its normal-boot guard refuses drawing over KDE; the
   desktop and touch service remain uninterrupted. The interface includes a large
@@ -73,12 +81,12 @@ been accepted as complete exported images on this tablet.
 
 ### Remaining work
 
-The next kernel, 7.2.11-4/sourceac1ed7e, adds the fixed input-off application
+Installed kernel 7.2.11-4/sourceac1ed7e adds the fixed input-off application
 probe for the already enabled 70/80 band and reviewed AudioReach response and
 readiness changes. Fresh ordered 79-patch/native preparation, actual battery
 and audio fixtures and complete AArch64 translation units pass. Full
-[COPR 11169288](https://copr.fedorainfracloud.org/coprs/build/11169288/) is in
-progress; it is not installed. The prior -3 full kernel compiles, but its package
+[COPR 11169288](https://copr.fedorainfracloud.org/coprs/build/11169288/) succeeds
+and its matching bundle is installed. The prior -3 full kernel compiles, but its package
 check fails because compiler-rt is missing; -4 declares that build dependency.
 Audio stays disabled, with no admitted speaker,
 microphone, DAI or amplifier path. Opaque charging receipt/readback cannot prove

@@ -28,8 +28,9 @@
 ## Project status
 
 **18 October 2026:** the development installation runs Fedora Rawhide KDE on a
-**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-2`** and the stock Android
-bootloader. Native display output reaches **3200×2136 at 144 Hz**. Xiaomi Pad 7
+**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-4`** and the stock Android
+bootloader. The latest physical display/touch confirmation is from `7.2.11-2`,
+at **3200×2136 and 144 Hz**; confirmation after the new reboot is pending. Xiaomi Pad 7
 and other memory/storage variants remain untested.
 
 The hardware results below apply to this separately provisioned development
@@ -56,7 +57,7 @@ Android user data; it is not a data-preserving dual-boot route.**
 
 **Validation scope:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64; stock
 Android bootloader. The persistent development boot is
-`7.2.11-2`, reviewed on 18 October 2026. Earlier subsystem tests
+`7.2.11-4`, reviewed on 18 October 2026. Earlier subsystem tests
 are identified where relevant. These are development-system observations, not acceptance of
 the downloadable Alpha 1 images.
 
@@ -77,14 +78,14 @@ Each row records the function's current status, observations, and remaining work
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Signed COPR 11168745 installs the matched 7.2.11-2 boot B/module bundle through DNF, preserving Android A and earlier tested tuples. A normal reboot reaches original KDE; the user confirms display and touch. Cold-boot endurance and failure recovery remain open. |
+| Fedora boot | 🟡 **Partial** | Signed COPR 11169288 installs the matched 7.2.11-4 boot B/module bundle through DNF, preserving Android A and earlier tested tuples. A normal reboot returns to SSH with original KDE processes and active touch/sensor services. Physical display/touch confirmation after this reboot, cold-boot endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Two 1 GiB memtester trials on 18 October stopped at the test's 65 °C thermal guard before completing. Memory integrity under sustained load and sleep retention remain unqualified. |
 | UFS storage | 🟢 **Working** | The internal Fedora root supports reads and writes. Long transfers, power loss and resume have not been tested. |
 | Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. Filesystem checks pass after orphan repair; power-loss recovery and complete file integrity still need testing. |
 | `reboot bootloader` | 🟡 **Partial** | Reaches fastboot. USB re-enumeration has required physical reconnects. Shutdown reliability remains affected by the KDE clipboard hang. |
-| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal reboot reaches signed persistent 7.2.11-2. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
+| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal reboot reaches signed persistent 7.2.11-4. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
 | Hardware information / Fastfetch | 🟡 **Partial — crash corrected** | Signed COPR 11169224 supplies fastfetch 2.68.1-2. Root all-module capture completes with exit 0 after the non-x86 legacy BIOS memory-scan correction. Missing CPU-cache geometry and unimplemented hardware remain explicit; no synthetic SMBIOS data is supplied. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The Uke UEFI port is in development. Current Fedora tests use the Android bootloader. |
 
@@ -176,15 +177,15 @@ event mapping or physical calibration result.
 | Battery current / power / charging indication | 🟡 **Partial** | Signed current, derived voltage×current power and charge-counter readings reach standard power-supply/hwmon interfaces. External power can be present while the battery discharges; a Charging flag alone does not prove energy gain. |
 | Charging from computer USB | 🟡 **Partial** | Revision 1.39 automatically admits the enumerated 500 mA budget; measured input is about 450 mA. Active-system load can exceed this supply, and a three-minute native diagnostic trial lost battery charge. Sustained net charging remains unqualified. |
 | USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | The Ricomm-powered Juo dock supplies charging while the tablet uses host data role. Bounded battery readings are available; exact negotiated contracts, all charging protocols and protection behavior remain unqualified. |
-| Charge limits / charge stop | 🟡 **Partial — configuration persists** | Explicit activation of the existing 70/80 firmware band survives normal reboots through 7.2.11-2. A powered observation still reaches reported 80% with positive battery current; physical cutoff is unqualified. The separate fixed target-application probe is a 7.2.11-4 source candidate. General control admission remains closed. |
+| Charge limits / charge stop | 🟡 **Partial — effect unqualified** | The existing 70/80 firmware band survives normal reboots through 7.2.11-4. Earlier feature activation alone still permits positive battery current at reported 80%. A separate input-off application request now receives an opaque 16-byte reply and verified unchanged settings. Physical cutoff and bypass remain unqualified; general control admission stays closed. |
 | Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass control or battery-isolation result. A charge threshold is not a bypass. Powered HDMI tests remain paused for the requested protection/power-path work. |
-| Native device management | 🟡 **Partial** | Signed COPR 11169315 installs C++ uke-control 14 and development diagnostics. Three bounded sensor snapshots complete with explicit cached, unknown-age and unavailable fields; package-channel transitions remain untested. Runtime/helper 7 keeps charge workers disabled. The observer distinguishes the VRR upper limit from measured DPU cadence. Half-RAM swap survives normal reboot. The fixed target request awaits kernel 7.2.11-4 and physical validation; swap-partition preference remains untested. |
+| Native device management | 🟡 **Partial** | Signed COPR 11169315 installs C++ uke-control 14 and development diagnostics. Three bounded sensor snapshots complete with explicit cached, unknown-age and unavailable fields; package-channel transitions remain untested. Runtime/helper 7 keeps charge workers disabled. The observer distinguishes the VRR upper limit from measured DPU cadence. Half-RAM swap survives normal reboot. The fixed target request has a firmware receipt with unknown actuator effect; swap-partition preference remains untested. |
 | Offline charging screen | ⚪ **Not tested — package installed** | Runtime cohort 7 retains the separate minimal native DRM interface with a large battery, percentage, firmware time-to-full, battery-side watts and temperature. Normal-boot refusal passes without interrupting KDE/touch. The matched initramfs handoff is installed in 7.2.11; actual charger boot, screen/key/unplug behavior, low battery and power use remain unqualified. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
 | Desktop power profiles | 🟡 **Partial** | On 29, all three PPD selections match CPU governors and GPU limits; balanced is restored afterward. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
 | Thermal protection / throttling | 🟡 **Partial** | Software-emulated thermal events lower three CPU policy limits and the GPU limit; PPD respects thermal QoS. All emulation values are cleared afterward. Actual heat, sustained throttling, protective shutdown and full OEM BCL/skin policy remain unqualified. |
 | Display-only soft sleep | 🟡 **Partial** | Ten display-only off/on cycles on 29 restore backlight and scanout state, but one DPU frame-done timeout remains. System sleep and physical wake are untested. |
-| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | Signed adaptive-display 10 enables standard systemd s2idle persistently. One real cycle returns after approximately 26 seconds with the RTC alarm identified as the wake source and zero PM failures. Wi-Fi reconnects about nine seconds later; touch/sensor services retain zero restarts. Physical display/touch confirmation, power-key wake, repeated cycles and energy remain open. |
+| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | Signed adaptive-display 10 enables standard systemd s2idle; its selection persists after reboot to 7.2.11-4. One real cycle on 7.2.11-2 returns after approximately 26 seconds with the RTC alarm identified as the wake source and zero PM failures. Wi-Fi reconnects about nine seconds later. Physical display/touch confirmation, power-key wake, repeated cycles and energy remain open. |
 | Deep suspend | ⚪ **Not tested** | Advertised by the kernel; actual sleep and resume have not been verified. |
 | Power-key IRQ wake | ⚪ **Not tested** | The input and wake flag exist. Wake from actual sleep has not been tested. |
 | USB cable wake | 🔴 **Broken** | Required USB wake interrupts are missing from the current device tree. |
