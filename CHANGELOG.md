@@ -61,8 +61,10 @@ been accepted as complete exported images on this tablet.
 - **Suspend policy:** signed COPR 11169255 installs adaptive-display 10. Standard
   systemd selects s2idle at startup and each suspend request; logind reports
   suspend available after deliberate removal of earlier laboratory masks. A
-  device-test PM phase returns with zero failure counters. Actual sleep/wake,
-  physical display/input and sleep power remain separate validation gates.
+  device-test PM phase and one real approximately 26-second s2idle cycle return
+  with zero failure counters. The recorded wake IRQ maps to the RTC alarm;
+  Wi-Fi reconnects about nine seconds after resume. Physical display/input,
+  power-key wake, repeated cycles and sleep power remain separate gates.
 
 ### Remaining work
 
