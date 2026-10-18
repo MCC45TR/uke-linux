@@ -58,15 +58,22 @@ been accepted as complete exported images on this tablet.
   approximately 143.9 Hz DPU timing and application CPU use approaching one full
   core. GPU frequency responds to load. Content frame rate and the reported
   stutter remain unresolved; no KDE application is forked or replaced.
+- **Suspend policy:** signed COPR 11169255 installs adaptive-display 10. Standard
+  systemd selects s2idle at startup and each suspend request; logind reports
+  suspend available after deliberate removal of earlier laboratory masks. A
+  device-test PM phase returns with zero failure counters. Actual sleep/wake,
+  physical display/input and sleep power remain separate validation gates.
 
 ### Remaining work
 
-The next kernel, 7.2.11-3/source071dc16, adds the fixed input-off application
+The next kernel, 7.2.11-4/sourceac1ed7e, adds the fixed input-off application
 probe for the already enabled 70/80 band and reviewed AudioReach response and
 readiness changes. Fresh ordered 79-patch/native preparation, actual battery
 and audio fixtures and complete AArch64 translation units pass. Full
-[COPR 11169202](https://copr.fedorainfracloud.org/coprs/build/11169202/) is in
-progress; it is not installed. Audio stays disabled, with no admitted speaker,
+[COPR 11169288](https://copr.fedorainfracloud.org/coprs/build/11169288/) is in
+progress; it is not installed. The prior -3 full kernel compiles, but its package
+check fails because compiler-rt is missing; -4 declares that build dependency.
+Audio stays disabled, with no admitted speaker,
 microphone, DAI or amplifier path. Opaque charging receipt/readback cannot prove
 actuator effect or battery bypass. Actual offline charging remains untested.
 
@@ -75,8 +82,8 @@ bypass/system-power path before resuming powered HDMI tests. HDMI output,
 Ethernet traffic, storage throughput and external brightness still need physical
 tests. The internal display uses the OEM 10-bpc RGB/DSC path; selectable 8/12/16-bpc
 modes are not implemented. White-flash behavior, stability and energy efficiency
-remain open. Actual system sleep remains deferred; display-only blanking is
-separate from s2idle.
+remain open. S2idle is now enabled at the user's request; actual sleep/resume
+and energy validation remain open. Display-only blanking is a separate action.
 
 Source, host tests, signed packages and physical observations are reported
 separately in the [hardware support table](README.md#hardware-support).

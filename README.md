@@ -22,7 +22,8 @@
 
 > [!WARNING]
 > **Not suitable for daily use.** Boot reliability, shutdown, power management
-> and several hardware functions remain incomplete. System suspend is disabled.
+> and several hardware functions remain incomplete. Suspend now selects s2idle;
+> physical wake, resume reliability and sleep power remain under validation.
 
 ## Project status
 
@@ -175,15 +176,15 @@ event mapping or physical calibration result.
 | Battery current / power / charging indication | 🟡 **Partial** | Signed current, derived voltage×current power and charge-counter readings reach standard power-supply/hwmon interfaces. External power can be present while the battery discharges; a Charging flag alone does not prove energy gain. |
 | Charging from computer USB | 🟡 **Partial** | Revision 1.39 automatically admits the enumerated 500 mA budget; measured input is about 450 mA. Active-system load can exceed this supply, and a three-minute native diagnostic trial lost battery charge. Sustained net charging remains unqualified. |
 | USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | The Ricomm-powered Juo dock supplies charging while the tablet uses host data role. Bounded battery readings are available; exact negotiated contracts, all charging protocols and protection behavior remain unqualified. |
-| Charge limits / charge stop | 🟡 **Partial — configuration persists** | Explicit activation of the existing 70/80 firmware band survives normal reboots through 7.2.11-2. A powered observation still reaches reported 80% with positive battery current; physical cutoff is unqualified. The separate fixed target-application probe is a 7.2.11-3 source candidate. General control admission remains closed. |
+| Charge limits / charge stop | 🟡 **Partial — configuration persists** | Explicit activation of the existing 70/80 firmware band survives normal reboots through 7.2.11-2. A powered observation still reaches reported 80% with positive battery current; physical cutoff is unqualified. The separate fixed target-application probe is a 7.2.11-4 source candidate. General control admission remains closed. |
 | Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass control or battery-isolation result. A charge threshold is not a bypass. Powered HDMI tests remain paused for the requested protection/power-path work. |
-| Native device management | 🟡 **Partial** | C++ uke-control 11 and development diagnostics remain installed. Signed COPR 11169204 upgrades runtime/helper to 7; metadata checks pass and charge workers stay disabled. The observer distinguishes the VRR upper limit from measured DPU cadence. Half-RAM swap survives normal reboot. The new fixed target request awaits kernel 7.2.11-3 and physical validation; swap-partition preference remains untested. |
+| Native device management | 🟡 **Partial** | C++ uke-control 11 and development diagnostics remain installed. Signed COPR 11169204 upgrades runtime/helper to 7; metadata checks pass and charge workers stay disabled. The observer distinguishes the VRR upper limit from measured DPU cadence. Half-RAM swap survives normal reboot. The new fixed target request awaits kernel 7.2.11-4 and physical validation; swap-partition preference remains untested. |
 | Offline charging screen | ⚪ **Not tested — package installed** | Runtime cohort 7 retains the separate minimal native DRM interface with a large battery, percentage, firmware time-to-full, battery-side watts and temperature. Normal-boot refusal passes without interrupting KDE/touch. The matched initramfs handoff is installed in 7.2.11; actual charger boot, screen/key/unplug behavior, low battery and power use remain unqualified. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
 | Desktop power profiles | 🟡 **Partial** | On 29, all three PPD selections match CPU governors and GPU limits; balanced is restored afterward. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
 | Thermal protection / throttling | 🟡 **Partial** | Software-emulated thermal events lower three CPU policy limits and the GPU limit; PPD respects thermal QoS. All emulation values are cleared afterward. Actual heat, sustained throttling, protective shutdown and full OEM BCL/skin policy remain unqualified. |
 | Display-only soft sleep | 🟡 **Partial** | Ten display-only off/on cycles on 29 restore backlight and scanout state, but one DPU frame-done timeout remains. System sleep and physical wake are untested. |
-| Suspend-to-idle / s2idle | ⏸️ **Disabled** | Sleep remains disabled. The brief black-screen interval did not confirm suspend entry. |
+| Suspend-to-idle / s2idle | 🟡 **Partial — enabled** | Signed adaptive-display 10 selects standard systemd s2idle persistently. Earlier laboratory sleep/suspend masks are removed on the development tablet and logind reports suspend available. The device-test PM phase passes; actual sleep/wake, physical input/display and energy remain separate acceptance gates. |
 | Deep suspend | ⚪ **Not tested** | Advertised by the kernel; actual sleep and resume have not been verified. |
 | Power-key IRQ wake | ⚪ **Not tested** | The input and wake flag exist. Wake from actual sleep has not been tested. |
 | USB cable wake | 🔴 **Broken** | Required USB wake interrupts are missing from the current device tree. |
