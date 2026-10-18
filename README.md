@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td colspan="2" align="center">
-<img src="assets/screenshots/Fedora_Rawhide_PAD7_UKE_Fastfetch_Konsole.png" width="100%" alt="Fedora Rawhide KDE and Fastfetch on the Uke development installation, 17 October 2026">
+<img src="assets/screenshots/Lastest_Rawhide_Screen_Shot_Ref.png" width="100%" alt="Fedora Rawhide KDE and Fastfetch on the Uke development installation, 17 October 2026">
 </td>
 </tr>
 </table>
