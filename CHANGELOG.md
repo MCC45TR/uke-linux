@@ -9,22 +9,24 @@ been accepted as complete exported images on this tablet.
 
 ### Installed and observed
 
-- **Kernel 7.2.10-29:** signed COPR 11168479 installs through DNF. Boot B is
-  written and read back, Android A is unchanged and the previous 28 image/modules
+- **Kernel 7.2.11-2:** signed COPR 11168745 installs through DNF. Boot B is
+  written and read back, Android A is unchanged and earlier tested image/modules
   are retained. A normal reboot reaches KDE; physical display and touch pass.
 - **VRR preference and observation:** KDE Always persists through that reboot.
   An eight-second DRM/DPU capture measures about 30 Hz idle while the configured
   upper mode remains 144 Hz. The user accepts the development VRR/touch profile;
   optical cadence and complete receiver/endurance qualification remain separate.
 - **Native management:** signed COPR 11168593 installs uke-control 11 and its
-  separate development diagnostics. Signed COPR 11168630 installs runtime and
-  charging helper 6. RPM/source checks and native self-checks pass. The 3690 MiB half-RAM
+  separate development diagnostics. Signed COPR 11169204 upgrades runtime and
+  charging helper to 7. Exact source/signature/native payload and DNF verification
+  pass; charge workers stay disabled. The 3690 MiB half-RAM
   swap survives reboot. Existing swap-partition preference remains untested.
-- **Charging diagnostics:** metadata status remains read-only. With input off,
-  the explicit root query reads firmware restart 70%, stop 80%, feature disabled.
-  Old-kernel and ordinary-user requests fail explicitly without a fallback.
-  No control permission, SET, electrical cutoff or bypass follows from a read.
-- **Minimal charging interface:** signed COPR 11168630 installs the separate
+- **Charging configuration:** an explicit input-off operation enables the
+  existing firmware 70/80 band. Readback survives normal reboots through
+  7.2.11-2, without service replay. A later powered observation reaches reported
+  80% with positive battery current; physical charge stop remains unqualified.
+  A separate fixed target-application request is prepared for 7.2.11-3.
+- **Minimal charging interface:** signed runtime cohort 7 retains the separate
   native offline screen. Its normal-boot guard refuses drawing over KDE; the
   desktop and touch service remain uninterrupted. The interface includes a large
   battery, percentage, firmware time-to-full, signed battery-side power and
@@ -33,6 +35,8 @@ been accepted as complete exported images on this tablet.
   and RTL8153; mouse movement passes evdev and physical confirmation. Kernel 28
   enables compressed firmware loading; ethtool reports rtl8153b-2 v2 04/27/23.
   SuperSpeed enumeration is distinct from throughput or Ethernet traffic.
+  Kernel 7.2.11-2 corrects the WCD AUX status address/mask. Its powered HDMI
+  validation remains behind the charging gate.
 - **Manual CDC:** CDC defaults off. Explicit one-shot management uses
   `uke-control set cdc on/off`; it has no persistent gadget service. Development
   SSH uses infrastructure Wi-Fi.
@@ -46,16 +50,25 @@ been accepted as complete exported images on this tablet.
   the current profile is balanced. Native sensor readiness and original KDE
   interfaces are retained. These observations do not close jank, energy,
   thermal, color-temperature or complete sensor-accuracy work.
+- **Fastfetch:** signed COPR 11169224 installs 2.68.1-2. A non-x86 guard removes
+  the legacy PC BIOS memory scan that caused root SIGBUS. The all-module root
+  capture completes at exit 0 without a device-permission workaround. Missing
+  cache geometry and unavailable hardware remain explicit.
+- **Scrolling measurements:** a physical original Settings-list trial records
+  approximately 143.9 Hz DPU timing and application CPU use approaching one full
+  core. GPU frequency responds to load. Content frame rate and the reported
+  stutter remain unresolved; no KDE application is forked or replaced.
 
 ### Remaining work
 
-The next kernel targets signed Linux 7.2.11, the current kernel.org stable source
-on 18 October. All 77 base patches, native source preparation, guarded battery
-fixtures and full AArch64 battmgr/early-boot translation units pass. Full
-[COPR 11168638](https://copr.fedorainfracloud.org/coprs/build/11168638/) is in
-progress; it is not installed. Its explicit charger-boot handoff and restricted
-existing 70/80 cap enable still require matched-kernel device tests. Source and
-package results do not qualify physical offline charging or battery bypass.
+The next kernel, 7.2.11-3/source071dc16, adds the fixed input-off application
+probe for the already enabled 70/80 band and reviewed AudioReach response and
+readiness changes. Fresh ordered 79-patch/native preparation, actual battery
+and audio fixtures and complete AArch64 translation units pass. Full
+[COPR 11169202](https://copr.fedorainfracloud.org/coprs/build/11169202/) is in
+progress; it is not installed. Audio stays disabled, with no admitted speaker,
+microphone, DAI or amplifier path. Opaque charging receipt/readback cannot prove
+actuator effect or battery bypass. Actual offline charging remains untested.
 
 Qualify charge-stop behavior, reboot-persistent protection and any actual
 bypass/system-power path before resuming powered HDMI tests. HDMI output,
