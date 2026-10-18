@@ -79,7 +79,7 @@ Each row records the function's current status, observations, and remaining work
 | Fedora boot | 🟡 **Partial** | Signed COPR 11168479 installs the matched 7.2.10-29 boot B/module bundle through DNF, preserving Android A and the previous 28 tuple. A normal reboot reaches original KDE; the user confirms display and touch. Cold-boot endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
-| RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Memory stress and sleep retention have not been tested. |
+| RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Two 1 GiB memtester trials on 18 October stopped at the test's 65 °C thermal guard before completing. Memory integrity under sustained load and sleep retention remain unqualified. |
 | UFS storage | 🟢 **Working** | The internal Fedora root supports reads and writes. Long transfers, power loss and resume have not been tested. |
 | Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. Filesystem checks pass after orphan repair; power-loss recovery and complete file integrity still need testing. |
 | `reboot bootloader` | 🟡 **Partial** | Reaches fastboot. USB re-enumeration has required physical reconnects. Shutdown reliability remains affected by the KDE clipboard hang. |
@@ -92,7 +92,7 @@ Each row records the function's current status, observations, and remaining work
 |---|---|---|
 | Tablet screen / local TTY | 🟢 **Working** | A local console and KDE desktop are visible at 3200×2136. The 17 October native-display boot uses MSM DRM scanout. |
 | Manual backlight brightness | 🟢 **Working** | Smooth adjustment was confirmed on 17 October. Both banks use the exact OEM normal-mode mapping through the standard non-linear backlight interface. Active zero requests retain a visible minimum. Optical calibration and automatic control are separate. |
-| Screen-off backlight / DPMS | 🟡 **Partial** | Five bounded screen-off/on cycles on 7.2.10-20 retain touch and restore VRR without interface underruns. These display-only cycles do not establish system suspend or long-term reliability. |
+| Screen-off backlight / DPMS | 🟡 **Partial** | Ten cycles on 7.2.10-29 switch the backlight and active CRTC off/on, retaining the touch service and KDE VRR preference. The tenth off transition logs a DPU frame-done timeout. Display lifecycle reliability and system suspend remain unqualified. |
 | Native DPU / DSI / DSC display | 🟢 **Working** | The persistent development bundle displays KDE through DSI-1 and msm-kmsdrmfb. The earlier seven-rate transition tests remain bounded; long-run and suspend tests remain open. |
 | Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
 | Adaptive sync / dynamic refresh | 🟢 **Working — development profile** | The user accepts the tested VRR/touch profile. Bounded tests show variable host-interface timing with 30–144 fps delivery, irregular intervals and floor repeats. On 29, KDE Always survives normal reboot without restoration; an eight-second DRM/DPU capture measures about 30 Hz idle with the 144 Hz upper mode selected. Optical panel cadence, complete receiver range and endurance remain unqualified. |
@@ -100,9 +100,9 @@ Each row records the function's current status, observations, and remaining work
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the native-display development track. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Original Fedora applications run on native scanout. A full-shutdown dump identifies a Wayland clipboard deadlock in KGuiAddons 6.31.0; an original distribution fix and repeat tests are required. |
 | Manual display rotation | 🟢 **Working** | KScreen manual rotation works. Automatic four-pose rotation and matching touch coordinates also pass direct user checks. |
-| GPU — Adreno 732 | 🟡 **Partial — experimental** | Hardware rendering and bounded OpenGL/Vulkan tests pass. Nine 255–950 MHz states are exposed and residency changes during use. CPU/GPU profiles change limits. Sustained workloads, thermal actions and suspend remain unqualified. |
-| Xwayland / OpenGL | 🟡 **Partial — experimental** | A fresh session reports Freedreno and hardware acceleration, with OpenGL 4.6 available. Late GPU loading requires a clean graphical session; broad application testing remains open. |
-| Vulkan / Turnip | 🟡 **Partial — experimental** | A bounded Wayland cube completes on the hardware GPU. Vulkan conformance, long workloads and lifecycle tests have not been completed. |
+| GPU — Adreno 732 | 🟡 **Partial — experimental** | Desktop OpenGL validation and a 9,000-frame Vulkan run pass on 29. OpenGL ES has six glmark2 output-validation failures with Mesa 26.2.4. Nine 255–950 MHz states are exposed; profiles change limits. Sustained workloads, thermal actions and suspend remain unqualified. |
+| Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | On 18 October, FD732 hardware rendering passes 27 glmark2 output checks each through Xwayland and Wayland, plus texture, Phong shading and desktop-blur workloads. Six other scenes lack a validation result. Broader applications, OpenGL ES and suspend remain unqualified. |
+| Vulkan / Turnip | 🟡 **Partial — experimental** | On 29, Turnip completes 9,000 Wayland frames with exit 0. vulkaninfo exits 1 while querying VK_KHR_display, including with only the Freedreno driver selected. Conformance, long workloads and lifecycle tests remain open. |
 | Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch remain usable across all seven refresh rates, confirmed on 17 October. Ten simultaneous contacts worked in the 14 October test. Input starts automatically; suspend/resume remains to be validated. Stylus support is listed separately. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟢 **Working** | All power and volume buttons work during normal Fedora use, confirmed on 14 and 17 October. Wake from actual suspend is listed separately. |
@@ -161,9 +161,9 @@ event mapping or physical calibration result.
 | Microphones | 🔴 **Broken** | No usable ALSA recording route. |
 | Bluetooth audio / LDAC | 🟢 **Working — stereo playback** | On 18 October, soundcore Space Q45 playback is reported clear and PipeWire confirms a running A2DP sink with the LDAC codec. Microphone/HFP, latency, reconnection and suspend behavior remain untested. |
 | USB audio | ⚪ **Not tested** | No USB playback or recording acceptance. |
-| Front camera | ⚪ **Not tested** | No verified capture pipeline or frame. |
-| Rear camera | ⚪ **Not tested** | No verified capture pipeline or frame. |
-| Hardware video decoding / encoding | ⚪ **Not tested** | No verified hardware codec workload. |
+| Front camera | ⚪ **Not tested** | On 29, no video device or media graph is exposed; the bounded V4L2 capture attempt cannot open a device. No verified front-camera frame. |
+| Rear camera | ⚪ **Not tested** | On 29, no video device or media graph is exposed. No verified rear-camera pipeline or frame. |
+| Hardware video decoding / encoding | ⚪ **Not tested** | On 29, no V4L2 codec device or GStreamer hardware codec factory is available for a workload. Hardware decoding and encoding remain unverified. |
 
 ### Power, thermal management and platform services
 
@@ -177,9 +177,9 @@ event mapping or physical calibration result.
 | Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass control or battery-isolation result. A charge threshold is not a bypass. Powered HDMI tests remain paused for the requested protection/power-path work. |
 | Native device management | 🟡 **Partial** | Signed COPR 11168494 installs C++ uke-control 10 and separate development diagnostics; COPR 11168495 supplies charging helper 4. Half-RAM swap survives normal reboot. Metadata status and explicit threshold GETs work; they grant no control permission. Existing swap-partition preference and charging actuation remain untested. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
-| Desktop power profiles | 🟡 **Partial** | Three real CPU/GPU profiles are exposed through PPD. Governor and GPU-cap changes pass bounded physical checks. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
+| Desktop power profiles | 🟡 **Partial** | On 29, all three PPD selections match CPU governors and GPU limits; balanced is restored afterward. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
 | Thermal protection / throttling | 🟡 **Partial** | Software-emulated thermal events lower three CPU policy limits and the GPU limit; PPD respects thermal QoS. All emulation values are cleared afterward. Actual heat, sustained throttling, protective shutdown and full OEM BCL/skin policy remain unqualified. |
-| Display-only soft sleep | 🟡 **Partial** | One screen-off/on cycle turned off and restored the backlight. This does not suspend the system. |
+| Display-only soft sleep | 🟡 **Partial** | Ten display-only off/on cycles on 29 restore backlight and scanout state, but one DPU frame-done timeout remains. System sleep and physical wake are untested. |
 | Suspend-to-idle / s2idle | ⏸️ **Disabled** | Sleep remains disabled. The brief black-screen interval did not confirm suspend entry. |
 | Deep suspend | ⚪ **Not tested** | Advertised by the kernel; actual sleep and resume have not been verified. |
 | Power-key IRQ wake | ⚪ **Not tested** | The input and wake flag exist. Wake from actual sleep has not been tested. |
