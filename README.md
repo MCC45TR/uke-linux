@@ -11,6 +11,11 @@
 <img src="assets/images/uke-fedora-mockup.png" width="240" alt="Xiaomi Pad 7 mockup with Fedora KDE Plasma">
 </td>
 </tr>
+<tr>
+<td colspan="2" align="center">
+<img src="assets/screenshots/Fedora_Rawhide_PAD7_UKE_Fastfetch_Konsole.png" width="100%" alt="Fedora Rawhide KDE and Fastfetch on the Uke development installation, 17 October 2026">
+</td>
+</tr>
 </table>
 
 [Downloads](#downloads) · [Hardware support](#hardware-support) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
