@@ -54,6 +54,11 @@ been accepted as complete exported images on this tablet.
   the legacy PC BIOS memory scan that caused root SIGBUS. The all-module root
   capture completes at exit 0 without a device-permission workaround. Missing
   cache geometry and unavailable hardware remain explicit.
+- **Native management:** signed COPR 11169315 installs uke-control 14 and its
+  development diagnostics through DNF. Package verification and three bounded
+  sensor snapshots pass on Linux 7.2.11-2. Cached values, unknown acquisition
+  age and stale front-color data remain visible. Channel transitions and
+  physical sensor accuracy remain untested; no repository policy is changed.
 - **Scrolling measurements:** a physical original Settings-list trial records
   approximately 143.9 Hz DPU timing and application CPU use approaching one full
   core. GPU frequency responds to load. Content frame rate and the reported
