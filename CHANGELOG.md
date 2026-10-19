@@ -3,8 +3,32 @@
 ## 19 October 2026
 
 Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original KDE
-and Linux 7.2.11-5. Development-system results remain separate from the older
+and Linux 7.2.11-5/6. Development-system results remain separate from the older
 public Alpha 1 images and physical acceptance after the latest reboot.
+
+- **Touch reliability follow-up:** a live release-10 stall reaches a 6 GiB
+  memory peak in recursive contact assignment. Release 11 bounds the workspace;
+  release 12 restores OEM charger-noise policy, bounds configuration reads and
+  wraps tracking IDs without active collisions. Signed COPR 11173813 installs
+  exactly touchscreen 12 through DNF on kernel 6. RPM verification, firmware
+  policy readback and unchanged-state event deduplication pass. Input publishes
+  in 410 ms; a bounded resource observation retains approximately 11 MiB RSS,
+  eleven descriptors and no restart. Host ASan/LSan checks and 18800 private
+  replay operations pass; they do not establish zero leaks for all lifecycles.
+  The physical release-12 trial, pen and wake features remain unqualified.
+- **VRR regression:** ten-finger input on release 11 causes transient upper-
+  display corruption and oscillating contacts with Always VRR. Never at the
+  same 60 Hz base removes the reported symptom. VRR remains disabled, reopening
+  earlier continuity acceptance. Firmware watchdog causes and complete panel/
+  THP synchronization remain unresolved.
+- **Current delivery correction:** kernel 6 returns to KDE after a normal
+  restart, with user-confirmed display/touch. Uke Control 18 and integration 14
+  are installed and verified. A persistent original KSystemStats client reads
+  finite idle GPU usage and 255 MHz; active load and GUI presentation remain
+  pending. Kernel 7/8 package fixtures fail after compilation; corrected kernel
+  9 COPR 11173706 succeeds and passes signed source/Image/module/initramfs audits,
+  but is not installed during the same-kernel touch control. These observations
+  supersede the earlier unavailable-access and package-only limits below.
 
 - **Memory accounting:** the desktop/lock-screen baseline reports 2.36 GiB
   used and 4.85 GiB available, with unused swap. Plasma PSS is about 224 MiB,

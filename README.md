@@ -27,10 +27,11 @@
 
 ## Project status
 
-**19 October 2026:** the last observed development session runs Fedora Rawhide KDE on a
-**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-5`** and the stock Android
-bootloader. The latest physical display/touch confirmation is from `7.2.11-2`,
-at **3200×2136 and 144 Hz**; confirmation after the new reboot is pending. Xiaomi Pad 7
+**19 October 2026:** the development session runs Fedora Rawhide KDE on a
+**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-6`** and the stock Android
+bootloader. A normal kernel-6 restart returns to KDE with user-confirmed display
+and touch. A later ten-finger fault reopens VRR/input reliability; the current
+touch control uses **3200×2136 at 60 Hz with VRR disabled**. Xiaomi Pad 7
 and other memory/storage variants remain untested.
 
 The hardware results below apply to this separately provisioned development
@@ -43,11 +44,13 @@ VRR preference, native management tools, dock mouse, LDAC and battery readback.
 Charge-stop and bypass controls are not physically qualified; HDMI tests remain
 paused until the requested protection/power-path gate is satisfied.
 
-The latest ordinary restart on kernel 5 has not returned to authenticated SSH;
-physical state and shutdown/startup logs are pending. Kernel 6 and the native
-original-KDE Adreno statistics extension pass separate package checks, with
-no target installation or GUI result yet. Memory and mount findings are recorded
-in the development changes.
+The earlier shutdown hang remains unexplained. Touchscreen 12 is installed
+from signed COPR after correcting an allocation stall and firmware-policy gaps.
+Host sanitizer/replay checks and bounded device resource/readback checks pass;
+the latest physical multitouch trial remains pending. Original KSystemStats now
+returns finite idle GPU readings with integration 14. Signed kernel 9 is built
+and audited separately, with no new device-boot result. See the
+[touch firmware audit](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-TOUCH-FIRMWARE-AUDIT-2026-10-19.md).
 
 ## Downloads
 
@@ -63,7 +66,7 @@ Android user data; it is not a data-preserving dual-boot route.**
 
 **Validation scope:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64; stock
 Android bootloader. The persistent development boot is
-`7.2.11-5`, reviewed on 19 October 2026. Earlier subsystem tests
+`7.2.11-6`, reviewed on 19 October 2026. Earlier subsystem tests
 are identified where relevant. These are development-system observations, not acceptance of
 the downloadable Alpha 1 images.
 
@@ -84,7 +87,7 @@ Each row records the function's current status, observations, and remaining work
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Signed COPR 11170586 installs matched 7.2.11-5 through DNF, preserving Android A and matched rollback bundles. Four normal starts return to SSH with original KDE processes and active touch/sensor services. systemd reports 6.743–8.053 seconds, excluding bootloader and physical first frame. A later ordinary restart on the same kernel has not returned to SSH; shutdown/startup and network state remain undiagnosed. Physical display/touch, cold-boot endurance and failure recovery remain open. |
+| Fedora boot | 🟡 **Partial** | Signed kernel 7.2.11-6 installs through DNF with matched modules/boot image and returns to KDE after a normal restart; the user confirms display and touch. systemd reports 6.988 seconds, excluding bootloader and physical first frame. An earlier kernel-5 shutdown hang remains unexplained. Kernel 9 passes separate signed package/boot-image audits but is not installed. Android A and rollback bundles are retained; endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
 | RAM | 🟡 **Partial** | Linux reports 7.21 GiB total. A 19 October desktop/lock-screen snapshot has 2.36 GiB used, 4.85 GiB available and unused swap; GPU resident buffers account for about 1.10 GiB with overlapping shared accounting. No leak or measured RAM reduction is established. Two earlier 1 GiB memory trials stop at the 65 °C guard; sustained integrity and sleep retention remain unqualified. |
@@ -107,17 +110,17 @@ Each row records the function's current status, observations, and remaining work
 | Screen-off backlight / DPMS | 🟡 **Partial** | Ten cycles on 7.2.10-29 switch the backlight and active CRTC off/on, retaining the touch service and KDE VRR preference. The tenth off transition logs a DPU frame-done timeout. Display lifecycle reliability and system suspend remain unqualified. |
 | Native DPU / DSI / DSC display | 🟢 **Working** | The persistent development bundle displays KDE through DSI-1 and msm-kmsdrmfb. The earlier seven-rate transition tests remain bounded; long-run and suspend tests remain open. |
 | Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
-| Adaptive sync / dynamic refresh | 🟢 **Working — development profile** | The user accepts the tested VRR/touch profile. Bounded tests show variable host-interface timing with 30–144 fps delivery, irregular intervals and floor repeats. On 19 October with 7.2.11-5, KDE Always is restored and survives the next normal reboot; twelve seconds of DRM intervals average 29.973 Hz idle while the upper mode remains 144 Hz. The earlier saved Never choice has no established cause. Optical panel cadence, complete receiver range and endurance remain unqualified. |
+| Adaptive sync / dynamic refresh | ⏸️ **Disabled — ten-contact regression** | On kernel 6 with touchscreen 11, ten-finger input causes oscillating contacts and transient upper-display corruption with Always VRR. Changing only VRR to Never at the same 60 Hz base removes the reported symptom. Earlier variable host-interface timing and reboot observations remain historical; complete panel/THP synchronization, receiver range and endurance are reopened. |
 | Display color depth | 🟡 **Partial** | The active desktop uses a 10-bit framebuffer and the exact OEM 10-bpc RGB/DSC link. Xiaomi advertises 12-bit color; native panel depth versus FRC is not independently established. Selectable 8/12/16-bpc link modes are not implemented. |
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the native-display development track. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Original Fedora applications run on native scanout. A full-shutdown dump identifies a Wayland clipboard deadlock in KGuiAddons 6.31.0; an original distribution fix and repeat tests are required. |
 | Desktop scrolling | 🟡 **Partial** | A physical Settings-list trial on 7.2.11-2 records stable approximately 143.9 Hz DPU timing while application CPU use approaches one full core. GPU frequency rises with load. These measurements do not establish content frame rate or resolve the reported stutter. |
 | Manual display rotation | 🟢 **Working** | KScreen manual rotation works. Automatic four-pose rotation and matching touch coordinates also pass direct user checks. |
 | GPU — Adreno 732 | 🟡 **Partial — experimental** | Desktop OpenGL validation and a 9,000-frame Vulkan run pass on 29. OpenGL ES has six glmark2 output-validation failures with Mesa 26.2.4. Nine 255–950 MHz states are exposed; profiles change limits. Sustained workloads, thermal actions and suspend remain unqualified. |
-| KDE GPU statistics | 🟡 **Partial — package checks only** | Original KSystemStats misses the platform Adreno device. Integration 13 adds a native library extension and an Adreno GPU page; COPR 11171580 and two build tests pass. Signed kernel 7.2.11-6 from COPR 11171564 passes source, Image/module and initramfs checks. Neither is installed; target idle/load values and GUI presentation remain untested. Original KDE and compositor access protection are retained. |
+| KDE GPU statistics | 🟡 **Partial — idle values observed** | Signed integration 14 and kernel 6 are installed and verified. A persistent original KSystemStats client receives finite 0% idle utilization and 255 MHz after correcting the Qt sysfs reader. Active-load accuracy, GUI presentation and energy remain unqualified. Original KDE and compositor access protection are retained. |
 | Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | On 18 October, FD732 hardware rendering passes 27 glmark2 output checks each through Xwayland and Wayland, plus texture, Phong shading and desktop-blur workloads. Six other scenes lack a validation result. Broader applications, OpenGL ES and suspend remain unqualified. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | On 29, Turnip completes 9,000 Wayland frames with exit 0. vulkaninfo exits 1 while querying VK_KHR_display, including with only the Freedreno driver selected. Conformance, long workloads and lifecycle tests remain open. |
-| Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch remain usable across all seven refresh rates, confirmed on 17 October. Ten simultaneous contacts worked in the 14 October test. Input starts automatically; suspend/resume remains to be validated. Stylus support is listed separately. |
+| Touchscreen — Novatek NT36532 | 🟡 **Partial — reliability under investigation** | Signed touchscreen 12 is installed through DNF on kernel 6. The allocation-stall path is bounded; configuration reads and tracking IDs are bounded, and OEM charger-noise policy is restored with acknowledgement/readback. Host ASan/LSan and 18800 private-packet replay operations pass. A short device observation has stable approximately 11 MiB RSS and no restart; physical release-12 multitouch remains pending. Earlier firmware watchdogs, VRR coexistence and suspend/resume remain open. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟢 **Working** | All power and volume buttons work during normal Fedora use, confirmed on 14 and 17 October. Wake from actual suspend is listed separately. |
 | Power-button screen toggle | 🟡 **Partial — configured** | Original PowerDevil is configured for display-only on/off. Physical power-button toggle validation remains pending; this is separate from s2idle. |
