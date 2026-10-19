@@ -1,5 +1,78 @@
 # Development changes
 
+## 19 October 2026
+
+Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original KDE
+and Linux 7.2.11-5. Development-system results remain separate from the older
+public Alpha 1 images and physical acceptance after the latest reboot.
+
+- **Native management 15:** signed COPR 11170610 installs through DNF after
+  exact source, signature, native hardening and Python-free payload checks.
+  Swap discovery uses GPT metadata while retaining filesystem-label searches,
+  ambiguity refusal and actual partition/signature validation. An on-device
+  comparison measures 0.53–0.63 s against 1.01–1.10 s for the old discovery path.
+  Real lock contention refuses inventory refresh without changing either
+  snapshot. Three helper restarts take 0.64–0.86 s; this is separate from boot
+  concurrency and full startup time. Half-RAM swap and disabled charging workers
+  are preserved. No package-channel transition is performed.
+- **PC USB and idle resources:** the confirmed direct computer connection
+  reports 5 V / 500 mA SDP. A 60.40-second observation averages 1.82 W input,
+  approximately -0.02 W battery-side power and 1.14% aggregate CPU. Cached power
+  samples are not integrated energy. About 5.1 GiB of RAM is available, swap is
+  unused and no direct reclaim or compaction stalls are observed. Active desktop
+  scrolling and battery energy remain separate measurements.
+- **Pressure accounting:** signed kernel 5 from COPR 11170586 exposes procfs
+  and cgroup CPU/memory/I/O PSI. Original systemd-oomd starts; its policy has
+  no monitored cgroups, so effective OOM protection is not qualified. The native
+  private report captures all pressure files and ten command groups without
+  uploading raw logs. No custom memory policy is introduced.
+- **Normal startup:** two kernel-5 boots report 8.053 and 6.743 seconds in
+  systemd, versus the initial 8.372 seconds on kernel 4. The latest helper
+  takes 1.043 seconds and 0.300 CPU-seconds. Bootloader and physical first frame
+  are excluded; concurrent work and original Fedora updates prevent isolated
+  attribution. A separate 60.36-second screen-off sample reports 0.358%
+  aggregate CPU with no memory-pressure/reclaim stalls and unused swap.
+- **Idle services:** unused software RAID units are disabled, with matching
+  vendor defaults in integration 11. Original fwupd retains on-demand access
+  and active-operation inhibitors but now exits after its normal five-minute
+  idle timeout. About 55 MiB previously remained allocated; battery-life gain
+  is unmeasured. Authentication, sensors, thermal management, fstrim, SELinux
+  and ordinary firmware-update access remain enabled.
+- **UFS checks:** UFS 4.0 identification, two-lane rate B, dynamic gear and
+  WriteBooster, clock gating and runtime suspension are observed. A bounded
+  native 256 MiB CRC32C file test and short QD1/QD32 reads complete without
+  error. A separate read-only 1 GiB sample reaches about 1.7 GB/s. MCQ, inline
+  encryption, temperature notification, maximum gear, endurance and power-loss
+  behavior remain unqualified.
+- **Consistent UFS scheduling:** signed integration 12 from COPR 11170835
+  skips Fedora's generic BFQ assignment only for Qualcomm UFS. Before the
+  change, concurrent shared-tag LUN switches produce EBUSY and mixed schedulers.
+  After two normal boots, all six LUNs retain mq-deadline without those errors.
+  External disks retain Fedora's rule, administrator configuration is preserved
+  and installation performs no live scheduler transition. Later startup reports
+  are 7.440 and 7.172 seconds; no performance gain is attributed to this rule.
+- **VRR preference and clock check:** KDE Always is restored through the
+  original kscreen-doctor and retained after reboot on kernel 5. Twelve seconds
+  of DRM intervals average 29.973 Hz idle with the 144-Hz upper mode selected;
+  this is not optical panel timing. Existing boot-integration 20 restores saved
+  drift-file time through original chronyd before normal NTP synchronization.
+  The hardware RTC still reports an old epoch. No additional clock daemon,
+  VRR enforcement service or RTC write is added.
+- **Final quiet sample:** with integration 12 and DPMS off, 60.37 seconds
+  report 0.322% aggregate CPU, approximately 4.88 GiB available RAM, unused
+  swap and no memory-pressure/reclaim stalls. Seven cached power samples
+  average 1.818 W input and +0.023 W battery-side power at 52%, Good and 24 °C.
+  This is near balance in that state, not battery-life or active-scrolling
+  qualification.
+- **Remaining scheduler observation:** the repeated post-policy file test
+  passes integrity and read jobs, but emits one deadline-replenishment warning
+  during QD32 reads. Upstream resets the late deadline/budget; the affected
+  entity and relation to UI stutter are not established. No scheduler warning
+  is suppressed and no speculative real-time or governor setting is applied.
+
+Charge cutoff, bypass, powered HDMI, active scrolling, physical screen/input
+after the new boot and exported-image qualification remain open.
+
 ## 18 October 2026
 
 Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original KDE

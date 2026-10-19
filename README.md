@@ -18,7 +18,7 @@
 </tr>
 </table>
 
-[Downloads](#downloads) · [Hardware support](#hardware-support) · [18 October changes](CHANGELOG.md) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
+[Downloads](#downloads) · [Hardware support](#hardware-support) · [Development changes](CHANGELOG.md) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
 
 > [!WARNING]
 > **Not suitable for daily use.** Boot reliability, shutdown, power management
@@ -27,8 +27,8 @@
 
 ## Project status
 
-**18 October 2026:** the development installation runs Fedora Rawhide KDE on a
-**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-4`** and the stock Android
+**19 October 2026:** the development installation runs Fedora Rawhide KDE on a
+**POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-5`** and the stock Android
 bootloader. The latest physical display/touch confirmation is from `7.2.11-2`,
 at **3200×2136 and 144 Hz**; confirmation after the new reboot is pending. Xiaomi Pad 7
 and other memory/storage variants remain untested.
@@ -38,7 +38,7 @@ system. **The public Alpha 1 images use an older kernel and have not been booted
 on the tablet as complete exported artifacts.** OEM firmware and device
 calibration files are not distributed.
 
-The [18 October development record](CHANGELOG.md) covers the matched kernel,
+The [development record](CHANGELOG.md) covers the matched kernel,
 VRR preference, native management tools, dock mouse, LDAC and battery readback.
 Charge-stop and bypass controls are not physically qualified; HDMI tests remain
 paused until the requested protection/power-path gate is satisfied.
@@ -57,7 +57,7 @@ Android user data; it is not a data-preserving dual-boot route.**
 
 **Validation scope:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64; stock
 Android bootloader. The persistent development boot is
-`7.2.11-4`, reviewed on 18 October 2026. Earlier subsystem tests
+`7.2.11-5`, reviewed on 19 October 2026. Earlier subsystem tests
 are identified where relevant. These are development-system observations, not acceptance of
 the downloadable Alpha 1 images.
 
@@ -78,14 +78,17 @@ Each row records the function's current status, observations, and remaining work
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Signed COPR 11169288 installs the matched 7.2.11-4 boot B/module bundle through DNF, preserving Android A and earlier tested tuples. A normal reboot returns to SSH with original KDE processes and active touch/sensor services. Physical display/touch confirmation after this reboot, cold-boot endurance and failure recovery remain open. |
+| Fedora boot | 🟡 **Partial** | Signed COPR 11170586 installs matched 7.2.11-5 through DNF, preserving Android A and matched rollback bundles. Four normal starts return to SSH with original KDE processes and active touch/sensor services. systemd reports 6.743–8.053 seconds, excluding bootloader and physical first frame. Physical display/touch confirmation after these starts, cold-boot endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
 | RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Two 1 GiB memtester trials on 18 October stopped at the test's 65 °C thermal guard before completing. Memory integrity under sustained load and sleep retention remain unqualified. |
-| UFS storage | 🟢 **Working** | The internal Fedora root supports reads and writes. Long transfers, power loss and resume have not been tested. |
+| UFS storage | 🟢 **Working** | The UFS 4.0 root completes a bounded 256 MiB native CRC32C write/readback test. A direct read-only 1 GiB sample reaches about 1.7 GB/s. Small-file/cache effects, sustained transfers, power loss, endurance and resume remain separate. |
+| UFS performance / power features | 🟡 **Partial** | Two lanes, rate B, clock scaling/gating, WriteBooster flushing and runtime suspension are exposed. Sampled load changes gear 1 to 4 and enables WriteBooster, then returns to idle. MCQ and inline encryption are disabled; temperature notification and maximum gear remain unqualified. |
+| Memory-pressure accounting | 🟡 **Partial** | Kernel 5 exposes standard CPU/memory/I/O PSI and lets original systemd-oomd start. Its current policy monitors no cgroups; no effective OOM policy or exhaustion test is claimed. A private native diagnostic report captures the pressure files. |
+| UFS scheduler / idle services | 🟡 **Partial** | Signed integration 12 from COPR 11170835 retains the kernel scheduler only for Qualcomm UFS. All six LUNs use mq-deadline without the former BFQ switch errors after two normal boots; external disks retain Fedora policy. Unused RAID jobs are disabled. Original fwupd releases idle memory while retaining normal activation and firmware-operation guards. Sustained energy and external-disk checks remain open. |
 | Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. Filesystem checks pass after orphan repair; power-loss recovery and complete file integrity still need testing. |
 | `reboot bootloader` | 🟡 **Partial** | Reaches fastboot. USB re-enumeration has required physical reconnects. Shutdown reliability remains affected by the KDE clipboard hang. |
-| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal reboot reaches signed persistent 7.2.11-4. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
+| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal reboot reaches signed persistent 7.2.11-5. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
 | Hardware information / Fastfetch | 🟡 **Partial — crash corrected** | Signed COPR 11169224 supplies fastfetch 2.68.1-2. Root all-module capture completes with exit 0 after the non-x86 legacy BIOS memory-scan correction. Missing CPU-cache geometry and unimplemented hardware remain explicit; no synthetic SMBIOS data is supplied. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The Uke UEFI port is in development. Current Fedora tests use the Android bootloader. |
 
@@ -98,7 +101,7 @@ Each row records the function's current status, observations, and remaining work
 | Screen-off backlight / DPMS | 🟡 **Partial** | Ten cycles on 7.2.10-29 switch the backlight and active CRTC off/on, retaining the touch service and KDE VRR preference. The tenth off transition logs a DPU frame-done timeout. Display lifecycle reliability and system suspend remain unqualified. |
 | Native DPU / DSI / DSC display | 🟢 **Working** | The persistent development bundle displays KDE through DSI-1 and msm-kmsdrmfb. The earlier seven-rate transition tests remain bounded; long-run and suspend tests remain open. |
 | Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
-| Adaptive sync / dynamic refresh | 🟢 **Working — development profile** | The user accepts the tested VRR/touch profile. Bounded tests show variable host-interface timing with 30–144 fps delivery, irregular intervals and floor repeats. On 29, KDE Always survives normal reboot without restoration; an eight-second DRM/DPU capture measures about 30 Hz idle with the 144 Hz upper mode selected. Optical panel cadence, complete receiver range and endurance remain unqualified. |
+| Adaptive sync / dynamic refresh | 🟢 **Working — development profile** | The user accepts the tested VRR/touch profile. Bounded tests show variable host-interface timing with 30–144 fps delivery, irregular intervals and floor repeats. On 19 October with 7.2.11-5, KDE Always is restored and survives the next normal reboot; twelve seconds of DRM intervals average 29.973 Hz idle while the upper mode remains 144 Hz. The earlier saved Never choice has no established cause. Optical panel cadence, complete receiver range and endurance remain unqualified. |
 | Display color depth | 🟡 **Partial** | The active desktop uses a 10-bit framebuffer and the exact OEM 10-bpc RGB/DSC link. Xiaomi advertises 12-bit color; native panel depth versus FRC is not independently established. Selectable 8/12/16-bpc link modes are not implemented. |
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the native-display development track. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Original Fedora applications run on native scanout. A full-shutdown dump identifies a Wayland clipboard deadlock in KGuiAddons 6.31.0; an original distribution fix and repeat tests are required. |
@@ -175,17 +178,17 @@ event mapping or physical calibration result.
 |---|---|---|
 | Battery percentage / voltage / temperature | 🟡 **Partial** | Readings start automatically on normal slot-B boots. Long-term accuracy and all battery states still need testing. |
 | Battery current / power / charging indication | 🟡 **Partial** | Signed current, derived voltage×current power and charge-counter readings reach standard power-supply/hwmon interfaces. External power can be present while the battery discharges; a Charging flag alone does not prove energy gain. |
-| Charging from computer USB | 🟡 **Partial** | Revision 1.39 automatically admits the enumerated 500 mA budget; measured input is about 450 mA. Active-system load can exceed this supply, and a three-minute native diagnostic trial lost battery charge. Sustained net charging remains unqualified. |
+| Charging from computer USB | 🟡 **Partial** | On 19 October with 7.2.11-4, direct PC USB reports 5 V / 500 mA SDP. A 60.40-second quiet observation averages 1.82 W input and about -0.02 W battery-side power. These cached samples are not integrated energy; active load can exceed this supply. Sustained net charging remains unqualified. |
 | USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | The Ricomm-powered Juo dock supplies charging while the tablet uses host data role. Bounded battery readings are available; exact negotiated contracts, all charging protocols and protection behavior remain unqualified. |
 | Charge limits / charge stop | 🟡 **Partial — effect unqualified** | The existing 70/80 firmware band survives normal reboots through 7.2.11-4. Earlier feature activation alone still permits positive battery current at reported 80%. A separate input-off application request now receives an opaque 16-byte reply and verified unchanged settings. Physical cutoff and bypass remain unqualified; general control admission stays closed. |
 | Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass control or battery-isolation result. A charge threshold is not a bypass. Powered HDMI tests remain paused for the requested protection/power-path work. |
-| Native device management | 🟡 **Partial** | Signed COPR 11169315 installs C++ uke-control 14 and development diagnostics. Three bounded sensor snapshots complete with explicit cached, unknown-age and unavailable fields; package-channel transitions remain untested. Runtime/helper 7 keeps charge workers disabled. The observer distinguishes the VRR upper limit from measured DPU cadence. Half-RAM swap survives normal reboot. The fixed target request has a firmware receipt with unknown actuator effect; swap-partition preference remains untested. |
+| Native device management | 🟡 **Partial** | Signed COPR 11170610 installs C++ uke-control 15 and development diagnostics. Guarded swap discovery and real inventory-lock refusal pass; the first inventory and half-RAM swap are preserved. Runtime helper restarts take 0.64–0.86 s; full boot timing is separate. Earlier bounded sensor snapshots retain cached/unknown-age fields. Package-channel transitions and swap-partition preference remain untested. Runtime/helper 7 keeps charge workers disabled; a firmware receipt does not establish charge cutoff or bypass. |
 | Offline charging screen | ⚪ **Not tested — package installed** | Runtime cohort 7 retains the separate minimal native DRM interface with a large battery, percentage, firmware time-to-full, battery-side watts and temperature. Normal-boot refusal passes without interrupting KDE/touch. The matched initramfs handoff is installed in 7.2.11; actual charger boot, screen/key/unplug behavior, low battery and power use remain unqualified. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
 | Desktop power profiles | 🟡 **Partial** | On 29, all three PPD selections match CPU governors and GPU limits; balanced is restored afterward. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
 | Thermal protection / throttling | 🟡 **Partial** | Software-emulated thermal events lower three CPU policy limits and the GPU limit; PPD respects thermal QoS. All emulation values are cleared afterward. Actual heat, sustained throttling, protective shutdown and full OEM BCL/skin policy remain unqualified. |
 | Display-only soft sleep | 🟡 **Partial** | Ten display-only off/on cycles on 29 restore backlight and scanout state, but one DPU frame-done timeout remains. System sleep and physical wake are untested. |
-| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | Signed adaptive-display 10 enables standard systemd s2idle; its selection persists after reboot to 7.2.11-4. One real cycle on 7.2.11-2 returns after approximately 26 seconds with the RTC alarm identified as the wake source and zero PM failures. Wi-Fi reconnects about nine seconds later. Physical display/touch confirmation, power-key wake, repeated cycles and energy remain open. |
+| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | The installed integration retains standard systemd s2idle; its selection persists after reboot to 7.2.11-5. One real cycle on 7.2.11-2 returns after approximately 26 seconds with the RTC alarm identified as the wake source and zero PM failures. Wi-Fi reconnects about nine seconds later. Physical display/touch confirmation, power-key wake, repeated cycles and energy remain open. |
 | Deep suspend | ⚪ **Not tested** | Advertised by the kernel; actual sleep and resume have not been verified. |
 | Power-key IRQ wake | ⚪ **Not tested** | The input and wake flag exist. Wake from actual sleep has not been tested. |
 | USB cable wake | 🔴 **Broken** | Required USB wake interrupts are missing from the current device tree. |
