@@ -17,9 +17,17 @@ public Alpha 1 images and physical acceptance after the latest reboot.
   supplies activity/frequency sensors and a standard Adreno GPU page without
   rebuilding KDE or weakening compositor proc protection. Signed integration
   13 from COPR 11171580 passes exact-source, AArch64, hardening, Python-free and
-  two native test checks. Kernel 7.2.11-6 prepares the read-only completed-engine
-  counter independently of governor polling. Neither candidate is installed;
+  two native test checks. Signed kernel 7.2.11-6 from COPR 11171564 passes exact
+  source, matched Image/module and native initramfs checks. Its completed-engine
+  counter is independent of governor polling. Neither candidate is installed;
   original GUI output, idle/load behavior and power profiles remain pending.
+- **Diagnostic robustness:** application 16 corrects a reproduced report abort
+  when disk inventory or device status fails. Earlier logs and their receipt are
+  retained, with separate private metadata errors. Read-only process/cgroup,
+  short CPU/memory samples, boot-chain, fstab and THP context are added. Four
+  failure/success fixtures, full native/SDK checks and actual contained report
+  generation pass. It adds no daemon or startup workload; tablet execution and
+  a measured resource improvement remain pending while access is unavailable.
 - **Root mount policy:** a verified live fstab update adds noatime and
   errors=remount-ro to the PARTLABEL-selected ext4 root. Journaling, barriers,
   normal commit timing, read-only persist and periodic trim remain. Boot package

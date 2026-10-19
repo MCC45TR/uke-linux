@@ -45,7 +45,7 @@ paused until the requested protection/power-path gate is satisfied.
 
 The latest ordinary restart on kernel 5 has not returned to authenticated SSH;
 physical state and shutdown/startup logs are pending. Kernel 6 and the native
-original-KDE Adreno statistics extension are separate build candidates, with
+original-KDE Adreno statistics extension pass separate package checks, with
 no target installation or GUI result yet. Memory and mount findings are recorded
 in the development changes.
 
@@ -114,7 +114,7 @@ Each row records the function's current status, observations, and remaining work
 | Desktop scrolling | 🟡 **Partial** | A physical Settings-list trial on 7.2.11-2 records stable approximately 143.9 Hz DPU timing while application CPU use approaches one full core. GPU frequency rises with load. These measurements do not establish content frame rate or resolve the reported stutter. |
 | Manual display rotation | 🟢 **Working** | KScreen manual rotation works. Automatic four-pose rotation and matching touch coordinates also pass direct user checks. |
 | GPU — Adreno 732 | 🟡 **Partial — experimental** | Desktop OpenGL validation and a 9,000-frame Vulkan run pass on 29. OpenGL ES has six glmark2 output-validation failures with Mesa 26.2.4. Nine 255–950 MHz states are exposed; profiles change limits. Sustained workloads, thermal actions and suspend remain unqualified. |
-| KDE GPU statistics | 🟡 **Partial — package checks only** | Original KSystemStats misses the platform Adreno device. Integration 13 adds a native library extension and an Adreno GPU page; COPR 11171580 and two build tests pass. The read-only kernel counter is prepared in 7.2.11-6. Target idle/load values and GUI presentation remain untested; original KDE applications and compositor access protection are retained. |
+| KDE GPU statistics | 🟡 **Partial — package checks only** | Original KSystemStats misses the platform Adreno device. Integration 13 adds a native library extension and an Adreno GPU page; COPR 11171580 and two build tests pass. Signed kernel 7.2.11-6 from COPR 11171564 passes source, Image/module and initramfs checks. Neither is installed; target idle/load values and GUI presentation remain untested. Original KDE and compositor access protection are retained. |
 | Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | On 18 October, FD732 hardware rendering passes 27 glmark2 output checks each through Xwayland and Wayland, plus texture, Phong shading and desktop-blur workloads. Six other scenes lack a validation result. Broader applications, OpenGL ES and suspend remain unqualified. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | On 29, Turnip completes 9,000 Wayland frames with exit 0. vulkaninfo exits 1 while querying VK_KHR_display, including with only the Freedreno driver selected. Conformance, long workloads and lifecycle tests remain open. |
 | Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch remain usable across all seven refresh rates, confirmed on 17 October. Ten simultaneous contacts worked in the 14 October test. Input starts automatically; suspend/resume remains to be validated. Stylus support is listed separately. |
