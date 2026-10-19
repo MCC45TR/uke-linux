@@ -30,8 +30,8 @@
 **19 October 2026:** the development session runs Fedora Rawhide KDE on a
 **POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-6`** and the stock Android
 bootloader. A normal kernel-6 restart returns to KDE with user-confirmed display
-and touch. A later ten-finger fault reopens VRR/input reliability; the current
-touch control uses **3200×2136 at 60 Hz with VRR disabled**. Xiaomi Pad 7
+and touch. A later ten-finger fault reopens VRR/input reliability. The latest
+comparison leaves **3200×2136 at 144 Hz with VRR disabled**. Xiaomi Pad 7
 and other memory/storage variants remain untested.
 
 The hardware results below apply to this separately provisioned development
@@ -51,6 +51,13 @@ the latest physical multitouch trial remains pending. Original KSystemStats now
 returns finite idle GPU readings with integration 14. Signed kernel 9 is built
 and audited separately, with no new device-boot result. See the
 [touch firmware audit](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-TOUCH-FIRMWARE-AUDIT-2026-10-19.md).
+
+Signed Uke Control 19 and battery observer/offline screen 9 are installed through
+DNF. They correct presentation-test deadlines, time-weighted battery estimates
+and misleading charge-time display with nonpositive battery power. Bounded DRM
+measurements reach about 30 Hz idle with VRR, but touch watchdogs recur; VRR stays
+disabled. Physical 1 Hz, charge termination and bypass remain unqualified. See the
+[power and VRR report](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-POWER-VRR-OPTIMIZATION-2026-10-19.md).
 
 ## Downloads
 
@@ -110,7 +117,7 @@ Each row records the function's current status, observations, and remaining work
 | Screen-off backlight / DPMS | 🟡 **Partial** | Ten cycles on 7.2.10-29 switch the backlight and active CRTC off/on, retaining the touch service and KDE VRR preference. The tenth off transition logs a DPU frame-done timeout. Display lifecycle reliability and system suspend remain unqualified. |
 | Native DPU / DSI / DSC display | 🟢 **Working** | The persistent development bundle displays KDE through DSI-1 and msm-kmsdrmfb. The earlier seven-rate transition tests remain bounded; long-run and suspend tests remain open. |
 | Refresh-rate switching | 🟢 **Working** | KDE exposes 30/48/50/60/90/120/144 Hz. Nine measured transitions passed on 17 October without panel reset, visible blanking or interrupted touch. Long-run and suspend tests remain open. |
-| Adaptive sync / dynamic refresh | ⏸️ **Disabled — ten-contact regression** | On kernel 6 with touchscreen 11, ten-finger input causes oscillating contacts and transient upper-display corruption with Always VRR. Changing only VRR to Never at the same 60 Hz base removes the reported symptom. Earlier variable host-interface timing and reboot observations remain historical; complete panel/THP synchronization, receiver range and endurance are reopened. |
+| Adaptive sync / dynamic refresh | ⏸️ **Disabled — input regression** | On kernel 6, ten-finger input with touch 11 produces oscillating contacts and upper-display corruption with Always VRR; Never removes the reported symptom. A later touch-13 run measures about 30 Hz idle and host cadence following actual submissions, but two FD watchdogs recur. VRR remains Never at a 144 Hz base. Complete panel/THP synchronization, optical cadence and endurance remain open; physical 1 Hz is unsupported in this stack. |
 | Display color depth | 🟡 **Partial** | The active desktop uses a 10-bit framebuffer and the exact OEM 10-bpc RGB/DSC link. Xiaomi advertises 12-bit color; native panel depth versus FRC is not independently established. Selectable 8/12/16-bpc link modes are not implemented. |
 | Firmware DRM fallback | 🟡 **Partial** | Revision 1.39 uses simpledrm and the bootloader framebuffer. This older path remains separate from the native-display development track. |
 | Original Fedora KDE / Wayland | 🟡 **Partial** | Original Fedora applications run on native scanout. A full-shutdown dump identifies a Wayland clipboard deadlock in KGuiAddons 6.31.0; an original distribution fix and repeat tests are required. |
@@ -192,8 +199,9 @@ event mapping or physical calibration result.
 | USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | The Ricomm-powered Juo dock supplies charging while the tablet uses host data role. Bounded battery readings are available; exact negotiated contracts, all charging protocols and protection behavior remain unqualified. |
 | Charge limits / charge stop | 🟡 **Partial — effect unqualified** | The existing 70/80 firmware band survives normal reboots through 7.2.11-4. Earlier feature activation alone still permits positive battery current at reported 80%. A separate input-off application request now receives an opaque 16-byte reply and verified unchanged settings. Physical cutoff and bypass remain unqualified; general control admission stays closed. |
 | Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass control or battery-isolation result. A charge threshold is not a bypass. Powered HDMI tests remain paused for the requested protection/power-path work. |
-| Native device management | 🟡 **Partial** | Signed COPR 11170610 installs C++ uke-control 15 and development diagnostics. Guarded swap discovery and real inventory-lock refusal pass; the first inventory and half-RAM swap are preserved. Runtime helper restarts take 0.64–0.86 s; full boot timing is separate. Earlier bounded sensor snapshots retain cached/unknown-age fields. Package-channel transitions and swap-partition preference remain untested. Runtime/helper 7 keeps charge workers disabled; a firmware receipt does not establish charge cutoff or bypass. |
-| Offline charging screen | ⚪ **Not tested — package installed** | Runtime cohort 7 retains the separate minimal native DRM interface with a large battery, percentage, firmware time-to-full, battery-side watts and temperature. Normal-boot refusal passes without interrupting KDE/touch. The matched initramfs handoff is installed in 7.2.11; actual charger boot, screen/key/unplug behavior, low battery and power use remain unqualified. |
+| Native device management | 🟡 **Partial** | Signed COPR 11173912 installs C++ Uke Control/tests 19 through DNF; RPM/hash checks and native self-tests pass. Absolute presentation deadlines correct diagnostic pacing; its new visual repeat awaits an unlocked KDE session. Earlier revision-15 guarded swap discovery, inventory-lock refusal and helper timing remain separate evidence. The first inventory and half-RAM swap are preserved. Package-channel transitions and swap-partition preference remain untested. Charge-control 7 keeps actuator workers disabled; no cutoff or bypass acceptance. |
+| Battery runtime estimates | 🟡 **Partial — software checks** | Signed observer 9 from COPR 11173924 installs through DNF. A regression corrects unequal-interval power averaging with a time-weighted trapezoidal integral. A coherent device snapshot retains unqualified model status and unavailable forecasts; estimator accuracy, aging and full charging behavior remain unqualified. |
+| Offline charging screen | ⚪ **Not tested — package installed** | Signed screen 9 installs through DNF. The minimal native DRM interface retains a large battery, percentage, firmware time-to-full, battery-side watts and temperature. A rendering regression now requires valid healthy positive net battery power before showing a charge duration. Normal-boot status passes without opening the display. Actual charger boot, screen/key/unplug behavior, low battery and power use remain unqualified. |
 | Plasma battery indicator | 🟡 **Partial** | The battery icon and readings were observed through UPower. Startup and current/counter interpretation still need work. |
 | Desktop power profiles | 🟡 **Partial** | On 29, all three PPD selections match CPU governors and GPU limits; balanced is restored afterward. Sustained energy, responsiveness and complete OEM thermal policy remain unqualified. |
 | Thermal protection / throttling | 🟡 **Partial** | Software-emulated thermal events lower three CPU policy limits and the GPU limit; PPD respects thermal QoS. All emulation values are cleared afterward. Actual heat, sustained throttling, protective shutdown and full OEM BCL/skin policy remain unqualified. |

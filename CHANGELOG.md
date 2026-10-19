@@ -6,6 +6,19 @@ Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original KDE
 and Linux 7.2.11-5/6. Development-system results remain separate from the older
 public Alpha 1 images and physical acceptance after the latest reboot.
 
+- **Power arithmetic and test pacing:** signed Control/tests 19 (COPR 11173912)
+  and observer/offline screen 9 (11173924) install through DNF on kernel 6.
+  Exact-source/signature/payload checks, RPM/hash verification and native
+  diagnostic self-tests pass. Runtime power is weighted by elapsed sample time;
+  absolute test deadlines avoid adding rendering time to every frame period.
+  The offline screen suppresses charge duration without healthy positive net
+  battery power. Controls/profiles remain unqualified, with charge helper 7
+  and its disabled workers retained. No kernel or firmware change is made.
+  A 43-second VRR run with the earlier test observes cadence following actual
+  submissions and about 30 Hz idle, but two touch watchdogs recur. VRR remains
+  off at a 144 Hz base; the corrected visual repeat awaits an unlocked session.
+  The reviewed O82 stack has no qualified physical 1 Hz path. See the
+  [equations, device observations and remaining gates](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-POWER-VRR-OPTIMIZATION-2026-10-19.md).
 - **Touch reliability follow-up:** a live release-10 stall reaches a 6 GiB
   memory peak in recursive contact assignment. Release 11 bounds the workspace;
   release 12 restores OEM charger-noise policy, bounds configuration reads and
