@@ -26,7 +26,9 @@ public Alpha 1 images and physical acceptance after the latest reboot.
   retained, with separate private metadata errors. Read-only process/cgroup,
   short CPU/memory samples, boot-chain, fstab and THP context are added. Four
   failure/success fixtures, full native/SDK checks and actual contained report
-  generation pass. It adds no daemon or startup workload; tablet execution and
+  generation pass. COPR 11171675 succeeds; signatures, exact sources, native
+  hardening and Python-free payload/dependency checks pass before installation.
+  It adds no daemon or startup workload; tablet execution and
   a measured resource improvement remain pending while access is unavailable.
 - **Root mount policy:** a verified live fstab update adds noatime and
   errors=remount-ro to the PARTLABEL-selected ext4 root. Journaling, barriers,
