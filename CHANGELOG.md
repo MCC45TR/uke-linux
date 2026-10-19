@@ -16,6 +16,14 @@ public Alpha 1 images and physical acceptance after the latest reboot.
   eleven descriptors and no restart. Host ASan/LSan checks and 18800 private
   replay operations pass; they do not establish zero leaks for all lifecycles.
   The physical release-12 trial, pen and wake features remain unqualified.
+- **Lifetime boundary follow-up:** source 13 also saturates palm history and
+  contact age through the same boundary-tested helper. COPR 11173836 and source
+  contracts pass; signed exact-source/payload checks and DNF installation of
+  only touchscreen 13 pass on kernel 6. Input publishes in 437 ms and firmware
+  power-policy readback succeeds. Thirty one-second samples retain 9516 KiB
+  RSS, eleven descriptors, zero swap and no restart/watchdog after 32 unchanged-
+  state power events. This is not a controlled RAM improvement. Physical touch,
+  pen and lifecycle qualification remain pending.
 - **VRR regression:** ten-finger input on release 11 causes transient upper-
   display corruption and oscillating contacts with Always VRR. Never at the
   same 60 Hz base removes the reported symptom. VRR remains disabled, reopening

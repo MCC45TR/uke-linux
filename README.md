@@ -44,7 +44,7 @@ VRR preference, native management tools, dock mouse, LDAC and battery readback.
 Charge-stop and bypass controls are not physically qualified; HDMI tests remain
 paused until the requested protection/power-path gate is satisfied.
 
-The earlier shutdown hang remains unexplained. Touchscreen 12 is installed
+The earlier shutdown hang remains unexplained. Touchscreen 13 is installed
 from signed COPR after correcting an allocation stall and firmware-policy gaps.
 Host sanitizer/replay checks and bounded device resource/readback checks pass;
 the latest physical multitouch trial remains pending. Original KSystemStats now
@@ -120,7 +120,7 @@ Each row records the function's current status, observations, and remaining work
 | KDE GPU statistics | 🟡 **Partial — idle values observed** | Signed integration 14 and kernel 6 are installed and verified. A persistent original KSystemStats client receives finite 0% idle utilization and 255 MHz after correcting the Qt sysfs reader. Active-load accuracy, GUI presentation and energy remain unqualified. Original KDE and compositor access protection are retained. |
 | Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | On 18 October, FD732 hardware rendering passes 27 glmark2 output checks each through Xwayland and Wayland, plus texture, Phong shading and desktop-blur workloads. Six other scenes lack a validation result. Broader applications, OpenGL ES and suspend remain unqualified. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | On 29, Turnip completes 9,000 Wayland frames with exit 0. vulkaninfo exits 1 while querying VK_KHR_display, including with only the Freedreno driver selected. Conformance, long workloads and lifecycle tests remain open. |
-| Touchscreen — Novatek NT36532 | 🟡 **Partial — reliability under investigation** | Signed touchscreen 12 is installed through DNF on kernel 6. The allocation-stall path is bounded; configuration reads and tracking IDs are bounded, and OEM charger-noise policy is restored with acknowledgement/readback. Host ASan/LSan and 18800 private-packet replay operations pass. A short device observation has stable approximately 11 MiB RSS and no restart; physical release-12 multitouch remains pending. Earlier firmware watchdogs, VRR coexistence and suspend/resume remain open. |
+| Touchscreen — Novatek NT36532 | 🟡 **Partial — reliability under investigation** | Signed touchscreen 13 is installed through DNF on kernel 6. The allocation-stall path, configuration reads, tracking IDs and lifetime counters are bounded; OEM charger-noise policy is restored with acknowledgement/readback. Host ASan/LSan and 18800 private-packet replay operations pass. A short device observation has stable approximately 9.3 MiB RSS, eleven descriptors and no restart; physical release-13 multitouch remains pending. Earlier firmware watchdogs, VRR coexistence and suspend/resume remain open. |
 | Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
 | Power / volume buttons | 🟢 **Working** | All power and volume buttons work during normal Fedora use, confirmed on 14 and 17 October. Wake from actual suspend is listed separately. |
 | Power-button screen toggle | 🟡 **Partial — configured** | Original PowerDevil is configured for display-only on/off. Physical power-button toggle validation remains pending; this is separate from s2idle. |
