@@ -27,7 +27,7 @@
 
 ## Project status
 
-**19 October 2026:** the development installation runs Fedora Rawhide KDE on a
+**19 October 2026:** the last observed development session runs Fedora Rawhide KDE on a
 **POCO Pad X1, 8 GB / 512 GB**, using kernel **`7.2.11-5`** and the stock Android
 bootloader. The latest physical display/touch confirmation is from `7.2.11-2`,
 at **3200×2136 and 144 Hz**; confirmation after the new reboot is pending. Xiaomi Pad 7
@@ -42,6 +42,12 @@ The [development record](CHANGELOG.md) covers the matched kernel,
 VRR preference, native management tools, dock mouse, LDAC and battery readback.
 Charge-stop and bypass controls are not physically qualified; HDMI tests remain
 paused until the requested protection/power-path gate is satisfied.
+
+The latest ordinary restart on kernel 5 has not returned to authenticated SSH;
+physical state and shutdown/startup logs are pending. Kernel 6 and the native
+original-KDE Adreno statistics extension are separate build candidates, with
+no target installation or GUI result yet. Memory and mount findings are recorded
+in the development changes.
 
 ## Downloads
 
@@ -78,17 +84,17 @@ Each row records the function's current status, observations, and remaining work
 
 | Feature | Status | Validation and remaining work |
 |---|---|---|
-| Fedora boot | 🟡 **Partial** | Signed COPR 11170586 installs matched 7.2.11-5 through DNF, preserving Android A and matched rollback bundles. Four normal starts return to SSH with original KDE processes and active touch/sensor services. systemd reports 6.743–8.053 seconds, excluding bootloader and physical first frame. Physical display/touch confirmation after these starts, cold-boot endurance and failure recovery remain open. |
+| Fedora boot | 🟡 **Partial** | Signed COPR 11170586 installs matched 7.2.11-5 through DNF, preserving Android A and matched rollback bundles. Four normal starts return to SSH with original KDE processes and active touch/sensor services. systemd reports 6.743–8.053 seconds, excluding bootloader and physical first frame. A later ordinary restart on the same kernel has not returned to SSH; shutdown/startup and network state remain undiagnosed. Physical display/touch, cold-boot endurance and failure recovery remain open. |
 | CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Heavy workloads have not been tested. |
 | CPU frequency control | 🟡 **Partial** | Three policies retain their complete firmware tables and reach 1900.8, 2611.2 and 2803.2 MHz requests under the performance profile. Energy, voltage and sustained throttling behavior remain unqualified. |
-| RAM | 🟡 **Partial** | About 7.21 GiB of the installed 8 GB is available. Two 1 GiB memtester trials on 18 October stopped at the test's 65 °C thermal guard before completing. Memory integrity under sustained load and sleep retention remain unqualified. |
+| RAM | 🟡 **Partial** | Linux reports 7.21 GiB total. A 19 October desktop/lock-screen snapshot has 2.36 GiB used, 4.85 GiB available and unused swap; GPU resident buffers account for about 1.10 GiB with overlapping shared accounting. No leak or measured RAM reduction is established. Two earlier 1 GiB memory trials stop at the 65 °C guard; sustained integrity and sleep retention remain unqualified. |
 | UFS storage | 🟢 **Working** | The UFS 4.0 root completes a bounded 256 MiB native CRC32C write/readback test. A direct read-only 1 GiB sample reaches about 1.7 GB/s. Small-file/cache effects, sustained transfers, power loss, endurance and resume remain separate. |
 | UFS performance / power features | 🟡 **Partial** | Two lanes, rate B, clock scaling/gating, WriteBooster flushing and runtime suspension are exposed. Sampled load changes gear 1 to 4 and enables WriteBooster, then returns to idle. MCQ and inline encryption are disabled; temperature notification and maximum gear remain unqualified. |
 | Memory-pressure accounting | 🟡 **Partial** | Kernel 5 exposes standard CPU/memory/I/O PSI and lets original systemd-oomd start. Its current policy monitors no cgroups; no effective OOM policy or exhaustion test is claimed. A private native diagnostic report captures the pressure files. |
 | UFS scheduler / idle services | 🟡 **Partial** | Signed integration 12 from COPR 11170835 retains the kernel scheduler only for Qualcomm UFS. All six LUNs use mq-deadline without the former BFQ switch errors after two normal boots; external disks retain Fedora policy. Unused RAID jobs are disabled. Original fwupd releases idle memory while retaining normal activation and firmware-operation guards. Sustained energy and external-disk checks remain open. |
-| Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. Filesystem checks pass after orphan repair; power-loss recovery and complete file integrity still need testing. |
+| Linux partition / EXT4 | 🟡 **Partial** | The 64 GiB root mounts by `PARTLABEL=linux`. A validated live mount adds `noatime,errors=remount-ro`, retaining normal journaling, barriers and periodic trim. Future root templates and callers match; startup after the latest trial remains unconfirmed. Power-loss recovery and complete file integrity still need testing. |
 | `reboot bootloader` | 🟡 **Partial** | Reaches fastboot. USB re-enumeration has required physical reconnects. Shutdown reliability remains affected by the KDE clipboard hang. |
-| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Normal reboot reaches signed persistent 7.2.11-5. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
+| Normal reboot, recovery command and poweroff | 🟡 **Partial** | Earlier normal reboots reach signed persistent 7.2.11-5. The latest ordinary restart has not returned to SSH; physical state and journals are pending. Earlier poweroff stays off without USB; USB-powered poweroff can restart the system. Intermittent full shutdown can hang in KDE. Recovery entry is unqualified. |
 | Hardware information / Fastfetch | 🟡 **Partial — crash corrected** | Signed COPR 11169224 supplies fastfetch 2.68.1-2. Root all-module capture completes with exit 0 after the non-x86 legacy BIOS memory-scan correction. Missing CPU-cache geometry and unimplemented hardware remain explicit; no synthetic SMBIOS data is supplied. |
 | Project Aloha / UEFI boot | ⚪ **Not tested** | The Uke UEFI port is in development. Current Fedora tests use the Android bootloader. |
 
@@ -108,6 +114,7 @@ Each row records the function's current status, observations, and remaining work
 | Desktop scrolling | 🟡 **Partial** | A physical Settings-list trial on 7.2.11-2 records stable approximately 143.9 Hz DPU timing while application CPU use approaches one full core. GPU frequency rises with load. These measurements do not establish content frame rate or resolve the reported stutter. |
 | Manual display rotation | 🟢 **Working** | KScreen manual rotation works. Automatic four-pose rotation and matching touch coordinates also pass direct user checks. |
 | GPU — Adreno 732 | 🟡 **Partial — experimental** | Desktop OpenGL validation and a 9,000-frame Vulkan run pass on 29. OpenGL ES has six glmark2 output-validation failures with Mesa 26.2.4. Nine 255–950 MHz states are exposed; profiles change limits. Sustained workloads, thermal actions and suspend remain unqualified. |
+| KDE GPU statistics | 🟡 **Partial — package checks only** | Original KSystemStats misses the platform Adreno device. Integration 13 adds a native library extension and an Adreno GPU page; COPR 11171580 and two build tests pass. The read-only kernel counter is prepared in 7.2.11-6. Target idle/load values and GUI presentation remain untested; original KDE applications and compositor access protection are retained. |
 | Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | On 18 October, FD732 hardware rendering passes 27 glmark2 output checks each through Xwayland and Wayland, plus texture, Phong shading and desktop-blur workloads. Six other scenes lack a validation result. Broader applications, OpenGL ES and suspend remain unqualified. |
 | Vulkan / Turnip | 🟡 **Partial — experimental** | On 29, Turnip completes 9,000 Wayland frames with exit 0. vulkaninfo exits 1 while querying VK_KHR_display, including with only the Freedreno driver selected. Conformance, long workloads and lifecycle tests remain open. |
 | Touchscreen — Novatek NT36532 | 🟢 **Working** | Single-finger input and multitouch remain usable across all seven refresh rates, confirmed on 17 October. Ten simultaneous contacts worked in the 14 October test. Input starts automatically; suspend/resume remains to be validated. Stylus support is listed separately. |

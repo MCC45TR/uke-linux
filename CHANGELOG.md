@@ -6,6 +6,31 @@ Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original KDE
 and Linux 7.2.11-5. Development-system results remain separate from the older
 public Alpha 1 images and physical acceptance after the latest reboot.
 
+- **Memory accounting:** the desktop/lock-screen baseline reports 2.36 GiB
+  used and 4.85 GiB available, with unused swap. Plasma PSS is about 224 MiB,
+  KWin 112 MiB and the keyboard 80 MiB. MSM reports about 1.10 GiB resident
+  graphics buffers; shared process/display buffers must not be counted twice.
+  No leak or measured reduction is established. A reversible THP madvise trial
+  awaits the same-state post-reboot comparison; no packaged default is added.
+- **Original KDE GPU sensors:** the existing Linux GPU provider enumerates
+  PCI devices and misses platform Adreno. A native C++ SystemStats extension
+  supplies activity/frequency sensors and a standard Adreno GPU page without
+  rebuilding KDE or weakening compositor proc protection. Signed integration
+  13 from COPR 11171580 passes exact-source, AArch64, hardening, Python-free and
+  two native test checks. Kernel 7.2.11-6 prepares the read-only completed-engine
+  counter independently of governor polling. Neither candidate is installed;
+  original GUI output, idle/load behavior and power profiles remain pending.
+- **Root mount policy:** a verified live fstab update adds noatime and
+  errors=remount-ro to the PARTLABEL-selected ext4 root. Journaling, barriers,
+  normal commit timing, read-only persist and periodic trim remain. Boot package
+  21 and both builder root producers plus the composition assertion match.
+  COPR 11171579, exact-source/signature checks and builder CI pass; existing
+  administrator fstabs are not overwritten by packaging.
+- **Latest restart limitation:** the ordinary 10:36:53 UTC restart on the
+  existing kernel 5 has not returned to authenticated SSH after the live mount
+  and THP trial. No kernel or GPU plugin was installed for this restart.
+  Physical state and shutdown/startup logs are needed to distinguish the cause;
+  no new startup, RAM-saving or error-free-log result is claimed.
 - **Native management 15:** signed COPR 11170610 installs through DNF after
   exact source, signature, native hardening and Python-free payload checks.
   Swap discovery uses GPT metadata while retaining filesystem-label searches,
