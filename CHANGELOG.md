@@ -1,5 +1,16 @@
 # Development changes
 
+## 20 October 2026
+
+- **Offline charging entry:** on POCO Pad X1 with Linux 7.2.11-6 and native
+  screen 9, both 19 October powered-shutdown and cold USB trials return to KDE
+  without a charger signal. The hardware table now records failing entry;
+  physical screen/key/unplug operation remains untested. Exact Android and
+  boot-infrastructure comparisons separate shutdown notification from charging
+  mode selection. Stock flag readback is blocked by missing fastboot USB
+  enumeration. No bootloader setting, slot or boot image is changed. See the
+  [device and source record](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-OFFLINE-CHARGING-2026-10-20.md).
+
 ## 19 October 2026
 
 Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original KDE
