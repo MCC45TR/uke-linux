@@ -2,6 +2,12 @@
 
 ## 20 October 2026
 
+- **Functional status:** the tables separate tested functions from broader
+  unfinished work, including boot versus shutdown and dock mouse versus
+  keyboard input. Existing observations support 40 Working rows, previously 20;
+  combined rows are split where needed. Descriptions are shortened and a stable
+  release checklist is added. No new tablet trial is run; charging, VRR/input,
+  sleep, HDMI and release-image limitations remain open.
 - **Offline charging entry:** on POCO Pad X1 with Linux 7.2.11-6 and native
   screen 9, both 19 October powered-shutdown and cold USB trials return to KDE
   without a charger signal. The hardware table now records failing entry;
