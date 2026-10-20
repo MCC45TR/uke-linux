@@ -27,15 +27,14 @@
 
 ## Project status
 
-**20 October 2026:** the tested development installation uses **POCO Pad X1,
+**Report date: 20 October 2026.** Test environment: **POCO Pad X1,
 8 GB / 512 GB**, Fedora Rawhide, original KDE and **Linux 7.2.11-6** with the
 stock Android bootloader. KDE boots with display, touch, Wi-Fi, rotation and
 automatic brightness. Fixed refresh modes work; VRR remains disabled after
 input/display faults.
 
-The table below records the functions that work and the problems still open.
-Charge cutoff/bypass, shutdown reliability, sleep, powered HDMI and internal
-audio remain incomplete. Offline charging currently starts KDE instead of the
+Open work includes charge cutoff/bypass, shutdown reliability, sleep, powered
+HDMI and internal audio. Offline charging currently starts KDE instead of the
 charging screen. Detailed changes and test limits are in the
 [development record](CHANGELOG.md).
 
@@ -82,7 +81,8 @@ identifies their scope. These results do not validate the downloadable Alpha 1 i
 <details>
 <summary><strong>View all hardware support tables</strong></summary>
 
-Each row records the function's current status, observations, and remaining work.
+Each row separates the observed result from remaining validation. Status applies
+only to the function and test scope stated in that row.
 
 - 🟢 **Working:** the listed function was used successfully on the tested tablet;
   the stated limits still apply.
@@ -94,71 +94,71 @@ Each row records the function's current status, observations, and remaining work
 
 ### Boot, CPU and storage
 
-| Feature | Status | Observed result / remaining work |
-|---|---|---|
-| Fedora boot | 🟢 **Working** | I can boot KDE with working display and touch on kernel 6. Published-image validation is separate. |
-| CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores are online. Sustained heavy-load testing remains open. |
-| CPU frequency policies | 🟢 **Working** | All three CPU policies accept power-profile changes. Sustained performance and energy remain unverified. |
-| RAM | 🟡 **Partial** | Linux uses 7.21 GiB. Sustained memory tests stopped at the 65 °C guard before completion. |
-| UFS storage | 🟢 **Working** | A 256 MiB write/readback passes; a bounded direct read reaches about 1.7 GB/s. |
-| UFS scaling / WriteBooster | 🟢 **Working** | Gear scaling, WriteBooster and runtime idle states change under load. MCQ and inline encryption remain disabled. |
-| Memory-pressure telemetry | 🟢 **Working** | CPU, memory and I/O pressure counters are available. Effective OOM policy is not validated. |
-| UFS I/O scheduler | 🟢 **Working** | mq-deadline stays active across two boots without the earlier scheduler-switch errors. |
-| Linux partition / EXT4 | 🟢 **Working** | Fedora boots from the dedicated EXT4 linux partition. Power-loss recovery remains untested. |
-| Bootloader entry | 🟢 **Working** | I can reach the FASTBOOT screen. USB detection is listed separately. |
-| Fastboot USB connection | 🟡 **Partial** | Earlier sessions worked; the current PC connection is not detected. |
-| Normal reboot — kernel 6 | 🟢 **Working** | The tested normal reboots return to KDE. Shutdown reliability remains a separate issue. |
-| Shutdown / poweroff | 🟡 **Partial** | USB-powered shutdown can restart the tablet. An intermittent shutdown hang remains unresolved. |
-| Reboot to recovery | ⚪ **Not tested** | Recovery entry from the current Fedora kernel is not validated. |
-| Hardware information / Fastfetch | 🟢 **Working** | The all-module capture completes; some hardware fields remain unavailable. |
-| Project Aloha / UEFI boot | ⚪ **Not tested** | Development continues separately. These Fedora tests use the stock Android bootloader. |
+| Feature | Status | Observed result | Remaining validation / limits |
+|---|---|---|---|
+| Fedora boot | 🟢 **Working** | KDE starts with display and touch on Linux 7.2.11-6. | Complete published images. |
+| CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores online. | Sustained heavy loads. |
+| CPU frequency policies | 🟢 **Working** | All three CPU policies respond to power-profile changes. | Sustained performance and energy use. |
+| RAM | 🟡 **Partial** | Linux reports 7.21 GiB; memory stress stops at the 65 °C guard. | Complete sustained memory test. |
+| UFS storage | 🟢 **Working** | 256 MiB write/readback passes; bounded direct read about 1.7 GB/s. | Bounded workloads only. |
+| UFS scaling / WriteBooster | 🟢 **Working** | Gear scaling, WriteBooster and runtime idle states respond to load. | MCQ and inline encryption disabled. |
+| Memory-pressure telemetry | 🟢 **Working** | CPU, memory and I/O pressure counters available. | Effective OOM policy. |
+| UFS I/O scheduler | 🟢 **Working** | mq-deadline retained across two boots without the earlier switch errors. | Two-boot sample. |
+| Linux partition / EXT4 | 🟢 **Working** | Fedora boots from the dedicated EXT4 linux partition. | Power-loss recovery. |
+| Bootloader entry | 🟢 **Working** | FASTBOOT screen visible. | USB detection assessed separately. |
+| Fastboot USB connection | 🟡 **Partial** | Earlier sessions functional; current PC connection not detected. | Restore and repeat USB enumeration. |
+| Normal reboot — kernel 6 | 🟢 **Working** | Tested normal reboots return to KDE. | Shutdown assessed separately. |
+| Shutdown / poweroff | 🟡 **Partial** | USB-powered shutdown can restart the tablet; intermittent shutdown hang. | Reliable shutdown with and without USB. |
+| Reboot to recovery | ⚪ **Not tested** | No validated entry from the current Fedora kernel. | Physical recovery-entry test. |
+| Hardware information / Fastfetch | 🟢 **Working** | All-module capture completes. | Some hardware fields unavailable. |
+| Project Aloha / UEFI boot | ⚪ **Not tested** | Fedora test path uses the stock Android bootloader. | Separate UEFI development and device validation. |
 
 ### Display, graphics and input
 
-| Feature | Status | Observed result / remaining work |
-|---|---|---|
-| Tablet screen / local TTY | 🟢 **Working** | KDE and the local console display at 3200×2136. |
-| Manual backlight brightness | 🟢 **Working** | I can adjust brightness smoothly. Optical calibration remains unverified. |
-| Screen-off backlight / DPMS | 🟡 **Partial** | Off/on cycles work, but one of ten cycles logs a DPU frame-done timeout. |
-| Native DPU / DSI / DSC display | 🟢 **Working** | Native scanout displays KDE on the internal screen. Lifecycle testing remains open. |
-| Refresh-rate switching | 🟢 **Working** | I can switch fixed modes between 30/48/50/60/90/120/144 Hz. VRR is separate. |
-| Adaptive sync / dynamic refresh | ⏸️ **Disabled — input regression** | VRR causes multitouch/display faults and touch watchdogs. It remains off; physical 1 Hz is unsupported. |
-| Display color depth | 🟡 **Partial** | The 10-bit framebuffer and DSC link are active. Selectable 8/12/16-bit output is not implemented. |
-| Firmware DRM fallback | 🟡 **Partial** | The older firmware framebuffer path worked. Current fallback behavior remains untested. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | The desktop and applications run. A clipboard-related shutdown deadlock remains unresolved. |
-| Desktop scrolling | 🟡 **Partial** | Settings-list scrolling still stutters. Stable display Hz does not establish smooth content frames. |
-| Manual display rotation | 🟢 **Working** | Display rotation works with matching touch coordinates. |
-| GPU — Adreno 732 | 🟡 **Partial** | Desktop OpenGL works; OpenGL ES validation failures and lifecycle checks remain open. |
-| KDE GPU statistics | 🟡 **Partial** | Idle usage and frequency reach KSystemStats. Active-load accuracy and GUI presentation remain unverified. |
-| Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | Wayland and Xwayland each pass 27 output checks plus bounded rendering workloads. |
-| Vulkan / Turnip | 🟡 **Partial** | A 9,000-frame cube completes, but vulkaninfo fails a display-extension query. |
-| Touchscreen — Novatek NT36532 | 🟡 **Partial** | Touch works in normal use. Ten-contact/VRR faults and continuous-contact reliability remain unresolved. |
-| Stylus / pen | 🔴 **Broken** | Pen input, pressure and tilt are unavailable. |
-| Power / volume buttons | 🟢 **Working** | Power and volume buttons respond in normal Fedora use. Suspend wake is separate. |
-| Power-button screen toggle | 🟡 **Partial** | Display-only behavior is configured; physical toggle validation is pending. |
-| USB receiver mouse | 🟢 **Working** | The receiver mouse works through the powered Juo dock on 7.2.10-27. |
-| USB keyboard | ⚪ **Not tested** | Keyboard input has not been physically tested. |
-| Pogo keyboard / touchpad | ⚪ **Not tested** | No keyboard is available. Native transport and authentication remain incomplete. |
+| Feature | Status | Observed result | Remaining validation / limits |
+|---|---|---|---|
+| Tablet screen / local TTY | 🟢 **Working** | KDE and local console at 3200×2136. | Internal display only. |
+| Manual backlight brightness | 🟢 **Working** | Smooth manual adjustment. | Optical calibration. |
+| Screen-off backlight / DPMS | 🟡 **Partial** | Scanout returns after off/on; one DPU frame-done timeout in ten cycles. | Resolve timeout and repeat transitions. |
+| Native DPU / DSI / DSC display | 🟢 **Working** | Native KDE scanout on the internal screen. | Display lifecycle tests. |
+| Refresh-rate switching | 🟢 **Working** | Fixed 30/48/50/60/90/120/144 Hz modes functional. | VRR assessed separately. |
+| Adaptive sync / dynamic refresh | ⏸️ **Disabled — input regression** | Multitouch/display faults and touch watchdogs with VRR. | Disabled; no supported physical 1 Hz path. |
+| Display color depth | 🟡 **Partial** | Active 10-bit framebuffer and DSC link. | Selectable 8/12/16-bit output not implemented. |
+| Firmware DRM fallback | 🟡 **Partial** | Earlier firmware-framebuffer operation recorded. | Current fallback behavior. |
+| Original Fedora KDE / Wayland | 🟡 **Partial** | Desktop and applications operational. | Clipboard-related shutdown deadlock. |
+| Desktop scrolling | 🟡 **Partial** | Settings-list scrolling stutters. | Content-frame pacing; display Hz alone is insufficient. |
+| Manual display rotation | 🟢 **Working** | Rotation with matching touch coordinates. | — |
+| GPU — Adreno 732 | 🟡 **Partial** | Desktop OpenGL operational. | OpenGL ES failures and lifecycle coverage. |
+| KDE GPU statistics | 🟡 **Partial** | KSystemStats exposes idle usage and frequency. | Active-load accuracy and GUI presentation. |
+| Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | 27 output checks per backend plus bounded workloads pass. | Desktop OpenGL only. |
+| Vulkan / Turnip | 🟡 **Partial** | 9,000-frame cube completes; vulkaninfo display-extension query fails. | Resolve query failure and broaden validation. |
+| Touchscreen — Novatek NT36532 | 🟡 **Partial** | Normal-use touch operational. | Ten-contact/VRR faults and continuous-contact reliability. |
+| Stylus / pen | 🔴 **Broken** | No pen input, pressure or tilt. | Functional pen implementation and tests. |
+| Power / volume buttons | 🟢 **Working** | Buttons respond during normal Fedora use. | Wake from real suspend. |
+| Power-button screen toggle | 🟡 **Partial** | Display-only policy configured. | Physical toggle test. |
+| USB receiver mouse | 🟢 **Working** | Mouse input through powered Juo dock on 7.2.10-27. | Tested dock/kernel only. |
+| USB keyboard | ⚪ **Not tested** | No physical input result. | Keyboard input test. |
+| Pogo keyboard / touchpad | ⚪ **Not tested** | No keyboard available. | Native transport, authentication and hardware tests. |
 
 ### Networking and USB
 
-| Feature | Status | Observed result / remaining work |
-|---|---|---|
-| Wi-Fi — WCN6750 | 🟢 **Working** | Automatic connection, SSH and file transfers work. The factory WLAN address is retained across restarts. |
-| Signed network updates | 🟢 **Working** | Signed Fedora and COPR packages install over Wi-Fi. Kernel updates retain matched boot/module checks. |
-| Bluetooth | 🟢 **Working — mouse and audio** | The mouse pairs and reconnects; Space Q45 LDAC playback works. Broader device coverage remains open. |
-| NFC | ⚪ **Not tested** | No controller is exposed; fitted hardware is not confirmed. |
-| USB overall | 🟡 **Partial** | Device mode and dock mouse operation work. Role changes and combined dock workloads remain incomplete. |
-| Manual CDC ACM management | 🟢 **Working — manual** | CDC switches on/off manually and defaults off. Current-cable reconnect and suspend remain unverified. |
-| USB ECM / SSH | 🟢 **Working — manual** | Earlier SSH and verified 16 MiB transfers pass. USB networking defaults off. |
-| USB host / accessory power (VBUS) | 🟡 **Partial** | Dock devices enumerate, but accessory power budget and the earlier ESP32 power failure remain unverified. |
-| USB-C switch / role control | 🟡 **Partial** | PC sink/device and dock host/sink states are reported. Broader role switching remains incomplete. |
-| USB reconnect / driver lifecycle | 🟡 **Partial** | Software reconnect worked. Physical reconnect and driver-reload fault recovery remain open. |
-| USB SuperSpeed | 🟡 **Partial** | Hub and RTL8153 devices enumerate at 5 Gbit/s. Storage throughput remains untested. |
-| DisplayPort / USB-C video output | 🟡 **Partial** | No successful tablet HDMI output yet. Powered testing awaits the charging-protection gate. |
-| External-monitor DDC/CI brightness | 🟡 **Partial** | PowerDevil/ddcutil initializes. Actual monitor brightness control remains untested. |
-| USB hubs | 🟢 **Working — tested dock** | Juo USB 2/3 hubs enumerate and the powered-dock mouse works. Storage and Ethernet are separate. |
-| USB Ethernet | 🟡 **Partial** | RTL8153 and its firmware are detected. Cable carrier and real network traffic remain untested. |
+| Feature | Status | Observed result | Remaining validation / limits |
+|---|---|---|---|
+| Wi-Fi — WCN6750 | 🟢 **Working** | Automatic connection, SSH and file transfers; factory WLAN address retained across restarts. | — |
+| Signed network updates | 🟢 **Working** | Signed Fedora/COPR packages install over Wi-Fi. | Kernel updates require matching boot/modules. |
+| Bluetooth | 🟢 **Working — mouse and audio** | Mouse pairing/reconnection and Space Q45 LDAC playback functional. | Broader device coverage. |
+| NFC | ⚪ **Not tested** | No exposed controller. | Confirm fitted hardware. |
+| USB overall | 🟡 **Partial** | Device mode and dock mouse operational. | Role changes and combined dock workloads. |
+| Manual CDC ACM management | 🟢 **Working — manual** | Manual on/off control; default off. | Current-cable reconnect and suspend. |
+| USB ECM / SSH | 🟢 **Working — manual** | Earlier SSH and verified 16 MiB transfers pass. | Default off; earlier-test scope. |
+| USB host / accessory power (VBUS) | 🟡 **Partial** | Dock devices enumerate. | Accessory power budget and earlier ESP32 power failure. |
+| USB-C switch / role control | 🟡 **Partial** | PC sink/device and dock host/sink states reported. | Broader role switching. |
+| USB reconnect / driver lifecycle | 🟡 **Partial** | Software reconnect functional in earlier tests. | Physical reconnect and driver-reload recovery. |
+| USB SuperSpeed | 🟡 **Partial** | Hub and RTL8153 enumeration at 5 Gbit/s. | Storage throughput. |
+| DisplayPort / USB-C video output | 🟡 **Partial** | No successful tablet HDMI output. | Powered test requires charging-protection qualification. |
+| External-monitor DDC/CI brightness | 🟡 **Partial** | PowerDevil/ddcutil initializes. | Actual monitor brightness control. |
+| USB hubs | 🟢 **Working — tested dock** | Juo USB 2/3 enumeration and powered-dock mouse input functional. | Storage and Ethernet assessed separately. |
+| USB Ethernet | 🟡 **Partial** | RTL8153 and firmware detected. | Cable carrier and real traffic. |
 
 ### Sensors and desktop integration
 
@@ -166,64 +166,64 @@ Sensor startup uses native readiness dependencies. Factory calibration remains
 on read-only persist; runtime registry writes use RAM. Some endpoints still
 lack a validated physical mapping.
 
-| Feature | Status | Observed result / remaining work |
-|---|---|---|
-| SSC sensor startup | 🟢 **Working** | Motion, light and proximity services start automatically. DSP restart recovery remains open. |
-| Accelerometer — LSM6DSO | 🟢 **Working — rotation** | All four physical orientations work with matching touch alignment. |
-| Gyroscope — LSM6DSO | 🟡 **Partial** | XYZ rates are readable. Physical motion response and drift still need validation. |
-| Magnetometer / compass — QMC630x family | 🟡 **Partial** | Heading changes with movement, but the absolute-heading comparison did not pass. |
-| Front light sensor — STK3BCx family | 🟢 **Working — ambient light** | Lux responds to front illumination and controls KDE brightness. |
-| Rear light sensor — SIP1328 | 🟢 **Working — ambient light** | Rear illumination changes brightness while the front remains dark. |
-| Ambient color temperature | ⚪ **Not qualified** | No valid startup color sample or calibrated Kelvin conversion is available. |
-| Front proximity sensor — STK3BCx family | 🟢 **Working — near/far** | Covering and uncovering the sensor produces far → near → far. |
-| SAR / body proximity — SX937x family | ⏸️ **Disabled** | No usable endpoint or physical response is established. |
-| Automatic rotation / sensor fusion | 🟢 **Working — four poses** | KDE rotates correctly in all four orientations, including touch alignment. |
-| Automatic brightness | 🟢 **Working** | Brightness follows front/rear light changes. Long-run and sunlight behavior remain untested. |
-| Magnetic cover / lid detection | 🟢 **Working — switch events** | Front cover and rear fold produce the expected switch events. Cover-triggered blanking is unverified. |
-| Temperature telemetry | 🟢 **Working** | PMIC and thermal readings reach standard interfaces and KDE. Absolute calibration and protection are separate. |
+| Feature | Status | Observed result | Remaining validation / limits |
+|---|---|---|---|
+| SSC sensor startup | 🟢 **Working** | Automatic motion, light and proximity service startup. | DSP restart recovery. |
+| Accelerometer — LSM6DSO | 🟢 **Working — rotation** | Four physical orientations with matching touch alignment. | Rotation only. |
+| Gyroscope — LSM6DSO | 🟡 **Partial** | Readable XYZ angular rates. | Physical motion response and drift. |
+| Magnetometer / compass — QMC630x family | 🟡 **Partial** | Heading responds to movement; absolute-heading comparison fails. | Absolute-heading accuracy. |
+| Front light sensor — STK3BCx family | 🟢 **Working — ambient light** | Front illumination changes lux and KDE brightness. | Ambient light only. |
+| Rear light sensor — SIP1328 | 🟢 **Working — ambient light** | Rear illumination changes brightness with the front dark. | Ambient light only. |
+| Ambient color temperature | ⚪ **Not qualified** | No valid startup color sample. | Calibrated Kelvin conversion. |
+| Front proximity sensor — STK3BCx family | 🟢 **Working — near/far** | Cover/release sequence reports far → near → far. | Near/far response only. |
+| SAR / body proximity — SX937x family | ⏸️ **Disabled** | No usable endpoint or physical response. | Endpoint mapping and physical validation. |
+| Automatic rotation / sensor fusion | 🟢 **Working — four poses** | KDE and touch alignment follow all four orientations. | Four poses. |
+| Automatic brightness | 🟢 **Working** | Brightness follows front/rear illumination changes. | Long-run and sunlight behavior. |
+| Magnetic cover / lid detection | 🟢 **Working — switch events** | Front cover and rear fold generate expected switch events. | Cover-triggered blanking. |
+| Temperature telemetry | 🟢 **Working** | Standard interfaces and KDE expose PMIC/thermal readings. | Absolute calibration and protection effectiveness. |
 
 ### Audio, cameras and media
 
-| Feature | Status | Observed result / remaining work |
-|---|---|---|
-| Internal speakers | 🔴 **Broken** | No usable ALSA playback route. |
-| Microphones | 🔴 **Broken** | No usable ALSA recording route. |
-| Bluetooth audio / LDAC | 🟢 **Working — stereo playback** | LDAC playback sounds clear on the Space Q45. Microphone/HFP and suspend remain untested. |
-| USB audio | ⚪ **Not tested** | USB playback and recording have not been tested. |
-| Front camera | ⚪ **Not tested** | No capture device or verified frame is available. |
-| Rear camera | ⚪ **Not tested** | No capture pipeline or verified frame is available. |
-| Hardware video decoding / encoding | ⚪ **Not tested** | No usable hardware codec device or workload is established. |
+| Feature | Status | Observed result | Remaining validation / limits |
+|---|---|---|---|
+| Internal speakers | 🔴 **Broken** | No usable ALSA playback route. | Protected speaker playback. |
+| Microphones | 🔴 **Broken** | No usable ALSA recording route. | Functional recording route and capture. |
+| Bluetooth audio / LDAC | 🟢 **Working — stereo playback** | Clear stereo LDAC playback reported on Space Q45. | Microphone/HFP and suspend. |
+| USB audio | ⚪ **Not tested** | No playback/recording test result. | Physical playback and capture. |
+| Front camera | ⚪ **Not tested** | No capture device or verified frame. | Functional capture pipeline. |
+| Rear camera | ⚪ **Not tested** | No capture pipeline or verified frame. | Functional capture pipeline. |
+| Hardware video decoding / encoding | ⚪ **Not tested** | No usable codec device or verified workload. | Hardware decode/encode workloads. |
 
 ### Power, thermal management and platform services
 
-| Feature | Status | Observed result / remaining work |
-|---|---|---|
-| Battery percentage / voltage / temperature | 🟢 **Working — readings** | Battery percentage, voltage and temperature are available after normal boot. Accuracy remains independently unverified. |
-| Battery current / net power | 🟢 **Working — readings** | Signed current, net battery power and charge-counter readings are available. Protection is separate. |
-| Charging from computer USB | 🟡 **Partial** | USB input is detected, but system load can still discharge the battery. Sustained net charging is unverified. |
-| USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | Powered-dock charging is observed. Negotiated protocols and protection remain unverified. |
-| Charge limits / charge stop | 🟡 **Partial — effect unverified** | The 70/80 setting persists, but actual cutoff and restart hysteresis are not established. |
-| Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass or battery-isolation result. |
-| Native device management | 🟡 **Partial** | Status, sensor reports and inventory work. Swap-partition preference and advanced control paths still need testing. |
-| Battery runtime estimates | 🟡 **Partial — software checks** | Model checks pass, but qualified device forecasts remain unavailable. |
-| Offline charging | 🔴 **Broken — charger-mode entry** | USB-triggered starts return to KDE. The native charging screen is not reached. |
-| Plasma battery indicator | 🟢 **Working** | The battery icon and readings appear in KDE. |
-| Desktop power profiles | 🟢 **Working** | I can switch all three power modes without an error. Sustained energy and thermal behavior remain unverified. |
-| Thermal protection / throttling | 🟡 **Partial** | Emulated events lower CPU/GPU limits. Actual heat and protective shutdown remain unverified. |
-| Display-only soft sleep | 🟡 **Partial** | Off/on cycles restore scanout, but one DPU timeout remains. |
-| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | One RTC-wake cycle returns successfully. Display, touch, power-key wake, repeated cycles and sleep energy remain unverified. |
-| Deep suspend | ⚪ **Not tested** | Actual sleep and resume have not been tested. |
-| Power-key IRQ wake | ⚪ **Not tested** | Power-key wake from real suspend has not been tested. |
-| USB cable wake | 🔴 **Broken** | Required USB wake interrupts are missing from the current device tree. |
-| USB keyboard / mouse wake | ⚪ **Not tested** | Input wake from actual suspend has not been tested. |
-| RTC / persistent clock | 🟡 **Partial** | Hardware startup time is wrong. Saved-time restoration and NTP synchronization work. |
-| Watchdog | 🟡 **Partial** | The driver starts; recovery behavior remains untested. |
-| PMIC / regulators | 🟡 **Partial** | Essential storage/USB resources work; other PMIC probe failures remain. |
-| DMA / IOMMU resources | 🟡 **Partial** | Essential device paths work. Broader client and lifecycle coverage remains incomplete. |
-| Interconnect / platform power control | 🟡 **Partial** | Basic operation works; provider errors and measured power/performance remain unresolved. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Charger and sensor services start. Audio, other workloads and restart recovery remain incomplete. |
-| FastRPC sensor transport | 🟢 **Working** | ADSP contexts serve sensor registry requests. General DSP compute and restart recovery remain unverified. |
-| CoreSight tracing | ⏸️ **Disabled** | Autoload remains blocked after earlier resets. |
+| Feature | Status | Observed result | Remaining validation / limits |
+|---|---|---|---|
+| Battery percentage / voltage / temperature | 🟢 **Working — readings** | Readings available after normal boot. | Independent accuracy checks. |
+| Battery current / net power | 🟢 **Working — readings** | Signed current, net battery power and charge counter available. | Protection effectiveness assessed separately. |
+| Charging from computer USB | 🟡 **Partial** | USB input detected; system load can exceed the supply. | Sustained net charging under the tested load. |
+| USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | Battery charging through the powered dock observed. | Negotiated protocols and protection. |
+| Charge limits / charge stop | 🟡 **Partial — effect unverified** | 70/80 setting retained. | Physical cutoff and restart hysteresis. |
+| Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass or battery isolation. | Physical power-path qualification. |
+| Native device management | 🟡 **Partial** | Status, sensor reports and inventory functional. | Swap-partition preference and advanced controls. |
+| Battery runtime estimates | 🟡 **Partial — software checks** | Model checks pass. | Qualified device forecasts unavailable. |
+| Offline charging | 🔴 **Broken — charger-mode entry** | USB-triggered starts return to KDE without the charging screen. | Charger-mode entry and physical screen operation. |
+| Plasma battery indicator | 🟢 **Working** | Battery icon and readings visible in KDE. | Readings only; protection separate. |
+| Desktop power profiles | 🟢 **Working** | All three profiles selectable without an error. | Sustained energy and thermal behavior. |
+| Thermal protection / throttling | 🟡 **Partial** | Emulated events lower CPU/GPU limits. | Actual heat response and protective shutdown. |
+| Display-only soft sleep | 🟡 **Partial** | Scanout returns after off/on; one DPU timeout recorded. | Resolve timeout and repeat cycles. |
+| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | One successful RTC-wake cycle. | Display, touch, power-key wake, repetition and sleep energy. |
+| Deep suspend | ⚪ **Not tested** | No physical sleep/resume result. | Suspend and resume tests. |
+| Power-key IRQ wake | ⚪ **Not tested** | No physical suspend-wake result. | Power-key wake from real suspend. |
+| USB cable wake | 🔴 **Broken** | Required USB wake interrupts missing from the device tree. | Wake interrupt integration and physical test. |
+| USB keyboard / mouse wake | ⚪ **Not tested** | No physical input-wake result. | Input wake from real suspend. |
+| RTC / persistent clock | 🟡 **Partial** | Saved-time restoration and NTP functional; hardware startup time incorrect. | Hardware clock correctness. |
+| Watchdog | 🟡 **Partial** | Driver starts. | Recovery behavior. |
+| PMIC / regulators | 🟡 **Partial** | Essential storage/USB resources operational. | Remaining PMIC probe failures. |
+| DMA / IOMMU resources | 🟡 **Partial** | Essential device paths operational. | Broader clients and lifecycle coverage. |
+| Interconnect / platform power control | 🟡 **Partial** | Basic operation functional. | Provider errors and measured power/performance. |
+| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Charger and sensor services start. | Audio, other workloads and restart recovery. |
+| FastRPC sensor transport | 🟢 **Working** | ADSP contexts serve sensor registry requests. | General DSP compute and restart recovery. |
+| CoreSight tracing | ⏸️ **Disabled** | Autoload blocked after earlier resets. | Cause and recovery investigation. |
 
 The current boot handoff is **EL1**. EL2/KVM work remains on a separate
 experimental branch, and Project Aloha/UEFI is not the boot path used for the
