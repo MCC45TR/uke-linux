@@ -149,7 +149,7 @@ Each row records the function's current status, observations, and remaining work
 | Bluetooth | 🟢 **Working — mouse and audio** | The mouse pairs and reconnects; Space Q45 LDAC playback works. Broader device coverage remains open. |
 | NFC | ⚪ **Not tested** | No controller is exposed; fitted hardware is not confirmed. |
 | USB overall | 🟡 **Partial** | Device mode and dock mouse operation work. Role changes and combined dock workloads remain incomplete. |
-| USB CDC ACM / serial shell | 🟢 **Working — manual** | Manual serial commands work. CDC defaults off; current-cable reconnect and suspend coverage remain open. |
+| Manual CDC ACM management | 🟢 **Working — manual** | CDC switches on/off manually and defaults off. Current-cable reconnect and suspend remain unverified. |
 | USB ECM / SSH | 🟢 **Working — manual** | Earlier SSH and verified 16 MiB transfers pass. USB networking defaults off. |
 | USB host / accessory power (VBUS) | 🟡 **Partial** | Dock devices enumerate, but accessory power budget and the earlier ESP32 power failure remain unverified. |
 | USB-C switch / role control | 🟡 **Partial** | PC sink/device and dock host/sink states are reported. Broader role switching remains incomplete. |
