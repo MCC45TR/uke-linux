@@ -30,24 +30,14 @@
 
 ## Project status
 
-**Package check, 21 October 2026:** the tablet runs **Linux 7.2.11-14**, with
-**7.2.11-16** installed separately. The mandatory `uke-core-meta` selection is
-installed. A refreshed DNF upgrade plan reports no pending updates and the
-dependency check passes. F2FS root remains 14 GiB and firewalld remains failed.
-Normal kernel [7.2.11-17 built successfully on COPR](https://copr.fedorainfracloud.org/coprs/build/11181181/);
-it has not been installed or booted in this check. See the
-[dated package and tablet record](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-DNF-COHORT-2026-10-21.md).
+**Updated 21 October 2026.** Fedora Rawhide and the standard KDE Plasma desktop
+run on the tested POCO Pad X1. Display, touch, Wi-Fi, screen rotation and
+automatic brightness are available.
 
-**Hardware review, 20 October 2026.** Test environment: **POCO Pad X1,
-8 GB / 512 GB**, Fedora Rawhide, original KDE and **Linux 7.2.11-6** with the
-stock Android bootloader. KDE boots with display, touch, Wi-Fi, rotation and
-automatic brightness. Fixed refresh modes work; VRR remains disabled after
-input/display faults.
-
-Open work includes charge cutoff/bypass, shutdown reliability, sleep, powered
-HDMI and internal audio. Offline charging currently starts KDE instead of the
-charging screen. Detailed changes and test limits are in the
-[development record](CHANGELOG.md).
+Charging, power management, sleep, USB-C docks and internal audio remain under
+development. Variable refresh rate (VRR) is currently disabled. Development
+packages are delivered through [COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/);
+see the [development notes](CHANGELOG.md) for recent changes.
 
 **The public Alpha 1 images are older and have not been validated as complete
 exported artifacts on the tablet.** The development installation is separate.
@@ -56,20 +46,10 @@ and device calibration are not distributed.
 
 ## Release readiness
 
-For a stable/OEM release, these items remain:
-
-- **Charging:** verify cutoff, restart hysteresis and thermal behavior; resolve offline entry and qualify any advertised bypass.
-- **Display and touch:** resolve multitouch/VRR faults, blanking failures and repeated DPMS transitions.
-- **Boot and recovery:** reliable cold boot, reboot, shutdown, fastboot USB detection and a tested rollback route.
-- **Sleep:** repeated s2idle, physical wake, restored devices and measured sleep power.
-- **USB-C dock:** correct power/data roles, powered HDMI, storage and Ethernet together.
-- **Internal audio:** working protected speaker playback and microphone recording.
-- **Performance:** resolve scrolling stutter and complete memory, thermal and endurance tests.
-- **Release image:** validate the complete image, first boot, signed updates, rollback, security defaults and installation instructions.
-
-Experimental alphas can retain clearly documented limitations. Optional hardware
-and unfinished features remain listed below; an untested feature is not Working.
-See the [release checklist and status evidence](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-RELEASE-READINESS-2026-10-20.md).
+A stable release needs further work on charging, boot and shutdown, sleep,
+display and input reliability, docks, audio and sustained performance.
+Installation, updates and recovery also need complete testing on the tablet.
+The [hardware support tables](#hardware-support) show the current limitations.
 
 ## Downloads
 
