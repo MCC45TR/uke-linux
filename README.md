@@ -21,13 +21,24 @@
 [Downloads](#downloads) · [Hardware support](#hardware-support) · [Release readiness](#release-readiness) · [Development changes](CHANGELOG.md) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
 
 > [!WARNING]
-> **Not suitable for daily use.** Boot reliability, shutdown, power management
-> and several hardware functions remain incomplete. Suspend now selects s2idle;
-> physical wake, resume reliability and sleep power remain under validation.
+> **Work in Progress — Unofficial Project.** This independent community project
+> is not affiliated with or endorsed by the device manufacturer. Installing or
+> modifying this software may affect your device warranty. The software is
+> provided "as is", without warranty. Use it at your own risk. To the extent
+> permitted by applicable law, the maintainers accept no liability for device
+> damage, data loss or other consequences of its use.
 
 ## Project status
 
-**Report date: 20 October 2026.** Test environment: **POCO Pad X1,
+**Package check, 21 October 2026:** the tablet runs **Linux 7.2.11-14**, with
+**7.2.11-16** installed separately. The mandatory `uke-core-meta` selection is
+installed. A refreshed DNF upgrade plan reports no pending updates and the
+dependency check passes. F2FS root remains 14 GiB and firewalld remains failed.
+Normal kernel [7.2.11-17 built successfully on COPR](https://copr.fedorainfracloud.org/coprs/build/11181181/);
+it has not been installed or booted in this check. See the
+[dated package and tablet record](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-DNF-COHORT-2026-10-21.md).
+
+**Hardware review, 20 October 2026.** Test environment: **POCO Pad X1,
 8 GB / 512 GB**, Fedora Rawhide, original KDE and **Linux 7.2.11-6** with the
 stock Android bootloader. KDE boots with display, touch, Wi-Fi, rotation and
 automatic brightness. Fixed refresh modes work; VRR remains disabled after
