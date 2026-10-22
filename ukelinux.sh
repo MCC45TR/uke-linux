@@ -15,6 +15,18 @@ if [ "${UKE_IMAGE_ENTRY_LOADED:-0}" != 1 ]; then
             elif command -v doas >/dev/null 2>&1; then doas -- "$@";
             else printf '%s\n' 'Bash is missing; root, sudo or doas is required.' >&2; exit 1; fi
         }
+        bootstrap_yes=0
+        for bootstrap_argument in "$@"; do
+            case "$bootstrap_argument" in
+                --yes) bootstrap_yes=1;;
+                --help|-h|--self-test) printf '%s\n' 'Install Bash to use the Uke build menu, then run ./ukelinux.sh --help.'; exit 0;;
+            esac
+        done
+        if [ "$bootstrap_yes" != 1 ]; then
+            printf '%s' 'Install Bash as a host prerequisite? [y/N] '
+            read -r bootstrap_answer || exit 1
+            case "$bootstrap_answer" in y|Y|yes) :;; *) exit 1;; esac
+        fi
         # shellcheck disable=SC1091
         . /etc/os-release
         case " $ID ${ID_LIKE:-} " in
@@ -33,9 +45,12 @@ unset UKE_IMAGE_ENTRY_LOADED
 set -Eeuo pipefail
 umask 022
 root=$(cd -- "$(dirname -- "$0")" && pwd)
-entry=$root/uke-fedora-builder/src/image/core.sh
+entry=$root/uke-fedora-builder/src/public/entry.sh
 [[ -f $entry ]] || { printf '%s\n' 'Initialize uke-fedora-builder before building: git submodule update --init uke-fedora-builder' >&2; exit 1; }
 # shellcheck source=uke-fedora-builder/src/image/core.sh
 # shellcheck disable=SC1091
+source "$root/uke-fedora-builder/src/image/core.sh"
+# shellcheck source=uke-fedora-builder/src/public/entry.sh
+# shellcheck disable=SC1091
 source "$entry"
-image_main "$@"
+public_main "$@"

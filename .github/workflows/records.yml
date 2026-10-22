@@ -35,4 +35,4 @@ jobs:
           sudo apt-get install -y --no-install-recommends jq ripgrep shellcheck
           ./ukelinux.sh --self-test
           ./ukelinux.sh --build core --distro=fedora --offline --dry-run
-          shellcheck ukelinux.sh uke-fedora-builder/src/image/*.sh uke-fedora-builder/src/audit/*.sh uke-fedora-builder/tests/*.sh
+          shellcheck ukelinux.sh uke-fedora-builder/src/public/*.sh uke-fedora-builder/src/image/*.sh uke-fedora-builder/src/audit/*.sh uke-fedora-builder/tests/*.sh

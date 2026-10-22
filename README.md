@@ -222,13 +222,34 @@ reported Fedora tests.
 
 </details>
 
+## Build from public source
+
+23 October 2026: `./ukelinux.sh` offers image and native kernel builds on Ubuntu,
+Fedora, openSUSE, Arch Linux and Alpine hosts. Image selections cover multiboot
+or singleboot, EXT4/F2FS/Btrfs/XFS, original KDE/GNOME and stable/testing/unstable
+package channels. Output defaults to `out` in the invoking directory.
+
+[Public build and manual installation guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md)
+includes source pins, prerequisite confirmation, local-data boundaries and
+output verification. The new workflow has source and shell checks only; full
+builds and tablet acceptance remain untested. **Run `sudo dnf update --refresh`
+after the first Fedora boot.**
+
+```sh
+git clone --recurse-submodules https://github.com/MCC45TR/uke-linux.git
+cd uke-linux
+./ukelinux.sh
+# Kernel only:
+./ukelinux.sh --build kernel
+```
+
 ## Documentation
 
 | Topic | Guide |
 |---|---|
-| Build Fedora images | [Image recipes and validation](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/IMAGES.md) |
-| Build the kernel | [Kernel build automation](https://github.com/MCC45TR/senemos-uke-kernel-mainline/blob/main/docs/AUTOMATION.md) |
-| Boot requirements and rollback | [Stock-bootloader boot pair](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/FEDORA-BOOT-PAIR.md) — private, access required |
+| Build Fedora images | [Public image build guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md) |
+| Build the kernel | [Native kernel worker](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md) |
+| Boot requirements and rollback | [Public prerequisites and manual installation](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md#output-and-manual-installation) |
 | Development plan | [Milestones and remaining work](https://github.com/MCC45TR/uke-linux-docs/blob/main/PLAN.md) — private, access required |
 | Engineering records | [Documentation index](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/README.md) — private, access required |
 | Desktop screenshots | [Fedora KDE gallery](assets/screenshots) |

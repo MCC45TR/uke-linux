@@ -1,4 +1,5 @@
 /build/
+/out/
 /artifacts/
 /reports/private/
 /reports/*.log
