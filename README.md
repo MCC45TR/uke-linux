@@ -252,7 +252,7 @@ cd uke-linux
 | Boot requirements and rollback | [Public prerequisites and manual installation](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md#output-and-manual-installation) |
 | Development plan | [Milestones and remaining work](https://github.com/MCC45TR/uke-linux-docs/blob/main/PLAN.md) — private, access required |
 | Engineering records | [Documentation index](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/README.md) — private, access required |
-| Desktop screenshots | [Fedora KDE gallery](assets/screenshots) |
+| Desktop screenshots | [Fedora KDE gallery](assets/screenshots/README.md) |
 | Contributing and bug reports | [Reporting guide](CONTRIBUTING.md) · [Open an issue](https://github.com/MCC45TR/uke-linux/issues/new?template=bug_report.yml) |
 | Security reports | [Security policy](SECURITY.md) |
 
