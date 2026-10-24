@@ -76,3 +76,11 @@ Keep source review, build, package, VM and tablet results separate. Preserve
 checksums, source attribution, failures and test limitations. Shortening a report
 must not broaden a hardware claim. Keep lengthy trial histories and raw logs in
 the private engineering records.
+
+## Commit authorship
+
+24 October 2026. Commit authors and `Co-authored-by` trailers identify human
+contributors. Do not add AI tools or generated bot identities as authors or
+co-authors. Tool-use notes may remain in the pull request description. Preserve
+human contributor credit, source attribution and license notices when squashing
+or editing commit messages.
