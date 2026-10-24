@@ -39,10 +39,10 @@ development. Variable refresh rate (VRR) is currently disabled. Development
 packages are delivered through [COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/);
 see the [development notes](CHANGELOG.md) for recent changes.
 
-**The public Alpha 1 images are older and have not been validated as complete
-exported artifacts on the tablet.** The development installation is separate.
-Xiaomi Pad 7 and other memory/storage variants remain untested. OEM firmware
-and device calibration are not distributed.
+**Published images are separate from the tested development installation.**
+Complete exported-image validation on the tablet remains open. Xiaomi Pad 7
+and other memory/storage variants remain untested. See [Downloads](#downloads)
+for each image's device and installation scope.
 
 ## Release readiness
 
@@ -53,13 +53,31 @@ The [hardware support tables](#hardware-support) show the current limitations.
 
 ## Downloads
 
-- **[Fedora Rawhide Alpha 1 — images and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1)** — Linux 7.2.9, revision 1.39; predates the current native display and sensor work.
-- [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) — kernel and platform packages, with validation recorded per build.
-- [Linux image releases](https://github.com/MCC45TR/uke-linux-images/releases) · [Experimental OrangeFox releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases).
+**Updated 24 October 2026.** The [Fedora KDE EXT4 singleboot testing release](https://github.com/MCC45TR/uke-linux/releases/tag/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing)
+uses original Fedora KDE and the signed `7.2.12-22` kernel RPM family from
+`mcc45tr/uke-linux-test`.
 
-Public installation instructions are pending. Read the release requirements and
-verify checksums before using an artifact. **The `userdata` variant replaces
-Android user data; it is not a data-preserving dual-boot route.**
+| File | Download size | Installation target |
+| --- | ---: | --- |
+| [boot.img](https://github.com/MCC45TR/uke-linux/releases/download/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing/boot.img) | 96 MiB | `boot_b` |
+| [system.img.zst](https://github.com/MCC45TR/uke-linux/releases/download/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing/system.img.zst) | 1.19 GiB | Decompress to `system.img`, then write to `userdata` |
+
+The system archive uses Zstandard compression and contains an Android sparse
+image with an initial **16 GiB EXT4 filesystem**. Decompress it before flashing.
+Read the release's checksums, capacity requirements and installation/recovery
+instructions. **Writing `userdata` destroys Android apps, files and encryption
+metadata; this is not a data-preserving dual-boot route.** After the first
+Fedora boot, run `sudo dnf update --refresh`.
+
+**Device-specific test image:** OEM firmware and a device-local touch reference
+are included. Use it only on the device that supplied that reference. This exact
+exported image has not completed tablet validation; see the
+[package/source and validation records](https://github.com/MCC45TR/uke-linux-images/tree/4e8d0df65ab80862ffd6e0554962aa94e8ee1034/releases/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing)
+for its scope and remaining limits.
+
+- [Older Fedora Rawhide Alpha 1 — images and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1) — Linux 7.2.9, revision 1.39; predates the current native display and sensor work.
+- [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) — kernel and platform packages, with validation recorded per build.
+- [All Uke Linux releases](https://github.com/MCC45TR/uke-linux/releases) · [Archived image releases](https://github.com/MCC45TR/uke-linux-images/releases) · [Experimental OrangeFox releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases).
 
 ## Hardware support
 
@@ -67,7 +85,7 @@ Android user data; it is not a data-preserving dual-boot route.**
 bootloader; development kernel `7.2.11-6`. Reviewed **20 October 2026** using
 14–20 October observations, including earlier development kernels. The
 [evidence record](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-RELEASE-READINESS-2026-10-20.md)
-identifies their scope. These results do not validate the downloadable Alpha 1 images.
+identifies their scope. These results do not validate the published images.
 
 <details>
 <summary><strong>View all hardware support tables</strong></summary>
