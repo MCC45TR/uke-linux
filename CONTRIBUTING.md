@@ -79,8 +79,8 @@ the private engineering records.
 
 ## Commit authorship
 
-24 October 2026. Commit authors and `Co-authored-by` trailers identify human
-contributors. Do not add AI tools or generated bot identities as authors or
-co-authors. Tool-use notes may remain in the pull request description. Preserve
-human contributor credit, source attribution and license notices when squashing
-or editing commit messages.
+24 October 2026. Code contributions retain their human authors and human
+`Co-authored-by` credit. Do not list AI tools as authors or co-authors. Tool-use
+notes may remain in the pull request description. Preserve human contributor
+credit, source attribution and license notices when squashing or editing commit
+messages. Maintenance workflows may retain their normal service-account author.
