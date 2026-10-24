@@ -276,14 +276,21 @@ cd uke-linux
 
 ## Project repositories
 
-| Component | Repository |
+| Component | Current development branch |
 |---|---|
-| Kernel and device trees | [senemos-uke-kernel-mainline](https://github.com/MCC45TR/senemos-uke-kernel-mainline) |
-| Hardware integration and packages | [uke-linux-hardware-support](https://github.com/MCC45TR/uke-linux-hardware-support) |
-| Fedora image builder | [uke-fedora-builder](https://github.com/MCC45TR/uke-fedora-builder) |
-| Image distribution | [uke-linux-images](https://github.com/MCC45TR/uke-linux-images) |
-| OrangeFox Recovery | [orangefox_device_xiaomi_uke](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) |
-| Experimental UEFI | [uke-project-aloha](https://github.com/MCC45TR/uke-project-aloha) |
+| Kernel and device trees | [senemos-uke-kernel-mainline / main](https://github.com/MCC45TR/senemos-uke-kernel-mainline/tree/main) |
+| Hardware integration and packages | [uke-linux-hardware-support / main](https://github.com/MCC45TR/uke-linux-hardware-support/tree/main) |
+| Fedora image builder | [uke-fedora-builder / main](https://github.com/MCC45TR/uke-fedora-builder/tree/main) |
+| Image distribution | [uke-linux-images / main](https://github.com/MCC45TR/uke-linux-images/tree/main) |
+| OrangeFox Recovery | [orangefox_device_xiaomi_uke / R12.0](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/tree/R12.0) |
+| Experimental UEFI | [uke-project-aloha / main](https://github.com/MCC45TR/uke-project-aloha/tree/main) |
+
+These links always open the current development branches. GitHub's file list
+shows the exact submodule commits saved in this workspace. An hourly workflow
+refreshes those snapshots after the workspace checks pass; it can also be run
+manually from **Actions → Validate workspace links → Run workflow**. GitHub may
+delay scheduled runs. Each workspace commit retains its exact source snapshot;
+these updates do not qualify a new build or change published release images.
 
 ## License
 

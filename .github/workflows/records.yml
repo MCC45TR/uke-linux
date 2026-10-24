@@ -3,21 +3,30 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
 permissions:
   contents: read
+concurrency:
+  group: workspace-links-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   workspace:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           submodules: true
       - name: Verify component checkouts and the public landing layout
-        run: |
+        run: &workspace_layout |
           set -euo pipefail
           for component in recovery-uke-ofox senemos-uke-kernel uke-project-aloha uke-fedora-builder uke-linux-hardware-support uke-linux-images; do
             test -f "$component/README.md"
             git -C "$component" rev-parse --verify HEAD >/dev/null
+            branch=$(git config -f .gitmodules --get "submodule.$component.branch")
+            test -n "$branch"
+            git -C "$component" rev-parse --verify "origin/$branch" >/dev/null
           done
           test ! -e docs
           test ! -e AGENTS.md
@@ -30,9 +39,35 @@ jobs:
           test -x ukelinux.sh
           bash -n ukelinux.sh
       - name: Validate Core image entry contracts
-        run: |
+        run: &entry_contracts |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends jq ripgrep shellcheck
           ./ukelinux.sh --self-test
           ./ukelinux.sh --build core --distro=fedora --offline --dry-run
-          shellcheck ukelinux.sh uke-fedora-builder/src/public/*.sh uke-fedora-builder/src/image/*.sh uke-fedora-builder/src/audit/*.sh uke-fedora-builder/tests/*.sh
+          shellcheck --source-path=uke-fedora-builder ukelinux.sh uke-fedora-builder/src/public/*.sh uke-fedora-builder/src/image/*.sh uke-fedora-builder/src/audit/*.sh uke-fedora-builder/tests/*.sh
+  refresh:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          submodules: true
+      - name: Follow the configured component branches
+        run: git submodule update --init --remote --checkout --jobs 6
+      - name: Verify component checkouts and the public landing layout
+        run: *workspace_layout
+      - name: Validate Core image entry contracts
+        run: *entry_contracts
+      - name: Save updated component commits
+        run: |
+          set -euo pipefail
+          git add -- recovery-uke-ofox senemos-uke-kernel uke-project-aloha uke-fedora-builder uke-linux-hardware-support uke-linux-images
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -m 'Update component branch snapshots'
+          git push origin HEAD:main
