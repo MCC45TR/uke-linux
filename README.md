@@ -234,9 +234,19 @@ lack a validated physical mapping.
 | FastRPC sensor transport | 🟢 **Working** | ADSP contexts serve sensor registry requests. | General DSP compute and restart recovery. |
 | CoreSight tracing | ⏸️ **Disabled** | Autoload blocked after earlier resets. | Cause and recovery investigation. |
 
-The current boot handoff is **EL1**. EL2/KVM work remains on a separate
-experimental branch, and Project Aloha/UEFI is not the boot path used for the
+Retained physical boot records report **EL1**; no new entry-level measurement
+was made on 25 October. Project Aloha/UEFI is not the boot path used for the
 reported Fedora tests.
+
+25 October 2026: the separate
+[KVM preparation branch](https://github.com/MCC45TR/uke-linux/tree/work/kvm73-el2-20261025)
+pins Linux 7.3 sources and explicit producer/profile support.
+[COPR build 11206340](https://copr.fedorainfracloud.org/coprs/build/11206340)
+targets Fedora Rawhide AArch64 with tests deliberately deferred. The
+`el2-require` profile requires existing EL2 on every CPU and parks on EL1;
+it does not transfer ownership from firmware. Firmware exit remains unadmitted.
+BinderFS is prepared for a later original-Fedora Waydroid trial. No tablet
+installation, boot, KVM guest or Waydroid result is established by this work.
 
 </details>
 
