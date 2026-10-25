@@ -242,7 +242,7 @@ reported Fedora tests.
 [KVM preparation branch](https://github.com/MCC45TR/uke-linux/tree/work/kvm73-el2-20261025)
 pins Linux 7.3 sources and explicit producer/profile support.
 [COPR build 11206340](https://copr.fedorainfracloud.org/coprs/build/11206340)
-targets Fedora Rawhide AArch64 with tests deliberately deferred. The
+completed on Fedora Rawhide AArch64 with tests deliberately deferred. The
 `el2-require` profile requires existing EL2 on every CPU and parks on EL1;
 it does not transfer ownership from firmware. Firmware exit remains unadmitted.
 BinderFS is prepared for a later original-Fedora Waydroid trial. No tablet
