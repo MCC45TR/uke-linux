@@ -31,8 +31,11 @@ Fedora KDE. Development-installation results are separate from exported images.
 - Native identity/probe, kernel, recovery and Project Aloha source checkpoints
   are published on separate development branches. Source/host checks do not
   create a new device acceptance result.
-- A replacement KDE EXT4 singleboot image using Linux 7.3 is in preparation.
-  The 24 October testing release currently has no attached image assets.
+- The KDE EXT4 singleboot testing image is replaced with signed Linux 7.3.0-16
+  and Control 1.15.0-2. Host content/metadata, SELinux, both sparse decoders,
+  Zstandard and independent root checks pass. The generic export omits the
+  device-local touch reference; local provisioning and tablet acceptance remain
+  open. The release carries only matched `boot.img` and `system.img.zst`.
 
 ## 20 October 2026
 

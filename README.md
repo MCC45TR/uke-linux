@@ -67,16 +67,16 @@ The [hardware support tables](#hardware-support) show the current limitations.
 
 ## Downloads
 
-**Checked 26 October 2026.** A Linux 7.3 replacement is being built with original
-Fedora KDE, EXT4, singleboot and signed packages from `mcc45tr/uke-linux-test`.
-The [24 October testing release](https://github.com/MCC45TR/uke-linux/releases/tag/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing)
-currently has release notes but no attached image files. Replacement downloads
-will be listed after their exact output passes the host checks.
+**Published 26 October 2026.** The [KDE EXT4 singleboot testing image](https://github.com/MCC45TR/uke-linux/releases/tag/prebuild-fedora-kde-singleboot-ext4-20261026-k7.3.0-16-testing)
+uses signed **Linux 7.3.0-16**, matching modules and original Fedora KDE.
+Host content, metadata, SELinux, sparse-decoder and compression checks pass.
+Read the [package/source and validation record](https://github.com/MCC45TR/uke-linux-images/tree/main/releases/prebuild-fedora-kde-singleboot-ext4-20261026-k7.3.0-16-testing)
+and local setup requirement below. These exact files remain untested on a tablet.
 
 | File | Download size | Installation target |
 | --- | ---: | --- |
-| `boot.img` | Not currently attached | `boot_b` |
-| `system.img.zst` | Not currently attached | Decompress to `system.img`, then write to `userdata` |
+| [boot.img](https://github.com/MCC45TR/uke-linux/releases/download/prebuild-fedora-kde-singleboot-ext4-20261026-k7.3.0-16-testing/boot.img) | 96 MiB | `boot_b` |
+| [system.img.zst](https://github.com/MCC45TR/uke-linux/releases/download/prebuild-fedora-kde-singleboot-ext4-20261026-k7.3.0-16-testing/system.img.zst) | 991 MiB | Decompress to `system.img`, then write to `userdata` |
 
 The selected image profile uses a Zstandard-compressed Android sparse image
 with an initial **16 GiB EXT4 filesystem**. Decompress it before flashing.
@@ -85,13 +85,13 @@ instructions. **Writing `userdata` destroys Android apps, files and encryption
 metadata; this is not a data-preserving dual-boot route.** After the first
 Fedora boot, run `sudo dnf update --refresh`.
 
-**Local input remains device-specific:** the earlier export included OEM
-firmware and a local touch reference. Do not reuse that reference on another
-tablet. The replacement recipe omits private touch data and requires local
-provisioning before touchscreen account setup. Exact-export tablet validation
-remains open; see the earlier
-[package/source and validation records](https://github.com/MCC45TR/uke-linux-images/tree/4e8d0df65ab80862ffd6e0554962aa94e8ee1034/releases/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing)
-for its scope and remaining limits.
+**Local input remains device-specific:** this generic image omits the private
+touch reference. Provision the target tablet's own accepted reference locally
+before touchscreen account setup; the release gives the path, size and mode.
+Do not reuse another tablet's reference. USB-only first setup is not qualified.
+The original KDE Connect package, autostart/daemon and desktop discovery policy
+are included. First setup, growth, updates, recovery and exact-export tablet
+validation remain open. OEM firmware and its licensing scope are recorded separately.
 
 - [Older Fedora Rawhide Alpha 1 — images and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1) — Linux 7.2.9, revision 1.39; predates the current native display and sensor work.
 - [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) — kernel and platform packages, with validation recorded per build.
@@ -277,9 +277,10 @@ package channels. Output defaults to `out` in the invoking directory.
 
 [Public build and manual installation guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md)
 includes source pins, prerequisite confirmation, local-data boundaries and
-output verification. The 24 October KDE EXT4 singleboot export passed host image
-checks; the new Linux 7.3 replacement is building. Other combinations and exact
-exported-image tablet acceptance remain separate. **Run `sudo dnf update --refresh`
+output verification. The 26 October Linux 7.3.0-16 KDE EXT4 singleboot export
+passes host image checks with the [frozen release recipe](https://github.com/MCC45TR/uke-fedora-builder/blob/b0fd2380b07dbaaf37403c057b74796faf8f5ed3/docs/PUBLIC-BUILD.md).
+Other combinations and exact exported-image tablet acceptance remain separate.
+**Run `sudo dnf update --refresh`
 after the first Fedora boot and use the configured signed repositories for updates.**
 Keep the kernel, modules, device trees and boot profile matched, retain a working
 rollback, and verify `uname -r` after the planned restart. Automatic slot
