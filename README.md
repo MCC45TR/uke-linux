@@ -40,8 +40,8 @@ Display, normal touch, Wi-Fi, Bluetooth mouse/stereo playback, rotation and
 automatic brightness have recorded working results. **HDMI works on Linux 7.3**,
 confirmed on 26 October. Earlier Juo trials also establish monitor audio and
 Gigabit Ethernet connectivity. KDE Connect discovery works after the signed
-local-network policy update. A bounded RGB color test and one native H.264
-constrained-baseline decode mode have passed; their wider coverage remains open.
+local-network policy update. Bounded RGB colors, seven VA decode modes and
+basic native H.264 encode output have passed; wider coverage remains open.
 
 Charging protection, sleep, display/input lifecycle, internal audio, cameras
 and broader hardware video remain incomplete. VRR is disabled after input
@@ -59,8 +59,9 @@ for each image's device and installation scope.
 
 A stable release needs further work on charging, boot and shutdown, sleep,
 display and input reliability, dock lifecycle, internal audio, cameras and
-sustained performance. H.264 High currently fails despite a zero process exit;
-browser hardware video and the GPU sandbox/rendering combination remain open.
+sustained performance. The native FFmpeg H.264 High path still fails despite a
+zero process exit, while the separate VA path passes its bounded frame test.
+Browser hardware video and the GPU sandbox/rendering combination remain open.
 Installation, updates and recovery also need complete testing on the tablet.
 The [hardware support tables](#hardware-support) show the current limitations.
 
@@ -224,8 +225,8 @@ lack a validated physical mapping.
 | USB audio | ⚪ **Not tested** | No playback/recording test result. | Physical playback and capture. |
 | Front camera | ⚪ **Not tested** | No capture device or verified frame. | Functional capture pipeline. |
 | Rear camera | ⚪ **Not tested** | No capture pipeline or verified frame. | Functional capture pipeline. |
-| Hardware video decoding / encoding | 🟡 **Partial — one decode mode** | Iris on Linux 7.3.0-15 produces 30/30 exact-reference H.264 constrained-baseline NV12 frames at 320×240 with locally provisioned VPU firmware. | H.264 High yields a corrupt frame and firmware errors; other profiles, encode, precision and endurance remain open. |
-| VA-API / browser video | 🟡 **Partial — initialization** | Default VA initialization and profile queries pass with the installed backend. | Chrome/WebCodecs/WebRTC frame output, DMA-BUF/fences, sandbox and cold-boot activation. |
+| Hardware video decoding / encoding | 🟡 **Partial — bounded output** | Iris on Linux 7.3.0-15 produces 30 exact H.264 baseline frames; a 640×360 H.264 Main encode yields 30 independently decoded frames and correct SPS timing. | Native FFmpeg High/B-frame decode still fails; encoding color metadata, rate control, larger modes and endurance remain open. |
+| VA-API / browser video | 🟡 **Partial — bounded decode** | VA 0.4 on Linux 7.3.0-15: H.264 Baseline/Main/High, HEVC Main/Main10 and VP9 Profile0/2 each produce 30 exact-reference 320×240 frames, including ten-bit references. | CPU readback only; Chrome/WebCodecs/WebRTC, DMA-BUF presentation, larger modes, lifecycle and sustained operation remain open. |
 
 ### Power, thermal management and platform services
 
