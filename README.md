@@ -4,7 +4,7 @@ Fedora Rawhide AArch64 for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Qualcomm SM7675)
 
 **Status updated: 26 October 2026. Experimental alpha.**
 
-[Project status](#project-status) · [Downloads](#downloads) · [Hardware support](#hardware-support) · [Build from source](#build-from-source) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
+[Project status](#project-status) · [Recent changes](#recent-changes) · [Downloads](#downloads) · [Hardware support](#hardware-support) · [Updating Fedora](#updating-fedora) · [Build from source](#build-from-source) · [Repositories](#project-repositories)
 
 ![Fedora Rawhide KDE on the development installation, 17 October 2026](assets/screenshots/Lastest_Rawhide_Screen_Shot_Ref.png)
 
@@ -17,6 +17,23 @@ The current development kernel series is **Linux 7.3**. The latest recorded norm
 Charging protection, suspend, display/input lifecycle, internal audio, cameras and hardware video remain incomplete. Working HDMI output does not establish HDR, DDC/CI monitor control or compressed transport. External DSC/FEC is experimental and disabled by default. The current firmware handoff remains EL1; KVM and Project Aloha are separate development work.
 
 **The tested development installation is different from the published images.** Xiaomi Pad 7 and other memory/storage variants have not received equivalent physical validation. This project is not ready for general daily use.
+
+## Recent changes
+
+The following updates cover the development installation and source work recorded through **26 October 2026**:
+
+| Area | Current change | Evidence and remaining work |
+|---|---|---|
+| Kernel | Development moved from Linux 7.2 to Linux 7.3; signed `7.3.0-15` is the latest recorded normal boot. | Boot readback and boot-health checks passed; older hardware observations retain their original test scope. |
+| External display | HDMI output now works with Linux 7.3. | Confirmed in device use on 26 October; HDR, DDC/CI and experimental DSC/FEC remain separate. |
+| KDE Connect | Original Fedora KDE Connect starts through normal desktop integration; a packaged local-network firewall policy enables discovery. | POCO F5 was discovered after the signed policy update. Pairing and transfer acceptance remain open. |
+| Sensors and Bluetooth | Rotation, ambient-light response, proximity/cover events, mouse input and Space Q45 stereo playback have recorded results. | Accuracy, suspend and broader accessory coverage remain incomplete. |
+| Graphics and video | Native GL/browser pixel checks and VA capability enumeration have progressed. | Capability listings do not establish decoded frames, browser hardware video, WebGPU or a working GPU sandbox. |
+| Native platform tools | Control, identity, diagnostic and guarded power-management source has expanded. | Source/host/package results are distinguished from installed-device and electrical acceptance. |
+| Images | Linux 7.3 KDE EXT4 singleboot replacement is being prepared. | Release assets and acceptance will be updated only after the exact output passes its host checks. |
+| Recovery and UEFI | Recovery build-evidence fixtures and native Project Aloha boot-core tests have expanded. | These results do not establish a new recovery image or bootable Uke UEFI. |
+
+See [Development changes](CHANGELOG.md) for dated context and the tables below for each function's current limit.
 
 ## Downloads
 
@@ -179,6 +196,18 @@ sudo dnf update --refresh
 | ADSP / CDSP / QSH and FastRPC | Partial | Sensor registry and selected charger services work. | General compute, internal audio and restart recovery. |
 | CoreSight tracing | Disabled | Earlier autoload/reset problems. | Cause and safe recovery qualification. |
 
+## Updating Fedora
+
+For an existing compatible Uke Fedora installation, review and install updates from the configured signed repositories:
+
+```sh
+sudo dnf update --refresh
+```
+
+Keep the kernel core, modules, device trees and selected boot profile from the same build. Retain the working boot image and matching modules for rollback. Automatic boot-slot activation remains disabled; a successful DNF transaction alone does not prove that a new kernel has booted. Follow the package's documented activation procedure and verify the running version with `uname -r` after the planned restart.
+
+The stable and testing COPR channels have different package histories. Do not combine a boot image from a release with unrelated modules, switch channels by copying individual RPMs, or reuse another tablet's local touch data. KDE Connect remains the original Fedora application; discovery requires the devices to share a reachable local network, and pairing still requires user acceptance.
+
 ## Development work awaiting acceptance
 
 New source is published on development branches before device acceptance. Its presence does not change the status tables above.
@@ -186,7 +215,7 @@ New source is published on development branches before device acceptance. Its pr
 | Workstream | Source / record | Remaining gate |
 |---|---|---|
 | Native Control NFC, battery and charging views | [Charging/Control source](https://github.com/MCC45TR/uke-linux-hardware-support/tree/feat/charging-completion-20261026) | Signed integrated native package, installation and physical electrical/NFC/gesture tests. |
-| Video and browser validation | [Platform source](https://github.com/MCC45TR/uke-linux-hardware-support) and [native VA backend build](https://copr.fedorainfracloud.org/coprs/build/11206385/) | Actual codec output, corrected driver tests, sandbox and display coexistence. |
+| Video and browser validation | [Platform source checkpoint](https://github.com/MCC45TR/uke-linux-hardware-support/tree/publish/source-snapshot-20261026) and [native VA backend build](https://copr.fedorainfracloud.org/coprs/build/11206385/) | Actual codec output, corrected driver tests, sandbox and display coexistence. |
 | Linux 7.3 integration | [Kernel source](https://github.com/MCC45TR/senemos-uke-kernel-mainline/tree/main) and [test COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Per-build device validation; experimental DSC/FEC stays off by default. |
 | Recovery and UEFI | [OrangeFox](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) and [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Independent firmware, storage, touch, boot and Android-return acceptance. |
 

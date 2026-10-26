@@ -1,5 +1,29 @@
 # Development changes
 
+## 26 October 2026
+
+Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64 and original
+Fedora KDE. Development-installation results are separate from exported images.
+
+- Linux 7.3 is the current development series. Signed `7.3.0-15`, COPR
+  11207395, passed the recorded normal boot, boot readback and boot-health
+  checks. Hardware observations from older kernels retain their original scope.
+- HDMI output works on Linux 7.3, confirmed in device use on 26 October.
+  The exact mode and precision were not remeasured. HDR, DDC/CI and experimental
+  DSC/FEC remain separate acceptance items; DSC/FEC stays disabled by default.
+- The signed KDE Connect desktop policy enabled discovery of POCO F5 on
+  24 October. Pairing, transfers and the separate laptop route issue remain open.
+- The README now covers current display/input, graphics, browser/video,
+  networking, USB, sensors, audio/camera, charging and lifecycle results at
+  function level. It includes recent changes, update instructions, source
+  checkpoints and live release availability rather than treating package or
+  capability enumeration as physical support.
+- Native identity/probe, kernel, recovery and Project Aloha source checkpoints
+  are published on separate development branches. Source/host checks do not
+  create a new device acceptance result.
+- A replacement KDE EXT4 singleboot image using Linux 7.3 is in preparation.
+  The 24 October testing release currently has no attached image assets.
+
 ## 20 October 2026
 
 - **Functional status:** the tables separate tested functions from broader
