@@ -11,6 +11,13 @@ Fedora KDE. Development-installation results are separate from exported images.
 - HDMI output works on Linux 7.3, confirmed in device use on 26 October.
   The exact mode and precision were not remeasured. HDR, DDC/CI and experimental
   DSC/FEC remain separate acceptance items; DSC/FEC stays disabled by default.
+- Earlier Juo trials also confirm native/Chromium monitor sound and basic
+  Gigabit Ethernet connectivity. Later RX drops, reconnect and cover behavior
+  remain open. The signed RGB cohort passes one visible ten-second color test.
+- On Linux 7.3.0-15, native Iris produces 30 exact-reference H.264 constrained-
+  baseline frames at 320x240. The High/B-frame trial produces a corrupt frame
+  and firmware errors despite FFmpeg exiting zero. Other profiles, encoding,
+  browser hardware video and sandbox/GL coexistence remain unqualified.
 - The signed KDE Connect desktop policy enabled discovery of POCO F5 on
   24 October. Pairing, transfers and the separate laptop route issue remain open.
 - The README now covers current display/input, graphics, browser/video,
