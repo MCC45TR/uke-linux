@@ -1,299 +1,237 @@
-<table>
-<tr>
-<td width="65%" valign="top">
-<h1>Uke Linux</h1>
-<p><strong>Fedora Rawhide for Xiaomi Pad 7 and POCO Pad X1</strong></p>
-<p>A community Linux port for the Snapdragon 7+ Gen 3 (SM7675), with the original Fedora KDE Plasma desktop.</p>
-<p><strong>Experimental alpha</strong> · AArch64 · <code>uke</code></p>
-</td>
-<td width="35%" valign="top" align="center">
-<br>
-<img src="assets/images/uke-fedora-mockup.png" width="240" alt="Xiaomi Pad 7 mockup with Fedora KDE Plasma">
-</td>
-</tr>
-<tr>
-<td colspan="2" align="center">
-<img src="assets/screenshots/Lastest_Rawhide_Screen_Shot_Ref.png" width="100%" alt="Fedora Rawhide KDE and Fastfetch on the Uke development installation, 17 October 2026">
-</td>
-</tr>
-</table>
+# Uke Linux
 
-[Downloads](#downloads) · [Hardware support](#hardware-support) · [Release readiness](#release-readiness) · [Development changes](CHANGELOG.md) · [Documentation](#documentation) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
+Fedora Rawhide AArch64 for Xiaomi Pad 7 and POCO Pad X1 (`uke`, Qualcomm SM7675), using the original Fedora KDE Plasma desktop.
 
-> [!WARNING]
-> **Work in Progress — Unofficial Project.** This independent community project
-> is not affiliated with or endorsed by the device manufacturer. Installing or
-> modifying this software may affect your device warranty. The software is
-> provided "as is", without warranty. Use it at your own risk. To the extent
-> permitted by applicable law, the maintainers accept no liability for device
-> damage, data loss or other consequences of its use.
+**Status updated: 26 October 2026. Experimental alpha.**
+
+[Project status](#project-status) · [Downloads](#downloads) · [Hardware support](#hardware-support) · [Build from source](#build-from-source) · [Repositories](#project-repositories) · [Report a problem](CONTRIBUTING.md)
+
+![Fedora Rawhide KDE on the development installation, 17 October 2026](assets/screenshots/Lastest_Rawhide_Screen_Shot_Ref.png)
 
 ## Project status
 
-**Updated 21 October 2026.** Fedora Rawhide and the standard KDE Plasma desktop
-run on the tested POCO Pad X1. Display, touch, Wi-Fi, screen rotation and
-automatic brightness are available.
+POCO Pad X1 boots Fedora through the stock Android bootloader and runs the original KDE Wayland session. Recorded working functions include native internal display output, fixed refresh-rate selection, normal touch input, Wi-Fi, Bluetooth mouse and stereo audio, sensor-driven rotation and automatic brightness. These results come from the development installation, with the limitations below.
 
-Charging, power management, sleep, USB-C docks and internal audio remain under
-development. Variable refresh rate (VRR) is currently disabled. Development
-packages are delivered through [COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/);
-see the [development notes](CHANGELOG.md) for recent changes.
+The current development kernel series is **Linux 7.3**. The latest recorded normal boot is **7.3.0-15**, installed from signed [COPR build 11207395](https://copr.fedorainfracloud.org/coprs/build/11207395/). Boot-image readback and the existing boot-health checks passed on 26 October. **HDMI output is working on Linux 7.3**, confirmed in the 26 October device-use report. The exact mode and output precision of that report were not remeasured.
 
-**Published images are separate from the tested development installation.**
-Complete exported-image validation on the tablet remains open. Xiaomi Pad 7
-and other memory/storage variants remain untested. See [Downloads](#downloads)
-for each image's device and installation scope.
+Charging protection, suspend, display/input lifecycle, internal audio, cameras and hardware video remain incomplete. Working HDMI output does not establish HDR, DDC/CI monitor control or compressed transport. External DSC/FEC is experimental and disabled by default. The current firmware handoff remains EL1; KVM and Project Aloha are separate development work.
 
-## Release readiness
-
-A stable release needs further work on charging, boot and shutdown, sleep,
-display and input reliability, docks, audio and sustained performance.
-Installation, updates and recovery also need complete testing on the tablet.
-The [hardware support tables](#hardware-support) show the current limitations.
+**The tested development installation is different from the published images.** Xiaomi Pad 7 and other memory/storage variants have not received equivalent physical validation. This project is not ready for general daily use.
 
 ## Downloads
 
-**Updated 24 October 2026.** The [Fedora KDE EXT4 singleboot testing release](https://github.com/MCC45TR/uke-linux/releases/tag/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing)
-uses original Fedora KDE and the signed `7.2.12-22` kernel RPM family from
-`mcc45tr/uke-linux-test`.
+Availability checked on **26 October 2026**.
 
-| File | Download size | Installation target |
-| --- | ---: | --- |
-| [boot.img](https://github.com/MCC45TR/uke-linux/releases/download/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing/boot.img) | 96 MiB | `boot_b` |
-| [system.img.zst](https://github.com/MCC45TR/uke-linux/releases/download/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing/system.img.zst) | 1.19 GiB | Decompress to `system.img`, then write to `userdata` |
+| Release | Current availability | Validation and limits |
+|---|---|---|
+| Linux 7.3 KDE image update | In preparation; replacement assets have not been uploaded | The new matched boot/root pair will retain separate host-image and tablet acceptance results. |
+| [Fedora Rawhide Alpha 1, 15 October](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1) | Three attached boot/root image files | Linux 7.2.9 revision 1.39; historical alpha, predating current display, sensor and Linux 7.3 work. The exact exported files have not completed tablet validation. |
+| [KDE EXT4 singleboot test, 24 October](https://github.com/MCC45TR/uke-linux/releases/tag/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing) | Release notes only; no attached image assets at the time of this update | Original Fedora KDE and signed 7.2.12-22 package composition passed host image checks. Earlier direct `boot.img` and `system.img.zst` links are not available. |
+| [Development RPMs](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Signed kernel and platform packages | Test channel; source, package and device results are recorded separately. |
+| [OrangeFox test releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases) | Separate experimental recovery artifacts | Recovery has its own firmware, touch, storage and installation requirements. |
 
-The system archive uses Zstandard compression and contains an Android sparse
-image with an initial **16 GiB EXT4 filesystem**. Decompress it before flashing.
-Read the release's checksums, capacity requirements and installation/recovery
-instructions. **Writing `userdata` destroys Android apps, files and encryption
-metadata; this is not a data-preserving dual-boot route.** After the first
-Fedora boot, run `sudo dnf update --refresh`.
+Read each release's exact installation targets, checksums, device scope and rollback instructions. Replacing Android `userdata` destroys Android applications, files and encryption metadata. A userdata-root singleboot image is not a data-preserving dual-boot installation.
 
-**Device-specific test image:** OEM firmware and a device-local touch reference
-are included. Use it only on the device that supplied that reference. This exact
-exported image has not completed tablet validation; see the
-[package/source and validation records](https://github.com/MCC45TR/uke-linux-images/tree/4e8d0df65ab80862ffd6e0554962aa94e8ee1034/releases/prebuild-fedora-kde-singleboot-ext4-20261024-k7.2.12-22-testing)
-for its scope and remaining limits.
+Do not reuse calibration or a device-local touch reference on another tablet. Keep stock early firmware and a verified recovery route. After the first Fedora boot, run:
 
-- [Older Fedora Rawhide Alpha 1 — images and checksums](https://github.com/MCC45TR/uke-linux/releases/tag/fedora-rawhide-alpha-1) — Linux 7.2.9, revision 1.39; predates the current native display and sensor work.
-- [Development RPMs on COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) — kernel and platform packages, with validation recorded per build.
-- [All Uke Linux releases](https://github.com/MCC45TR/uke-linux/releases) · [Archived image releases](https://github.com/MCC45TR/uke-linux-images/releases) · [Experimental OrangeFox releases](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/releases).
+```sh
+sudo dnf update --refresh
+```
 
 ## Hardware support
 
-**Test scope:** POCO Pad X1, 8 GB / 512 GB; Fedora Rawhide AArch64; stock Android
-bootloader; development kernel `7.2.11-6`. Reviewed **20 October 2026** using
-14–20 October observations, including earlier development kernels. The
-[evidence record](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/testing/UKE-RELEASE-READINESS-2026-10-20.md)
-identifies their scope. These results do not validate the published images.
+**Test environment:** POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64, original Fedora KDE and stock Android bootloader. This summary combines dated observations from 14–26 October, across Linux 7.2.10, 7.2.11, 7.2.12 and 7.3 development kernels. Older successful tests have not all been repeated on 7.3.0-15.
 
-<details>
-<summary><strong>View all hardware support tables</strong></summary>
+**Working** applies to the named, observed function. **Partial** means useful behavior exists with unresolved defects or incomplete coverage. **Not qualified** means source, enumeration or package evidence does not establish physical operation. No row validates an exported image or a different device variant.
 
-Each row separates the observed result from remaining validation. Status applies
-only to the function and test scope stated in that row.
+### Boot, storage and updates
 
-- 🟢 **Working:** the listed function was used successfully on the tested tablet;
-  the stated limits still apply.
-- 🟡 **Partial:** some functions work, with incomplete integration or validation.
-- 🔴 **Broken:** the function is not currently operational in this Linux stack;
-  this does not imply a physical hardware defect.
-- ⚪ **Not tested / not qualified:** the needed functional or calibration result is unavailable.
-- ⏸️ **Disabled:** kept off while a known fault is investigated.
-
-### Boot, CPU and storage
-
-| Feature | Status | Observed result | Remaining validation / limits |
+| Feature | Status | Observed result | Remaining work / limits |
 |---|---|---|---|
-| Fedora boot | 🟢 **Working** | KDE starts with display and touch on Linux 7.2.11-6. | Complete published images. |
-| CPU — Snapdragon 7+ Gen 3 (SM7675) | 🟢 **Working** | All eight cores online. | Sustained heavy loads. |
-| CPU frequency policies | 🟢 **Working** | All three CPU policies respond to power-profile changes. | Sustained performance and energy use. |
-| RAM | 🟡 **Partial** | Linux reports 7.21 GiB; memory stress stops at the 65 °C guard. | Complete sustained memory test. |
-| UFS storage | 🟢 **Working** | 256 MiB write/readback passes; bounded direct read about 1.7 GB/s. | Bounded workloads only. |
-| UFS scaling / WriteBooster | 🟢 **Working** | Gear scaling, WriteBooster and runtime idle states respond to load. | MCQ and inline encryption disabled. |
-| Memory-pressure telemetry | 🟢 **Working** | CPU, memory and I/O pressure counters available. | Effective OOM policy. |
-| UFS I/O scheduler | 🟢 **Working** | mq-deadline retained across two boots without the earlier switch errors. | Two-boot sample. |
-| Linux partition / EXT4 | 🟢 **Working** | Fedora boots from the dedicated EXT4 linux partition. | Power-loss recovery. |
-| Bootloader entry | 🟢 **Working** | FASTBOOT screen visible. | USB detection assessed separately. |
-| Fastboot USB connection | 🟡 **Partial** | Earlier sessions functional; current PC connection not detected. | Restore and repeat USB enumeration. |
-| Normal reboot — kernel 6 | 🟢 **Working** | Tested normal reboots return to KDE. | Shutdown assessed separately. |
-| Shutdown / poweroff | 🟡 **Partial** | USB-powered shutdown can restart the tablet; intermittent shutdown hang. | Reliable shutdown with and without USB. |
-| Reboot to recovery | ⚪ **Not tested** | No validated entry from the current Fedora kernel. | Physical recovery-entry test. |
-| Hardware information / Fastfetch | 🟢 **Working** | All-module capture completes. | Some hardware fields unavailable. |
-| Project Aloha / UEFI boot | ⚪ **Not tested** | Fedora test path uses the stock Android bootloader. | Separate UEFI development and device validation. |
+| Stock-bootloader Fedora boot | Working — development installation | Normal Linux 7.3.0-15 boot accepted on 26 October. | Exact installation and matched boot/modules required. |
+| Signed DNF kernel updates | Working — reviewed transactions | Matching kernel children, boot-image readback and retained rollback verified. | Interrupted updates, broader firmware/variant coverage and unattended lifecycle. |
+| UFS and Linux root filesystem | Working — mounted development root | Fedora root, package installation and file transfers operate. | Full storage endurance and fault qualification. |
+| Public exported images | Not qualified on tablet | Host filesystem, sparse-image and package checks exist. | Boot and complete acceptance of each exact export. |
+| Filesystem/layout management | Host/VM tested | Native planning, filesystem and rollback fixtures are available. | Actual destructive storage operations need separate validation and authorization. |
+| RTC and persistent clock | Partial | Saved-time restoration and network time work. | Correct hardware time at startup. |
+| Project Aloha / UEFI | Development only | Native core, EFI and platform source work exists. | No complete bootable Uke UEFI or accepted Android-return installer. |
+| EL2 / KVM | Not qualified | Separate kernel and firmware-handoff research. | Proven stock-firmware release of EL2 and actual KVM guest execution. |
 
-### Display, graphics and input
+### Display, input and desktop
 
-| Feature | Status | Observed result | Remaining validation / limits |
+| Feature | Status | Observed result | Remaining work / limits |
 |---|---|---|---|
-| Tablet screen / local TTY | 🟢 **Working** | KDE and local console at 3200×2136. | Internal display only. |
-| Manual backlight brightness | 🟢 **Working** | Smooth manual adjustment. | Optical calibration. |
-| Screen-off backlight / DPMS | 🟡 **Partial** | Scanout returns after off/on; one DPU frame-done timeout in ten cycles. | Resolve timeout and repeat transitions. |
-| Native DPU / DSI / DSC display | 🟢 **Working** | Native KDE scanout on the internal screen. | Display lifecycle tests. |
-| Refresh-rate switching | 🟢 **Working** | Fixed 30/48/50/60/90/120/144 Hz modes functional. | VRR assessed separately. |
-| Adaptive sync / dynamic refresh | ⏸️ **Disabled — input regression** | Multitouch/display faults and touch watchdogs with VRR. | Disabled; no supported physical 1 Hz path. |
-| Display color depth | 🟡 **Partial** | Active 10-bit framebuffer and DSC link. | Selectable 8/12/16-bit output not implemented. |
-| Firmware DRM fallback | 🟡 **Partial** | Earlier firmware-framebuffer operation recorded. | Current fallback behavior. |
-| Original Fedora KDE / Wayland | 🟡 **Partial** | Desktop and applications operational. | Clipboard-related shutdown deadlock. |
-| Desktop scrolling | 🟡 **Partial** | Settings-list scrolling stutters. | Content-frame pacing; display Hz alone is insufficient. |
-| Manual display rotation | 🟢 **Working** | Rotation with matching touch coordinates. | — |
-| GPU — Adreno 732 | 🟡 **Partial** | Desktop OpenGL operational. | OpenGL ES failures and lifecycle coverage. |
-| KDE GPU statistics | 🟡 **Partial** | KSystemStats exposes idle usage and frequency. | Active-load accuracy and GUI presentation. |
-| Xwayland / OpenGL | 🟢 **Working — desktop OpenGL** | 27 output checks per backend plus bounded workloads pass. | Desktop OpenGL only. |
-| Vulkan / Turnip | 🟡 **Partial** | 9,000-frame cube completes; vulkaninfo display-extension query fails. | Resolve query failure and broaden validation. |
-| Touchscreen — Novatek NT36532 | 🟡 **Partial** | Normal-use touch operational. | Ten-contact/VRR faults and continuous-contact reliability. |
-| Stylus / pen | 🔴 **Broken** | No pen input, pressure or tilt. | Functional pen implementation and tests. |
-| Power / volume buttons | 🟢 **Working** | Buttons respond during normal Fedora use. | Wake from real suspend. |
-| Power-button screen toggle | 🟡 **Partial** | Display-only policy configured. | Physical toggle test. |
-| USB receiver mouse | 🟢 **Working** | Mouse input through powered Juo dock on 7.2.10-27. | Tested dock/kernel only. |
-| USB keyboard | ⚪ **Not tested** | No physical input result. | Keyboard input test. |
-| Pogo keyboard / touchpad | ⚪ **Not tested** | No keyboard available. | Native transport, authentication and hardware tests. |
+| Internal O82 DPU/DSI/DSC output | Working — recorded KDE sessions | Native scanout on the internal display. | Current-kernel lifecycle and sustained physical checks. |
+| Fixed refresh rates | Working — recorded modes | 30/48/50/60/90/120/144 Hz selection. | Repeat the complete mode set on the current kernel. |
+| Variable refresh rate | Partial — experimental | Bounded cadence policies and fixed-mode fallback exist. | Earlier multitouch/display regressions; no qualified physical 1 Hz path. |
+| Internal color depth | Partial | Recorded 10-bpc framebuffer/link operation. | No qualified selectable 8/12/16-bpc output. |
+| Brightness control | Working — recorded sessions | Manual and sensor-driven brightness operate. | Sunlight behavior, long-run comfort and current-kernel transitions. |
+| Display off/on | Partial | Scanout has returned after software off/on. | Earlier frame-done timeout and wake/lifecycle faults. |
+| Firmware framebuffer fallback | Partial | Earlier firmware-framebuffer operation recorded. | Current fallback and handoff reliability. |
+| Original Fedora KDE / Wayland | Working — desktop session | Original desktop and applications run. | Clipboard-related shutdown hang and broader session lifecycle. |
+| Desktop scrolling | Partial | Normal navigation works. | Previously observed settings-list stutter and content pacing. |
+| Novatek NT36532 touch | Partial | Normal finger input and active native touch services. | Continuous contact, ten-contact/VRR regressions and gesture timeouts. |
+| Manual rotation | Working — recorded sessions | Display rotation with matching touch coordinates. | Current-kernel transition coverage. |
+| Stylus / pen | Not working in recorded tests | No functional pen, pressure or tilt input. | Driver/firmware integration and physical tests. |
+| Power and volume buttons | Working — normal use | Button events respond in Fedora. | Wake from real suspend. |
+| Double-tap / gesture wake | Not qualified | Guarded control/readiness source exists; gesture entry still times out in the latest boot record. | Actual armed gesture and physical wake. |
+| USB receiver mouse | Working — tested powered dock | Recorded motion, clicks and pointer use. | Broader receiver and lifecycle coverage. |
+| USB keyboard | Not tested | No accepted physical typing result. | Physical keyboard and wake tests. |
+| Pogo keyboard / touchpad | Not tested | No physical accessory result. | Transport, authentication, input and illumination. |
 
-### Networking and USB
+### Graphics and browsers
 
-| Feature | Status | Observed result | Remaining validation / limits |
+| Feature | Status | Observed result | Remaining work / limits |
 |---|---|---|---|
-| Wi-Fi — WCN6750 | 🟢 **Working** | Automatic connection, SSH and file transfers; factory WLAN address retained across restarts. | — |
-| Signed network updates | 🟢 **Working** | Signed Fedora/COPR packages install over Wi-Fi. | Kernel updates require matching boot/modules. |
-| Bluetooth | 🟢 **Working — mouse and audio** | Mouse pairing/reconnection and Space Q45 LDAC playback functional. | Broader device coverage. |
-| NFC | ⚪ **Not tested** | No exposed controller. | Confirm fitted hardware. |
-| USB overall | 🟡 **Partial** | Device mode and dock mouse operational. | Role changes and combined dock workloads. |
-| Manual CDC ACM management | 🟢 **Working — manual** | Manual on/off control; default off. | Current-cable reconnect and suspend. |
-| USB ECM / SSH | 🟢 **Working — manual** | Earlier SSH and verified 16 MiB transfers pass. | Default off; earlier-test scope. |
-| USB host / accessory power (VBUS) | 🟡 **Partial** | Dock devices enumerate. | Accessory power budget and earlier ESP32 power failure. |
-| USB-C switch / role control | 🟡 **Partial** | PC sink/device and dock host/sink states reported. | Broader role switching. |
-| USB reconnect / driver lifecycle | 🟡 **Partial** | Software reconnect functional in earlier tests. | Physical reconnect and driver-reload recovery. |
-| USB SuperSpeed | 🟡 **Partial** | Hub and RTL8153 enumeration at 5 Gbit/s. | Storage throughput. |
-| DisplayPort / USB-C video output | 🟡 **Partial** | No successful tablet HDMI output. | Powered test requires charging-protection qualification. |
-| External-monitor DDC/CI brightness | 🟡 **Partial** | PowerDevil/ddcutil initializes. | Actual monitor brightness control. |
-| USB hubs | 🟢 **Working — tested dock** | Juo USB 2/3 enumeration and powered-dock mouse input functional. | Storage and Ethernet assessed separately. |
-| USB Ethernet | 🟡 **Partial** | RTL8153 and firmware detected. | Cable carrier and real traffic. |
+| Adreno 732 desktop OpenGL | Working — bounded tests | Earlier per-case output checks and 26 October Chrome GL pixels pass. | Full API conformance, sustained load and lifecycle. |
+| OpenGL ES | Partial | Selected native probes have passed. | Broader conformance and regression coverage. |
+| Vulkan / Turnip | Partial | Transfer, fence and readback paths work in selected tests. | Display-query/presentation issues and image-atomic/barrier failures. |
+| Vulkan CTS correction | Package/source work | 113 selected cases passed only with a diagnostic UBWC-hint override. | Validate the actual correction on the tablet without debug overrides. |
+| Zink | Partial | Selected GL-on-Vulkan probes exist. | Presentation, mixed workloads and sustained performance. |
+| OpenCL / Rusticl | Partial | Selected compute/readback probes passed. | Full capability, conformance and application coverage. |
+| KDE GPU statistics | Partial | Idle usage/frequency reporting observed. | Accuracy under load and GUI presentation. |
+| Chrome Canvas / WebGL | Working — bounded pixel checks | Chrome 156, ANGLE/FD732 on kernel 7.3.0-14 passed clear, shader and context-restoration checks. | Performance, physical output and lifecycle. |
+| Browser GPU sandbox | Unresolved | Latest captured Chrome report still says sandbox disabled. | Diagnose and validate the sandbox; no bypass is a supported fix. |
+| WebGPU | Not qualified | Latest normal Chrome trial returned no adapter and performed no compute rounds. | Real adapter, compute and video-import validation. |
+| Browser display precision / HDR | Not qualified | Browser and kernel output descriptors differ. | End-to-end precision, metadata, transport and visible HDR. |
 
-### Sensors and desktop integration
+### Networking, USB and external displays
 
-Sensor startup uses native readiness dependencies. Factory calibration remains
-on read-only persist; runtime registry writes use RAM. Some endpoints still
-lack a validated physical mapping.
-
-| Feature | Status | Observed result | Remaining validation / limits |
+| Feature | Status | Observed result | Remaining work / limits |
 |---|---|---|---|
-| SSC sensor startup | 🟢 **Working** | Automatic motion, light and proximity service startup. | DSP restart recovery. |
-| Accelerometer — LSM6DSO | 🟢 **Working — rotation** | Four physical orientations with matching touch alignment. | Rotation only. |
-| Gyroscope — LSM6DSO | 🟡 **Partial** | Readable XYZ angular rates. | Physical motion response and drift. |
-| Magnetometer / compass — QMC630x family | 🟡 **Partial** | Heading responds to movement; absolute-heading comparison fails. | Absolute-heading accuracy. |
-| Front light sensor — STK3BCx family | 🟢 **Working — ambient light** | Front illumination changes lux and KDE brightness. | Ambient light only. |
-| Rear light sensor — SIP1328 | 🟢 **Working — ambient light** | Rear illumination changes brightness with the front dark. | Ambient light only. |
-| Ambient color temperature | ⚪ **Not qualified** | No valid startup color sample. | Calibrated Kelvin conversion. |
-| Front proximity sensor — STK3BCx family | 🟢 **Working — near/far** | Cover/release sequence reports far → near → far. | Near/far response only. |
-| SAR / body proximity — SX937x family | ⏸️ **Disabled** | No usable endpoint or physical response. | Endpoint mapping and physical validation. |
-| Automatic rotation / sensor fusion | 🟢 **Working — four poses** | KDE and touch alignment follow all four orientations. | Four poses. |
-| Automatic brightness | 🟢 **Working** | Brightness follows front/rear illumination changes. | Long-run and sunlight behavior. |
-| Magnetic cover / lid detection | 🟢 **Working — switch events** | Front cover and rear fold generate expected switch events. | Cover-triggered blanking. |
-| Temperature telemetry | 🟢 **Working** | Standard interfaces and KDE expose PMIC/thermal readings. | Absolute calibration and protection effectiveness. |
+| WCN6750 Wi-Fi | Working — development installation | Automatic connection, SSH, file transfer and signed network updates. | Broader power/lifecycle coverage. |
+| Bluetooth mouse | Working — tested device | Pairing, movement, clicks and reconnection. | Broader device coverage and suspend. |
+| Bluetooth stereo / LDAC | Working — Space Q45 playback | Recorded clear stereo playback. | Microphone/HFP and lifecycle. |
+| KDE Connect | Working — discovery | Signed default local-network policy installed; POCO F5 discovered on 24 October. | Pairing, file sharing and post-update reboot; separate laptop Wi-Fi route issue remains. |
+| NFC | Not qualified | Source distinguishes the OEM tag from an active Linux NFC reader. | No accepted tag transfer, card reading or emulation result. |
+| Manual CDC ACM management | Working — manual | Explicit on/off management; default off. | Current cable/reconnect and suspend tests. |
+| USB ECM / SSH | Working — earlier manual path | SSH and verified 16 MiB transfers. | Default off; repeat against the current kernel/cable. |
+| USB role control | Partial | PC device/sink and dock host/sink states observed. | Broader transitions and combined loads. |
+| USB accessory power | Partial | Powered-dock devices enumerate. | Real current budget and earlier ESP32 power failure. |
+| USB reconnect / driver lifecycle | Partial | Software reconnect has worked. | Physical reconnect, fault recovery and reloads. |
+| USB SuperSpeed | Partial | Hub and RTL8153 enumeration at 5 Gbit/s. | Sustained storage throughput and combined use. |
+| Juo USB hubs | Working — tested dock | USB 2/3 enumeration and receiver mouse operation. | Broader accessories and dock lifecycle. |
+| USB Ethernet | Partial | RTL8153 and its firmware are detected. | Cable carrier, traffic and sustained throughput. |
+| External HDMI through Juo JH925 | Working — external display | Working HDMI on Linux 7.3 confirmed on 26 October; earlier 1440p/75 Hz output recorded on 24 October. | Current mode/precision were not remeasured; reconnection, sustained use, DDC/CI, HDR and compression have separate limits. |
+| External 10-bpc output | Partial | Kernel reports uncompressed 10-bpc DP transport in recent boots. | Actual receiver/HDMI output and optical precision. |
+| External DSC / FEC | Experimental — default off | Source, transport fixtures and native kernel-15 package checks pass. | Disconnected policy change, fresh receiver events and sustained visible compressed output. |
+| DDC/CI brightness / monitor power | Not working in recorded tests | Standard command attempts did not establish brightness control or wake. | Receiver forwarding and physical monitor behavior. |
+| HDR / YCbCr external formats | Not qualified | Source investigation and capability work. | Implemented per-commit state and actual sink/transport/visible results. |
 
-### Audio, cameras and media
+### Sensors and platform controls
 
-| Feature | Status | Observed result | Remaining validation / limits |
+| Feature | Status | Observed result | Remaining work / limits |
 |---|---|---|---|
-| Internal speakers | 🔴 **Broken** | No usable ALSA playback route. | Protected speaker playback. |
-| Microphones | 🔴 **Broken** | No usable ALSA recording route. | Functional recording route and capture. |
-| Bluetooth audio / LDAC | 🟢 **Working — stereo playback** | Clear stereo LDAC playback reported on Space Q45. | Microphone/HFP and suspend. |
-| USB audio | ⚪ **Not tested** | No playback/recording test result. | Physical playback and capture. |
-| Front camera | ⚪ **Not tested** | No capture device or verified frame. | Functional capture pipeline. |
-| Rear camera | ⚪ **Not tested** | No capture pipeline or verified frame. | Functional capture pipeline. |
-| Hardware video decoding / encoding | ⚪ **Not tested** | No usable codec device or verified workload. | Hardware decode/encode workloads. |
+| SSC sensor startup | Working — recorded sessions | Motion, light and proximity services start automatically. | DSP restart and current-kernel lifecycle. |
+| Accelerometer / automatic rotation | Working — four poses | KDE rotation and matching touch alignment observed. | Repeat on current kernel and longer sessions. |
+| Gyroscope | Partial | XYZ angular rates are readable. | Physical response, drift and calibration. |
+| Compass | Partial | Heading changes with movement. | Absolute-heading accuracy remains unqualified. |
+| Front ambient light | Working — illumination response | Front illumination changes lux and KDE brightness. | Accuracy and long-run behavior. |
+| Rear ambient light | Working — illumination response | Rear illumination changes brightness with the front dark. | Accuracy and interaction with cover state. |
+| Ambient color temperature | Not qualified | No accepted calibrated startup color sample. | Sensor mapping and Kelvin conversion. |
+| Front proximity | Working — near/far | Recorded far → near → far cover/release sequence. | Broader lifecycle and mapping coverage. |
+| SAR / body proximity | Disabled / not qualified | No accepted usable endpoint or physical response. | Endpoint mapping and physical validation. |
+| Magnetic cover / lid | Working — switch events | Front cover and rear fold events recorded. | Cover-triggered blanking and dock/display interactions. |
+| Temperature telemetry | Working — readings | PMIC/thermal interfaces and KDE readings. | Absolute calibration and protection effectiveness. |
+| Torch / flashlight | Source available — not qualified | Guarded native driver/Control work and real current-step reporting. | Physical output, thermal limits and failure/lifecycle tests. |
+| RGB notification LED | Source available — not qualified | Native multicolor and bounded Control source. | Actual probe, channel/color mapping and measured output. |
+| Native Control and KDE integration | Partial | Installed management/reporting and desktop integration; expanded CLI has host checks. | Source-only commands are not automatically installed or physically accepted. |
 
-### Power, thermal management and platform services
+### Audio, cameras and video
 
-| Feature | Status | Observed result | Remaining validation / limits |
+| Feature | Status | Observed result | Remaining work / limits |
 |---|---|---|---|
-| Battery percentage / voltage / temperature | 🟢 **Working — readings** | Readings available after normal boot. | Independent accuracy checks. |
-| Battery current / net power | 🟢 **Working — readings** | Signed current, net battery power and charge counter available. | Protection effectiveness assessed separately. |
-| Charging from computer USB | 🟡 **Partial** | USB input detected; system load can exceed the supply. | Sustained net charging under the tested load. |
-| USB Power Delivery / fast charging | 🟡 **Partial — powered dock** | Battery charging through the powered dock observed. | Negotiated protocols and protection. |
-| Charge limits / charge stop | 🟡 **Partial — effect unverified** | 70/80 setting retained. | Physical cutoff and restart hysteresis. |
-| Battery bypass / direct system supply | ⚪ **Not qualified** | No verified bypass or battery isolation. | Physical power-path qualification. |
-| Native device management | 🟡 **Partial** | Status, sensor reports and inventory functional. | Swap-partition preference and advanced controls. |
-| Battery runtime estimates | 🟡 **Partial — software checks** | Model checks pass. | Qualified device forecasts unavailable. |
-| Offline charging | 🔴 **Broken — charger-mode entry** | USB-triggered starts return to KDE without the charging screen. | Charger-mode entry and physical screen operation. |
-| Plasma battery indicator | 🟢 **Working** | Battery icon and readings visible in KDE. | Readings only; protection separate. |
-| Desktop power profiles | 🟢 **Working** | All three profiles selectable without an error. | Sustained energy and thermal behavior. |
-| Thermal protection / throttling | 🟡 **Partial** | Emulated events lower CPU/GPU limits. | Actual heat response and protective shutdown. |
-| Display-only soft sleep | 🟡 **Partial** | Scanout returns after off/on; one DPU timeout recorded. | Resolve timeout and repeat cycles. |
-| Suspend-to-idle / s2idle | 🟡 **Partial — RTC wake tested** | One successful RTC-wake cycle. | Display, touch, power-key wake, repetition and sleep energy. |
-| Deep suspend | ⚪ **Not tested** | No physical sleep/resume result. | Suspend and resume tests. |
-| Power-key IRQ wake | ⚪ **Not tested** | No physical suspend-wake result. | Power-key wake from real suspend. |
-| USB cable wake | 🔴 **Broken** | Required USB wake interrupts missing from the device tree. | Wake interrupt integration and physical test. |
-| USB keyboard / mouse wake | ⚪ **Not tested** | No physical input-wake result. | Input wake from real suspend. |
-| RTC / persistent clock | 🟡 **Partial** | Saved-time restoration and NTP functional; hardware startup time incorrect. | Hardware clock correctness. |
-| Watchdog | 🟡 **Partial** | Driver starts. | Recovery behavior. |
-| PMIC / regulators | 🟡 **Partial** | Essential storage/USB resources operational. | Remaining PMIC probe failures. |
-| DMA / IOMMU resources | 🟡 **Partial** | Essential device paths operational. | Broader clients and lifecycle coverage. |
-| Interconnect / platform power control | 🟡 **Partial** | Basic operation functional. | Provider errors and measured power/performance. |
-| DSPs — ADSP / CDSP / QSH | 🟡 **Partial** | Charger and sensor services start. | Audio, other workloads and restart recovery. |
-| FastRPC sensor transport | 🟢 **Working** | ADSP contexts serve sensor registry requests. | General DSP compute and restart recovery. |
-| CoreSight tracing | ⏸️ **Disabled** | Autoload blocked after earlier resets. | Cause and recovery investigation. |
+| Internal speakers | Not working in recorded tests | No accepted protected playback route. | Amplifier identity, calibration/protection, routing and physical audio. |
+| Microphones | Not working in recorded tests | No accepted usable recording result. | SoundWire/codec route and physical capture. |
+| DisplayPort audio | Partial | ALSA card, ELD, DMA and monitor-label integration exist. | Audible playback and sustained sink operation. |
+| USB audio | Not tested | No accepted playback/recording workload. | Physical playback and capture. |
+| Front camera | Not qualified | No accepted capture pipeline or image frame. | Sensor/CSIPHY/CAMSS integration and actual capture. |
+| Rear camera | Not qualified | No accepted capture pipeline or image frame. | Sensor/CSIPHY/CAMSS integration and actual capture. |
+| Iris / VA-API initialization | Partial | Default VA initialization and runtime capability queries work with the tested backend. | Boot-time availability, actual codec output and lifecycle. |
+| Hardware video decode | Not qualified | H.264, HEVC and VP9 capability enumeration is available in the initialized test stack. | Real decoded frames, pixel references, DMA-BUF/fences and sustained playback. |
+| Hardware video encode | Not qualified | Runtime-format and rate checks exist in native package tests. | Actual encoded bitstreams, Main10/P010 output and physical-device validation. |
+| Browser video / WebCodecs / WebRTC | Not qualified | Scoped host workloads and independent software references are prepared. | Actual hardware workload, output validation, import and sandbox. |
 
-The current boot handoff is **EL1**. EL2/KVM work remains on a separate
-experimental branch, and Project Aloha/UEFI is not the boot path used for the
-reported Fedora tests.
+### Power, charging and lifecycle
 
-</details>
+| Feature | Status | Observed result | Remaining work / limits |
+|---|---|---|---|
+| Battery percentage / voltage / temperature | Working — readings | Standard telemetry and KDE battery indicator. | Independent unit/scale/accuracy checks. |
+| Battery current / net power / counter | Working — readings | Signed readings and charge counter available. | Exact pack basis and electrical reference. |
+| Pack health / aging | Partial — reported values | Software keeps reported SOH, retention and cycle estimates distinct. | Qualified capacity/aging measurements. |
+| Individual-cell health / balance | Not available | No qualified per-cell export. | Exact fitted cell/gauge mapping and measured telemetry. |
+| Computer USB charging | Partial | USB input is detected; load can exceed supply. | Sustained net charging under measured load. |
+| USB-PD / fast charging | Partial | Powered-dock charging and PD state observed. | Exact negotiated session, per-adapter/cable limits and measured power; no qualified 45 W claim. |
+| QC / proprietary charging protocols | Not qualified | Read-only source/protocol work remains bounded. | Actual negotiation/authentication and electrical tests. |
+| Charge limits / stop / restore | Partial — effect unverified | Guarded threshold/current software and readback paths. | Real cutoff, restart hysteresis, restore and fault response. |
+| Battery bypass / direct supply | Not qualified | No accepted battery isolation or bypass. | Physical power-path validation. |
+| Charging protection | Not qualified | Software refusal and fault fixtures pass; shipped qualification gates remain. | Thermal, moisture, watchdog, OVP/OCP/short, source changes and endurance. |
+| Offline charging | Not working in recorded charger-boot test | Earlier USB-triggered starts returned to KDE. | Correct charger-mode entry, visible UI and key/unplug behavior. |
+| Desktop power profiles | Working — selection | Three original desktop profiles are selectable. | Sustained energy/thermal effects. |
+| Battery runtime estimates | Partial — software model | Host model/session checks pass. | Calibrated device forecasts and safe reserve. |
+| Suspend-to-idle | Partial — earlier RTC wake | One earlier RTC-wake cycle completed. | Repetition, display/touch, power-key wake and sleep energy. |
+| Deep suspend | Not tested | No accepted complete cycle. | Suspend/resume and energy measurement. |
+| Power-key / USB-input wake | Not qualified | Source and readiness work exist. | Actual wake from real suspend. |
+| USB cable wake | Not working in earlier test | Missing wake integration was recorded. | Current-kernel physical wake test. |
+| Watchdog | Partial | Driver startup observed. | Recovery behavior and repeated fault tests. |
+| PMIC / regulators / interconnect | Partial | Essential storage, sensor, display and USB resources operate. | Remaining probe/power-vote and lifecycle defects. |
+| DMA / IOMMU | Partial | Selected clients operate. | Broader clients, translation faults and cleanup. |
+| ADSP / CDSP / QSH and FastRPC | Partial | Sensor registry and selected charger services work. | General compute, internal audio and restart recovery. |
+| CoreSight tracing | Disabled | Earlier autoload/reset problems. | Cause and safe recovery qualification. |
 
-## Build from public source
+## Development work awaiting acceptance
 
-23 October 2026: `./ukelinux.sh` offers image and native kernel builds on Ubuntu,
-Fedora, openSUSE, Arch Linux and Alpine hosts. Image selections cover multiboot
-or singleboot, EXT4/F2FS/Btrfs/XFS, original KDE/GNOME and stable/testing/unstable
-package channels. Output defaults to `out` in the invoking directory.
+New source is published on development branches before device acceptance. Its presence does not change the status tables above.
 
-[Public build and manual installation guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md)
-includes source pins, prerequisite confirmation, local-data boundaries and
-output verification. The new workflow has source and shell checks only; full
-builds and tablet acceptance remain untested. **Run `sudo dnf update --refresh`
-after the first Fedora boot.**
+| Workstream | Source / record | Remaining gate |
+|---|---|---|
+| Native Control NFC, battery and charging views | [Charging/Control source](https://github.com/MCC45TR/uke-linux-hardware-support/tree/feat/charging-completion-20261026) | Signed integrated native package, installation and physical electrical/NFC/gesture tests. |
+| Video and browser validation | [Platform source](https://github.com/MCC45TR/uke-linux-hardware-support) and [native VA backend build](https://copr.fedorainfracloud.org/coprs/build/11206385/) | Actual codec output, corrected driver tests, sandbox and display coexistence. |
+| Linux 7.3 integration | [Kernel source](https://github.com/MCC45TR/senemos-uke-kernel-mainline/tree/main) and [test COPR](https://copr.fedorainfracloud.org/coprs/mcc45tr/uke-linux-test/) | Per-build device validation; experimental DSC/FEC stays off by default. |
+| Recovery and UEFI | [OrangeFox](https://github.com/MCC45TR/orangefox_device_xiaomi_uke) and [Project Aloha](https://github.com/MCC45TR/uke-project-aloha) | Independent firmware, storage, touch, boot and Android-return acceptance. |
+
+## Build from source
+
+The workspace entry point provides image and kernel workflows. Available image selections include multiboot/singleboot, EXT4/F2FS/Btrfs/XFS, original KDE/GNOME and stable/testing/unstable package channels. Advertised host support and source checks are separate from a completed build on each host.
 
 ```sh
 git clone --recurse-submodules https://github.com/MCC45TR/uke-linux.git
 cd uke-linux
 ./ukelinux.sh
-# Kernel only:
+# Kernel workflow:
 ./ukelinux.sh --build kernel
 ```
 
-## Documentation
+Read the [public build guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md) for prerequisite confirmation, source selection, output checks and manual installation. Output defaults to `out`. The 24 October KDE EXT4 export has host-build evidence; it does not establish tablet acceptance of the exported image or every other build selection.
 
-| Topic | Guide |
-|---|---|
-| Build Fedora images | [Public image build guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md) |
-| Build the kernel | [Native kernel worker](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md) |
-| Boot requirements and rollback | [Public prerequisites and manual installation](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md#output-and-manual-installation) |
-| Development plan | [Milestones and remaining work](https://github.com/MCC45TR/uke-linux-docs/blob/main/PLAN.md) — private, access required |
-| Engineering records | [Documentation index](https://github.com/MCC45TR/uke-linux-docs/blob/main/docs/README.md) — private, access required |
-| Desktop screenshots | [Fedora KDE gallery](assets/screenshots/README.md) |
-| Contributing and bug reports | [Reporting guide](CONTRIBUTING.md) · [Open an issue](https://github.com/MCC45TR/uke-linux/issues/new?template=bug_report.yml) |
-| Security reports | [Security policy](SECURITY.md) |
+KDE applications remain original distribution packages. Unmodified Fedora desktop dependencies may retain Fedora-provided Python helpers; project device code, recovery, initramfs and installers do not introduce a Python runtime. Device-local calibration and private firmware inputs are not supplied by a generic source checkout.
 
 ## Project repositories
 
-| Component | Current development branch |
+| Component | Development branch |
 |---|---|
 | Kernel and device trees | [senemos-uke-kernel-mainline / main](https://github.com/MCC45TR/senemos-uke-kernel-mainline/tree/main) |
-| Hardware integration and packages | [uke-linux-hardware-support / main](https://github.com/MCC45TR/uke-linux-hardware-support/tree/main) |
-| Fedora image builder | [uke-fedora-builder / main](https://github.com/MCC45TR/uke-fedora-builder/tree/main) |
-| Image distribution | [uke-linux-images / main](https://github.com/MCC45TR/uke-linux-images/tree/main) |
+| Hardware services and packages | [uke-linux-hardware-support / main](https://github.com/MCC45TR/uke-linux-hardware-support/tree/main) |
+| Image builder | [uke-fedora-builder / main](https://github.com/MCC45TR/uke-fedora-builder/tree/main) |
+| Image records | [uke-linux-images / main](https://github.com/MCC45TR/uke-linux-images/tree/main) |
 | OrangeFox Recovery | [orangefox_device_xiaomi_uke / R12.0](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/tree/R12.0) |
 | Experimental UEFI | [uke-project-aloha / main](https://github.com/MCC45TR/uke-project-aloha/tree/main) |
 
-These links always open the current development branches. GitHub's file list
-shows the exact submodule commits saved in this workspace. An hourly workflow
-refreshes those snapshots after the workspace checks pass; it can also be run
-manually from **Actions → Validate workspace links → Run workflow**. GitHub may
-delay scheduled runs. Each workspace commit retains its exact source snapshot;
-these updates do not qualify a new build or change published release images.
+Component links open current development branches. Submodule commits record an exact workspace snapshot; scheduled snapshot updates do not qualify a new build or alter published release images.
+
+## Documentation and contributions
+
+- [Build and manual installation guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md)
+- [Desktop screenshot gallery](assets/screenshots/README.md)
+- [Development changes](CHANGELOG.md)
+- [Reporting guide and documentation style](CONTRIBUTING.md)
+- [Issue tracker](https://github.com/MCC45TR/uke-linux/issues)
+- [Security reporting](SECURITY.md)
+
+Include the exact kernel/package or release identity, device variant, date, reproduction steps and relevant redacted output in reports. Keep credentials, device identifiers, calibration and private logs out of public issues.
 
 ## License
 
-Original files use the [MIT License](LICENSE). Components retain their own
-licenses and attribution. Uke Linux is an independent community project,
-unaffiliated with Fedora, Xiaomi, POCO or Qualcomm.
+Original repository material uses the [MIT License](LICENSE). Components retain their original licenses and contributor attribution.
+
+Uke Linux is an independent, unofficial project, unaffiliated with Fedora, Xiaomi, POCO or Qualcomm. The software is experimental and provided without warranty. Installation or modification can cause data loss or device damage.
