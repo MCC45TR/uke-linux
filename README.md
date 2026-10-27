@@ -325,6 +325,11 @@ manually from **Actions → Validate workspace links → Run workflow**. GitHub 
 delay scheduled runs. Each workspace commit retains its exact source snapshot;
 these updates do not qualify a new build or change published release images.
 
+## Thanks
+
+Thanks to [RealDexxo](https://github.com/RealDexxo) for getting the previously
+nonfunctional speakers working and optimizing the build scripts.
+
 ## License
 
 Original files use the [MIT License](LICENSE). Components retain their own
