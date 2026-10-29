@@ -186,6 +186,20 @@ cd uke-linux
 ./ukelinux.sh
 ```
 
+To update an existing workspace from this repository:
+
+```sh
+git pull --ff-only --recurse-submodules
+git submodule update --init --recursive
+```
+
+The components track the branches declared in `.gitmodules` (`main`, or `R12.0`
+for OrangeFox). The hourly workspace workflow updates their recorded revisions
+after validation. To follow the component branch tips immediately, run
+`git submodule update --init --remote --checkout`. Keep local component changes
+committed or stashed before updating. Git submodules always record a commit in
+the parent; branch tracking and the refresh workflow advance that record.
+
 For a kernel-only build:
 
 ```sh
@@ -232,7 +246,7 @@ Keep the kernel, modules, device trees, and boot profile matched, and retain a w
 | OrangeFox Recovery | [orangefox_device_xiaomi_uke](https://github.com/MCC45TR/orangefox_device_xiaomi_uke/tree/R12.0) |
 | Experimental UEFI | [uke-project-aloha](https://github.com/MCC45TR/uke-project-aloha/tree/main) |
 
-These links follow development branches. The submodules in this repository pin specific commits.
+These links follow development branches. The submodules track the branches in `.gitmodules`; the workspace refresh workflow advances their recorded revisions after validation.
 
 ## Thanks
 
