@@ -25,13 +25,13 @@
 
 ## Project status
 
-**Last updated: 26 October 2026.**
+**Last updated: 29 October 2026.**
 
-Fedora Rawhide and KDE Plasma run on the tested **POCO Pad X1, 8 GB / 512 GB**. The screen, Wi-Fi, Bluetooth mouse and stereo audio, automatic rotation, and automatic brightness work. HDMI output also works through the tested USB-C dock.
+Fedora Rawhide and KDE Plasma run on the tested **POCO Pad X1, 8 GB / 512 GB**. The screen, touch, Wi-Fi, Bluetooth mouse and stereo audio, automatic rotation, automatic brightness, and internal speakers work. HDMI output and monitor audio also work through the tested Juo JH925 dock.
 
-Charging, suspend, internal audio, cameras, and hardware video still need work. VRR is disabled because it causes touch issues. See the [changelog](CHANGELOG.md) for development updates.
+Charging protection, suspend, microphones, cameras, and sustained hardware video still need work. VRR remains disabled because it causes touch issues. External DSC/FEC produces a black image; automatic recovery to uncompressed output works in the latest test. See the [changelog](CHANGELOG.md) for development updates.
 
-The latest tested development kernel is **7.3.0-15**, using the stock Android bootloader.
+The latest recorded development boot is **7.3.0-48**, on **29 October 2026**, using the stock Android bootloader. These results are separate from the downloadable image below.
 
 ## Downloads
 
@@ -55,7 +55,7 @@ First setup, filesystem expansion, updates, and recovery still need full testing
 
 ## Hardware support
 
-These results cover development builds tested between **14 and 26 October 2026** on the POCO Pad X1. Some tests used earlier kernels and have not been repeated on 7.3.0-15. They do not establish support in the downloadable image.
+These results cover Fedora Rawhide AArch64 development builds tested between **14 and 29 October 2026** on the **POCO Pad X1, 8 GB / 512 GB**. Some tests used earlier kernels and have not been repeated on 7.3.0-48. They do not establish support in the downloadable image. Xiaomi Pad 7 and other memory/storage variants remain untested.
 
 🟢 Working in the listed tests · 🟡 Partial · 🔴 Not working · ⚪ Not verified · ⏸️ Disabled
 
@@ -64,10 +64,12 @@ These results cover development builds tested between **14 and 26 October 2026**
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Fedora boot | 🟢 Working | Boots through the stock Android bootloader at EL1. |
+| Fedora boot | 🟢 Working | Linux 7.3.0-48 boots through the stock Android bootloader at EL1 with matching modules. |
 | CPU and power profiles | 🟢 Working | All eight cores and three frequency policies work. Sustained loads need more testing. |
-| RAM | 🟢 Working | Linux reports 7.21 GiB. |
-| UFS storage and EXT4 | 🟢 Working | Basic read/write tests, scaling, and WriteBooster work. MCQ and inline encryption are disabled. |
+| RAM | 🟢 Working | Linux reports 7.21 GiB; sustained stress testing remains incomplete. |
+| UFS storage and EXT4 | 🟢 Working | Basic read/write tests, scaling, and WriteBooster work. |
+| UFS MCQ and inline encryption | 🟡 Partial | MCQ starts and a 32 MiB direct read passes. ICE registers; concurrent queues and encrypted I/O remain unverified. |
+| Memory bandwidth and cache monitoring | 🟡 Partial | CPU/DDR monitors and eight cache counters respond. Counter units, scaling, and MEMLAT policy need more work. |
 | Reboot | 🟢 Working | Returns to the tested Linux installation. |
 | Shutdown | 🟡 Partial | Occasional hangs; shutdown with USB power connected can restart the tablet. |
 | Reboot to Fastboot | 🟢 Working | Bootloader entry works. |
@@ -86,9 +88,9 @@ These results cover development builds tested between **14 and 26 October 2026**
 | Manual brightness | 🟢 Working | Backlight adjustment works. |
 | Screen off/on | 🟡 Partial | Display returns, but occasional display timeouts remain. |
 | Color depth | 🟡 Partial | Active 10-bit framebuffer and DSC link; output depth cannot be selected. |
-| Touchscreen | 🟢 Working | Single-touch and multi-touch work out of the box |
+| Touchscreen | 🟢 Working | Finger and multi-touch input work on the configured installation. Gestures and suspend/resume need more testing. |
 | Adaptive sync / VRR | ⏸️ Disabled | Causes touch and display faults. |
-| KDE Plasma / Wayland | 🟡 Partial | Desktop and applications work; scrolling stutter and a clipboard-related shutdown hang remain. |
+| KDE Plasma / Wayland | 🟡 Partial | Desktop and applications work. Scrolling stutter, stalls during cover transitions under load, and a clipboard-related shutdown hang remain. |
 | Adreno 732 / OpenGL | 🟡 Partial | Desktop rendering works. Broader API and sustained-load testing remain incomplete. |
 | Vulkan / OpenCL | 🟡 Partial | Some transfer and compute tests pass; Vulkan image tests still fail. |
 | Browser graphics / WebGPU | 🟡 Partial | GL works; operation with the GPU sandbox is unverified. Chrome has no WebGPU adapter. |
@@ -111,11 +113,14 @@ These results cover development builds tested between **14 and 26 October 2026**
 | USB SuperSpeed | 🟡 Partial | Devices connect at 5 Gbit/s; storage throughput is unverified. |
 | USB serial and network gadgets | 🟢 Working | Manual CDC ACM and ECM/SSH setup works. Both are off by default. |
 | USB hubs | 🟢 Working | USB 2/3 devices detected through the tested Juo dock. |
-| USB-C video output | 🟢 Working | HDMI through Juo works. 2560×1440 at 75 Hz was tested on an earlier kernel. |
-| HDR, MST and external DSC/FEC | ⚪ Not verified | HDR and MST remain unverified; external DSC/FEC is disabled by default. |
-| Monitor brightness over DDC/CI | 🔴 Not working | Brightness queries fail with the tested monitor. |
+| USB-C video output | 🟢 Working | HDMI through Juo works at 2560×1440: 60 Hz RGB10 and 75 Hz RGB8. These modes were tested separately. |
+| External HDR | 🟡 Partial | KDE HDR output is visible at 1440p60; color accuracy and browser HDR remain unverified. HDR at 75 Hz is rejected. |
+| MST and four-lane DisplayPort | ⚪ Not verified | The tested dock route uses two lanes. Multiple external displays and four-lane operation remain unverified. |
+| External DSC/FEC | 🔴 Not working | Forced compression produces a black image and receiver errors. Automatic recovery to visible uncompressed output passes on 7.3.0-48. |
+| Monitor brightness over DDC/CI | 🔴 Not working | Queries fail and brightness commands have no visible effect through either Juo HDMI socket. |
 | USB Ethernet | 🟢 Working | RTL8153 connects at 1 Gbit/s. Receive drops and sustained throughput still need investigation. |
-| NFC | ⚪ Not verified | No confirmed Linux reader functionality. |
+| NFC tag interface | 🟡 Partial | The POCO-specific tag driver registers and a bounded I2C read passes. External RF transfer remains unverified; this is not reader support. |
+| Infrared transmitter | ⚪ Not verified | The transmitter registers; optical output and receiver response remain untested. |
 
 </details>
 
@@ -130,6 +135,7 @@ These results cover development builds tested between **14 and 26 October 2026**
 | Gyroscope and compass | 🟡 Partial | Gyroscope readings are available, but motion response is unverified. Compass accuracy tests fail. |
 | Magnetic cover detection | 🟢 Working | Cover events work; automatic screen blanking is unverified. |
 | Ambient color temperature | ⚪ Not verified | No calibrated color-temperature reading. |
+| Light flicker sensing | 🟡 Partial | Seven raw channels are readable; units and response to controlled lighting remain unverified. |
 | SAR / body proximity | ⏸️ Disabled | No usable sensor response. |
 
 </details>
@@ -139,13 +145,13 @@ These results cover development builds tested between **14 and 26 October 2026**
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Internal speakers | 🟢 Working | All four speakers work properly. Audio channels automatically adjust to screen orientation. |
+| Internal speakers | 🟢 Working | All four speakers play sound and channels follow screen orientation. KMix provides four level controls; channel isolation and suspend/resume need testing. |
 | Microphones | 🔴 Not working | Microphone support is still under development. |
 | Bluetooth and HDMI audio | 🟢 Working | Stereo playback tested with Space Q45 headphones and a monitor through Juo HUB. |
 | USB audio | ⚪ Not verified | Playback and recording have not been tested. |
 | Front and rear cameras | ⚪ Not verified | No working capture pipeline or verified frames. |
 | Native hardware video | 🟡 Partial | Small H.264 samples decode and encode. Native FFmpeg High/B-frame decoding still fails. |
-| VA-API and browser video | 🟡 Partial | H.264, HEVC, and VP9 pass small-frame decode tests. Browser playback and sustained operation remain unverified. |
+| VA-API and browser video | 🟡 Partial | Seven H.264, HEVC, and VP9 modes pass bounded decode tests. Original Chrome 4K60 playback still fails sustained performance; HDR remains unverified. |
 
 </details>
 
@@ -154,20 +160,20 @@ These results cover development builds tested between **14 and 26 October 2026**
 
 | Feature | Status | Notes |
 | --- | --- | --- |
-| Battery and temperature readings | 🟢 Working | Charge, voltage, current, power, and temperature readings are available; KDE shows battery status. |
+| Battery and temperature readings | 🟢 Working | Charge, voltage, current, power, and temperature readings are available; KDE shows battery status. Energy estimates and calibration remain incomplete. |
 | USB charging / Power Delivery | 🟡 Partial | Charging through a powered dock works. Computer USB may supply less power than the tablet uses; fast-charging protocols remain unverified. |
-| Charge limits | 🟡 Partial | Settings are saved; physical cutoff and restart behavior are unverified. |
+| Charge limits | 🟡 Partial | Firmware restart/stop settings read back. Physical cutoff/restart and the updated original KDE controls remain unverified. |
 | Charging protection | ⚪ Not verified | Electrical cutoff, fault response, and protection under real charging conditions need testing. |
-| Battery bypass | ⚪ Not verified | No confirmed direct-power or battery-isolation mode. |
+| Battery bypass | ⚪ Not verified | Low net battery current is observed under dock power; this does not establish direct power or battery isolation. |
 | Offline charging | 🔴 Not working | Connecting power starts KDE instead of a charging screen. |
 | Suspend-to-idle | 🟡 Partial | One RTC wake cycle passed. Display, touch, repeated resume, and sleep power use need testing. |
 | Deep suspend and input wake | ⚪ Not verified | Deep sleep, power-button wake, and USB input wake have not been tested. |
 | USB cable wake | 🔴 Not working | Required wake interrupts are missing. |
-| Thermal protection | 🟡 Partial | Software tests reduce CPU/GPU limits; actual heat response and protective shutdown remain unverified. |
+| Thermal protection | 🟡 Partial | Software tests reduce CPU/GPU limits and native PMIC monitoring registers. Actual heat/fault response and protective shutdown remain unverified. |
 | RGB notification LED | 🟢 Working | Basic colors tested; notification behavior and extended use need testing. |
 | Flashlight | ⚪ Not verified | Control code exists; physical output has not been confirmed. |
 | Clock | 🟡 Partial | Saved time and NTP work; hardware startup time is incorrect. |
-| PMIC, DSP and platform services | 🟡 Partial | Essential services run; probe errors and restart recovery still need work. |
+| PMIC, DSP and platform services | 🟡 Partial | WPSS and ADSP run. CDSP compute, PMIC access warnings, and restart recovery still need work. |
 | CoreSight tracing | ⏸️ Disabled | Disabled after earlier resets. |
 
 </details>

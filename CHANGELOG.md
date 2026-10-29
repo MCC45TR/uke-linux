@@ -1,5 +1,36 @@
 # Development changes
 
+## 29 October 2026
+
+Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64 and original
+Fedora KDE. This update reviews recorded development tests; no new tablet test
+was run for the documentation. The published 26 October image is unchanged
+and remains untested on a tablet.
+
+- Signed Linux 7.3.0-48 boots with matching modules. Earlier hardware results
+  keep their original test scope; the latest boot does not repeat every test.
+- HDMI through Juo JH925 has visible 1440p60 RGB10 and 1440p75 RGB8 results.
+  KDE HDR output is visible at 60 Hz, but color accuracy and browser HDR remain
+  unverified; 75 Hz HDR is rejected. DSC/FEC still produces a black image and
+  receiver errors. Release 48 recovers visible uncompressed output automatically.
+  DDC/CI fails through both dock HDMI sockets.
+- The original KMix provides four internal-speaker level sliders. Playback and
+  screen-based channel rotation work; independent acoustic channel isolation
+  and suspend/resume still need testing. Microphones and camera capture remain
+  unfinished.
+- UFS MCQ starts and passes a bounded direct read; encrypted I/O is unverified.
+  CPU/DDR bandwidth monitors and eight cache counters respond. NFC tag I2C
+  transport, infrared registration and raw flicker readings are available;
+  RF, optical, calibration and lifecycle checks remain separate.
+- Seven VA decode modes pass bounded tests. Native 4K pixel and throughput
+  controls do not establish original Chrome 4K60 playback, which still fails
+  sustained performance. Serial decode waits and video downclocking are
+  reproduced; the cached-surface experiment alone does not resolve throughput.
+- Battery/PD observation, threshold validation and original KDE/UPower fixes
+  pass source, host and emulation checks. Combined signed delivery, installed
+  desktop behavior, physical cutoff/restart, bypass, calibration and charging
+  protection remain open. No new charging protocol is declared working.
+
 ## 26 October 2026
 
 Environment: POCO Pad X1, 8 GB / 512 GB, Fedora Rawhide AArch64 and original
