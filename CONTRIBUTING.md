@@ -20,9 +20,11 @@ for one problem at a time. Include:
   hardware conditions: power source, attached accessories, display mode and
   whether touch input or SSH remained available.
 
-The `userdata` boot variant has not been tested on the tablet. A successful build
-or checksum check does not establish that it boots. Installation instructions
-will be published separately.
+The development installation uses `userdata` as its Linux root. The published
+26 October 2026 singleboot image has passed host checks but has not been tested
+on a tablet. A successful build or checksum check does not establish that the
+exported image boots. See the [downloads](README.md#downloads) and linked release
+instructions for its installation and recovery requirements.
 
 ## Useful evidence from a running Fedora session
 
@@ -71,6 +73,11 @@ to the ESP32-S3."
 Use concise, natural English. Omit personal ownership labels, conversational
 narration, promotional wording and internal review jargon. A configured model
 name is not a hardware identity; record the tested commercial model separately.
+
+Keep README introductions and project status brief. Group hardware tables in
+collapsible sections with Feature, Status and Notes columns, following the
+[project README](README.md#hardware-support). Keep detailed development history
+in the changelog and engineering evidence in the private records.
 
 Keep source review, build, package, VM and tablet results separate. Preserve
 checksums, source attribution, failures and test limitations. Shortening a report

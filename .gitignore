@@ -53,3 +53,10 @@ __pycache__/
 *.swp
 .vscode/
 .idea/
+
+# Local tooling, temporary experiments and copied build logs.
+/node_modules/
+/package.json
+/package-lock.json
+/tmp/
+/media/
