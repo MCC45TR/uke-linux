@@ -1,0 +1,106 @@
+name: EXT4 singleboot image and release (manual)
+run-name: EXT4 singleboot · ${{ inputs.desktop }} · COPR ${{ inputs.kernel_rpm }}
+on:
+  workflow_dispatch:
+    inputs:
+      desktop:
+        description: Original Fedora graphical session
+        type: choice
+        options: [kde, gnome]
+        default: kde
+      login_shell:
+        description: Login shell for new accounts
+        type: choice
+        options: [bash, fish, zsh]
+        default: bash
+      size_mib:
+        description: Initial EXT4 filesystem capacity in MiB
+        type: choice
+        options: ['16384', '8192']
+        default: '16384'
+      kernel_rpm:
+        description: COPR kernel version-release (latest or exact 7.3.x-N.fc46)
+        type: string
+        default: latest
+      publish:
+        description: Publish validated files as a GitHub pre-release
+        type: boolean
+        default: true
+permissions:
+  contents: read
+concurrency:
+  group: ext4-singleboot-image
+  cancel-in-progress: false
+jobs:
+  compose:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 360
+    outputs:
+      tag: ${{ steps.image.outputs.tag }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - name: Prepare disposable native ARM64 image host
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = aarch64
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /usr/local/share/boost
+          docker image prune --all --force
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends jq zstd
+          docker info
+          df -h /
+      - name: Compose and validate signed-package EXT4 singleboot image
+        id: image
+        env:
+          IMAGE_DESKTOP: ${{ inputs.desktop }}
+          IMAGE_SHELL: ${{ inputs.login_shell }}
+          IMAGE_SIZE_MIB: ${{ inputs.size_mib }}
+          IMAGE_KERNEL_RPM: ${{ inputs.kernel_rpm }}
+        run: bash uke-fedora-builder/scripts/hosted-image.sh
+      - name: Retain validated image and receipts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ext4-singleboot-release
+          path: ${{ steps.image.outputs.release_dir }}/*
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: error
+      - name: Retain failed-stage diagnostics
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ext4-singleboot-diagnostics
+          path: ${{ runner.temp }}/uke-build/*/*.log
+          retention-days: 7
+          if-no-files-found: ignore
+  publish:
+    needs: compose
+    if: inputs.publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: ext4-singleboot-release
+          path: release
+      - name: Verify and publish the completed pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ needs.compose.outputs.tag }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          cd release
+          sha256sum --check --strict SHA256SUMS
+          jq -e '.image_built and .filesystem=="ext4" and .partition=="userdata" and .device_private_data_included==false' manifest.json
+          gh release create "$RELEASE_TAG" ./* --target "$SOURCE_COMMIT" --draft --prerelease \
+            --title "Fedora $(jq -r .desktop manifest.json) EXT4 singleboot · Linux $(jq -r .kernel_release manifest.json)" \
+            --notes-file RELEASE.md
+          gh release edit "$RELEASE_TAG" --draft=false --prerelease
+          gh release view "$RELEASE_TAG" --json url --jq .url >> "$GITHUB_STEP_SUMMARY"

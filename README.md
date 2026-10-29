@@ -208,6 +208,21 @@ For a kernel-only build:
 
 The menu includes desktop, filesystem, boot-layout, and package-channel options. Build output is saved to `out/` in the directory where the command is run. See the [public build guide](https://github.com/MCC45TR/uke-fedora-builder/blob/main/docs/PUBLIC-BUILD.md) for supported hosts, requirements, and installation instructions. The [pinned release recipe](https://github.com/MCC45TR/uke-fedora-builder/blob/b0fd2380b07dbaaf37403c057b74796faf8f5ed3/docs/PUBLIC-BUILD.md) describes the published KDE EXT4 image.
 
+### Manual GitHub image builds
+
+Open [EXT4 singleboot image and release](https://github.com/MCC45TR/uke-linux/actions/workflows/image-release.yml)
+and select **Run workflow** on `main`. The native `ubuntu-24.04-arm` job downloads
+signed COPR/Fedora packages and composes a Rawhide KDE or GNOME EXT4 image; it
+does not rebuild the kernel or hardware packages. The default initial capacity
+is 16 GiB. `latest` resolves one signed testing kernel tuple for that run; an
+exact `7.3.x-N.fc46` tuple can also be selected.
+
+After content, metadata, signature, boot/module, sparse-decoder and compression
+checks pass, the workflow optionally publishes a pre-release containing
+`boot.img`, `system.img.zst`, checksums, manifests and installation/source records.
+No device-specific touch reference is included. Host validation does not prove
+physical tablet boot, first-account setup, charging or recovery acceptance.
+
 ### Updates
 
 After the first Fedora boot, update from the configured signed repositories:
