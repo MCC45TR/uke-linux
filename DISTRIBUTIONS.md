@@ -8,12 +8,12 @@ new hardware qualification or release.
 | Edition | Status | Development branch |
 | --- | --- | --- |
 | Fedora Rawhide (AArch64) | Active community port; experimental alpha | `Fedora` |
-| Ubuntu (AArch64) | Planned; no qualified image, installer or device result | Not created |
+| Ubuntu 27.04 (ARM64) | Source packaging in progress; no published packages or qualified image | `Ubuntu` |
 | Arch Linux (AArch64) | Planned; no qualified image, installer or device result | Not created |
 
-Keep **one active branch, `Fedora`, for now**. Only establish dedicated
-`Ubuntu` and `ArchLinux` branches when there is real distribution-specific
-source to maintain; do not create empty placeholder branches.
+The `Ubuntu` branch now contains source packaging integration; see
+[Ubuntu package migration](UBUNTU-PACKAGES.md). Fedora remains independent.
+Shared component sources retain both RPM and Debian packaging.
 
 The kernel, device trees, firmware boundary, hardware-support components and
 platform-level boot experiments may be reused between editions, subject to

@@ -16,7 +16,8 @@ The front-color helper requires the still-unported SSC service. No package is
 ready for publication. Kernel/DTB/modules/initramfs cohort safeguards and the
 Control APT/dpkg transaction backend remain substantial implementation work.
 
-Launchpad identity: `mcs45tr`. PPA terms acceptance, signing-key enrollment and
-upload authorization remain pending in the parent workflow. No signing key,
+Launchpad identity: `mcs45tr`. Parent confirmed accepted PPA terms and public ARM64-only unstable and stable
+PPAs, both empty. OpenPGP signer enrollment and signed-source upload remain
+pending. No signing key,
 credential, PPA upload or image was created here. Stable stays empty until
 separately documented qualification; Fedora evidence is not Ubuntu acceptance.
