@@ -1,10 +1,12 @@
 # Ubuntu package migration
 
 Recorded: 1 November 2026. Target: Ubuntu 27.04 Tenacious ARM64, unstable only.
-No Ubuntu image is available from this work. Launchpad ARM64 build 33897552
-for the first speaker preset succeeded; archive publication is still pending.
-New Ubuntu implementation and build dispatches are paused while Fedora Rawhide
-DE release work takes priority. Existing build results are monitored read-only.
+No Ubuntu image is available from this work. The first speaker preset is now
+Published for Tenacious ARM64. The user has resumed work on a minimal Ubuntu
+test image for later download; no tablet writes are authorized here.
+Experimental kernel1006 was found in the separate test/power channel and its
+exact emitted source is staged. See the
+[test-image gates](uke-linux-hardware-support/packaging/ubuntu/TEST-IMAGE-GATES.md).
 
 The hardware-support submodule tracks the `ubuntu` packaging branch. Common
 component sources and RPM recipes remain shared and unchanged; Debian overlays
@@ -24,10 +26,14 @@ Kernel release-115 source composition is retained exactly. Its three candidate
 packages are staged outside live boot/module paths; the first-pass Image is
 not bootable and boot-bundle production fails explicitly. Synthetic payload
 refusal tests pass; no real kernel/module payload has yet been admitted.
-Native kernel retry 41309327976 terminated because the Debian release name
-exceeds the shared ALSA `sizeof("uke" UTS_RELEASE) <= 16` assertion. Its
-coordinated shorter release identity is the next kernel action on resumption;
-the assertion has not been weakened and no new build was dispatched.
+Native kernel retry 41309327976 terminated because the old Debian release name
+exceeded the shared ALSA `sizeof("uke" UTS_RELEASE) <= 16` assertion. The new
+coordinated experimental identity 7.3.1-1006u1 fits exactly; the assertion is
+unchanged. Source assembly, emitted inventories, signer and chunk reconstruction
+pass. Native execution of the new source set has not run. The userspace test
+uses only signed official Ubuntu packages plus the published PPA preset and
+exports evidence, not a root/boot image. Full embedded-initramfs/dpkg provenance,
+DT/module trust and enforcing root handoff remain implementation work.
 The six shared image tools have a separate native Debian recipe. No system
 image composition is performed. Native Tenacious ARM64 server builds now pass
 for shared libssc and SensorProxy; the latter builds against the exact patched
