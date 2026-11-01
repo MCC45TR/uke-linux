@@ -26,6 +26,10 @@ jobs:
             git -C "$component" rev-parse --verify HEAD >/dev/null
             branch=$(git config -f .gitmodules --get "submodule.$component.branch")
             test -n "$branch"
+            git check-ref-format --branch "$branch" >/dev/null
+            # A shallow submodule checkout fetches the pinned SHA, not every branch.
+            # Fetch only the configured ref; never move the pinned checkout here.
+            git -C "$component" fetch --no-tags --depth=1 origin "refs/heads/$branch:refs/remotes/origin/$branch"
             git -C "$component" rev-parse --verify "origin/$branch" >/dev/null
           done
           test ! -e docs

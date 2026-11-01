@@ -3,21 +3,26 @@
 Recorded: 1 November 2026. Target: Ubuntu 27.04 Tenacious ARM64, unstable only.
 No Ubuntu image or published package is available from this work.
 
-The hardware-support submodule points to the `ubuntu` packaging branch, which
-adds native Debian recipes around unchanged common component sources and RPM
-specs. It is a packaging staging branch, not an independent hardware-source
-fork. See [migration coverage and instructions](uke-linux-hardware-support/packaging/ubuntu/README.md)
-and the [43-entry COPR inventory](uke-linux-hardware-support/packaging/ubuntu/coverage.json).
+The hardware-support submodule tracks the `ubuntu` packaging branch. Common
+component sources and RPM recipes remain shared and unchanged; Debian overlays
+hold distribution dependencies and lifecycle integration. See the
+[migration report](uke-linux-hardware-support/packaging/ubuntu/README.md),
+[implemented recipes](uke-linux-hardware-support/packaging/ubuntu/components.tsv)
+and [43-entry COPR coverage](uke-linux-hardware-support/packaging/ubuntu/coverage.json).
 
-Two unsigned source packages (battery observer and front-color helper) passed
-source assembly/extraction and static packaging checks on Debian 13 x86_64.
-No ARM64 binary build, installation, VM or tablet validation was performed.
-The front-color helper requires the still-unported SSC service. No package is
-ready for publication. Kernel/DTB/modules/initramfs cohort safeguards and the
-Control APT/dpkg transaction backend remain substantial implementation work.
+Sixteen source routes are prepared, including shared SSC, SensorProxy, UPower,
+VA-API and touchscreen patch sets. Four configuration-only ARM64 DEBs passed
+payload checks on the x86_64 host. No native ARM64 compilation, installation,
+VM or tablet validation was performed. None is publication-ready. Current COPR
+release reconciliation, Control APT/dpkg transactions, real kernel/DT/module and
+initramfs checks, firmware and remaining runtime ports are implementation work.
 
-Launchpad identity: `mcs45tr`. Parent confirmed accepted PPA terms and public ARM64-only unstable and stable
-PPAs, both empty. OpenPGP signer enrollment and signed-source upload remain
-pending. No signing key,
-credential, PPA upload or image was created here. Stable stays empty until
-separately documented qualification; Fedora evidence is not Ubuntu acceptance.
+Launchpad identity: `mcs45tr`. Parent confirmed accepted PPA terms and public
+ARM64-only unstable and stable PPAs, both empty. OpenPGP signer enrollment and
+signed-source upload remain pending. No key, credential, upload or image was
+created here. Stable remains gated by independent qualification.
+
+Workspace CI preserves pinned component checkouts and validates each configured
+branch. Shallow submodule fetches do not necessarily create a tracking ref for
+non-default branches; validation now fetches only that configured ref before
+checking it, without checking out its tip or weakening the remaining tests.
