@@ -10,9 +10,15 @@ hold distribution dependencies and lifecycle integration. See the
 [implemented recipes](uke-linux-hardware-support/packaging/ubuntu/components.tsv)
 and [43-entry COPR coverage](uke-linux-hardware-support/packaging/ubuntu/coverage.json).
 
-Sixteen source routes are prepared, including shared SSC, SensorProxy, UPower,
-VA-API and touchscreen patch sets. Four configuration-only ARM64 DEBs passed
-payload checks on the x86_64 host. No native ARM64 compilation, installation,
+Seventeen source routes are prepared, including shared SSC, SensorProxy, UPower,
+VA-API and touchscreen patch sets. Battery 1.4.1 and SSC release 26 now reuse
+their exact released safety-related source changes. Four configuration-only
+ARM64 DEBs and the existing Android recovery data-delivery DEB passed payload
+checks on the x86_64 host. Recovery artifacts retain their published checksums
+and have no installation or boot hooks; recovery was not recompiled.
+Read-only native APT policy tests pass, but the active package backend remains
+Fedora until solver, authentication, journal and boot integration are complete.
+No native ARM64 compilation, installation,
 VM or tablet validation was performed. None is publication-ready. Current COPR
 release reconciliation, Control APT/dpkg transactions, real kernel/DT/module and
 initramfs checks, firmware and remaining runtime ports are implementation work.
