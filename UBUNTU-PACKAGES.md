@@ -32,8 +32,12 @@ coordinated experimental identity 7.3.1-1006u1 fits exactly; the assertion is
 unchanged. Source assembly, emitted inventories, signer and chunk reconstruction
 pass. Native execution of the new source set has not run. The userspace test
 uses only signed official Ubuntu packages plus the published PPA preset and
-exports evidence, not a root/boot image. Full embedded-initramfs/dpkg provenance,
-DT/module trust and enforcing root handoff remain implementation work.
+exports evidence, not a root/boot image. The bounded dracut/dpkg overlay now
+stages with unchanged kernel configuration and root-handoff code. Metadata
+refusal fixtures and actual stock ARM64 package provenance pass. Native1006
+execution still awaits source-specific approval; full embedded initramfs,
+DT/module trust and actual root handoff remain unqualified. The final security
+profile is not selected and no security setting was changed.
 The six shared image tools have a separate native Debian recipe. No system
 image composition is performed. Native Tenacious ARM64 server builds now pass
 for shared libssc and SensorProxy; the latter builds against the exact patched
