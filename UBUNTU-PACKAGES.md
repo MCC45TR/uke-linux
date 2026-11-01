@@ -1,7 +1,10 @@
 # Ubuntu package migration
 
 Recorded: 1 November 2026. Target: Ubuntu 27.04 Tenacious ARM64, unstable only.
-No Ubuntu image or published package is available from this work.
+No Ubuntu image is available from this work. Launchpad ARM64 build 33897552
+for the first speaker preset succeeded; archive publication is still pending.
+New Ubuntu implementation and build dispatches are paused while Fedora Rawhide
+DE release work takes priority. Existing build results are monitored read-only.
 
 The hardware-support submodule tracks the `ubuntu` packaging branch. Common
 component sources and RPM recipes remain shared and unchanged; Debian overlays
@@ -21,6 +24,10 @@ Kernel release-115 source composition is retained exactly. Its three candidate
 packages are staged outside live boot/module paths; the first-pass Image is
 not bootable and boot-bundle production fails explicitly. Synthetic payload
 refusal tests pass; no real kernel/module payload has yet been admitted.
+Native kernel retry 41309327976 terminated because the Debian release name
+exceeds the shared ALSA `sizeof("uke" UTS_RELEASE) <= 16` assertion. Its
+coordinated shorter release identity is the next kernel action on resumption;
+the assertion has not been weakened and no new build was dispatched.
 The six shared image tools have a separate native Debian recipe. No system
 image composition is performed. Native Tenacious ARM64 server builds now pass
 for shared libssc and SensorProxy; the latter builds against the exact patched
@@ -32,8 +39,12 @@ Fedora until solver, authentication, journal and boot integration are complete.
 The attributed speaker preset passed native ARM64 build, payload inspection,
 server install/reinstall/conffile/remove/purge and recipe source construction.
 Its [first Launchpad recipe handoff](uke-linux-hardware-support/packaging/ubuntu/LAUNCHPAD-RECIPES.md)
-includes the published package branch and upstream tag. Launchpad publication
-is still pending. No tablet validation was performed. Current COPR
+includes the published package branch and upstream tag. Nineteen non-kernel
+recipe source branches and exact-original metadata are now published. Of the
+27 actual binary packages, runtime metadata resolves 16 closures and refuses
+11 missing real ABI providers; two development closures include host Python
+and are server-only. Daily enrollment of gated source groups remains held.
+Launchpad publication is still pending. No tablet validation was performed. Current COPR
 release reconciliation, Control APT/dpkg transactions, real kernel/DT/module and
 initramfs checks, firmware and remaining runtime ports are implementation work.
 
