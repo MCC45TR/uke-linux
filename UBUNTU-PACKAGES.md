@@ -22,19 +22,27 @@ packages are staged outside live boot/module paths; the first-pass Image is
 not bootable and boot-bundle production fails explicitly. Synthetic payload
 refusal tests pass; no real kernel/module payload has yet been admitted.
 The six shared image tools have a separate native Debian recipe. No system
-image composition is performed. Offline metadata simulation resolves build
-dependencies for 19 recipes; SensorProxy awaits the patched libssc package.
+image composition is performed. Native Tenacious ARM64 server builds now pass
+for shared libssc and SensorProxy; the latter builds against the exact patched
+libssc DEBs in its own clean root. See the recorded
+[native build results](uke-linux-hardware-support/packaging/ubuntu/NATIVE-BUILDS.md)
+and live CI for the remaining routes.
 Read-only native APT policy tests pass, but the active package backend remains
 Fedora until solver, authentication, journal and boot integration are complete.
-No native ARM64 compilation, installation,
-VM or tablet validation was performed. None is publication-ready. Current COPR
+The attributed speaker preset passed native ARM64 build, payload inspection,
+server install/reinstall/conffile/remove/purge and recipe source construction.
+Its [first Launchpad recipe handoff](uke-linux-hardware-support/packaging/ubuntu/LAUNCHPAD-RECIPES.md)
+includes the published package branch and upstream tag. Launchpad publication
+is still pending. No tablet validation was performed. Current COPR
 release reconciliation, Control APT/dpkg transactions, real kernel/DT/module and
 initramfs checks, firmware and remaining runtime ports are implementation work.
 
 Launchpad identity: `mcs45tr`. Parent confirmed accepted PPA terms and public
 ARM64-only unstable and stable PPAs, both empty. OpenPGP enrollment is confirmed;
-the private key remains on the user's tablet. Native build approval is pending,
-and local signing/upload must wait for package qualification. No key, credential, upload or image was
+the private key remains on the user's tablet. Native server builds and public
+Git import/daily changed-source recipes to unstable are authorized. Source
+branches are enrolled after validation; the parent session handles the first
+Launchpad import and recipe UI. No new upload credential or Ubuntu image was
 created here. Stable remains gated by independent qualification.
 
 Workspace CI preserves pinned component checkouts and validates each configured
