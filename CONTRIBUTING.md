@@ -61,6 +61,16 @@ out of photos. Keep error codes, driver names and relative timestamps intact;
 replace private values with `[redacted]`. Public issues are not a place for raw
 private logs. Use [private security reporting](SECURITY.md) for vulnerabilities.
 
+# Hardware integration policy
+
+3 November 2026. Do not fork KDE or GNOME packages in any Uke repository or
+component. Use original distribution packages. Prefer kernel and Device Tree
+changes for hardware support and minimize other package forks. Build device
+candidates through COPR and install or update them through DNF; do not deliver
+copied binaries or compile on the tablet. Keep device-specific calibration
+private, access EEPROM read-only and avoid full-image backups or unnecessary
+large artifacts during bring-up.
+
 # Documentation style
 
 Use this report style across Uke repositories, including README status sections,
