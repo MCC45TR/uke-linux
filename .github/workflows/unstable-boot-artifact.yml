@@ -1,0 +1,46 @@
+name: Export current COPR unstable boot (no Release)
+run-name: Unstable boot.img · 7.3.1-12101-unstable · artifacts only
+on:
+  push:
+    branches: [test/unstable-boot-12101-20261105]
+    paths:
+      - .github/workflows/unstable-boot-artifact.yml
+      - .github/scripts/unstable-boot-artifact.sh
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: unstable-boot-12101-artifact
+  cancel-in-progress: false
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: MCC45TR/uke-fedora-builder
+          ref: 781079d9d3c2095005d3fe235f828d2a90553764
+          path: builder
+          persist-credentials: false
+      - name: Export and validate the signed unstable userdata boot
+        run: bash .github/scripts/unstable-boot-artifact.sh
+      - name: Retain boot.img, checksum and provenance
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: boot-img-7.3.1-12101-unstable
+          path: ${{ runner.temp }}/unstable-boot-${{ github.run_id }}/delivery/
+          compression-level: 6
+          retention-days: 90
+          if-no-files-found: error
+      - name: Retain host validation records
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: unstable-boot-12101-validation
+          path: ${{ runner.temp }}/unstable-boot-${{ github.run_id }}/receipts/
+          retention-days: 90
+          if-no-files-found: warn
