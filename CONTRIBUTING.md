@@ -70,13 +70,29 @@ kernel whenever practical. Keep other package forks and userspace adaptations
 to the necessary minimum, with a documented reason when a kernel/DT solution
 cannot address the requirement.
 
+8 November 2026. Use unmodified Fedora packages wherever they can provide the
+required functionality with native kernel/DT support and standard Linux
+interfaces. Do not introduce or retain a userspace package fork or project
+rebuild in that case. Hardware protocols, board topology, resource ownership
+and device lifecycle belong in the kernel/DT. Keep userspace-only functions,
+including Mesa, PipeWire, desktop policy and package transactions, in their
+appropriate distribution components; do not move private calibration into
+generic kernel or DT payloads.
+
+A fork exception requires documented technical necessity, the exact remaining
+delta, the upstream alternatives considered and a return path to the original
+package. Maintain concrete package retirement and kernel/DT migration lists.
+Minimize separate COPR producers and consolidate necessary integration, but
+preserve every existing feature. Retire a provider only after measured parity,
+dependency closure, supported DNF transitions and recovery/rollback are
+verified; keep active build dependencies until their role is complete.
+
 Research relevant OSS sources comprehensively before implementation. For
 hardware support, compare the exact Uke OEM source, relevant same-SoC or
 shared-IP implementations, current upstream and their active patch queues.
 Use the pinned source inventory and donor review policy. Record exact revisions,
-files, licenses, attribution,
-compatibility limits and remaining gaps; a similar device or successful build
-does not establish support on Uke.
+files, licenses, attribution, compatibility limits and remaining gaps. A similar
+device or successful build does not establish support on Uke.
 
 Build device candidates through COPR and install or update them through DNF.
 Keep compilation off the tablet and deliver packaged changes instead of copied
@@ -141,3 +157,16 @@ Code contributions retain their authors and verified `Co-authored-by` credit.
 Preserve contributor attribution, source references and license notices when
 squashing changes or editing commit messages. Maintenance workflows retain
 their normal service-account identity.
+
+## Hardware bridges in Uke Control
+
+Do not add a runtime RPM for a userspace/kernel hardware bridge. Put required
+session integration in the existing uke-control package. Use internal helpers
+when isolation reduces resource use, with event-driven waits and demand
+activation. Healthy idle components must block on notifications instead of
+polling hardware or keeping the device awake.
+
+Keep hardware protocols and lifecycle in kernel/DT and compositor or session
+preferences in userspace. Fold existing helpers only after verifying file
+ownership, dependencies, persistent configuration and rollback. Retire their
+COPR producers after those transitions are accepted.
