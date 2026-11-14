@@ -1,0 +1,123 @@
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
+index 21f538d..d929664 100644
+--- a/CONTRIBUTING.md
++++ b/CONTRIBUTING.md
+@@ -63,13 +63,69 @@ private logs. Use [private security reporting](SECURITY.md) for vulnerabilities.
+ 
+ # Hardware integration policy
+ 
+-3 November 2026. Do not fork KDE or GNOME packages in any Uke repository or
+-component. Use original distribution packages. Prefer kernel and Device Tree
+-changes for hardware support and minimize other package forks. Build device
+-candidates through COPR and install or update them through DNF; do not deliver
+-copied binaries or compile on the tablet. Keep device-specific calibration
+-private, access EEPROM read-only and avoid full-image backups or unnecessary
+-large artifacts during bring-up.
++5 November 2026. Use original distribution KDE and GNOME packages. Uke
++repositories and COPR projects must not carry project forks or project-rebuilt
++variants of those packages. Resolve hardware support in Device Tree and the
++kernel whenever practical. Keep other package forks and userspace adaptations
++to the necessary minimum, with a documented reason when a kernel/DT solution
++cannot address the requirement.
++
++8 November 2026. Use unmodified Fedora packages wherever they can provide the
++required functionality with native kernel/DT support and standard Linux
++interfaces. Do not introduce or retain a userspace package fork or project
++rebuild in that case. Hardware protocols, board topology, resource ownership
++and device lifecycle belong in the kernel/DT. Keep userspace-only functions,
++including Mesa, PipeWire, desktop policy and package transactions, in their
++appropriate distribution components; do not move private calibration into
++generic kernel or DT payloads.
++
++A fork exception requires documented technical necessity, the exact remaining
++delta, the upstream alternatives considered and a return path to the original
++package. Maintain concrete package retirement and kernel/DT migration lists.
++Minimize separate COPR producers and consolidate necessary integration, but
++preserve every existing feature. Retire a provider only after measured parity,
++dependency closure, supported DNF transitions and recovery/rollback are
++verified; keep active build dependencies until their role is complete.
++
++Research relevant OSS sources comprehensively before implementation. For
++hardware support, compare the exact Uke OEM source, relevant same-SoC or
++shared-IP implementations, current upstream and their active patch queues.
++Use the pinned source inventory and
++donor review policy. Record exact revisions, files, licenses, attribution,
++compatibility limits and remaining gaps; a similar device or successful build
++does not establish support on Uke.
++
++Build device candidates through COPR and install or update them through DNF.
++Keep compilation off the tablet and deliver packaged changes instead of copied
++binaries. Keep device-specific calibration private, access EEPROM read-only and
++avoid full-image backups or unnecessary large artifacts during bring-up.
++
++# Package delivery and COPR housekeeping
++
++Publish only necessary runtime, integration and essential build/test packages.
++Retire completed temporary/test-only and superseded packages when they no
++longer serve a source/build dependency, supported upgrade or recovery route.
++Keep concise source and test evidence reproducible after cleanup. Coordinate
++cleanup with active builds and the shared kernel delivery queue.
++
++Deliver fixes as correctly versioned RPM updates through the supported
++repository and channel. Other users must receive the change through the normal
++`sudo dnf update` workflow. Verify dependency closure, upgrade behavior and
++preservation of persistent preferences. Stable kernel promotion remains a
++separate decision; automatic seamless staging and the selected local rollback
++preference must survive package upgrades.
++
++# Branch management
++
++Keep remote branches to the necessary minimum. Reuse an appropriate existing
++workstream branch, and use local worktrees to isolate unrelated work. Track
++successive trials with commits and unique COPR releases. Create another remote
++branch only when a distinct review or integration requires it.
++
++Remove completed branches after preserving their integrated work and required
++source references. Check active work, builds and shared integration dependencies
++before cleanup; the cumulative kernel baseline and recovery route remain
++required.
+ 
+ # Documentation style
+ 
+@@ -80,8 +136,9 @@ State the report date, tested device and software, observed result and remaining
+ work. Name the device directly. For example: "The USB port did not supply power
+ to the ESP32-S3."
+ 
+-Use concise, natural English. Omit personal ownership labels, conversational
+-narration, promotional wording and internal review jargon. A configured model
++Use professional, concise, natural English. Write for a reader who has not
++followed the development conversation. Omit boilerplate, personal ownership
++labels, conversational narration, promotional wording and internal review jargon. A configured model
+ name is not a hardware identity; record the tested commercial model separately.
+ 
+ Keep README introductions and project status brief. Group hardware tables in
+@@ -101,3 +158,8 @@ the private engineering records.
+ notes may remain in the pull request description. Preserve human contributor
+ credit, source attribution and license notices when squashing or editing commit
+ messages. Maintenance workflows may retain their normal service-account author.
++
++
++### Keep hardware bridges inside Uke Control
++
++Do not add a runtime RPM for a userspace/kernel bridge. Integrate required session glue into uke-control, using separate internal layers or helpers in the same package when that reduces resource use. Healthy idle components must block on events; use demand activation and avoid periodic hardware polling or wake locks. Hardware protocols and lifecycle belong in kernel/DT, while compositor and session choices remain in userspace. Fold existing helper packages through verified ownership, dependency, configuration and rollback transitions before retiring their COPR producers.
+diff --git a/senemos-uke-kernel b/senemos-uke-kernel
+index 7bc35f0..7c5404f 160000
+--- a/senemos-uke-kernel
++++ b/senemos-uke-kernel
+@@ -1 +1 @@
+-Subproject commit 7bc35f035d0169a586b73ce707717f57dbf72508
++Subproject commit 7c5404f6b0db820ff88d03f95427010a17ab5f3a
+diff --git a/uke-fedora-builder b/uke-fedora-builder
+index dd8a732..b69f42c 160000
+--- a/uke-fedora-builder
++++ b/uke-fedora-builder
+@@ -1 +1 @@
+-Subproject commit dd8a732b20ba8df2bb24d961c11761e5e90e61f6
++Subproject commit b69f42c131ebd6bb0fa56f4a5d65ebacdb208d36
+diff --git a/uke-linux-hardware-support b/uke-linux-hardware-support
+index 85f38d7..6f272d0 160000
+--- a/uke-linux-hardware-support
++++ b/uke-linux-hardware-support
+@@ -1 +1 @@
+-Subproject commit 85f38d715cd6ff0279987d82170437dfca6f1d80
++Subproject commit 6f272d03b1e05d9d67ab50f29b75177c49141b74

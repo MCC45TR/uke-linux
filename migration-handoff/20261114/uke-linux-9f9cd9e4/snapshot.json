@@ -1,0 +1,112 @@
+{
+  "label": "uke-linux-9f9cd9e4",
+  "base": "2bd4e22b0ad89b1d0bd8d4b744caab3f8e3b8c60",
+  "branch": "Fedora",
+  "staged_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "unstaged_sha256": "691077be53078ae0fc10fe60d42869f76cbc63713be51469a3f64c273c7ad103",
+  "untracked": [],
+  "private_only": [
+    {
+      "path": ".kernel-coordination/.gitignore",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/README.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/communication.json",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/feature-manifest.json",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/20261105-repository-maintenance.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/audio.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/camera.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/cdsp-kernel-compute.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/cdsp-pogo.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/chipset-efficiency.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/device-error-repair.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/front-camera-raw.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/governor-options.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/hall-startup.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/hardware-goal.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/issue14-boot-container.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/kernel-manager-resources.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/kernel-package-migration.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/keyboard-posture.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/keyboard-refresh.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/soc-block-audit.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/uke-control-qt.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/hand-offs/waydroid.md",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    },
+    {
+      "path": ".kernel-coordination/manifest.json",
+      "reason": "Private/reference/binary/unreviewed-large content retained only in ZIP"
+    }
+  ],
+  "omitted": [
+    {
+      "path": "uke-plasma-keyboard-custom/",
+      "reason": "Nested repository captured separately"
+    }
+  ]
+}
